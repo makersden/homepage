@@ -126,5 +126,8 @@
     "webpack": "^1.11.0",
     "whatwg-fetch": "^0.11.0",
     "phenomic": "^0.17.12"
+  },
+  "dependencies": {
+    "react-typist": "^1.0.3"
   }
 }
