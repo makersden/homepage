@@ -3,6 +3,7 @@ import Typist from 'react-typist';
 import styles from './index.css';
 import envelope from './Envelope.svg';
 import SVGInline from 'react-svg-inline';
+import Helmet from 'react-helmet';
 // import enhanceCollection from "phenomic/lib/enhance-collection"
 
 // import PagesList from "../../components/PagesList"
@@ -13,7 +14,6 @@ const cursor = {
 };
 
 const avgTypingDelay = 40;
-
 
 const showFooter = () => {
     document.querySelector('footer').classList.remove(styles.hidden);
@@ -28,23 +28,29 @@ const Homepage = () => {
   // .slice(0, numberOfLatestPosts)
 
   return (
-  <article className={styles.homepage}>
-    <h1 className={styles.hero}>
-      <Typist cursor={cursor}
-              avgTypingDelay={avgTypingDelay}
-              stdTypingDelay={0}
-              onTypingDone={showFooter}
-          >
-        We are Makers.
-      </Typist>
-    </h1>
-    <footer className={styles.hidden}>
-      <a href="mailto:wearemakersden@gmail.com" className={styles.contact}>
-        <SVGInline svg={envelope} />
-      </a>
-    </footer>
-  </article>
-  )
+    <article className={styles.homepage}>
+        <Helmet
+            title={'Makers\' Den'}
+            meta={[{
+                name: 'google-site-verification',
+                content: 'VEd-YN0XIV4G-934e_RkML776hewBuI9UC0O-9IFOrQ'
+            }]} />
+        <h1 className={styles.hero}>
+        <Typist cursor={cursor}
+                avgTypingDelay={avgTypingDelay}
+                stdTypingDelay={0}
+                onTypingDone={showFooter}
+            >
+            We are Makers.
+        </Typist>
+        </h1>
+        <footer className={styles.hidden}>
+        <a href="mailto:wearemakersden@gmail.com" className={styles.contact}>
+            <SVGInline svg={envelope} />
+        </a>
+        </footer>
+    </article>
+  );
 }
 
 Homepage.contextTypes = {
