@@ -9,7 +9,7 @@
     "lint:js": "eslint --ignore-path .gitignore --fix .",
     "lint:css": "stylelint \"src/**/*.css\"",
     "lint": "npm-run-all --parallel lint:*",
-    "start": "phenomic start",
+    "start": "webpack-dashboard -- phenomic start",
     "build": "phenomic build",
     "pretest": "npm run lint",
     "test": "npm run build"
@@ -106,6 +106,7 @@
     "invariant": "^2.1.1",
     "json-loader": "^0.5.2",
     "npm-run-all": "^1.7.0",
+    "phenomic": "^0.17.12",
     "postcss-browser-reporter": "^0.4.0",
     "postcss-cssnext": "^2.4.0",
     "postcss-loader": "^0.13.0",
@@ -124,10 +125,11 @@
     "stylelint": "^7.2.0",
     "stylelint-config-standard": "^13.0.0",
     "webpack": "^1.11.0",
-    "whatwg-fetch": "^0.11.0",
-    "phenomic": "^0.17.12"
+    "webpack-dashboard": "^0.2.0",
+    "whatwg-fetch": "^0.11.0"
   },
   "dependencies": {
+    "react-ga": "^2.1.2",
     "react-typist": "^1.0.3"
   }
 }

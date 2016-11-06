@@ -2,6 +2,7 @@ import path from "path"
 
 import webpack from "webpack"
 import ExtractTextPlugin from "extract-text-webpack-plugin"
+import DashboardPlugin from 'webpack-dashboard/plugin';
 import { phenomicLoader } from "phenomic"
 import PhenomicLoaderFeedWebpackPlugin
   from "phenomic/lib/loader-feed-webpack-plugin"
@@ -288,6 +289,10 @@ export default (config = {}) => {
       }),
       */
 
+      new webpack.DefinePlugin({
+        __PRODUCTION__:  config.production
+      }),
+
       ...config.production && [
         // webpack 2
         // DedupePlugin does not work correctly with Webpack 2, yet ;)
@@ -296,6 +301,10 @@ export default (config = {}) => {
         new webpack.optimize.UglifyJsPlugin(
           { compress: { warnings: false } }
         ),
+      ],
+
+      ...config.dev && [
+        new DashboardPlugin()
       ],
     ],
 

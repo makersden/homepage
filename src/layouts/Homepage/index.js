@@ -3,7 +3,6 @@ import Typist from 'react-typist';
 import styles from './index.css';
 import envelope from './Envelope.svg';
 import SVGInline from 'react-svg-inline';
-import Helmet from 'react-helmet';
 // import enhanceCollection from "phenomic/lib/enhance-collection"
 
 // import PagesList from "../../components/PagesList"
@@ -29,12 +28,6 @@ const Homepage = () => {
 
   return (
     <article className={styles.homepage}>
-        <Helmet
-            title={'Makers\' Den'}
-            meta={[{
-                name: 'google-site-verification',
-                content: 'VEd-YN0XIV4G-934e_RkML776hewBuI9UC0O-9IFOrQ'
-            }]} />
         <h1 className={styles.hero}>
         <Typist cursor={cursor}
                 avgTypingDelay={avgTypingDelay}

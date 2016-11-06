@@ -1,6 +1,9 @@
+/* global __PRODUCTION__ */
+
 import React from "react"
 import { Route } from "react-router"
 import { PageContainer as PhenomicPageContainer } from "phenomic"
+import ReactGA from 'react-ga';
 
 import AppContainer from "./AppContainer"
 import Page from "./layouts/Page"
@@ -8,6 +11,31 @@ import PageError from "./layouts/PageError"
 import PageLoading from "./layouts/PageLoading"
 import Homepage from "./layouts/Homepage"
 import Post from "./layouts/Post"
+
+let routeChangeHandler = () => {};
+let routeEnterHandler = () => {};
+
+if (typeof(window) !== 'undefined' && __PRODUCTION__) {
+  ReactGA.initialize('UA-86953911-1');
+
+  const trackRouteVisit = ({ pathname }) => {
+    ReactGA.set({
+      page: pathname,
+    });
+
+    ReactGA.pageview(pathname);
+  };
+
+  routeChangeHandler = (prevState, nextState ) => {
+    trackRouteVisit(nextState.location);
+    return true;
+  };
+
+  routeEnterHandler = (nextState) => {
+    trackRouteVisit(nextState.location);
+    return true;
+  };
+}
 
 const PageContainer = (props) => (
   <PhenomicPageContainer
@@ -23,7 +51,9 @@ const PageContainer = (props) => (
 )
 
 export default (
-  <Route component={ AppContainer }>
+  <Route component={ AppContainer }
+         onChange={ routeChangeHandler }
+         onEnter={ routeEnterHandler }>
     <Route path="*" component={ PageContainer } />
   </Route>
 )
