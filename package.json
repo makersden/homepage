@@ -142,6 +142,7 @@
   },
   "dependencies": {
     "react-ga": "^2.1.2",
+    "react-sticky": "^5.0.5",
     "react-typist": "^1.0.3"
   }
 }
