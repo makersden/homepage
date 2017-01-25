@@ -21,6 +21,11 @@ body {
   margin: 0;
   padding: 0;
   background: #090a0f;
+  overflow: hidden;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 /*

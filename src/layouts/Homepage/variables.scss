@@ -3,3 +3,10 @@ $home-size: 8rem;
 $star-color: rgba(255, 255, 255, 0.7);
 $star-dimension: 2000;
 $star-speed: 200;
+$background-color: #090a0f;
+
+%centered {
+  min-width: 960px;
+  width: calc(8 / 12 * 100%);
+  margin: 0 auto;
+}

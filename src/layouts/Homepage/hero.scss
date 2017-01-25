@@ -6,9 +6,6 @@ $base-size: 5rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 960px;
-  width: calc(10/12 * 100%);
-  margin: 0 auto;
   flex-direction: column;
 
   h1, h2 {

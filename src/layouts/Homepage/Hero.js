@@ -2,9 +2,9 @@ import React from 'react';
 
 import styles from './hero.scss';
 
- const Hero = () => {
+const Hero = () => {
    return (
-      <section className={styles.hero}>
+      <section id="home" className={styles.hero}>
         <h1 className={styles.tagline}>
           Software development by Veterans
         </h1>
