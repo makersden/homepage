@@ -1,5 +1,7 @@
 @import './variables';
 
+$base-size: 5rem;
+
 .hero {
   display: flex;
   justify-content: center;
@@ -10,20 +12,19 @@
   flex-direction: column;
 
   h1, h2 {
-    font-family: 'Titillium Web', sans-serif;
+    font-family: 'Lato', sans-serif;
     line-height: 1;
     margin: 0;
+    font-weight: 200;
   }
 
   h1 {
-    font-size: 5rem;
-    font-weight: 200;
+    font-size: $base-size;
     position: relative;
     bottom: $home-size;
   }
 
   h2 {
-    font-size: 2rem;
-    font-weight: 300;
+    font-size: $base-size - 2rem;
   }
 }
