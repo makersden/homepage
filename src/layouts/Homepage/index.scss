@@ -1,10 +1,5 @@
 @import '../../../assets/fonts/index.css';
-
-$bg-color: red;
-$home-size: 8rem;
-$star-color: rgba(255, 255, 255, 0.7);
-$star-dimension: 2000;
-$star-speed: 50;
+@import './variables';
 
 // n is number of stars required
 @function multiple-box-shadow ($n) {
@@ -154,6 +149,10 @@ $shadows-big:    multiple-box-shadow(20);
   align-items: center;
   flex-direction: column;
   text-align: center;
+}
+
+.homepageSegments > * {
+  min-height: calc(100vh - #{$home-size});
 }
 
 footer {

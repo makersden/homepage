@@ -3,6 +3,7 @@ import Typist from 'react-typist';
 import styles from './index.scss';
 import envelope from './Envelope.svg';
 import SVGInline from 'react-svg-inline';
+import Hero from './Hero';
 // import enhanceCollection from "phenomic/lib/enhance-collection"
 
 // import PagesList from "../../components/PagesList"
@@ -44,6 +45,9 @@ const Homepage = () =>
           <a href="">Read Testimonials</a>
           <a href="">Contact us!</a>
         </nav>
+        <section className={styles.homepageSegments}>
+          <Hero />
+        </section>
       </section>
      </section>
   );
