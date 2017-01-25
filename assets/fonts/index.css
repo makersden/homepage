@@ -1,8 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:300|Titillium+Web');
+
 @font-face {
   font-family: 'HFF-Jammed-Pack';
   src:
     url('./HFF-Jammed-Pack.ttf.woff') format('woff'),
     url('./HFF-Jammed-Pack.ttf.svg#HFF-Jammed-Pack') format('svg'),
+    url('./HFF-Jammed-Pack.ttf.eot'),
     url('./HFF-Jammed-Pack.ttf.eot'),
     url('./HFF-Jammed-Pack.ttf.eot?#iefix') format('embedded-opentype');
   font-weight: normal;
