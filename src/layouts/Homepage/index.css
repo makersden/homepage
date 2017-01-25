@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:300');
+@import '../../../assets/fonts/index.css';
 
 .homepage {
   position: absolute;
@@ -15,7 +15,7 @@
 }
 
 .hero {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'HFF-Jammed-Pack', sans-serif;
   font-size: 5rem;
   font-weight: lighter;
   line-height: 1;
