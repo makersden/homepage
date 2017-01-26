@@ -9,7 +9,7 @@ const Hero = () => {
           Software development by Veterans
         </h1>
         <h2 className={styles.subtitle}>
-          Successful launch guaranteed.
+          Let our veterans guide you 
         </h2>
       </section>
    );

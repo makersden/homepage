@@ -1,6 +1,6 @@
 @import './variables';
 
-$base-size: 5rem;
+$base-size: 4rem;
 
 .hero {
   display: flex;
@@ -13,6 +13,7 @@ $base-size: 5rem;
     line-height: 1;
     margin: 0;
     font-weight: 200;
+    text-align: center;
   }
 
   h1 {

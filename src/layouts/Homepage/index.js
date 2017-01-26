@@ -36,18 +36,27 @@ class Homepage extends Component {
         </section>
         <section className={styles.content}>
           <nav className={styles.nav}>
-            <a href="#meet_the_team" onMouseDown={this.scrollTo}>Meet the Team</a>
-            <a href="#see_our_work">See our Work</a>
+            <a href="#meet_the_team" onMouseDown={this.scrollTo}>Our Team</a>
+            <a href="#see_our_work">Our Work</a>
             <a href="#home" className={styles.homeLink} onMouseDown={this.scrollTo}>
               MAKERS' DEN
             </a>
-            <a href="">Read Testimonials</a>
-            <a href="">Contact Us!</a>
+            <a href="">Our Testimonials</a>
+            <a href="">Contact Us</a>
           </nav>
           <section className={styles.homepageSegments} ref={e => this.scrollContext = e}>
             <Hero ref={e => this.home = e} />
             <section id="meet_the_team" ref={(e) => this.meet_the_team = e}>
-              Poopsie Daisy
+              A combined 8278 parsecs of experience
+            </section>
+            <section id="work" ref={(e) => this.work = e}>
+              4318 projects launched into space
+            </section>
+            <section id="testimonials" ref={(e) => this.testimonials = e}>
+              "My God it was beautiful." - Some guy
+            </section>
+            <section id="contact" ref={(e) => this.contact = e}>
+              In addition to email + phone let's have a chatbox cause that's what everyone does nowadays, and it lowers barrier to contact immensly. I think there's even facebook messenger widgets.
             </section>
           </section>
         </section>
