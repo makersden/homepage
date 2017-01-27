@@ -26,7 +26,7 @@ $shadows-big:    multiple-box-shadow(20);
 }
 
 .stars {
-  @extend %centered;
+  width: 100%;
 }
 
 .smallStars {
@@ -111,19 +111,21 @@ $shadows-big:    multiple-box-shadow(20);
   @extend %centered;
   padding-top: 1rem;
   font-family: 'Lato', sans-serif;
-  display: flex;
-  align-items: center;
   justify-content: space-between;
+  text-align: center;
 
   a,
   a:link,
   a:visited {
     color: rgb(170, 200, 255);
+    display: inline-block;
     text-decoration: none;
     transition: color 0.3s;
     font-weight: 400;
-    font-variant: small-caps;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    vertical-align: middle;
+    width: 20%;
 
     // Not using classes for styling -> Specifity wars.
     &.homeLink {
@@ -146,7 +148,7 @@ $shadows-big:    multiple-box-shadow(20);
     }
   }
 
-  
+
 }
 
 .content {
@@ -176,9 +178,6 @@ $shadows-big:    multiple-box-shadow(20);
     @extend %centered;
     min-height: calc(100vh - #{$home-size});
 
-    &:not(:first-child) {
-      padding-top: calc(#{$home-size / 2});
-    }
   }
 }
 
