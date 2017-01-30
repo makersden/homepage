@@ -131,7 +131,38 @@ export default (config = {}) => {
         // *.global.css => global (normal) css
         {
           test: /\.global\.(scss|sass|css)$/,
-          include: path.resolve(__dirname, 'src'),
+          include: [
+            path.resolve('src'),
+          ],
+          // webpack 1
+          loader: ExtractTextPlugin.extract(
+            'style-loader',
+            ['css-loader', 'sass-loader'].join('!'),
+          ),
+          // webpack 2
+          /*
+            loader: ExtractTextPlugin.extract({
+            fallbackLoader: "style-loader",
+            loader: [
+            "css-loader",
+            {
+            loader: "postcss-loader",
+            // query for postcss can't be used right now
+            // https://github.com/postcss/postcss-loader/issues/99
+            // meanwhile, see webpack.LoaderOptionsPlugin in plugins list
+            // query: { plugins: postcssPlugins },
+            },
+            ],
+            }),
+          */
+        },
+        {
+          // External css
+          test: /\.(scss|sass|css)$/,
+          include: [
+            path.resolve('node_modules', 'devicon'),
+            path.resolve('node_modules', 'slick-carousel'),
+          ],
           // webpack 1
           loader: ExtractTextPlugin.extract(
             'style-loader',
@@ -215,6 +246,10 @@ export default (config = {}) => {
             name: '[path][name].[hash].[ext]',
             context: path.join(__dirname, config.source),
           },
+          include: [
+            path.resolve('assets', 'images'),
+            path.resolve('node_modules', 'slick-carousel')
+          ]
         },
           // svg as raw string to be inlined
         {
@@ -225,23 +260,47 @@ export default (config = {}) => {
         {
           test: /\.svg$/,
           loader: 'url-loader?limit=10000',
-          include: path.resolve('assets', 'fonts'),
+          include: [
+            path.resolve('assets', 'fonts'),
+            path.resolve('node_modules', 'devicon', 'fonts'),
+            path.resolve('node_modules', 'slick-carousel'),
+          ],
         },
         {
           test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
           loader: 'url?limit=10000&mimetype=application/font-woff',
+          include: [
+            path.resolve('assets', 'fonts'),
+            path.resolve('node_modules', 'devicon', 'fonts'),
+            path.resolve('node_modules', 'slick-carousel'),
+          ],
         },
         {
           test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
           loader: 'url?limit=10000&mimetype=application/font-woff',
+          include: [
+            path.resolve('assets', 'fonts'),
+            path.resolve('node_modules', 'devicon', 'fonts'),
+            path.resolve('node_modules', 'slick-carousel'),
+          ],
         },
         {
           test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
           loader: 'url?limit=10000&mimetype=application/octet-stream',
+          include: [
+            path.resolve('assets', 'fonts'),
+            path.resolve('node_modules', 'devicon', 'fonts'),
+            path.resolve('node_modules', 'slick-carousel'),
+          ],
         },
         {
           test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
           loader: 'file',
+          include: [
+            path.resolve('assets', 'fonts'),
+            path.resolve('node_modules', 'devicon', 'fonts'),
+            path.resolve('node_modules', 'slick-carousel'),
+          ],
         },
       ],
     },
@@ -329,7 +388,10 @@ export default (config = {}) => {
     // webpack 1
     resolve: {
       extensions: ['.js', '.json', ''],
-      root: [path.join(__dirname, 'node_modules')],
+      root: [
+        path.join(__dirname, 'node_modules'),
+        path.resolve('.'),
+      ],
     },
     resolveLoader: { root: [path.join(__dirname, 'node_modules')] },
     // webpack 2

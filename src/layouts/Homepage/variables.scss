@@ -1,9 +1,13 @@
 $bg-color: red;
 $home-size: 8rem;
 $star-color: rgba(255, 255, 255, 0.7);
-$star-dimension: 2000;
+$star-dimension: 3000;
 $star-speed: 200;
 $background-color: #090a0f;
+$teammate-height: 250px;
+$teammate-width: $teammate-height / 1.62; // golden ratio
+$margin: 15px;
+$background-color-light: #1b2735;
 
 %centered {
   min-width: 960px;
