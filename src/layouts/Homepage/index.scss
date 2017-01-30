@@ -223,10 +223,12 @@ footer {
     min-width: 0;
   }
 
-  :global(.slick-slide) {
-    height: calc(100vh - #{$home-size});
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  :global(.slick-initialized) {
+    :global(.slick-slide) {
+      height: calc(100vh - #{$home-size});
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 }
