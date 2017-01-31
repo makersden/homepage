@@ -4,6 +4,7 @@ import heroStyles from './hero.scss';
 import smoothscroll from 'smoothscroll';
 import Teammates from './Teammates';
 import Testimonials from './Testimonials';
+import Technologies from './Technologies';
 
 import rocket from 'assets/images/rocket.png';
 import rocketTrail from 'assets/images/rockettrail.png';
@@ -90,7 +91,10 @@ class Homepage extends Component {
               </section>
             </section>
             <section id="work" ref={setRefById}>
-              4318 projects launched into space
+              <h2>
+                We have successfully launched over 50 projects into space.
+              </h2>
+              <Technologies />
             </section>
             <section id="testimonials" ref={setRefById} className={styles.testimonials}>
               <h2 className={styles.testimonialsHeader}>
