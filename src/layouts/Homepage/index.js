@@ -3,9 +3,7 @@ import styles from './index.scss';
 import heroStyles from './hero.scss';
 import smoothscroll from 'smoothscroll';
 import Teammates from './Teammates';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import Testimonials from './Testimonials';
 // import enhanceCollection from "phenomic/lib/enhance-collection"
 
 // import PagesList from "../../components/PagesList"
@@ -18,14 +16,6 @@ const showFooter = () => {
 };
 
 console.log(styles);
-const SLIDER_SETTINGS = {
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1
-    };
-
 class Homepage extends Component {
   constructor(props) {
     super(props);
@@ -90,7 +80,7 @@ class Homepage extends Component {
                 </section>
                 <Teammates />
                 <p className={styles.teamValues}>
-                  We believe in using <strong>the right tools</strong>, <strong>shipping quality results</strong> and <strong>strong communication</strong> to get the job done. We put <strong>project success</strong> before our gain. We are fast and hungry learners, <strong>never discouraged by the unknown</strong>.
+                  We believe in using <strong>the right tools</strong>, <strong>consistent shipping</strong> of <strong>quality results</strong> and <strong>strong communication</strong> to get the job done. We put <strong>project success</strong> before our gain. We are fast and hungry learners, <strong>never discouraged by the unknown</strong>.
                 </p>
               </section>
             </section>
@@ -98,14 +88,10 @@ class Homepage extends Component {
               4318 projects launched into space
             </section>
             <section id="testimonials" ref={setRefById} className={styles.testimonials}>
-              <Slider {...SLIDER_SETTINGS}>
-                <section>
-                  "My God it was beautiful." - Some guy
-                </section>
-                <section>
-                  "The game has been changed." - Some guy
-                </section>
-              </Slider>
+              <h2 className={styles.testimonialsHeader}>
+                But don't take just our word for it.
+              </h2>
+              <Testimonials />
             </section>
             <section id="contact" ref={setRefById}>
               In addition to email + phone let's have a chatbox cause that's what everyone does nowadays, and it lowers barrier to contact immensly. I think there's even facebook messenger widgets.

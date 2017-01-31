@@ -263,7 +263,7 @@ export default (config = {}) => {
           include: [
             path.resolve('assets', 'fonts'),
             path.resolve('node_modules', 'devicon', 'fonts'),
-            path.resolve('node_modules', 'slick-carousel'),
+            path.resolve('node_modules', 'slick-carousel', 'slick', 'fonts'),
           ],
         },
         {
@@ -272,7 +272,7 @@ export default (config = {}) => {
           include: [
             path.resolve('assets', 'fonts'),
             path.resolve('node_modules', 'devicon', 'fonts'),
-            path.resolve('node_modules', 'slick-carousel'),
+            path.resolve('node_modules', 'slick-carousel', 'slick', 'fonts'),
           ],
         },
         {
@@ -281,7 +281,7 @@ export default (config = {}) => {
           include: [
             path.resolve('assets', 'fonts'),
             path.resolve('node_modules', 'devicon', 'fonts'),
-            path.resolve('node_modules', 'slick-carousel'),
+            path.resolve('node_modules', 'slick-carousel', 'slick', 'fonts'),
           ],
         },
         {
@@ -290,7 +290,7 @@ export default (config = {}) => {
           include: [
             path.resolve('assets', 'fonts'),
             path.resolve('node_modules', 'devicon', 'fonts'),
-            path.resolve('node_modules', 'slick-carousel'),
+            path.resolve('node_modules', 'slick-carousel', 'slick', 'fonts'),
           ],
         },
         {
