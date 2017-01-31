@@ -4,6 +4,9 @@ import heroStyles from './hero.scss';
 import smoothscroll from 'smoothscroll';
 import Teammates from './Teammates';
 import Testimonials from './Testimonials';
+
+import rocket from 'assets/images/rocket.png';
+import rocketTrail from 'assets/images/rockettrail.png';
 // import enhanceCollection from "phenomic/lib/enhance-collection"
 
 // import PagesList from "../../components/PagesList"
@@ -70,6 +73,8 @@ class Homepage extends Component {
               <h2>
                 Let our veterans guide you.
               </h2>
+              <img src={rocket} className={styles.rocket} />
+              <img src={rocketTrail} className={styles.rocketTrail} />
             </section>
             <section id="team" ref={setRefById}>
               <section className={styles.teamWrapper}>

@@ -179,6 +179,7 @@ $shadows-big:    multiple-box-shadow(100);
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    position: relative;
   }
 }
 
@@ -221,4 +222,14 @@ footer {
 
 .testimonialsHeader {
   margin: 0;
+}
+
+.rocket {
+  position: absolute;
+  transform: scale(0.24) translateX(-2000px) translateY(-1520px) rotateX(30deg) rotateY(-170deg) rotateZ(50deg)
+}
+
+.rocketTrail {
+  position: absolute;
+  transform: translateY(-98px) translateX(-64px);
 }

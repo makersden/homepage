@@ -3,6 +3,7 @@ import styles from './Teammates.scss';
 
 import rts from 'assets/images/rts.jpg';
 import kb from 'assets/images/kb.jpg';
+import kc from 'assets/images/kc.jpg';
 
 const mates = [{
     name: 'Carl-Petter Bertell',
@@ -11,7 +12,7 @@ const mates = [{
   }, {
     name: 'Korneliusz Caputa',
     experience: 6,
-    photo: '//www.gravatar.com/avatar/ad74ad58ee0a8ce6c5aea3c58922512a?size=222x360',
+    photo: kc,
   }, {
     name: 'Robert Tochman-Szewc',
     experience: 6,
