@@ -239,3 +239,15 @@ footer {
   position: absolute;
   transform: translateY(-98px) translateX(-64px);
 }
+
+.contact {
+  a {
+    color: $accent-color;
+    transition: color 0.3s;
+    font-weight: 400;
+
+    &:hover {
+      color: white;
+    }
+  }
+}

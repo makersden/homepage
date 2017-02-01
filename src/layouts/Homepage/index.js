@@ -108,8 +108,13 @@ class Homepage extends Component {
               </h2>
               <Testimonials />
             </section>
-            <section id="contact" ref={setRefById}>
-              In addition to email + phone let's have a chatbox cause that's what everyone does nowadays, and it lowers barrier to contact immensly. I think there's even facebook messenger widgets.
+            <section id="contact" ref={setRefById} className={styles.contact}>
+              <h2>
+                Interested? We'd love to touch base.
+              </h2>
+              <h3>
+                <a href="mailto:korneliusz@makersden.io">Send us an email</a> or drop a line in the chatbox.
+              </h3>
             </section>
           </section>
         </section>
