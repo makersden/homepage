@@ -180,6 +180,12 @@ $shadows-big:    multiple-box-shadow(100);
     align-items: center;
     justify-content: center;
     position: relative;
+    p {
+      width: 100%;
+      font-size: 1.4rem;
+      font-weight: 200;
+      line-height: 1.5;
+    }
   }
 }
 

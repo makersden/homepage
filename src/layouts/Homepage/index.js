@@ -94,6 +94,12 @@ class Homepage extends Component {
               <h2>
                 We have successfully launched over 50 projects into space.
               </h2>
+              <p>
+                Each of us is a freelance professional with a passion for creating products. We gain full-stack experience not only through customer work, but also through setting in motion our own creations.
+              </p>
+              <p>
+                We feel comfortable experimenting, but have a trusty set of tools we all know well and apply expertly.
+              </p>
               <Technologies />
             </section>
             <section id="testimonials" ref={setRefById} className={styles.testimonials}>

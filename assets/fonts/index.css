@@ -1,14 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:200,300,400');
 
 @font-face {
-  font-family: 'Droid';
-  src:
-  url('./droid.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
   font-family: 'HFF-Jammed-Pack';
   src:
     url('./HFF-Jammed-Pack.ttf.woff') format('woff'),
