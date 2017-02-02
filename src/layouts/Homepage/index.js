@@ -5,6 +5,7 @@ import smoothscroll from 'smoothscroll';
 import Teammates from './Teammates';
 import Testimonials from './Testimonials';
 import Technologies from './Technologies';
+import HelpChat from './HelpChat';
 
 import rocket from 'assets/images/rocket.png';
 import rocketTrail from 'assets/images/rockettrail.png';
@@ -80,8 +81,8 @@ class Homepage extends Component {
             <section id="team" ref={setRefById}>
               <section className={styles.teamWrapper}>
                 <section className={styles.teamDescription}>
-                  <h2>
-                    A crack crew of IT Veterans, armed with <strong title="That's about 24 light years!">7.34 parsecs</strong> of experience.
+                  <h2 className={styles.teamExperience}>
+                    A crack crew of IT Veterans, armed with <strong className={styles.parsecs}>7.34 parsecs</strong> of experience.
                   </h2>
                 </section>
                 <Teammates />
@@ -91,11 +92,11 @@ class Homepage extends Component {
               </section>
             </section>
             <section id="work" ref={setRefById}>
-              <h2>
+              <h2 className={styles.workHeader}>
                 We have successfully launched over 50 projects into space.
               </h2>
               <p>
-                Each of us is a freelance professional with a passion for creating products. We gain full-stack experience not only through customer work, but also through setting in motion our own creations.
+                Each of us is a freelance professional with a passion for creating products. Because of that, our full-stack experience doesn't come solely from customer work. We also set in motion creations of our own.
               </p>
               <p>
                 We feel comfortable experimenting, but have a trusty set of tools we all know well and apply expertly.
@@ -118,6 +119,7 @@ class Homepage extends Component {
             </section>
           </section>
         </section>
+        <HelpChat />
       </section>
     );
   }
