@@ -1,0 +1,68 @@
+@import 'src/variables.global';
+
+:root {
+  --nav-item-padding: 0.5rem;
+}
+
+.navBackground {
+  z-index: 1;
+
+  transition: background 0.3s;
+
+  &.stickyNavBackground {
+    background: $background-color;
+  }
+}
+
+// .header {
+//   background: linear-gradient(0 deg, rgba($background-color, 0.9) 80%, rgba($background-color, 0) 100% );
+// }
+
+.nav {
+  padding: $home-offset 0;
+  font-family: $font-secondary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: $home-size;
+
+  a.navLink,
+  a.navLink:link,
+  a.navLink:visited {
+    color: $accent-color;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    transition: color 0.3s;
+    font-weight: 400;
+    font-size: 1.5rem;
+    text-align: center;
+    min-width: 18%;
+
+    &.homeLink {
+      font-family: $font-brand;
+      font-size: $home-size;
+      line-height: 1;
+      letter-spacing: 3px;
+      opacity: 1;
+      color: white;
+      // subtle glow
+      text-shadow: 0 0 0 $accent-color;
+      transition: text-shadow 0.3s;
+      white-space: nowrap;
+
+      &:hover {
+        text-shadow: 0 0 10px $accent-color;
+      }
+    }
+
+    &:hover,
+    &.homeLink,
+    &.active {
+      color: white;
+      opacity: 1;
+    }
+  }
+
+
+}

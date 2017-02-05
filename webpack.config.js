@@ -1,38 +1,20 @@
-import path from "path"
+import path from 'path';
 
-import webpack from "webpack"
-import ExtractTextPlugin from "extract-text-webpack-plugin"
+import webpack from 'webpack';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import DashboardPlugin from 'webpack-dashboard/plugin';
-import { phenomicLoader } from "phenomic"
+import { phenomicLoader } from 'phenomic';
 import PhenomicLoaderFeedWebpackPlugin
-  from "phenomic/lib/loader-feed-webpack-plugin"
+  from 'phenomic/lib/loader-feed-webpack-plugin';
 
-import pkg from "./package.json"
+import pkg from './package.json';
 
 export default (config = {}) => {
-  const postcssPlugins = () => [
-    require("stylelint")(),
-    require("postcss-cssnext")({
-      browsers: "last 2 versions",
-      features: {
-        customProperties: {
-          variables: {
-            mainColor: "#111",
-            mainColorContrasted: "#eee",
-          },
-        },
-      },
-    }),
-    require("postcss-reporter")(),
-    ...!config.production ? [
-      require("postcss-browser-reporter")(),
-    ] : [],
-  ]
-
+  const dev = config.dev;
   return {
-    ...config.dev && {
-      devtool: "#cheap-module-eval-source-map",
-    },
+    // ...config.dev && {
+    //   devtool: 'eval',
+    // },
     module: {
       noParse: /\.min\.js/,
       // webpack 1
@@ -60,20 +42,22 @@ export default (config = {}) => {
         // (not handled by webpack by default)
         {
           test: /\.json$/,
-          loader: "json-loader",
+          loader: 'json-loader',
         },
 
         // *.js => babel + eslint
         {
           test: /\.js$/,
           include: [
-            path.resolve(__dirname, "scripts"),
-            path.resolve(__dirname, "src"),
+            path.resolve(__dirname, 'scripts'),
+            path.resolve(__dirname, 'src')
           ],
-          loaders: [
-            "babel-loader?cacheDirectory",
-            "eslint-loader" + (config.dev ? "?emitWarning" : ""),
-          ],
+          loaders: (config.dev ? [
+            'babel-loader?cacheDirectory',
+            `eslint-loader${config.dev ? '?emitWarning' : ''}`,
+          ] :  [
+            'babel-loader?cacheDirectory',
+          ]),
         },
 
         // ! \\
@@ -82,19 +66,19 @@ export default (config = {}) => {
 
         // *.css => CSS Modules
         {
-          test: /\.css$/,
-          exclude: /\.global\.css$/,
-          include: path.resolve(__dirname, "src"),
+          test: /\.(scss|sass|css)$/,
+          exclude: /\.global\.(scss|sass|css)$/,
+          include: path.resolve(__dirname, 'src'),
           // webpack 1
           loader: ExtractTextPlugin.extract(
-            "style-loader",
-            [ `css-loader?modules&localIdentName=${
+            'style-loader',
+            [`css-loader?modules&localIdentName=${
               config.production
-              ? "[hash:base64:5]"
-              : "[path][name]--[local]--[hash:base64:5]"
+              ? '[hash:base64:5]'
+              : '[path][name]--[local]--[hash:base64:5]'
               }`,
-              "postcss-loader",
-            ].join("!"),
+              'sass-loader',
+            ].join('!'),
           ),
           // webpack 2
           /*
@@ -125,12 +109,43 @@ export default (config = {}) => {
         },
         // *.global.css => global (normal) css
         {
-          test: /\.global\.css$/,
-          include: path.resolve(__dirname, "src"),
+          test: /\.global\.(scss|sass|css)$/,
+          include: [
+            path.resolve('src'),
+          ],
           // webpack 1
           loader: ExtractTextPlugin.extract(
-            "style-loader",
-            [ "css-loader", "postcss-loader" ].join("!"),
+            'style-loader',
+            ['css-loader', 'sass-loader'].join('!'),
+          ),
+          // webpack 2
+          /*
+            loader: ExtractTextPlugin.extract({
+            fallbackLoader: "style-loader",
+            loader: [
+            "css-loader",
+            {
+            loader: "postcss-loader",
+            // query for postcss can't be used right now
+            // https://github.com/postcss/postcss-loader/issues/99
+            // meanwhile, see webpack.LoaderOptionsPlugin in plugins list
+            // query: { plugins: postcssPlugins },
+            },
+            ],
+            }),
+          */
+        },
+        {
+          // External css
+          test: /\.(scss|sass|css)$/,
+          include: [
+            path.resolve('node_modules', 'devicon'),
+            path.resolve('node_modules', 'slick-carousel'),
+          ],
+          // webpack 1
+          loader: ExtractTextPlugin.extract(
+            'style-loader',
+            ['css-loader', 'sass-loader'].join('!'),
           ),
           // webpack 2
           /*
@@ -205,39 +220,72 @@ export default (config = {}) => {
         // copy assets and return generated path in js
         {
           test: /\.(html|ico|jpe?g|png|gif)$/,
-          loader: "file-loader",
+          loader: 'file-loader',
           query: {
-            name: "[path][name].[hash].[ext]",
+            name: '[path][name].[hash].[ext]',
             context: path.join(__dirname, config.source),
           },
+          include: [
+            path.resolve('assets', 'images'),
+            path.resolve('node_modules', 'slick-carousel')
+          ]
         },
-
-        // svg as raw string to be inlined
+          // svg as raw string to be inlined
+        // {
+        //   test: /\.svg$/,
+        //   loader: 'raw-loader',
+        //   exclude: path.resolve('assets', 'fonts'),
+        // },
         {
           test: /\.svg$/,
-          loader: "raw-loader",
+          loader: 'url-loader?limit=10000',
+          include: [
+            path.resolve('assets'),
+            path.resolve('node_modules', 'devicon', 'fonts'),
+            path.resolve('node_modules', 'slick-carousel', 'slick', 'fonts'),
+          ],
         },
-         {
-              test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-              loader: "url?limit=10000&mimetype=application/font-woff"
-         },
-          {
-              test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-              loader: "url?limit=10000&mimetype=application/font-woff"
-          },
-          {
-              test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-              loader: "url?limit=10000&mimetype=application/octet-stream"
-          },
-          {
-              test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-              loader: "file"
-          }
+        {
+          test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+          loader: 'url?limit=10000&mimetype=application/font-woff',
+          include: [
+            path.resolve('assets', 'fonts'),
+            path.resolve('node_modules', 'devicon', 'fonts'),
+            path.resolve('node_modules', 'slick-carousel', 'slick', 'fonts'),
+          ],
+        },
+        {
+          test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+          loader: 'url?limit=10000&mimetype=application/font-woff',
+          include: [
+            path.resolve('assets', 'fonts'),
+            path.resolve('node_modules', 'devicon', 'fonts'),
+            path.resolve('node_modules', 'slick-carousel', 'slick', 'fonts'),
+          ],
+        },
+        {
+          test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+          loader: 'url?limit=10000&mimetype=application/octet-stream',
+          include: [
+            path.resolve('assets', 'fonts'),
+            path.resolve('node_modules', 'devicon', 'fonts'),
+            path.resolve('node_modules', 'slick-carousel', 'slick', 'fonts'),
+          ],
+        },
+        {
+          test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+          loader: 'file',
+          include: [
+            path.resolve('assets', 'fonts'),
+            path.resolve('node_modules', 'devicon', 'fonts'),
+            path.resolve('node_modules', 'slick-carousel'),
+          ],
+        },
       ],
     },
 
     // webpack 1
-    postcss: postcssPlugins,
+    // postcss: postcssPlugins,
 
     plugins: [
       // webpack 2
@@ -268,10 +316,10 @@ export default (config = {}) => {
         feeds: {
           // here we define one feed, but you can generate multiple, based
           // on different filters
-          "feed.xml": {
+          'feed.xml': {
             collectionOptions: {
-              filter: { layout: "Post" },
-              sort: "date",
+              filter: { layout: 'Post' },
+              sort: 'date',
               reverse: true,
               limit: 20,
             },
@@ -280,7 +328,7 @@ export default (config = {}) => {
       }),
 
       // webpack 1
-      new ExtractTextPlugin("[name].[hash].css", { disable: config.dev }),
+      new ExtractTextPlugin('[name].[hash].css', { disable: config.dev }),
       // webpack 2
       /*
       new ExtractTextPlugin({
@@ -290,7 +338,7 @@ export default (config = {}) => {
       */
 
       new webpack.DefinePlugin({
-        __PRODUCTION__:  config.production
+        __PRODUCTION__: config.production,
       }),
 
       ...config.production && [
@@ -299,30 +347,35 @@ export default (config = {}) => {
         // https://github.com/webpack/webpack/issues/2644
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.UglifyJsPlugin(
-          { compress: { warnings: false } }
+          { compress: { warnings: false } },
         ),
       ],
 
       ...config.dev && [
-        new DashboardPlugin()
+        new DashboardPlugin(),
+        new webpack.NoErrorsPlugin()
+
       ],
     ],
 
     output: {
       path: path.join(__dirname, config.destination),
       publicPath: config.baseUrl.pathname,
-      filename: "[name].[hash].js",
+      filename: '[name].[hash].js',
     },
 
     // webpack 1
     resolve: {
-      extensions: [ ".js", ".json", "" ],
-      root: [ path.join(__dirname, "node_modules") ],
+      extensions: ['.js', '.json', ''],
+      root: [
+        path.join(__dirname, 'node_modules'),
+        path.resolve('.'),
+      ],
     },
-    resolveLoader: { root: [ path.join(__dirname, "node_modules") ] },
+    resolveLoader: { root: [path.join(__dirname, 'node_modules')] },
     // webpack 2
     /*
     resolve: { extensions: [ ".js", ".json" ] },
     */
-  }
-}
+  };
+};

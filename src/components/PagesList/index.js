@@ -1,29 +1,27 @@
-import React, { PropTypes } from "react"
+import React, { PropTypes } from 'react';
 
-import PagePreview from "../PagePreview"
+import PagePreview from '../PagePreview';
 
-const PagesList = ({ pages }) => {
-  return (
-    <div>
-      {
+const PagesList = ({ pages }) => (
+  <div>
+    {
       pages.length
       ? (
         <ul>
           {
-          pages.map((page) => (
-            <li key={ page.title }><PagePreview { ...page } /></li>
+          pages.map(page => (
+            <li key={page.title}><PagePreview {...page} /></li>
           ))
         }
         </ul>
       )
-      : "No posts yet."
+      : 'No posts yet.'
     }
-    </div>
-  )
-}
+  </div>
+  );
 
 PagesList.propTypes = {
   pages: PropTypes.array.isRequired,
-}
+};
 
-export default PagesList
+export default PagesList;

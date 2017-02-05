@@ -1,4 +1,4 @@
 ---
-title: ab actu ad posse valet illatio
+title: Makers' Den
 layout: Homepage
 ---

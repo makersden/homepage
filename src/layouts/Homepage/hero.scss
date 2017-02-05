@@ -1,0 +1,23 @@
+@import '../../variables.global';
+
+$base-size: 4rem;
+
+.hero {
+  h1, h2 {
+    font-family: 'Lato', sans-serif;
+    line-height: 1;
+    margin: 0;
+    font-weight: 200;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: $base-size;
+    position: relative;
+    bottom: $home-size;
+  }
+
+  h2 {
+    font-size: $base-size - 2rem;
+  }
+}

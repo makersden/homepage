@@ -1,0 +1,78 @@
+@import '../../variables.global';
+
+.testimonials {
+  * {
+    min-height: 0;
+    min-width: 0;
+  }
+
+  :global(.slick-next) {
+    right: 0;
+  }
+
+  :global(.slick-prev) {
+    left: 0;
+  }
+
+  width: calc(8/12 * 100%);
+
+  .testimonial {
+    min-height: 10rem;
+    margin: 10rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    h4 {
+      display: block;
+      margin: 0;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      font-weight: 400;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    span {
+      font-weight: 300;
+    }
+  }
+
+  :global(.slick-dots) {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+
+    li {
+      display: inline-block;
+
+      button,
+      button:active {
+        border: 1px solid $accent-color;
+        border-radius: 1px;
+        background: transparent;
+        color: transparent;
+        width: 10px;
+        height: 10px;
+        margin: 0 2px;
+        padding: 0;
+        cursor: pointer;
+        transition: background 0.3s, border-color 0.3s;
+        outline: none;
+
+        &:hover {
+          border: 1px solid white;
+        }
+      }
+
+      &:global(.slick-active) {
+        button {
+          background: white;
+          border: 1px solid white;
+        }
+      }
+    }
+  }
+}

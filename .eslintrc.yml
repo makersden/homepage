@@ -1,0 +1,25 @@
+---
+extends:
+  - "eslint:recommended"
+  - "plugin:react/recommended"
+
+env:
+  browser: true
+  es6: true
+  jasmine: true
+
+parserOptions:
+  ecmaVersion: 6
+  sourceType: module
+  ecmaFeatures:
+    jsx: true
+    react: true
+    spread: true
+    experimentalObjectRestSpread: true
+
+rules:
+  react/proptypes: [0]
+
+plugins:
+  - import
+  - react
