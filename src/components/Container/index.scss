@@ -1,6 +1,7 @@
 @import '../../variables.global';
 
 .container {
+  @extend %centered;
   height: 100vh;
   display: flex;
   flex-direction: column;

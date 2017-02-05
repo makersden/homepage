@@ -1,6 +1,8 @@
 @import '../../../assets/fonts/index.css';
 @import '../../variables.global';
 
+$segment-size: calc(100vh - #{$home-size} - #{2 * $home-offset}});
+
 .homepage {
   position: absolute;
   padding: 1rem;
@@ -16,19 +18,18 @@
 }
 
 .homepageSegments {
-  $scrollbar-hiding-offset: 30px;
-  $segment-size: calc(100vh - #{$home-size + 2 * $home-offset});
+  $scrollbar-hiding-offset: 3000px;
+  $scrollbar-size: 15px;
+
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-mask-image: linear-gradient(to bottom, transparent, rgba(0,0,0,1) #{$home-size/2});
   max-height: $segment-size;
   // Bye bye, scrollbar
   width: calc(100% + #{$scrollbar-hiding-offset});
-  padding-right: $scrollbar-hiding-offset;
+  padding-right: $scrollbar-hiding-offset - $scrollbar-size;
 
   > * {
-    @extend %centered;
-    width: calc(8/12 * 100% + 10px);
     min-height: $segment-size;
     display: flex;
     flex-direction: column;
@@ -85,14 +86,26 @@ footer {
   margin: 0;
 }
 
-.rocket {
+.rocketContainer {
+  position: relative;
+  width: 100%;
+}
+
+.rocket,
+.rocketTrail {
   position: absolute;
-  transform: scale(0.24) translateX(-2000px) translateY(-1316px) rotateX(30deg) rotateY(-170deg) rotateZ(50deg)
+}
+
+.rocket {
+  height: 250px;
+  left: 166px;
+  top: -376px;
+  transform: rotateY(-180deg) rotateZ(50deg);
 }
 
 .rocketTrail {
-  position: absolute;
-  transform: translateY(-55px) translateX(-70px);
+  left: 270px;
+  top: -200px;
 }
 
 .contact {
@@ -111,7 +124,6 @@ footer {
     position: absolute;
   }
 }
-
 
 .teamExperience {
   .parsecs {
@@ -134,8 +146,4 @@ footer {
       opacity: 1;
     }
   }
-}
-
-.workHeader {
-  margin-top: 10rem;
 }

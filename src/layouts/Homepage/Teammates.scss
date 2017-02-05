@@ -1,5 +1,7 @@
 @import '../../variables.global';
 
+$border-size: 5px;
+
 .teammatesWrapper {
   position: relative;
   width: 100%;
@@ -8,7 +10,7 @@
 .teammates {
   list-style: none;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   margin: 0;
   padding: 0;
@@ -20,18 +22,16 @@
   background: rgba(255,255,255, 0.5);
   height: $size;
   transform: skew(-20deg);
-  top: calc(#{$teammate-width} / 2 - #{$size / 2});
+  top: calc(#{$teammate-width} / 2 - #{($size - $border-size) / 2});
   position: absolute;
   width: 100%;
   margin: 0;
 }
 
 .teammate {
-  $mm: 100px;
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 100%;
   justify-content: space-between;
   text-align: center;
 }
@@ -39,9 +39,10 @@
 .photo {
   img {
     border-radius: 50%;
-    width: $teammate-width;
+    width: $teammate-width + $border-size;
     height: 100%;
-    max-height: $teammate-width;
+    max-height: $teammate-width + $border-size;
+    border: $border-size solid #8c8f94;
   }
 }
 

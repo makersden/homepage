@@ -1,18 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:200,300,400');
 
 @font-face {
-  font-family: 'HFF-Jammed-Pack';
-  src:
-    url('./HFF-Jammed-Pack.ttf.woff') format('woff'),
-    url('./HFF-Jammed-Pack.ttf.svg#HFF-Jammed-Pack') format('svg'),
-    url('./HFF-Jammed-Pack.ttf.eot'),
-    url('./HFF-Jammed-Pack.ttf.eot'),
-    url('./HFF-Jammed-Pack.ttf.eot?#iefix') format('embedded-opentype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
 	font-family: 'Airstream';
 	src: url('./Airstream.eot');
 	src: url('./Airstream.eot?#iefix') format('embedded-opentype'),
@@ -21,17 +9,5 @@
 	url('./Airstream.ttf') format('truetype'),
 	url('./Airstream.svg#Airstream') format('svg');
 	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: 'Bazar';
-	src: url('./Bazar.eot');
-	src: url('./Bazar.eot?#iefix') format('embedded-opentype'),
-	url('./Bazar.woff2') format('woff2'),
-	url('./Bazar.woff') format('woff'),
-	url('./Bazar.ttf') format('truetype'),
-	url('./Bazar.svg#Bazar') format('svg');
-	font-weight: 500;
 	font-style: normal;
 }

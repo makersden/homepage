@@ -6,8 +6,8 @@ import styles from './index.css';
 
 TopBarProgressIndicator.config({
   barColors: {
-    0: '#fff',
-    '1.0': '#fff',
+    0: 'rgba(255, 255, 255, 0.5)',
+    '1.0': 'rgba(255, 255, 255, 0.5)',
   },
   shadowBlur: 5,
 });

@@ -19,12 +19,11 @@
 // }
 
 .nav {
-  @extend %centered;
   padding: $home-offset 0;
   font-family: $font-secondary;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   min-height: $home-size;
 
   a.navLink,
@@ -37,9 +36,9 @@
     transition: color 0.3s;
     font-weight: 400;
     font-size: 1.5rem;
-    vertical-align: middle;
+    text-align: center;
+    min-width: 18%;
 
-    // Not using classes for styling -> Specifity wars.
     &.homeLink {
       font-family: $font-brand;
       font-size: $home-size;
@@ -50,9 +49,10 @@
       // subtle glow
       text-shadow: 0 0 0 $accent-color;
       transition: text-shadow 0.3s;
+      white-space: nowrap;
 
       &:hover {
-        text-shadow: 0 0 5px $accent-color;
+        text-shadow: 0 0 10px $accent-color;
       }
     }
 

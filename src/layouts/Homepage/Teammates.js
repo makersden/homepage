@@ -32,7 +32,7 @@ const Teammate = ({name, photo }) => (
   </li>
 );
 
-const Teammates = ({name, photo}) => {
+const Teammates = () => {
   return (
     <section className={styles.teammatesWrapper}>
       <hr className={styles.teammatesBackgroundDash} />

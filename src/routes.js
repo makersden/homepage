@@ -14,7 +14,7 @@ import Homepage from './layouts/Homepage';
 import Post from './layouts/Post';
 
 let trackPage = (page) => {
-  console.log('trackPage', page);
+  console.debug('trackPage', page);
 };
 
 if (typeof (window) !== 'undefined' && __PRODUCTION__) {

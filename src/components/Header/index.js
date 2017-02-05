@@ -17,7 +17,7 @@ const Header = ({ location: { hash} }, { metadata: { pkg } }) => {
       <a href="/#home" className={classNames(styles.homeLink, styles.navLink)}>
         Makers' Den
       </a>
-      {link('testimonials', 'Our Testimonials')}
+      {link('honors', 'Our Honors')}
       {link('contact', 'Contact Us!')}
     </nav>
   );

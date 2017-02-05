@@ -6,7 +6,7 @@ import invariant from 'invariant';
 import { joinUri, Link } from 'phenomic';
 import styles from './index.scss';
 import heroStyles from './hero.scss';
-import smoothscroll from 'smoothscroll';
+import smoothscroll from 'src/utils/smoothscroll';
 import Teammates from './Teammates';
 import Testimonials from './Testimonials';
 import Technologies from './Technologies';
@@ -23,7 +23,7 @@ const segments = [
   'home',
   'work',
   'team',
-  'testimonials',
+  'honors',
   'contact',
 ];
 
@@ -101,64 +101,64 @@ class Homepage extends Component {
   render() {
     const { setRefById } = this;
     return (
-        <section>
+      <ScrollContainer scrollKey='homepage' shouldUpdateScroll={this.shouldUpdateScroll}>
+        <section className={styles.homepageSegments} ref={e => this.scrollContext = e}>
           {this.helmet()}
-          <ScrollContainer scrollKey='homepage' shouldUpdateScroll={this.shouldUpdateScroll}>
-            <section className={styles.homepageSegments} ref={e => this.scrollContext = e}>
-              <section id="home" className={heroStyles.hero} ref={setRefById}>
-                <img src={rocketTrail} className={styles.rocketTrail} />
-                <img src={rocket} className={styles.rocket} />
-                <h1>
-                  Software development by Veterans
-                </h1>
-                <h2>
-                  Let our veterans guide you.
-                </h2>
-              </section>
-              <section id="team" ref={setRefById}>
-                <section className={styles.teamWrapper}>
-                  <section className={styles.teamDescription}>
-                    <h2 className={styles.teamExperience}>
-                      A crack crew of IT Veterans, armed with <strong className={styles.parsecs}>7.34 parsecs</strong> of experience.
-                    </h2>
-                  </section>
-                  <Teammates />
-                  <p className={styles.teamValues}>
-                    We believe in using <strong>the right tools</strong>, <strong>consistent shipping</strong> of <strong>quality results</strong> and <strong>strong communication</strong> to get the job done. We put <strong>project success</strong> before our gain. We are fast and hungry learners, <strong>never discouraged by the unknown</strong>.
-                  </p>
-                </section>
-              </section>
-              <section id="work"  ref={setRefById}>
-                <h2 className={styles.workHeader}>
-                  We have successfully launched over 50 projects into space.
-                </h2>
-                <p>
-                  Each of us is a freelance professional with a passion for creating products. Because of that, our full-stack experience doesn't come solely from customer work. We also set in motion creations of our own.
-                </p>
-                <p>
-                  We feel comfortable experimenting, but have a trusty set of tools we all know well and apply expertly.
-                </p>
-                <Technologies />
-              </section>
-              <section id="testimonials" className={styles.testimonials} ref={setRefById}>
-                <h2 className={styles.testimonialsHeader}>
-                  But don't take just our word for it.
-                </h2>
-                <Testimonials />
-              </section>
-              <section id="contact" className={styles.contact} ref={setRefById}>
-                <img src={planet} className={styles.planet} />
-                <h2>
-                  Interested? We'd love to touch base.
-                </h2>
-                <h3>
-                  <a href="mailto:korneliusz@makersden.io">Send us an email</a> or drop a line in the chatbox.
-                </h3>
-              </section>
+          <section id="home" className={heroStyles.hero} ref={setRefById}>
+            <section className={styles.rocketContainer}>
+              <img src={rocketTrail} className={styles.rocketTrail} />
+              <img src={rocket} className={styles.rocket} />
             </section>
-          </ScrollContainer>
+            <h1>
+              Software development by Veterans
+            </h1>
+            <h2>
+              Let our veterans guide you.
+            </h2>
+          </section>
+          <section id="team" ref={setRefById}>
+            <section className={styles.teamWrapper}>
+              <section className={styles.teamDescription}>
+                <h2 className={styles.teamExperience}>
+                  A crack crew of IT Veterans, armed with <strong className={styles.parsecs}>7.34 parsecs</strong> of experience.
+                </h2>
+              </section>
+              <Teammates />
+              <p className={styles.teamValues}>
+                We believe in using <strong>the right tools</strong>, <strong>consistent shipping</strong> of <strong>quality results</strong> and <strong>crystal clear communication</strong> to get the job done. We put <strong>laser focus on project success</strong>. We are fast and hungry learners, <strong>never discouraged by the unknown</strong>.
+              </p>
+            </section>
+          </section>
+          <section id="work"  ref={setRefById}>
+            <h2 className={styles.workHeader}>
+              We have successfully launched over 50 projects into space.
+            </h2>
+            <p>
+              Each of us is a freelance professional with a passion for creating products. Because of that, our full-stack experience doesn't come solely from customer work. We also set in motion creations of our own.
+            </p>
+            <p>
+              We feel comfortable experimenting, but have a trusty set of tools we all know well and apply expertly.
+            </p>
+            <Technologies />
+          </section>
+          <section id="honors" className={styles.testimonials} ref={setRefById}>
+            <h2 className={styles.testimonialsHeader}>
+              But don't take just our word for it.
+            </h2>
+            <Testimonials />
+          </section>
+          <section id="contact" className={styles.contact} ref={setRefById}>
+            <img src={planet} className={styles.planet} />
+            <h2>
+              Interested? We'd love to touch base.
+            </h2>
+            <h3>
+              <a href="mailto:korneliusz@makersden.io">Send us an email</a> or drop a line in the chatbox.
+            </h3>
+          </section>
           <HelpChat />
         </section>
+      </ScrollContainer>
     );
   }
 }
