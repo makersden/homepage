@@ -17,6 +17,9 @@ parserOptions:
     spread: true
     experimentalObjectRestSpread: true
 
+rules:
+  react/proptypes: [0]
+
 plugins:
   - import
   - react

@@ -1,17 +1,44 @@
+(function (root, smoothScroll) {
+  'use strict';
+
+  // Support RequireJS and CommonJS/NodeJS module formats.
+  // Attach smoothScroll to the `window` when executed as a <script>.
+
+  // RequireJS
+  if (typeof define === 'function' && define.amd) {
+    define(smoothScroll);
+
+  // CommonJS
+  } else if (typeof exports === 'object' && typeof module === 'object') {
+    module.exports = smoothScroll();
+
+  } else {
+    root.smoothScroll = smoothScroll();
+  }
+
+})(this, function(){
+'use strict';
+
+// Do not initialize smoothScroll when running server side, handle it in client:
+if (typeof window !== 'object') return;
+
+// We do not want this script to be applied in browsers that do not support those
+// That means no smoothscroll on IE9 and below.
+if(document.querySelectorAll === void 0 || window.pageYOffset === void 0 || history.pushState === void 0) { return; }
+
 // Get the top position of an element in the document
-function getTop(element, start) {
+var getTop = function(element, start) {
     // return value of html.getBoundingClientRect().top ... IE : 0, other browsers : -pageYOffset
     if(element.nodeName === 'HTML') return -start
     return element.getBoundingClientRect().top + start
 }
-
-function easeOutCubic (t) { return (--t)*t*t+1 }
+var easeOutCubic = function (t) { return (--t)*t*t+1 }
 
 // calculate the scroll position we should be in
 // given the start and end point of the scroll
 // the time elapsed from the beginning of the scroll
 // and the total duration of the scroll (default 500ms)
-function position(start, end, elapsed, duration) {
+var position = function(start, end, elapsed, duration) {
     if (elapsed > duration) return end;
     return start + (end - start) * easeOutCubic(elapsed / duration); // <-- you can change the easing funtion there
     // return start + (end - start) * (elapsed / duration); // <-- this would give a linear scroll
@@ -22,7 +49,7 @@ function position(start, end, elapsed, duration) {
 // if the first argument is numeric then scroll to this location
 // if the callback exist, it is called when the scrolling is finished
 // if context is set then scroll that element, else scroll window
-function smoothScroll(el, duration, callback, context){
+var smoothScroll = function(el, duration, callback, context){
     duration = duration || 500;
     context = context || window;
     var start = context.scrollTop || window.pageYOffset;
@@ -38,7 +65,7 @@ function smoothScroll(el, duration, callback, context){
         window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame ||
         function(fn){window.setTimeout(fn, 15);};
 
-    function step(){
+    var step = function(){
         var elapsed = Date.now() - clock;
         if (context !== window) {
           context.scrollTop = position(start, end, elapsed, duration);
@@ -58,7 +85,7 @@ function smoothScroll(el, duration, callback, context){
     step();
 }
 
-function linkHandler(ev) {
+var linkHandler = function(ev) {
     ev.preventDefault();
 
     if (location.hash !== this.hash) window.history.pushState(null, null, this.hash)
@@ -83,4 +110,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-export default smoothScroll;
+// return smoothscroll API
+return smoothScroll;
+
+});
