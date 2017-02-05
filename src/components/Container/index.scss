@@ -1,0 +1,102 @@
+@import '../../variables.global';
+
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+// n is number of stars required
+@function multiple-box-shadow ($n) {
+  $value: '#{random($star-dimension)}px #{random($star-dimension)}px #{$star-color}';
+  @for $i from 2 through $n {
+    $value: '#{$value} , #{random($star-dimension)}px #{random($star-dimension)}px #{$star-color}';
+  }
+
+  @return unquote($value);
+}
+
+$shadows-small:  multiple-box-shadow(500);
+$shadows-medium: multiple-box-shadow(200);
+$shadows-big:    multiple-box-shadow(100);
+
+@keyframes animStar {
+  from {
+    transform: translateY(0px);
+  }
+
+  to {
+    transform: translateY(-#{$star-dimension}px);
+  }
+}
+
+.stars {
+  height: 0;
+  width: 100%;
+}
+
+.smallStars {
+  width: 1px;
+  height: 1px;
+  background: transparent;
+  box-shadow: $shadows-small; animation			: animStar #{$star-speed}s linear infinite; &:after {
+    content: " ";
+    position: absolute;
+    top: #{$star-dimension}px;
+    width: 1px;
+    height: 1px;
+    background: transparent;
+    box-shadow: $shadows-small;
+  }
+}
+
+.mediumStars {
+  width: 2px;
+  height: 2px;
+  background: transparent;
+  box-shadow: $shadows-medium;
+  animation			: animStar #{2*$star-speed}s linear infinite;
+
+  &:after {
+    content: " ";
+    position: absolute;
+    top: #{$star-dimension}px;
+    width: 2px;
+    height: 2px;
+    background: transparent;
+    box-shadow: $shadows-medium;
+  }
+}
+
+.bigStars {
+  width: 3px;
+  height: 3px;
+  background: transparent;
+  box-shadow: $shadows-big;
+  animation			: animStar #{3*$star-speed}s linear infinite;
+
+  &:after {
+    content: " ";
+    position: absolute;
+    top: #{$star-dimension}px;
+    width: 3px;
+    height: 3px;
+    background: transparent;
+    box-shadow: $shadows-big;
+  }
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: radial-gradient(ellipse at bottom, $background-color-light 0%, $background-color 100%);
+  overflow: hidden;
+
+  & ~ * {
+    position: relative;
+  }
+}

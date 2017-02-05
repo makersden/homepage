@@ -1,4 +1,4 @@
-@import './variables';
+@import '../../variables.global';
 
 .testimonials {
   * {
@@ -14,7 +14,7 @@
     left: 0;
   }
 
-  width: 100%;
+  width: calc(8/12 * 100%);
 
   .testimonial {
     min-height: 10rem;
@@ -26,7 +26,7 @@
 
     h4 {
       display: block;
-      margin: 0 2rem;
+      margin: 0;
       margin-bottom: 2rem;
       font-size: 2rem;
       font-weight: 400;

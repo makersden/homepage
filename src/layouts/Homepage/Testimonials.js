@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 
@@ -24,8 +24,8 @@ const testimonials = [{
   author: 'Some Gal'
 }];
 
-const Testimonial = ({ quote, author }) => (
-  <section className={styles.testimonial}>
+const Testimonial = ({ quote, author }, index) => (
+  <section className={styles.testimonial} key={index}>
     <h4>
       “{quote}”
     </h4>
@@ -35,10 +35,17 @@ const Testimonial = ({ quote, author }) => (
   </section>
 );
 
-export default () => (
+Testimonial.propTypes = {
+  quote: PropTypes.string,
+  author: PropTypes.string,
+};
+
+const Testimonials = () => (
   <section className={styles.testimonials}>
     <Slider {...SLIDER_SETTINGS}>
       {testimonials.map(Testimonial)}
     </Slider>
   </section>
 );
+
+export default Testimonials;

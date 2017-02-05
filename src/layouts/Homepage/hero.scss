@@ -1,13 +1,8 @@
-@import './variables';
+@import '../../variables.global';
 
 $base-size: 4rem;
 
 .hero {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-
   h1, h2 {
     font-family: 'Lato', sans-serif;
     line-height: 1;

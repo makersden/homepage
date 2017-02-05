@@ -20,7 +20,7 @@ const mates = [{
   }];
 
 const Teammate = ({name, photo }) => (
-  <li className={styles.teammate}>
+  <li className={styles.teammate} key={name}>
     <section className={styles.photo}>
       <img className={styles.phtoto} src={photo} />
     </section>
@@ -32,7 +32,7 @@ const Teammate = ({name, photo }) => (
   </li>
 );
 
-export default ({name, photo}) => {
+const Teammates = ({name, photo}) => {
   return (
     <section className={styles.teammatesWrapper}>
       <hr className={styles.teammatesBackgroundDash} />
@@ -41,4 +41,6 @@ export default ({name, photo}) => {
       </ul>
     </section>
   );
-}
+};
+
+export default Teammates;

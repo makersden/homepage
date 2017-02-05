@@ -1,5 +1,7 @@
 ---
-extends: "eslint:recommended"
+extends:
+  - "eslint:recommended"
+  - "plugin:react/recommended"
 
 env:
   browser: true
@@ -11,6 +13,7 @@ parserOptions:
   sourceType: module
   ecmaFeatures:
     jsx: true
+    react: true
     spread: true
     experimentalObjectRestSpread: true
 

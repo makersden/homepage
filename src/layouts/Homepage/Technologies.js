@@ -1,5 +1,5 @@
 import React from 'react';
-import SVGInline from "react-svg-inline"
+/* import SVGInline from "react-svg-inline"*/
 
 import styles from './Technologies.scss';
 
@@ -24,23 +24,25 @@ const technologies = {
   react,
   heroku,
   java,
-  googleanalytics,
-  scala,
-  play,
   meteor,
+  scala,
+  googleanalytics,
+  play,
   rails,
 };
 
 const Technology = (name) => (
-  <section className={styles.technology}>
-    <SVGInline svg={technologies[name]} title={name} />
+  <section className={styles.technology} key={name}>
+    <img src={technologies[name]} title={name} />
   </section>
 );
 
-const Technologies = Object.keys(technologies).map(Technology)
+const AllTechnologies = Object.keys(technologies).map(Technology)
 
-export default () => (
+const Technologies = () => (
   <section className={styles.technologies}>
-    {Technologies}
+    {AllTechnologies}
   </section>
 );
+
+export default Technologies;
