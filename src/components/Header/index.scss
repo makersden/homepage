@@ -47,6 +47,8 @@
       text-shadow: 0 0 0 $accent-color;
       transition: text-shadow 0.3s;
       white-space: nowrap;
+      -webkit-tap-highlight-color: transparent;
+      -moz-tap-highlight-color: transparent;
 
       &:hover {
         text-shadow: 0 0 10px $accent-color;
