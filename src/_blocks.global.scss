@@ -1,0 +1,17 @@
+@import './variables.global';
+@import './include-media.global';
+
+%centered {
+  width: calc(8 / 12 * 100%);
+  margin: 0 auto;
+
+  @include media('<=tablet') {
+    width: calc(10 / 12 * 100%);
+  }
+
+  @include media('<=phone') {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    width: 100%;
+  }
+}

@@ -1,4 +1,5 @@
-@import '../../variables.global';
+@import 'src/variables.global';
+@import 'src/include-media.global';
 
 $base-size: 4rem;
 
@@ -12,12 +13,21 @@ $base-size: 4rem;
   }
 
   h1 {
-    font-size: $base-size;
+    $font-size: $base-size;
+    font-size: $font-size;
     position: relative;
     bottom: $home-size;
+
+    @include media('<=tablet') {
+      font-size: 1/2 * $font-size;
+    }
   }
 
   h2 {
-    font-size: $base-size - 2rem;
+    $font-size: $base-size - 2rem;
+    font-size: $font-size;
+    @include media('<=tablet') {
+      font-size: 3/4 * $font-size;
+    }
   }
 }

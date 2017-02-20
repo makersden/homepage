@@ -1,16 +1,29 @@
 @import '../../variables.global';
+@import 'src/include-media.global';
 
 $spacing: 32px;
 
+@mixin columns($count) {
+  -moz-column-count: $count;
+  -webkit-column-count: $count;
+  column-count: $count;
+}
+
 .technologies {
-  -moz-column-count: 3;
-  -webkit-column-count: 3;
-  column-count: 3;
+  @include columns(3);
   -moz-column-gap: $spacing / 2;
   -webkit-column-gap: $spacing / 2;
   column-gap: $spacing / 2;
   width: 100%;
   padding: 16px 32px;
+
+  @include media('<=tablet') {
+    @include columns(2);
+  }
+
+  @include media('<=phone') {
+    @include columns(1);
+  }
 }
 
 .technology {

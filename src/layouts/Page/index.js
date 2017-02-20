@@ -17,11 +17,10 @@ const Page = (
   },
   {
     metadata: { pkg },
-  },
-) => {
+  }) => {
   invariant(
     typeof head.title === 'string',
-    `Your page '${__filename}' needs a title`,
+    `Your page '${__filename}' needs a title`
   );
 
   const metaTitle = head.metaTitle ? head.metaTitle : head.title;

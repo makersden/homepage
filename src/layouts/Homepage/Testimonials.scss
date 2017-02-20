@@ -1,4 +1,5 @@
-@import '../../variables.global';
+@import 'src/variables.global';
+@import 'src/include-media.global';
 
 .testimonials {
   * {
@@ -17,11 +18,12 @@
   width: calc(8/12 * 100%);
 
   .testimonial {
-    min-height: 10rem;
-    margin: 10rem 0;
+    $size: 10rem;
+    min-height: $size;
+    margin: $size 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
 
     h4 {
@@ -36,6 +38,15 @@
 
     span {
       font-weight: 300;
+    }
+
+    @include media('<=tablet') {
+      margin: $size / 2 0 0 0;
+
+      h4 {
+        font-size: 1.5rem;
+        line-height: 1.5;
+      }
     }
   }
 

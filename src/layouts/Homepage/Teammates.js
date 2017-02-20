@@ -21,6 +21,7 @@ const mates = [{
 
 const Teammate = ({name, photo }) => (
   <li className={styles.teammate} key={name}>
+    <hr className={styles.mobileTeammatesBackgroundDash} />
     <section className={styles.photo}>
       <img className={styles.phtoto} src={photo} />
     </section>
@@ -35,7 +36,7 @@ const Teammate = ({name, photo }) => (
 const Teammates = () => {
   return (
     <section className={styles.teammatesWrapper}>
-      <hr className={styles.teammatesBackgroundDash} />
+    <hr className={styles.teammatesBackgroundDash} />
       <ul className={styles.teammates}>
         {mates.map(Teammate)}
       </ul>

@@ -1,5 +1,7 @@
-@import '../../../assets/fonts/index.css';
-@import '../../variables.global';
+@import 'assets/fonts/index.css';
+@import 'src/blocks.global';
+@import 'src/mixins.global';
+@import 'src/include-media.global';
 
 $segment-size: calc(100vh - #{$home-size} - #{2 * $home-offset}});
 
@@ -42,6 +44,19 @@ $segment-size: calc(100vh - #{$home-size} - #{2 * $home-offset}});
       font-weight: 200;
       line-height: 1.5;
     }
+
+    @include media('<=desktop') {
+      min-height: calc(100vh - 3.5rem - #{$home-offset}});
+      &:not(:first-child) {
+        padding-bottom: 3rem;
+        padding-top: 3rem;
+      }
+    }
+  }
+
+  @include media('<=desktop') {
+    margin-top: -2rem;
+    padding-right: $scrollbar-hiding-offset;
   }
 }
 
@@ -89,6 +104,7 @@ footer {
 .rocketContainer {
   position: relative;
   width: 100%;
+  margin: 0 auto;
 }
 
 .rocket,
@@ -97,15 +113,17 @@ footer {
 }
 
 .rocket {
-  height: 250px;
-  left: 166px;
-  top: -376px;
+  @include css-lock(75, 250, 320, 1500, height, px);
+  @include css-lock(-90, -376, 320, 1500, top, px);
+  @include css-lock(25, 166, 320, 1500, left, px);
   transform: rotateY(-180deg) rotateZ(50deg);
 }
 
 .rocketTrail {
-  left: 270px;
-  top: -200px;
+  @include css-lock(136, 680, 320, 1500, width, px);
+  @include css-lock(78, 398, 320, 1500, height, px);
+  @include css-lock(-32, -200, 320, 1500, top, px);
+  @include css-lock(63, 270, 320, 1500, left, px);
 }
 
 .contact {

@@ -1,10 +1,24 @@
-@import '../../variables.global';
+@import 'src/variables.global';
+@import 'src/include-media.global';
 
 $border-size: 5px;
+$dash-size: 10px;
 
 .teammatesWrapper {
   position: relative;
   width: 100%;
+}
+
+
+%bgDash {
+  border: none;
+  background: rgba(255,255,255, 0.5);
+  height: $dash-size;
+  transform: skew(-20deg);
+  top: calc(#{$teammate-width} / 2 - #{($dash-size - $border-size) / 2});
+  position: absolute;
+  width: 100%;
+  margin: 0;
 }
 
 .teammates {
@@ -14,18 +28,29 @@ $border-size: 5px;
   align-items: center;
   margin: 0;
   padding: 0;
+
+  @include media('<=tablet') {
+    flex-direction: column;
+  }
 }
 
 .teammatesBackgroundDash {
-  $size: 10px;
-  border: none;
-  background: rgba(255,255,255, 0.5);
-  height: $size;
-  transform: skew(-20deg);
-  top: calc(#{$teammate-width} / 2 - #{($size - $border-size) / 2});
-  position: absolute;
-  width: 100%;
-  margin: 0;
+  @extend %bgDash;
+
+  @include media('<=tablet') {
+    display: none;
+  }
+}
+
+.mobileTeammatesBackgroundDash {
+  @extend %bgDash;
+  display: none;
+
+  @include media('<=tablet') {
+    top: calc(#{$teammate-width} / 2 - #{$dash-size - $border-size} / 2 - 1rem);
+    display: block;
+    z-index: -1;
+  }
 }
 
 .teammate {
@@ -33,7 +58,11 @@ $border-size: 5px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  text-align: center;
+  align-items: center;
+
+  @include media('<=tablet') {
+    width: calc(100% - 2rem);
+  }
 }
 
 .photo {
@@ -43,6 +72,11 @@ $border-size: 5px;
     height: 100%;
     max-height: $teammate-width + $border-size;
     border: $border-size solid #8c8f94;
+
+    @include media('<=tablet') {
+      width: calc(#{$teammate-width + $border-size} - 2rem);
+      margin: 0 auto;
+    }
   }
 }
 
