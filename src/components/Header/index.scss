@@ -50,7 +50,8 @@
       -webkit-tap-highlight-color: transparent;
       -moz-tap-highlight-color: transparent;
 
-      &:hover {
+      &:hover,
+      &.active {
         text-shadow: 0 0 10px $accent-color;
       }
 
