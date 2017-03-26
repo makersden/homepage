@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { Link } from 'phenomic';
 import classnames from 'classnames/bind';
 import Svg from 'react-svg-inline';
 
@@ -7,9 +8,8 @@ import styles from './index.scss';
 const cx  = classnames.bind(styles);
 
 const _link = (currentHash) => (id, text) => {
-  console.log(id, currentHash);
   return (
-    <a href={`/#${id}`} className={cx('navLink', { active: id === currentHash })}>{text}</a>
+    <Link to={`/#${id}`} className={cx('navLink', { active: id === currentHash })}>{text}</Link>
   );
 };
 
@@ -21,9 +21,9 @@ const Header = ({ location: { hash, pathname } }, { metadata: { pkg } }) => {
     <nav className={styles.nav}>
       {link('team', 'Our Team')}
       {link('work', 'Our Work')}
-      <a href="/#home" className={cx('homeLink', 'navLink', { active: isHome })}>
+      <Link to="/#home" className={cx('homeLink', 'navLink', { active: isHome })}>
         Makers' Den
-      </a>
+      </Link>
       {link('honors', 'Our Honors')}
       {link('contact', 'Contact Us!')}
     </nav>
