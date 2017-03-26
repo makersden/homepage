@@ -7,25 +7,31 @@ import styles from './index.scss';
 
 const cx  = classnames.bind(styles);
 
-const _link = (currentHash) => (id, text) => {
+const _hashLink = (currentHash) => (id, text) => {
   return (
     <Link to={`/#${id}`} className={cx('navLink', { active: id === currentHash })}>{text}</Link>
   );
 };
 
+const link = (to, text) => {
+  return (
+    <Link to={to} className={cx('navLink')} activeClassName={cx('active')}>{text}</Link>
+  );
+}
+
 const Header = ({ location: { hash, pathname } }, { metadata: { pkg } }) => {
   const hashName = hash.slice(1);
-  const link = _link(hashName);
+  const hashLink = _hashLink(hashName);
   const isHome = pathname === '/' && (!hashName || hashName === 'home');
   return (
     <nav className={styles.nav}>
-      {link('team', 'Our Team')}
-      {link('work', 'Our Work')}
+      {hashLink('team', 'Our Team')}
+      {hashLink('honors', 'Our Honors')}
       <Link to="/#home" className={cx('homeLink', 'navLink', { active: isHome })}>
         Makers' Den
       </Link>
-      {link('honors', 'Our Honors')}
-      {link('contact', 'Contact Us!')}
+      {hashLink('contact', 'Contact Us!')}
+      {link('blog', 'Our Blog')}
     </nav>
   );
 };

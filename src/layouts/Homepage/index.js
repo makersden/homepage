@@ -55,7 +55,9 @@ class Homepage extends Component {
   }
 
   setRefById = (e) => {
-    this[e.id] = e;
+    if (e) {
+      this[e.id] = e;
+    }
   }
 
   helmet = () => {
