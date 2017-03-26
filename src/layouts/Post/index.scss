@@ -7,11 +7,11 @@
 
 .article {
   $width: 55rem;
-  $padding: 5rem;
-  $background: rgba($background-color-light, 0.8);
+  $padding: 25rem;
+  $background: rgba($background-color, 0.7);
   background: linear-gradient(to right, transparent, $background $padding, $background calc(100% - #{$padding}), transparent);
   max-width: $width + 2 * $padding;
-  padding: 5rem $padding;
+  padding: 9rem $padding;
   margin: 0 auto;
   width: calc(100%);
 
