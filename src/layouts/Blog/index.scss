@@ -1,8 +1,18 @@
+@import 'src/variables.global';
+
 .main {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.noPosts {
+  height: calc(100% - #{$home-size});
+
+  .introduction {
+    margin: 0;
+  }
 }
 
 .introduction {

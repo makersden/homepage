@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import classnames from 'classnames';
 import Helmet from 'react-helmet';
 import enhanceCollection from 'phenomic/lib/enhance-collection';
 
@@ -18,17 +19,20 @@ export default class Blog extends Component {
       filter: c => c.layout === 'Post'
     });
 
-    const text = posts.length > 0
-               ? 'Here\'s what we enjoy writing about.'
-               : 'Magnificent things coming very very soon.';
+    const noPosts = posts.length === 0;
+    const text = noPosts
+               ? 'Magnificent things are coming very very soon.'
+               : 'Here\'s what we enjoy writing about.';
 
     return (
-      <section className={styles.main}>
+      <section className={classnames(styles.main, { [styles.noPosts]: noPosts })}>
         <Helmet title={'Blog | Makers\' Den'} />
         <p className={styles.introduction}>
           {text}
         </p>
-        <PagesList pages={ posts } className={styles.posts} />
+        {!noPosts && (
+          <PagesList pages={ posts } className={styles.posts} />
+         )}
       </section>
     );
   }
