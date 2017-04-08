@@ -18,12 +18,15 @@ export default class Blog extends Component {
       filter: c => c.layout === 'Post'
     });
 
-    console.log(this.props, this.context);
+    const text = posts.length > 0
+               ? 'Here\'s what we enjoy writing about.'
+               : 'Magnificent things coming very very soon.';
 
     return (
       <section className={styles.main}>
+        <Helmet title={'Blog | Makers\' Den'} />
         <p className={styles.introduction}>
-          Here's what we enjoy writing about.
+          {text}
         </p>
         <PagesList pages={ posts } className={styles.posts} />
       </section>
