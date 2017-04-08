@@ -43,6 +43,15 @@ body {
   height: 100vh;
 }
 
+a,
+a:visited {
+  color: #FFF;
+}
+
+h1, h2, h3 {
+  margin: 0;
+}
+
 h2, h3 {
   font-weight: 300;
 }

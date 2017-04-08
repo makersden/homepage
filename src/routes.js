@@ -12,6 +12,7 @@ import PageError from './layouts/PageError';
 import PageLoading from './layouts/PageLoading';
 import Homepage from './layouts/Homepage';
 import Post from './layouts/Post';
+import Blog from './layouts/Blog';
 
 let trackPage = (page) => {
   console.log('trackPage', page);
@@ -53,6 +54,7 @@ const PageContainer = props => {
       PageLoading,
       Homepage,
       Post,
+      Blog,
     }}
   />
 ); };

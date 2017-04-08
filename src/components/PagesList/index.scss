@@ -1,0 +1,37 @@
+@import 'src/variables.global';
+
+.posts {
+  width: 50%;
+}
+
+.post {
+  &:not(:first-child) {
+    margin-top: 4rem;
+  }
+
+  &:hover {
+    header {
+      text-shadow: 0 0 10px $accent-color;
+    }
+  }
+
+  h2 {
+    font-size: 29px;
+    margin-left: -1.81px;
+    line-height: 1.04;
+    letter-spacing: -.028em;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    transition: text-shadow 0.3s;
+  }
+
+  p {
+    margin-top: 10px;
+  }
+
+}

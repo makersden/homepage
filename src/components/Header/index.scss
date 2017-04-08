@@ -20,7 +20,7 @@
   font-family: $font-secondary;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   min-height: $home-size;
 
   a.navLink,
@@ -29,12 +29,12 @@
     color: $accent-color;
     cursor: pointer;
     display: inline-block;
+    flex: 1;
     text-decoration: none;
     transition: color 0.3s;
     font-weight: 400;
     font-size: 1.5rem;
     text-align: center;
-    min-width: 18%;
 
     &.homeLink {
       font-family: $font-brand;

@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 
+import './reset.global.css';
 import './index.global.css';
 import './highlight.global.css';
 

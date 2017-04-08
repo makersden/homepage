@@ -1,0 +1,31 @@
+@import 'src/variables.global';
+
+.preview {
+  text-decoration: none;
+}
+
+.tags {
+  display: flex;
+  align-items: center;
+  margin-left: -1.81px;
+  margin-top: 10px;
+}
+
+.tag {
+  font-size: x-small;
+  text-transform: uppercase;
+  border: 1px solid rgba($accent-color, 0.5);
+  border-radius: 1px;
+  background: transparent;
+  padding: 0 5px;
+  margin-right: 2px;
+  cursor: pointer;
+  transition: background 0.3s, border-color 0.3s, color 0.3s;
+  outline: none;
+
+  &:hover {
+    border: 1px solid transparent;
+    background: rgba(white, 0.9);
+    color: $background-color;
+  }
+}

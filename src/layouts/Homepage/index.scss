@@ -20,16 +20,8 @@ $segment-size: calc(100vh - #{$home-size} - #{2 * $home-offset}});
 }
 
 .homepageSegments {
-  $scrollbar-hiding-offset: 3000px;
-  $scrollbar-size: 15px;
-
-  overflow-y: auto;
-  overflow-x: hidden;
-  -webkit-mask-image: linear-gradient(to bottom, transparent, rgba(0,0,0,1) #{$home-size/2});
   max-height: $segment-size;
-  // Bye bye, scrollbar
-  width: calc(100% + #{$scrollbar-hiding-offset});
-  padding-right: $scrollbar-hiding-offset - $scrollbar-size;
+  @extend %invisibleScrollbar;
 
   > * {
     min-height: $segment-size;

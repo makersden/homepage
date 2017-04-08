@@ -47,7 +47,7 @@ export default (config = {}) => {
 
         // *.js => babel + eslint
         {
-          test: /\.js$/,
+          test: /\.jsx?$/,
           include: [
             path.resolve(__dirname, 'scripts'),
             path.resolve(__dirname, 'src')
@@ -366,7 +366,7 @@ export default (config = {}) => {
 
     // webpack 1
     resolve: {
-      extensions: ['.js', '.json', ''],
+      extensions: ['.js', '.jsx', '.json', ''],
       root: [
         path.join(__dirname, 'node_modules'),
         path.resolve('.'),
