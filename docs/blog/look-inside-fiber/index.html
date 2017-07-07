@@ -1,0 +1,560 @@
+<!doctype html><html lang="en"><head><title data-react-helmet="true">A look inside React Fiber - how work will get done.</title><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta data-react-helmet="true" name="generator" content="Phenomic 0.19.5"/><meta data-react-helmet="true" property="og:site_name" content="makers-den-homepage"/><meta data-react-helmet="true" name="twitter:site" content="@makers_den"/><meta data-react-helmet="true" name="viewport" content="width=device-width, initial-scale=1"/><meta data-react-helmet="true" name="google-site-verification" content="VEd-YN0XIV4G-934e_RkML776hewBuI9UC0O-9IFOrQ"/><meta data-react-helmet="true" property="og:type" content="article"/><meta data-react-helmet="true" property="og:title" content="A look inside React Fiber - how work will get done."/><meta data-react-helmet="true" property="og:url" content="http://makersden.io/blog/look-inside-fiber/"/><meta data-react-helmet="true" property="og:description" content="Describing how React Fiber operates, step by step, starting from calling the `render` function in client JS and changing state of a component, down to describing the steps taken by Fiber to do all the work. Best served with Fiber source code on the side."/><meta data-react-helmet="true" name="twitter:card" content="summary"/><meta data-react-helmet="true" name="twitter:title" content="A look inside React Fiber - how work will get done."/><meta data-react-helmet="true" name="twitter:creator" content="@makers_den"/><meta data-react-helmet="true" name="twitter:description" content="Describing how React Fiber operates, step by step, starting from calling the `render` function in client JS and changing state of a component, down to describing the steps taken by Fiber to do all the work. Best served with Fiber source code on the side."/><meta data-react-helmet="true" name="description" content="Describing how React Fiber operates, step by step, starting from calling the `render` function in client JS and changing state of a component, down to describing the steps taken by Fiber to do all the work. Best served with Fiber source code on the side."/><link rel="stylesheet" href="/phenomic.browser.0f07dd3e99e533d0db49.css"/></head><body><div id="phenomic"><section class="_1JS_a" data-reactroot="" data-reactid="1" data-react-checksum="1972270676"><section class="uWwEu" data-reactid="2"><section class="_2_l_7" data-reactid="3"><section class="_1c1LD" data-reactid="4"></section><section class="_1vA7K" data-reactid="5"></section><section class="_1T-iF" data-reactid="6"></section></section></section><div hidden="" data-reactid="7"><!-- react-empty: 8 --><!-- react-empty: 9 --><style data-reactid="10">@-ms-viewport { width: device-width; }</style></div><nav class="_3IcTt" data-reactid="11"><a class="_2qWFf" href="/#team" data-reactid="12">Our Team</a><a class="_2qWFf" href="/#honors" data-reactid="13">Our Honors</a><a class="_1Nwa4 _2qWFf" href="/#home" data-reactid="14">Makers&#x27; Den</a><a class="_2qWFf" href="/#contact" data-reactid="15">Contact Us!</a><a class="_2qWFf" href="blog" data-reactid="16">Our Blog</a></nav><div class="_3RmNN" data-reactid="17"><main class="_1IDIW" tabindex="-1" data-reactid="18"><article class="uIaSu" data-reactid="19"><div class="sFWsg" data-reactid="20"><!-- react-empty: 21 --><h1 data-reactid="22">A look inside React Fiber - how work will get done.</h1><header data-reactid="23"><span data-reactid="24"><!-- react-text: 25 -->Korneliusz Caputa<!-- /react-text --><!-- react-text: 26 -->, <!-- /react-text --></span><time data-reactid="27">Fri Jul 07 2017</time></header><div class="phenomic-BodyContainer" data-reactid="28"><p>As we all know by now, a big change is coming inside of React with version 0.16.
+It's a significant one, because it will affect the performance of more complex
+React applications.
+The crux of the change is transitioning from processing updates in a synchronous,
+recursive way to relying on asynchronous scheduling and prioritization of
+interface changes.
+The desired result is 60 FPS and a pristine user experience.
+It's been a while since the announcement already, and
+<a href="https://www.youtube.com/watch?v=aV1271hd9ew">many good things</a>
+<a href="https://www.youtube.com/watch?v=ZCuYPiUIONs">have been said</a>
+<a href="https://github.com/acdlite/react-fiber-architecture">and written</a>.
+However, I like to see things for myself and understand how they work from the ground
+up. There were also a few topics that lacked "press coverage"</p>
+<p>Thus, down the rabbit hole I went!</p>
+<p>Fiber is not the most straightforward piece of software, both conceptually and
+code-wise, so it should be approached in a structured way.
+This post will go outside-in - starting from calling the <code>render</code>
+function in client JS and changing state of a component, down to
+describing the steps taken by Fiber to do all the work.
+At a few points along the way you will be given a choice to go further down or
+return to the tip and track your way back to the same point from a different
+origin.</p>
+<p>If you feel like it, you can grab the Fiber codebase from Github and track your
+way through the post in the code, starting <a href="https://github.com/facebook/react/blob/master/src/renderers/dom/fiber/ReactDOMFiberEntry.js">here</a>.</p>
+<p>React source code is sprinkled with a lot of error handling, dev logging and
+performance measurement calls. I'm going to skip those and focus on the main
+logic for the sake of clarity.</p>
+<p>Another point to note is that currently Fiber code is coupled to the DOM
+renderer in a few places, because things are still developing, as I understand it.
+I'll try to avoid referring to it, but you can assume that "the renderer" means
+"the DOM renderer" in this post.</p>
+<p><a id="org882dfad"></a></p>
+<h2 id="the-first-render-scratching-the-surface"><a href="#the-first-render-scratching-the-surface" class="phenomic-HeadingAnchor">#</a>The first render: scratching the surface</h2>
+<p>So you have your HTML skeleton in place, relevant JS is loaded, and you hit that
+first <code>render</code> call. Because the page and the fiber tree is empty (there is no <code>root</code>), Fiber knows
+that it doesn't have to worry about asynchronous processing, since nothing
+should be happening outside of React itself.
+So it creates a fiber instance that will represent your container as the root of
+the fiber tree.
+Then it tells the <code>Scheduler</code> that what happens next should be considered as <code>unbatchedUpdates</code>.
+The update in question is telling the <code>Reconciler</code> to <code>updateContainer</code>, where
+the <code>container</code> is the root fiber that has just been created.</p>
+<p>"Updating the container" at this point means the following:</p>
+<ol>
+<li>
+<p><strong>Set the root fiber <code>context</code>. </strong>
+Yeah, the thing that the docs tell you to avoid using.
+Overall I haven't found anything relevant to this post there.</p>
+</li>
+<li>
+<p><strong>Push an update into the update queue of the root fiber.</strong>
+The "bulk" of the update is the <code>state</code>. At that moment in the <code>Scheduler</code>
+context it is called <code>nextState</code>, because this state is what will be
+happening next. In the context of the update queue it is called
+<code>partialState</code>, because it will be merged with the <code>prevState</code>.
+It is also the state you use in your React components.</p>
+<p>React's composability is nicely visible here - if you squint just a little,
+rendering your application is not much more than a glorified <code>setState</code> call.</p>
+<p>The update has a set priority level - remember that the <code>Scheduler</code> has been
+told to do <code>unbatchedUpdates</code>? Because of that the priority level is set to
+<code>SynchronousPriority</code>. It means that this update must be done ASAP, without
+worrying about blocking the UI thread. The priority is being used to
+determine where in the fiber's update queue this particular update should go.
+In this case the queue is empty, so it will be the head. Even if the queue wasn't
+empty though, it's ordered by descending priority - the update would still go
+to the front (given there are no prior <code>SynchronousPriority</code> updates there already).</p>
+</li>
+<li>
+<p><strong>Tell the <code>Scheduler</code> to schedule the update work to be done.</strong>
+This is where the ball gets rolling.
+When the <code>Scheduler</code> is told to schedule an update, it looks at the
+nodes in the fiber tree, traversing it using the <code>return</code> property of each fiber.</p>
+<p> This property is pointing to a node which should be worked on next in case a
+work phase gets interrupted (more on that later). For the sake of simplicity
+you can assume it's the parent fiber.</p>
+<p> So the <code>Scheduler</code> goes up the tree starting from the node that the update
+should be scheduled for, bumping up priorities where needed along the way,
+until it reaches the root. It can see that it's at the root, because there is
+no <code>return</code> node from it.
+In the current case (initial render), the update has been scheduled for the
+root node, so we're already there.</p>
+<p> Upon reaching the root, the <code>Scheduler</code> puts it in a <code>scheduledRoot</code> list
+(more about this later, that's how it later finds new work to do) and finally
+schedules the work according to given priority. In our example it's
+<code>SynchronousPriority</code>, so it jumps to the "doing work" phase immediately.</p>
+<p> That's all there is to <code>render</code>. The "doing work" phase is generic across all
+the flows, so it's described in it's own chapter. You can go there now if you
+feel the flow. Alternatively, you can read how Fiber arrives at this phase
+when you call <code>setState</code> if you need a bit more context.</p>
+</li>
+</ol>
+<p><a id="orgc07b371"></a></p>
+<h2 id="changing-state-its-not-too-exotic"><a href="#changing-state-its-not-too-exotic" class="phenomic-HeadingAnchor">#</a>Changing state: it's not too exotic</h2>
+<p>Each React component instance has an <code>updater</code>.
+The <code>updater</code> is an injected dependency and mediates the communication between
+the components and the React core.</p>
+<p>With Fiber, the <code>updater</code> has 4 responsibilities:</p>
+<ol>
+<li>Find a fiber instance in the tree that corresponds to this component.</li>
+<li>Ask the <code>Scheduler</code> about the priority level for this fiber.</li>
+<li>Push updates to the fiber's update queue.</li>
+<li>Schedule update work to be done with the determined priority level.</li>
+</ol>
+<p>Sounds familiar? It should, because that's almost exactly the same thing that
+happens on render.</p>
+<p>You probably know that, but I should point out that there are two forms of arguments
+it can be called with:</p>
+<ul>
+<li><code>setState({ ... }, [callback])</code></li>
+<li><code>setState((prevState, props) => ({ ... }), [callback])</code></li>
+</ul>
+<p>It's not crucial at this point, but good for you to keep in mind as the
+first form will eventually become deprecated. More on that later.</p>
+<p>Ok, so you call <code>setState((prevState, props) => ({ ... }), [callback])</code>
+in your component. It tells its <code>updater</code> to enqueue a <code>setState</code>.</p>
+<p>Let's go through the 4 responsibilities.</p>
+<h3 id="1-find-a-fiber-instance-in-the-tree-that-corresponds-to-this-component"><a href="#1-find-a-fiber-instance-in-the-tree-that-corresponds-to-this-component" class="phenomic-HeadingAnchor">#</a>1. Find a fiber instance in the tree that corresponds to this component.</h3>
+<p>   It's just getting a thing from the <code>ReactInstanceMap</code> - which is just that, a
+map, nothing fancy. One perhaps slightly interesting thing about it is that
+it maps from public facing instances to internal methods. Example:
+<br>
+get: function(key) {
+return key._reactInternalInstance;
+},</p>
+<h3 id="2-ask-the-scheduler-about-the-priority-level-for-this-fiber"><a href="#2-ask-the-scheduler-about-the-priority-level-for-this-fiber" class="phenomic-HeadingAnchor">#</a>2. Ask the <code>Scheduler</code> about the priority level for this fiber.</h3>
+<p>   There is a <code>Scheduler</code> method called <code>getPriorityContext</code> that provides a
+suitable priority level for a fiber update. For all intents and purposes,
+the priority level for a <code>setState</code> will be <code>LowPriority</code>. Refer to the
+glossary to see how that priority level stacks up against the others.</p>
+<p>   <em>There are 2 edge cases to this, but you shouldn't concern yourself with
+them too much.
+If you're studying for a test and must know, they are:
+explicitly passing a <code>useSyncScheduling: true</code> parameter to the context getting
+function, which will result in <code>SynchronousPriority</code>; and having
+<code>priorityContext</code> of <code>SynchronousPriority</code> during the work phase or a
+<code>batchedUpdates</code> callback - which will result in <code>TaskPriority</code>.</em></p>
+<h3 id="3-push-updates-to-the-fibers-update-queue"><a href="#3-push-updates-to-the-fibers-update-queue" class="phenomic-HeadingAnchor">#</a>3. Push updates to the fiber's update queue.</h3>
+<p>   This logic is pretty much the same as in the initial render case. The only
+differences are that:</p>
+<ul>
+<li><code>setState</code> is not a top-level update, so the code doesn't check if the
+update is a top-level unmount.</li>
+<li>the priority level is lower (<code>LowPriority</code>).</li>
+</ul>
+<p>   The new update is being inserted to the fiber's update queue according to the
+priority level - so most likely it will get added to the end of the queue.</p>
+<h3 id="4-schedule-update-work-to-be-done-with-the-determined-priority-level"><a href="#4-schedule-update-work-to-be-done-with-the-determined-priority-level" class="phenomic-HeadingAnchor">#</a>4. Schedule update work to be done with the determined priority level.</h3>
+<p>   As I've mentioned before, this logic is generic across all the flows - so
+nothing changes here in terms of walking the tree. To reiterate, Fiber walks
+the <code>return</code> nodes starting from the node for which the update is being
+scheduled until it reaches the root node (whose <code>return</code> is <code>null</code>). Along
+the way, it bumps up the <code>pendingWorkPriority</code> of each node to the currently
+given level if it's lower. In this case the level is <code>LowPriority</code> so it's
+not likely for too many changes in the <code>pendingWorkPriority</code> values to occur.</p>
+<p>   After reaching the root, Fiber schedules the update work - due to
+<code>LowPriority</code> it's scheduled with <code>requestIdleCallback</code>.
+That brings us to the end of the <code>setState</code> flow.
+The logic exits and when time comes, the work phase begins.</p>
+<p><a id="org13b502a"></a></p>
+<h2 id="doing-the-work-show-me-the-money"><a href="#doing-the-work-show-me-the-money" class="phenomic-HeadingAnchor">#</a>Doing the work: show me the money</h2>
+<blockquote>
+<p>Ahh, you're here. Good. We've got a problem. A big one.</p>
+<p>– <cite>The Overseer, Vault 13</cite></p>
+</blockquote>
+<p>Well, not really. ;) Or not so much anymore at least, having asynchronous work
+scheduling on our side!
+That said though, you might want to take a breath/coffee/stretch before this one - this is the
+meat and potatoes of Fiber and might get a bit dense.</p>
+<p>The actual execution of the scheduled work is split up in 2 main phases:
+render/reconciliation and commit.</p>
+<p>Let's jump in.</p>
+<p><a id="orga27f81c"></a></p>
+<h3 id="render--reconciliation"><a href="#render--reconciliation" class="phenomic-HeadingAnchor">#</a>Render / reconciliation.</h3>
+<p>This phase happens within the fiber tree and thus can be interrupted.
+No DOM interaction takes place here yet. This is one of the big wins and differentiating factors from the traditional
+renderer.
+As the code can rely on the <code>deadline</code> value provided by
+<code>requestIdleCallback</code>, it can split the work in time to avoid busting UI frames.</p>
+<p>During this phase, Fiber aggregates the updates building up a second,
+<code>workInProgress</code> copy of the fiber tree, which is the <code>alternate</code> of the
+<code>current</code> tree. The <code>current</code> tree is the one that is flushed to the DOM at
+the given moment.</p>
+<p>Each of the flows described previously stopped at the phase where the work
+was to be executed immediately (for <code>SynchronousPriority</code>) or scheduled with
+an async callback request function.</p>
+<p>The function that is being called or scheduled at that point is <code>performWork</code>.
+Its purpose is to catch and handle errors happening during the reconciliation of the
+updates and building up the tree. It does it by running a <code>while</code> loop that
+bails out in case of errors. Within this loop, the <code>workLoop</code> function
+is being called.</p>
+<p>We're here. The core of the nuclear reactor.</p>
+<p><code>workLoop</code> finds a fiber to work on, which consists of looking through the
+<code>scheduledRoot</code> list (that's where the top-level updates go, remember?) for
+the highest priority root fiber.</p>
+<p>Then, it checks whether a <code>deadline</code> exists and whether the current priority
+of work is lower than <code>TaskPriority</code>, meaning that the execution of this work
+must obey the time limitations of the current frame.
+If there is no <code>deadline</code> or the priority is high enough then it runs a normal
+<code>while</code> loop until it can find no more work to do.</p>
+<p>If a <code>deadline</code> exists however (or the priority is low), then it runs a <code>while</code>
+loop until there is work to be done and the <code>deadline</code> hasn't yet expired.
+As long as that conditions hold, in terms of Fiber <strong>we are in a deferred batch</strong>.
+(again, any bells ringing? <code>batchedUpdates</code> way back when I was describing <code>render</code>?)
+<span class="underline">This is where the decision is being made to either carry on with processing the
+fibers or to defer the processing to the next frame to avoid causing jank in the UI.</span></p>
+<p>Here, the current unit of work is being <em>performed</em>.
+Performing the work is a process consisting of two stages: <code>begin</code> and <code>complete</code>.</p>
+<h4 id="stage-1-beginning-the-work"><a href="#stage-1-beginning-the-work" class="phenomic-HeadingAnchor">#</a>Stage 1: beginning the work</h4>
+<p>When the work is "being begun", the code checks whether the priority of
+the work-in-progress fiber is high enough to be processed given the priority at
+which work is currently supposed to be processed and bails out if it's not.</p>
+<p>Beginning the work encompasses a lot of things, which I think are out of scope
+since we're deep enough and they would take <strong>a lot</strong> of space to describe.
+In short, what happens here depends on the work-in-progress fiber type, and is
+handled by a big <code>switch</code> statement:</p>
+<pre><code>switch (workInProgress.tag) {
+  case IndeterminateComponent:
+    return mountIndeterminateComponent(
+      current,
+      workInProgress,
+      priorityLevel,
+    );
+  case FunctionalComponent:
+    return updateFunctionalComponent(current, workInProgress);
+  case ClassComponent:
+    return updateClassComponent(current, workInProgress, priorityLevel);
+  case HostRoot:
+    return updateHostRoot(current, workInProgress, priorityLevel);
+  case HostComponent:
+    return updateHostComponent(current, workInProgress);
+  case HostText:
+    return updateHostText(current, workInProgress);
+  case CoroutineHandlerPhase:
+    // This is a restart. Reset the tag to the initial phase.
+    workInProgress.tag = CoroutineComponent;
+  // Intentionally fall through since this is now the same.
+  case CoroutineComponent:
+    return updateCoroutineComponent(current, workInProgress);
+  case YieldComponent:
+    // A yield component is just a placeholder, we can just run through the
+    // next one immediately.
+    return null;
+  case HostPortal:
+    return updatePortalComponent(current, workInProgress);
+  case Fragment:
+    return updateFragment(current, workInProgress);
+  default:
+    invariant(
+      false,
+      'Unknown unit of work tag. This error is likely caused by a bug in ' +
+        'React. Please file an issue.',
+    );
+}
+</code></pre>
+<p>The following, however, is crucial:</p>
+<ul>
+<li>Those <code>update</code> functions merge component states with the <code>pendingState</code> values
+and memoize them, update children's props and perform reconciliation on subtrees.</li>
+<li>Each change performed on the node's subtree causes it to be tagged with a
+specific <strong>effect tag</strong>, meaning that a side-effect shall be executed on it.
+You can refer to the glossary to see all the effect tags - in this phase, the
+only tags that are being used are <code>ContentReset</code>, <code>Err</code>, <code>Placement</code> and <code>Ref</code>.</li>
+<li>The <code>update</code> functions return return <code>null</code> if the element is a leaf of the
+fiber tree, or return the child fiber if it has one. When they return the
+child fiber, we say that the <strong>beginning the work on this fiber has spawned new work</strong>.</li>
+</ul>
+<p>If beginning the work on a fiber hasn's spawned any new work, a function is
+called that starts <em>completing the work</em> (stage 2) on the the work-in-progress fiber.
+If new work has been spawned, control is returned to <code>workLoop</code>.
+It marks this new work as the <code>nextUnitOfWork</code> to be processed in the next
+turn of the time-constraining <code>while</code> loop.
+<span class="underline">This is how the decision is being made to either carry on with processing the
+fibers or to defer the processing to the next frame to avoid causing jank in the UI.</span></p>
+<h4 id="stage-2-completing-the-work"><a href="#stage-2-completing-the-work" class="phenomic-HeadingAnchor">#</a>Stage 2: completing the work</h4>
+<p>When beginning a unit of work hasn't spawned any new work, we are at a leaf of
+the fiber tree. In this case the code will complete the work for the current
+branch.
+Completing the work operates in a <code>while</code> loop that stops upon
+finding a <code>sibling</code> fiber (which gets returned to <code>workLoop</code>) or reaching the
+root of the tree (which prompts the <em>commit phase</em>).
+The process consists of 4 steps:</p>
+<ol>
+<li>
+<p><strong>Reset the fiber's priority.</strong></p>
+</li>
+<li>
+<p><strong>Set update information.</strong></p>
+<p>Depending on the type of fiber being completed it may mean:</p>
+<ul>
+<li>setting the new <code>context</code> on the root fiber,</li>
+<li>adding an <code>Update</code> tag to the fiber's <code>effectTag</code>, calculating the update payload
+(i.e. new props) and adding it to the fiber's <code>updateQueue</code>,</li>
+<li>adding a <code>Ref</code> tag to the fiber's <code>effectTag</code> if a <code>ref</code> was defined on the
+component.</li>
+</ul>
+</li>
+<li>
+<p><strong>Build up the effect lists up the fiber branch.</strong></p>
+<p>If the work-in-progress fiber has a <code>return</code> fiber and an <code>effectTag</code> value
+different than <code>NoEffect</code>, it will first append all the side effects from its
+effect list to the <code>return</code> fiber's list and then append itself to it.
+The result is that each fiber's effect list is an ordered collection
+of its child subtree's side effects, ended by its own. It's ordered by the
+completion order of the children.</p>
+</li>
+<li>
+<p><strong>Traverse the tree further.</strong></p>
+<p>If the work-in-progress fiber has a <code>sibling</code> fiber, it is returned to the
+<code>workLoop</code> to make a decision whether to start processing it in this frame or
+to defer it to the next one.
+<span class="underline">A <code>sibling</code> fiber is the result of returning an array of elements from a
+<code>render</code> function, that's one of the new features in Fiber.</span></p>
+<p>If there is no <code>sibling</code>, but a <code>return</code> fiber exists, then it is set to be
+processed in the next turn of the completion stage's <code>while</code> loop.</p>
+<p>If the work-in-progress fiber doesn't have a <code>return</code> or a <code>sibling</code> fiber,
+it means that we have reached the root of the fiber tree.</p>
+<p>If the <code>nextPriorityLevel</code> is <code>SynchronousPriority</code> or <code>TaskPriority</code>, it
+means that the work that has just been completed is related to a scheduled
+root and also that it has not been scheduled with an async callback request.
+In that case, the code immediately begins the commit phase by calling
+<code>commitAllWork(workInProgress)</code>.
+Otherwise, when the priority is lower (i.e. work belongs to a
+deferred batch), the work-in-progress is being set as a <code>pendingCommit</code>. The
+<code>workLoop</code> will decide when to commit the work in the <code>pendingCommit</code> based
+on how much time is left in the frame.</p>
+</li>
+</ol>
+<p>That's it for this stage. The result of completing a unit of work (fiber) is
+either entering the commit phase immediately or having a non-null <code>pendingBatch</code>.</p>
+<p>The commit phase will be described in the next chapter.</p>
+<p>I'll close off the render/reconciliation phase description by pointing out that the
+<code>workLoop</code> checks for the existence of a <code>pendingBatch</code> and if there is enough
+time within the current frame, it calls <code>commitAllWork(pendingBatch)</code>, thus
+entering the commit phase.</p>
+<p><a id="org2ca3fb6"></a></p>
+<h3 id="commit"><a href="#commit" class="phenomic-HeadingAnchor">#</a>Commit</h3>
+<p>This is where the contents of the work-in-progress fiber tree get flushed to the
+DOM - in other words, this is when all the side effects from the fiber tree get executed.
+This phase is not designed to be interruptible, since otherwise it would open up
+possibilities for inconsistent "in-between" UI states.
+It is being achieved by setting a priority level <code>TaskPriority</code> for the whole
+time of the phase.
+The previous priority level is being stowed away as <code>previousPriorityContext</code>.</p>
+<p>The entry point for committing the work is the <code>commitAllWork</code> function.</p>
+<p>Before starting going through the effect list of the fiber tree, it checks if
+the root fiber has an <code>effectTag</code> on it too.
+<em>(This is because during the completion phase, the <code>effectTag</code> was being added to the
+<code>return</code> fiber's effect list.
+There is no <code>return</code> fiber for the root of the tree, hence it is done here afterwards.)</em></p>
+<p>The commit process consists of two passes through the whole effect list of the fiber tree.</p>
+<p>The first pass does DOM manipulation (placement, updates, deletions) using the
+injected renderer and unmounts <code>ref</code> functions.</p>
+<p>After the first pass, Fiber swaps the work-in-progress tree with the <code>current</code>
+one. That's because the work-in-progress one just got flushed to the DOM, so
+conceptually it became the <code>current</code>.</p>
+<p>The second pass calls lifecycle hooks, <code>setState</code> callbacks, <code>ref</code> callbacks
+and component-level error handling methods (new feature in Fiber!).</p>
+<p>After the second pass (and some housekeeping), the priority level from before
+the commit ie restored from <code>previousPriorityContext</code>.</p>
+<p><a id="org3c31b83"></a></p>
+<h2 id="thats-all-folks"><a href="#thats-all-folks" class="phenomic-HeadingAnchor">#</a>That's all, folks!</h2>
+<p>With sufficient squinting and skipping over ancillary details, we have drilled
+through the main features of React Fiber, from the first client <code>render</code> call, down to
+the nitty-gritty of scheduling and splitting the work into phases.</p>
+<p>If you didn't have the Fiber codebase handy while reading this, it might be
+interesting for you to go grab it and read through this post again - this time
+tracking your steps through the code. You'll see that even though there is quite
+a few cogs in the machine of Fiber, it is way less complicated than you'd expect.</p>
+<p>If you see any mistakes or omissions, feel free to point them out!
+I'll amend the post.</p>
+<p>I did my best to skip over aspects that were not key to the main responsibility
+of Fiber.
+But a few of them are very interesting in themselves, or are used in an
+interesting way, for example:</p>
+<ul>
+<li>Component-level error handling, error boundaries</li>
+<li>The use of object pooling</li>
+<li>Dependency injection</li>
+</ul>
+<p>There might be another post coming, which will describe those things, so stay tuned!</p>
+<p>And lastly, the obligatory wafting paragraph. It's good to <em>actually know</em> how
+the tools you use every day work. Of course it's not always possible or sensible
+to look at everything - but the perspective, sense of confidence and
+satisfaction gained from this type of activity is significant.
+You have to read a lot to become a great writer. I think programmers are no
+different - and JavaScript fatigue, the state of Web development, Angular 4,
+React 16 or Webpack 3 should not serve as an excuse to neglect this practice.</p>
+<p>As craftspeople, we need to study the tools we use and other people's
+craft we see around us to improve our own and perhaps eventually surpass it.</p>
+<p><a id="org7cd8bdd"></a></p>
+<h2 id="glossary-types-and-constants"><a href="#glossary-types-and-constants" class="phenomic-HeadingAnchor">#</a>Glossary: types and constants</h2>
+<p>Here are some important types and constants used in the Fiber codebase.
+I'm not putting them at the top to allow you to jump right into the interesting
+stuff without having to waddle through a bunch of things that don't make sense
+out of context.</p>
+<p><a id="org8c13c72"></a></p>
+<h3 id="update"><a href="#update" class="phenomic-HeadingAnchor">#</a>Update</h3>
+<p>An <code>Update</code> looks like this:</p>
+<pre><code>type Update = {
+  priorityLevel: PriorityLevel,
+  partialState: PartialState&#x3C;any, any>,
+  callback: Callback | null,
+  isReplace: boolean,
+  isForced: boolean,
+  isTopLevelUnmount: boolean,
+  next: Update | null,
+};
+</code></pre>
+<p>Where <code>PartialState</code> is what you pass into <code>setState</code>: either an object or a
+<code>(prevState, props) => partialState</code> function.</p>
+<p><a id="org4c0e3af"></a></p>
+<h3 id="update-queue"><a href="#update-queue" class="phenomic-HeadingAnchor">#</a>Update queue</h3>
+<p>A fiber's update queue looks like this:</p>
+<pre><code>export type UpdateQueue = {
+  first: Update | null,
+  last: Update | null,
+  hasForceUpdate: boolean,
+  callbackList: null | Array&#x3C;Callback>,
+};
+</code></pre>
+<p>The <code>callbackList</code> holds the <code>callback</code> values you passed in to
+<code>setState(stateUpdater, [callback])</code>, if any.</p>
+<p><a id="orgdd96006"></a></p>
+<h3 id="priority-levels"><a href="#priority-levels" class="phenomic-HeadingAnchor">#</a>Priority levels</h3>
+<pre><code>type PriorityLevel = 0 | 1 | 2 | 3 | 4 | 5 | 6;
+
+NoWork: 0, // No work is pending.
+SynchronousPriority: 1, // For controlled text inputs. Synchronous side-effects.
+TaskPriority: 2, // Completes at the end of the current tick.
+AnimationPriority: 3, // Needs to complete before the next frame.
+HighPriority: 4, // Interaction that needs to complete pretty soon to feel responsive.
+LowPriority: 5, // Data fetching, or result from updating stores.
+OffscreenPriority: 6, // Won't be visible but do the work in case it becomes visible.
+</code></pre>
+<p>When Fiber schedules work, <code>SynchronousWork</code> is scheduled immediately on the UI
+thread, <code>AnimationPriority</code> is scheduled with <code>requestAnimationFrame</code> and the
+lower priorities with <code>requestIdleCallback</code>.</p>
+<p>Whenever "higher/highest priority level" is being mentioned, there is always an asterisk: "except
+for <code>NoWork</code>".
+The code always checks for that priority level separately.</p>
+<p><a id="org4ecef3c"></a></p>
+<h3 id="side-effect-tags-types-of-side-effects"><a href="#side-effect-tags-types-of-side-effects" class="phenomic-HeadingAnchor">#</a>Side effect tags (types of side effects)</h3>
+<pre><code>type TypeOfSideEffect = number
+
+NoEffect: 0, //           0b0000000
+Placement: 1, //          0b0000001
+Update: 2, //             0b0000010
+PlacementAndUpdate: 3, // 0b0000011
+Deletion: 4, //           0b0000100
+ContentReset: 8, //       0b0001000
+Callback: 16, //          0b0010000
+Err: 32, //               0b0100000
+Ref: 64, //               0b1000000
+</code></pre>
+<p>Having the tags defined like this allows using the binary operations in a handy
+way. (I mean adding new tags by <code>effectTag |= Placement</code>, removing them
+with <code>effectTag &#x26;= ~Placement</code> etc.)</p>
+<p><a id="orgdd07bda"></a></p>
+<h3 id="fiber-vs-fiber"><a href="#fiber-vs-fiber" class="phenomic-HeadingAnchor">#</a>Fiber vs fiber</h3>
+<p>Whenever I refer to Fiber with a capital F, I mean React Fiber, the new reconciler.
+Whenever I refer to a fiber with a lowercase f, I mean the data structure
+representing the basic unit of work related to a React component.
+The data structure like this (I'm leaving most of Facebook's comments as
+they're very good):</p>
+<pre><code>type Fiber = {
+  // These fields conceptually belong to an instance of the component
+  // this fiber is related to.
+
+  // Tag identifying the type of fiber.
+  tag: TypeOfWork,
+
+  // Unique identifier of this child.
+  key: null | string,
+
+  // The function/class/module associated with this fiber.
+  type: any,
+
+  // The local state associated with this fiber.
+  stateNode: any,
+
+  // Remaining fields belong to Fiber
+
+  // The Fiber to return to after finishing processing this one.
+  // This is effectively the parent, but there can be multiple parents (two)
+  // so this is only the parent of the thing we're currently processing.
+  // It is conceptually the same as the return address of a stack frame.
+  return: Fiber | null,
+
+  // Singly Linked List Tree Structure.
+  child: Fiber | null,
+  sibling: Fiber | null,
+  index: number,
+
+  // The ref last used to attach this node.
+  // I'll avoid adding an owner field for prod and model that as functions.
+  ref: null | (((handle: mixed) => void) &#x26; {_stringRef: ?string}),
+
+  // Input is the data coming into process this fiber. Arguments. Props.
+  pendingProps: any, // This type will be more specific once we overload the tag.
+  memoizedProps: any, // The props used to create the output.
+
+  // A queue of state updates and callbacks.
+  updateQueue: UpdateQueue | null,
+
+  // The state used to create the output
+  memoizedState: any,
+
+  // Bitfield that describes properties about the fiber and its subtree. E.g.
+  // the AsyncUpdates flag indicates whether the subtree should be async-by-
+  // default. When a fiber is created, it inherits the internalContextTag of its
+  // parent. Additional flags can be set at creation time, but after than the
+  // value should remain unchanged throughout the fiber's lifetime, particularly
+  // before its child fibers are created.
+  internalContextTag: TypeOfInternalContext,
+
+  // Effect
+  effectTag: TypeOfSideEffect,
+
+  // Singly linked list fast path to the next fiber with side-effects.
+  nextEffect: Fiber | null,
+
+  // The first and last fiber with side-effect within this subtree. This allows
+  // us to reuse a slice of the linked list when we reuse the work done within
+  // this fiber.
+  firstEffect: Fiber | null,
+  lastEffect: Fiber | null,
+
+  // This will be used to quickly determine if a subtree has no pending changes.
+  pendingWorkPriority: PriorityLevel,
+
+  // This value represents the priority level that was last used to process this
+  // component. This indicates whether it is better to continue from the
+  // progressed work or if it is better to continue from the current state.
+  progressedPriority: PriorityLevel,
+
+  // If work bails out on a Fiber that already had some work started at a lower
+  // priority, then we need to store the progressed work somewhere. This holds
+  // the started child set until we need to get back to working on it. It may
+  // or may not be the same as the "current" child.
+  progressedChild: Fiber | null,
+
+  // When we reconcile children onto progressedChild it is possible that we have
+  // to delete some child fibers. We need to keep track of this side-effects so
+  // that if we continue later on, we have to include those effects. Deletions
+  // are added in the reverse order from sibling pointers.
+  progressedFirstDeletion: Fiber | null,
+  progressedLastDeletion: Fiber | null,
+
+  // This is a pooled version of a Fiber. Every fiber that gets updated will
+  // eventually have a pair. There are cases when we can clean up pairs to save
+  // memory if we need to.
+  alternate: Fiber | null,
+
+  // Conceptual aliases
+  // workInProgress : Fiber ->  alternate The alternate used for reuse happens
+  // to be the same as work in progress.
+};
+</code></pre>
+<p><a id="orgab66cc2"></a></p>
+</div></div></article></main></div></section></div><script>window.__COLLECTION__ = [{"layout":"PageError","route":"404.html","description":"Content here not used, see src/layouts/PageError","__filename":"404.md","__url":"/404.html","__resourceUrl":"/404.html","__dataUrl":"/404.html.c51e41dcf93740dd221b7da7702623a9.json"},{"metaTitle":"Blog | Makers' Den","title":"Blog","layout":"Blog","description":"","__filename":"blog/index.md","__url":"/blog/","__resourceUrl":"/blog/index.html","__dataUrl":"/blog/index.html.e16e1e3fb59b78da2c0b047e1cd26167.json"},{"title":"A look inside React Fiber - how work will get done.","layout":"Post","date":"2017-07-07T15:00:00.000Z","author":"Korneliusz Caputa","description":"Describing how React Fiber operates, step by step, starting from calling the `render` function in client JS and changing state of a component, down to describing the steps taken by Fiber to do all the work. Best served with Fiber source code on the side.","tags":["react.js","javacsript","architecture"],"__filename":"blog/look-inside-fiber.md","__url":"/blog/look-inside-fiber/","__resourceUrl":"/blog/look-inside-fiber/index.html","__dataUrl":"/blog/look-inside-fiber/index.html.3f9ab5a42349ae23b7ea5df292d65ff6.json"},{"title":"Makers' Den","layout":"Homepage","description":"A crack crew of IT veterans, ready to get your software from here to done.","__filename":"index.md","__url":"/","__resourceUrl":"/index.html","__dataUrl":"/index.html.f7ba1cba9322affd82aa74534d566530.json"},{"layout":"PageLoading","description":"Content here not used, see src/layouts/PageLoading. This page is a demo for loading state. You can safely delete if you want.","__filename":"loading.md","__url":"/loading/","__resourceUrl":"/loading/index.html","__dataUrl":"/loading/index.html.195d4f0e5d27a11e56d8db059f891663.json"}];window.__INITIAL_STATE__ = {"pages":{"/blog/look-inside-fiber/":{"head":{"title":"A look inside React Fiber - how work will get done.","layout":"Post","date":"2017-07-07T15:00:00.000Z","author":"Korneliusz Caputa","description":"Describing how React Fiber operates, step by step, starting from calling the `render` function in client JS and changing state of a component, down to describing the steps taken by Fiber to do all the work. Best served with Fiber source code on the side.","tags":["react.js","javacsript","architecture"]},"body":"<p>As we all know by now, a big change is coming inside of React with version 0.16.\nIt's a significant one, because it will affect the performance of more complex\nReact applications.\nThe crux of the change is transitioning from processing updates in a synchronous,\nrecursive way to relying on asynchronous scheduling and prioritization of\ninterface changes.\nThe desired result is 60 FPS and a pristine user experience.\nIt's been a while since the announcement already, and\n<a href=\"https://www.youtube.com/watch?v=aV1271hd9ew\">many good things</a>\n<a href=\"https://www.youtube.com/watch?v=ZCuYPiUIONs\">have been said</a>\n<a href=\"https://github.com/acdlite/react-fiber-architecture\">and written</a>.\nHowever, I like to see things for myself and understand how they work from the ground\nup. There were also a few topics that lacked \"press coverage\"</p>\n<p>Thus, down the rabbit hole I went!</p>\n<p>Fiber is not the most straightforward piece of software, both conceptually and\ncode-wise, so it should be approached in a structured way.\nThis post will go outside-in - starting from calling the <code>render</code>\nfunction in client JS and changing state of a component, down to\ndescribing the steps taken by Fiber to do all the work.\nAt a few points along the way you will be given a choice to go further down or\nreturn to the tip and track your way back to the same point from a different\norigin.</p>\n<p>If you feel like it, you can grab the Fiber codebase from Github and track your\nway through the post in the code, starting <a href=\"https://github.com/facebook/react/blob/master/src/renderers/dom/fiber/ReactDOMFiberEntry.js\">here</a>.</p>\n<p>React source code is sprinkled with a lot of error handling, dev logging and\nperformance measurement calls. I'm going to skip those and focus on the main\nlogic for the sake of clarity.</p>\n<p>Another point to note is that currently Fiber code is coupled to the DOM\nrenderer in a few places, because things are still developing, as I understand it.\nI'll try to avoid referring to it, but you can assume that \"the renderer\" means\n\"the DOM renderer\" in this post.</p>\n<p><a id=\"org882dfad\"></a></p>\n<h2 id=\"the-first-render-scratching-the-surface\"><a href=\"#the-first-render-scratching-the-surface\" class=\"phenomic-HeadingAnchor\">#</a>The first render: scratching the surface</h2>\n<p>So you have your HTML skeleton in place, relevant JS is loaded, and you hit that\nfirst <code>render</code> call. Because the page and the fiber tree is empty (there is no <code>root</code>), Fiber knows\nthat it doesn't have to worry about asynchronous processing, since nothing\nshould be happening outside of React itself.\nSo it creates a fiber instance that will represent your container as the root of\nthe fiber tree.\nThen it tells the <code>Scheduler</code> that what happens next should be considered as <code>unbatchedUpdates</code>.\nThe update in question is telling the <code>Reconciler</code> to <code>updateContainer</code>, where\nthe <code>container</code> is the root fiber that has just been created.</p>\n<p>\"Updating the container\" at this point means the following:</p>\n<ol>\n<li>\n<p><strong>Set the root fiber <code>context</code>. </strong>\nYeah, the thing that the docs tell you to avoid using.\nOverall I haven't found anything relevant to this post there.</p>\n</li>\n<li>\n<p><strong>Push an update into the update queue of the root fiber.</strong>\nThe \"bulk\" of the update is the <code>state</code>. At that moment in the <code>Scheduler</code>\ncontext it is called <code>nextState</code>, because this state is what will be\nhappening next. In the context of the update queue it is called\n<code>partialState</code>, because it will be merged with the <code>prevState</code>.\nIt is also the state you use in your React components.</p>\n<p>React's composability is nicely visible here - if you squint just a little,\nrendering your application is not much more than a glorified <code>setState</code> call.</p>\n<p>The update has a set priority level - remember that the <code>Scheduler</code> has been\ntold to do <code>unbatchedUpdates</code>? Because of that the priority level is set to\n<code>SynchronousPriority</code>. It means that this update must be done ASAP, without\nworrying about blocking the UI thread. The priority is being used to\ndetermine where in the fiber's update queue this particular update should go.\nIn this case the queue is empty, so it will be the head. Even if the queue wasn't\nempty though, it's ordered by descending priority - the update would still go\nto the front (given there are no prior <code>SynchronousPriority</code> updates there already).</p>\n</li>\n<li>\n<p><strong>Tell the <code>Scheduler</code> to schedule the update work to be done.</strong>\nThis is where the ball gets rolling.\nWhen the <code>Scheduler</code> is told to schedule an update, it looks at the\nnodes in the fiber tree, traversing it using the <code>return</code> property of each fiber.</p>\n<p> This property is pointing to a node which should be worked on next in case a\nwork phase gets interrupted (more on that later). For the sake of simplicity\nyou can assume it's the parent fiber.</p>\n<p> So the <code>Scheduler</code> goes up the tree starting from the node that the update\nshould be scheduled for, bumping up priorities where needed along the way,\nuntil it reaches the root. It can see that it's at the root, because there is\nno <code>return</code> node from it.\nIn the current case (initial render), the update has been scheduled for the\nroot node, so we're already there.</p>\n<p> Upon reaching the root, the <code>Scheduler</code> puts it in a <code>scheduledRoot</code> list\n(more about this later, that's how it later finds new work to do) and finally\nschedules the work according to given priority. In our example it's\n<code>SynchronousPriority</code>, so it jumps to the \"doing work\" phase immediately.</p>\n<p> That's all there is to <code>render</code>. The \"doing work\" phase is generic across all\nthe flows, so it's described in it's own chapter. You can go there now if you\nfeel the flow. Alternatively, you can read how Fiber arrives at this phase\nwhen you call <code>setState</code> if you need a bit more context.</p>\n</li>\n</ol>\n<p><a id=\"orgc07b371\"></a></p>\n<h2 id=\"changing-state-its-not-too-exotic\"><a href=\"#changing-state-its-not-too-exotic\" class=\"phenomic-HeadingAnchor\">#</a>Changing state: it's not too exotic</h2>\n<p>Each React component instance has an <code>updater</code>.\nThe <code>updater</code> is an injected dependency and mediates the communication between\nthe components and the React core.</p>\n<p>With Fiber, the <code>updater</code> has 4 responsibilities:</p>\n<ol>\n<li>Find a fiber instance in the tree that corresponds to this component.</li>\n<li>Ask the <code>Scheduler</code> about the priority level for this fiber.</li>\n<li>Push updates to the fiber's update queue.</li>\n<li>Schedule update work to be done with the determined priority level.</li>\n</ol>\n<p>Sounds familiar? It should, because that's almost exactly the same thing that\nhappens on render.</p>\n<p>You probably know that, but I should point out that there are two forms of arguments\nit can be called with:</p>\n<ul>\n<li><code>setState({ ... }, [callback])</code></li>\n<li><code>setState((prevState, props) => ({ ... }), [callback])</code></li>\n</ul>\n<p>It's not crucial at this point, but good for you to keep in mind as the\nfirst form will eventually become deprecated. More on that later.</p>\n<p>Ok, so you call <code>setState((prevState, props) => ({ ... }), [callback])</code>\nin your component. It tells its <code>updater</code> to enqueue a <code>setState</code>.</p>\n<p>Let's go through the 4 responsibilities.</p>\n<h3 id=\"1-find-a-fiber-instance-in-the-tree-that-corresponds-to-this-component\"><a href=\"#1-find-a-fiber-instance-in-the-tree-that-corresponds-to-this-component\" class=\"phenomic-HeadingAnchor\">#</a>1. Find a fiber instance in the tree that corresponds to this component.</h3>\n<p>   It's just getting a thing from the <code>ReactInstanceMap</code> - which is just that, a\nmap, nothing fancy. One perhaps slightly interesting thing about it is that\nit maps from public facing instances to internal methods. Example:\n<br>\nget: function(key) {\nreturn key._reactInternalInstance;\n},</p>\n<h3 id=\"2-ask-the-scheduler-about-the-priority-level-for-this-fiber\"><a href=\"#2-ask-the-scheduler-about-the-priority-level-for-this-fiber\" class=\"phenomic-HeadingAnchor\">#</a>2. Ask the <code>Scheduler</code> about the priority level for this fiber.</h3>\n<p>   There is a <code>Scheduler</code> method called <code>getPriorityContext</code> that provides a\nsuitable priority level for a fiber update. For all intents and purposes,\nthe priority level for a <code>setState</code> will be <code>LowPriority</code>. Refer to the\nglossary to see how that priority level stacks up against the others.</p>\n<p>   <em>There are 2 edge cases to this, but you shouldn't concern yourself with\nthem too much.\nIf you're studying for a test and must know, they are:\nexplicitly passing a <code>useSyncScheduling: true</code> parameter to the context getting\nfunction, which will result in <code>SynchronousPriority</code>; and having\n<code>priorityContext</code> of <code>SynchronousPriority</code> during the work phase or a\n<code>batchedUpdates</code> callback - which will result in <code>TaskPriority</code>.</em></p>\n<h3 id=\"3-push-updates-to-the-fibers-update-queue\"><a href=\"#3-push-updates-to-the-fibers-update-queue\" class=\"phenomic-HeadingAnchor\">#</a>3. Push updates to the fiber's update queue.</h3>\n<p>   This logic is pretty much the same as in the initial render case. The only\ndifferences are that:</p>\n<ul>\n<li><code>setState</code> is not a top-level update, so the code doesn't check if the\nupdate is a top-level unmount.</li>\n<li>the priority level is lower (<code>LowPriority</code>).</li>\n</ul>\n<p>   The new update is being inserted to the fiber's update queue according to the\npriority level - so most likely it will get added to the end of the queue.</p>\n<h3 id=\"4-schedule-update-work-to-be-done-with-the-determined-priority-level\"><a href=\"#4-schedule-update-work-to-be-done-with-the-determined-priority-level\" class=\"phenomic-HeadingAnchor\">#</a>4. Schedule update work to be done with the determined priority level.</h3>\n<p>   As I've mentioned before, this logic is generic across all the flows - so\nnothing changes here in terms of walking the tree. To reiterate, Fiber walks\nthe <code>return</code> nodes starting from the node for which the update is being\nscheduled until it reaches the root node (whose <code>return</code> is <code>null</code>). Along\nthe way, it bumps up the <code>pendingWorkPriority</code> of each node to the currently\ngiven level if it's lower. In this case the level is <code>LowPriority</code> so it's\nnot likely for too many changes in the <code>pendingWorkPriority</code> values to occur.</p>\n<p>   After reaching the root, Fiber schedules the update work - due to\n<code>LowPriority</code> it's scheduled with <code>requestIdleCallback</code>.\nThat brings us to the end of the <code>setState</code> flow.\nThe logic exits and when time comes, the work phase begins.</p>\n<p><a id=\"org13b502a\"></a></p>\n<h2 id=\"doing-the-work-show-me-the-money\"><a href=\"#doing-the-work-show-me-the-money\" class=\"phenomic-HeadingAnchor\">#</a>Doing the work: show me the money</h2>\n<blockquote>\n<p>Ahh, you're here. Good. We've got a problem. A big one.</p>\n<p>– <cite>The Overseer, Vault 13</cite></p>\n</blockquote>\n<p>Well, not really. ;) Or not so much anymore at least, having asynchronous work\nscheduling on our side!\nThat said though, you might want to take a breath/coffee/stretch before this one - this is the\nmeat and potatoes of Fiber and might get a bit dense.</p>\n<p>The actual execution of the scheduled work is split up in 2 main phases:\nrender/reconciliation and commit.</p>\n<p>Let's jump in.</p>\n<p><a id=\"orga27f81c\"></a></p>\n<h3 id=\"render--reconciliation\"><a href=\"#render--reconciliation\" class=\"phenomic-HeadingAnchor\">#</a>Render / reconciliation.</h3>\n<p>This phase happens within the fiber tree and thus can be interrupted.\nNo DOM interaction takes place here yet. This is one of the big wins and differentiating factors from the traditional\nrenderer.\nAs the code can rely on the <code>deadline</code> value provided by\n<code>requestIdleCallback</code>, it can split the work in time to avoid busting UI frames.</p>\n<p>During this phase, Fiber aggregates the updates building up a second,\n<code>workInProgress</code> copy of the fiber tree, which is the <code>alternate</code> of the\n<code>current</code> tree. The <code>current</code> tree is the one that is flushed to the DOM at\nthe given moment.</p>\n<p>Each of the flows described previously stopped at the phase where the work\nwas to be executed immediately (for <code>SynchronousPriority</code>) or scheduled with\nan async callback request function.</p>\n<p>The function that is being called or scheduled at that point is <code>performWork</code>.\nIts purpose is to catch and handle errors happening during the reconciliation of the\nupdates and building up the tree. It does it by running a <code>while</code> loop that\nbails out in case of errors. Within this loop, the <code>workLoop</code> function\nis being called.</p>\n<p>We're here. The core of the nuclear reactor.</p>\n<p><code>workLoop</code> finds a fiber to work on, which consists of looking through the\n<code>scheduledRoot</code> list (that's where the top-level updates go, remember?) for\nthe highest priority root fiber.</p>\n<p>Then, it checks whether a <code>deadline</code> exists and whether the current priority\nof work is lower than <code>TaskPriority</code>, meaning that the execution of this work\nmust obey the time limitations of the current frame.\nIf there is no <code>deadline</code> or the priority is high enough then it runs a normal\n<code>while</code> loop until it can find no more work to do.</p>\n<p>If a <code>deadline</code> exists however (or the priority is low), then it runs a <code>while</code>\nloop until there is work to be done and the <code>deadline</code> hasn't yet expired.\nAs long as that conditions hold, in terms of Fiber <strong>we are in a deferred batch</strong>.\n(again, any bells ringing? <code>batchedUpdates</code> way back when I was describing <code>render</code>?)\n<span class=\"underline\">This is where the decision is being made to either carry on with processing the\nfibers or to defer the processing to the next frame to avoid causing jank in the UI.</span></p>\n<p>Here, the current unit of work is being <em>performed</em>.\nPerforming the work is a process consisting of two stages: <code>begin</code> and <code>complete</code>.</p>\n<h4 id=\"stage-1-beginning-the-work\"><a href=\"#stage-1-beginning-the-work\" class=\"phenomic-HeadingAnchor\">#</a>Stage 1: beginning the work</h4>\n<p>When the work is \"being begun\", the code checks whether the priority of\nthe work-in-progress fiber is high enough to be processed given the priority at\nwhich work is currently supposed to be processed and bails out if it's not.</p>\n<p>Beginning the work encompasses a lot of things, which I think are out of scope\nsince we're deep enough and they would take <strong>a lot</strong> of space to describe.\nIn short, what happens here depends on the work-in-progress fiber type, and is\nhandled by a big <code>switch</code> statement:</p>\n<pre><code>switch (workInProgress.tag) {\n  case IndeterminateComponent:\n    return mountIndeterminateComponent(\n      current,\n      workInProgress,\n      priorityLevel,\n    );\n  case FunctionalComponent:\n    return updateFunctionalComponent(current, workInProgress);\n  case ClassComponent:\n    return updateClassComponent(current, workInProgress, priorityLevel);\n  case HostRoot:\n    return updateHostRoot(current, workInProgress, priorityLevel);\n  case HostComponent:\n    return updateHostComponent(current, workInProgress);\n  case HostText:\n    return updateHostText(current, workInProgress);\n  case CoroutineHandlerPhase:\n    // This is a restart. Reset the tag to the initial phase.\n    workInProgress.tag = CoroutineComponent;\n  // Intentionally fall through since this is now the same.\n  case CoroutineComponent:\n    return updateCoroutineComponent(current, workInProgress);\n  case YieldComponent:\n    // A yield component is just a placeholder, we can just run through the\n    // next one immediately.\n    return null;\n  case HostPortal:\n    return updatePortalComponent(current, workInProgress);\n  case Fragment:\n    return updateFragment(current, workInProgress);\n  default:\n    invariant(\n      false,\n      'Unknown unit of work tag. This error is likely caused by a bug in ' +\n        'React. Please file an issue.',\n    );\n}\n</code></pre>\n<p>The following, however, is crucial:</p>\n<ul>\n<li>Those <code>update</code> functions merge component states with the <code>pendingState</code> values\nand memoize them, update children's props and perform reconciliation on subtrees.</li>\n<li>Each change performed on the node's subtree causes it to be tagged with a\nspecific <strong>effect tag</strong>, meaning that a side-effect shall be executed on it.\nYou can refer to the glossary to see all the effect tags - in this phase, the\nonly tags that are being used are <code>ContentReset</code>, <code>Err</code>, <code>Placement</code> and <code>Ref</code>.</li>\n<li>The <code>update</code> functions return return <code>null</code> if the element is a leaf of the\nfiber tree, or return the child fiber if it has one. When they return the\nchild fiber, we say that the <strong>beginning the work on this fiber has spawned new work</strong>.</li>\n</ul>\n<p>If beginning the work on a fiber hasn's spawned any new work, a function is\ncalled that starts <em>completing the work</em> (stage 2) on the the work-in-progress fiber.\nIf new work has been spawned, control is returned to <code>workLoop</code>.\nIt marks this new work as the <code>nextUnitOfWork</code> to be processed in the next\nturn of the time-constraining <code>while</code> loop.\n<span class=\"underline\">This is how the decision is being made to either carry on with processing the\nfibers or to defer the processing to the next frame to avoid causing jank in the UI.</span></p>\n<h4 id=\"stage-2-completing-the-work\"><a href=\"#stage-2-completing-the-work\" class=\"phenomic-HeadingAnchor\">#</a>Stage 2: completing the work</h4>\n<p>When beginning a unit of work hasn't spawned any new work, we are at a leaf of\nthe fiber tree. In this case the code will complete the work for the current\nbranch.\nCompleting the work operates in a <code>while</code> loop that stops upon\nfinding a <code>sibling</code> fiber (which gets returned to <code>workLoop</code>) or reaching the\nroot of the tree (which prompts the <em>commit phase</em>).\nThe process consists of 4 steps:</p>\n<ol>\n<li>\n<p><strong>Reset the fiber's priority.</strong></p>\n</li>\n<li>\n<p><strong>Set update information.</strong></p>\n<p>Depending on the type of fiber being completed it may mean:</p>\n<ul>\n<li>setting the new <code>context</code> on the root fiber,</li>\n<li>adding an <code>Update</code> tag to the fiber's <code>effectTag</code>, calculating the update payload\n(i.e. new props) and adding it to the fiber's <code>updateQueue</code>,</li>\n<li>adding a <code>Ref</code> tag to the fiber's <code>effectTag</code> if a <code>ref</code> was defined on the\ncomponent.</li>\n</ul>\n</li>\n<li>\n<p><strong>Build up the effect lists up the fiber branch.</strong></p>\n<p>If the work-in-progress fiber has a <code>return</code> fiber and an <code>effectTag</code> value\ndifferent than <code>NoEffect</code>, it will first append all the side effects from its\neffect list to the <code>return</code> fiber's list and then append itself to it.\nThe result is that each fiber's effect list is an ordered collection\nof its child subtree's side effects, ended by its own. It's ordered by the\ncompletion order of the children.</p>\n</li>\n<li>\n<p><strong>Traverse the tree further.</strong></p>\n<p>If the work-in-progress fiber has a <code>sibling</code> fiber, it is returned to the\n<code>workLoop</code> to make a decision whether to start processing it in this frame or\nto defer it to the next one.\n<span class=\"underline\">A <code>sibling</code> fiber is the result of returning an array of elements from a\n<code>render</code> function, that's one of the new features in Fiber.</span></p>\n<p>If there is no <code>sibling</code>, but a <code>return</code> fiber exists, then it is set to be\nprocessed in the next turn of the completion stage's <code>while</code> loop.</p>\n<p>If the work-in-progress fiber doesn't have a <code>return</code> or a <code>sibling</code> fiber,\nit means that we have reached the root of the fiber tree.</p>\n<p>If the <code>nextPriorityLevel</code> is <code>SynchronousPriority</code> or <code>TaskPriority</code>, it\nmeans that the work that has just been completed is related to a scheduled\nroot and also that it has not been scheduled with an async callback request.\nIn that case, the code immediately begins the commit phase by calling\n<code>commitAllWork(workInProgress)</code>.\nOtherwise, when the priority is lower (i.e. work belongs to a\ndeferred batch), the work-in-progress is being set as a <code>pendingCommit</code>. The\n<code>workLoop</code> will decide when to commit the work in the <code>pendingCommit</code> based\non how much time is left in the frame.</p>\n</li>\n</ol>\n<p>That's it for this stage. The result of completing a unit of work (fiber) is\neither entering the commit phase immediately or having a non-null <code>pendingBatch</code>.</p>\n<p>The commit phase will be described in the next chapter.</p>\n<p>I'll close off the render/reconciliation phase description by pointing out that the\n<code>workLoop</code> checks for the existence of a <code>pendingBatch</code> and if there is enough\ntime within the current frame, it calls <code>commitAllWork(pendingBatch)</code>, thus\nentering the commit phase.</p>\n<p><a id=\"org2ca3fb6\"></a></p>\n<h3 id=\"commit\"><a href=\"#commit\" class=\"phenomic-HeadingAnchor\">#</a>Commit</h3>\n<p>This is where the contents of the work-in-progress fiber tree get flushed to the\nDOM - in other words, this is when all the side effects from the fiber tree get executed.\nThis phase is not designed to be interruptible, since otherwise it would open up\npossibilities for inconsistent \"in-between\" UI states.\nIt is being achieved by setting a priority level <code>TaskPriority</code> for the whole\ntime of the phase.\nThe previous priority level is being stowed away as <code>previousPriorityContext</code>.</p>\n<p>The entry point for committing the work is the <code>commitAllWork</code> function.</p>\n<p>Before starting going through the effect list of the fiber tree, it checks if\nthe root fiber has an <code>effectTag</code> on it too.\n<em>(This is because during the completion phase, the <code>effectTag</code> was being added to the\n<code>return</code> fiber's effect list.\nThere is no <code>return</code> fiber for the root of the tree, hence it is done here afterwards.)</em></p>\n<p>The commit process consists of two passes through the whole effect list of the fiber tree.</p>\n<p>The first pass does DOM manipulation (placement, updates, deletions) using the\ninjected renderer and unmounts <code>ref</code> functions.</p>\n<p>After the first pass, Fiber swaps the work-in-progress tree with the <code>current</code>\none. That's because the work-in-progress one just got flushed to the DOM, so\nconceptually it became the <code>current</code>.</p>\n<p>The second pass calls lifecycle hooks, <code>setState</code> callbacks, <code>ref</code> callbacks\nand component-level error handling methods (new feature in Fiber!).</p>\n<p>After the second pass (and some housekeeping), the priority level from before\nthe commit ie restored from <code>previousPriorityContext</code>.</p>\n<p><a id=\"org3c31b83\"></a></p>\n<h2 id=\"thats-all-folks\"><a href=\"#thats-all-folks\" class=\"phenomic-HeadingAnchor\">#</a>That's all, folks!</h2>\n<p>With sufficient squinting and skipping over ancillary details, we have drilled\nthrough the main features of React Fiber, from the first client <code>render</code> call, down to\nthe nitty-gritty of scheduling and splitting the work into phases.</p>\n<p>If you didn't have the Fiber codebase handy while reading this, it might be\ninteresting for you to go grab it and read through this post again - this time\ntracking your steps through the code. You'll see that even though there is quite\na few cogs in the machine of Fiber, it is way less complicated than you'd expect.</p>\n<p>If you see any mistakes or omissions, feel free to point them out!\nI'll amend the post.</p>\n<p>I did my best to skip over aspects that were not key to the main responsibility\nof Fiber.\nBut a few of them are very interesting in themselves, or are used in an\ninteresting way, for example:</p>\n<ul>\n<li>Component-level error handling, error boundaries</li>\n<li>The use of object pooling</li>\n<li>Dependency injection</li>\n</ul>\n<p>There might be another post coming, which will describe those things, so stay tuned!</p>\n<p>And lastly, the obligatory wafting paragraph. It's good to <em>actually know</em> how\nthe tools you use every day work. Of course it's not always possible or sensible\nto look at everything - but the perspective, sense of confidence and\nsatisfaction gained from this type of activity is significant.\nYou have to read a lot to become a great writer. I think programmers are no\ndifferent - and JavaScript fatigue, the state of Web development, Angular 4,\nReact 16 or Webpack 3 should not serve as an excuse to neglect this practice.</p>\n<p>As craftspeople, we need to study the tools we use and other people's\ncraft we see around us to improve our own and perhaps eventually surpass it.</p>\n<p><a id=\"org7cd8bdd\"></a></p>\n<h2 id=\"glossary-types-and-constants\"><a href=\"#glossary-types-and-constants\" class=\"phenomic-HeadingAnchor\">#</a>Glossary: types and constants</h2>\n<p>Here are some important types and constants used in the Fiber codebase.\nI'm not putting them at the top to allow you to jump right into the interesting\nstuff without having to waddle through a bunch of things that don't make sense\nout of context.</p>\n<p><a id=\"org8c13c72\"></a></p>\n<h3 id=\"update\"><a href=\"#update\" class=\"phenomic-HeadingAnchor\">#</a>Update</h3>\n<p>An <code>Update</code> looks like this:</p>\n<pre><code>type Update = {\n  priorityLevel: PriorityLevel,\n  partialState: PartialState&#x3C;any, any>,\n  callback: Callback | null,\n  isReplace: boolean,\n  isForced: boolean,\n  isTopLevelUnmount: boolean,\n  next: Update | null,\n};\n</code></pre>\n<p>Where <code>PartialState</code> is what you pass into <code>setState</code>: either an object or a\n<code>(prevState, props) => partialState</code> function.</p>\n<p><a id=\"org4c0e3af\"></a></p>\n<h3 id=\"update-queue\"><a href=\"#update-queue\" class=\"phenomic-HeadingAnchor\">#</a>Update queue</h3>\n<p>A fiber's update queue looks like this:</p>\n<pre><code>export type UpdateQueue = {\n  first: Update | null,\n  last: Update | null,\n  hasForceUpdate: boolean,\n  callbackList: null | Array&#x3C;Callback>,\n};\n</code></pre>\n<p>The <code>callbackList</code> holds the <code>callback</code> values you passed in to\n<code>setState(stateUpdater, [callback])</code>, if any.</p>\n<p><a id=\"orgdd96006\"></a></p>\n<h3 id=\"priority-levels\"><a href=\"#priority-levels\" class=\"phenomic-HeadingAnchor\">#</a>Priority levels</h3>\n<pre><code>type PriorityLevel = 0 | 1 | 2 | 3 | 4 | 5 | 6;\n\nNoWork: 0, // No work is pending.\nSynchronousPriority: 1, // For controlled text inputs. Synchronous side-effects.\nTaskPriority: 2, // Completes at the end of the current tick.\nAnimationPriority: 3, // Needs to complete before the next frame.\nHighPriority: 4, // Interaction that needs to complete pretty soon to feel responsive.\nLowPriority: 5, // Data fetching, or result from updating stores.\nOffscreenPriority: 6, // Won't be visible but do the work in case it becomes visible.\n</code></pre>\n<p>When Fiber schedules work, <code>SynchronousWork</code> is scheduled immediately on the UI\nthread, <code>AnimationPriority</code> is scheduled with <code>requestAnimationFrame</code> and the\nlower priorities with <code>requestIdleCallback</code>.</p>\n<p>Whenever \"higher/highest priority level\" is being mentioned, there is always an asterisk: \"except\nfor <code>NoWork</code>\".\nThe code always checks for that priority level separately.</p>\n<p><a id=\"org4ecef3c\"></a></p>\n<h3 id=\"side-effect-tags-types-of-side-effects\"><a href=\"#side-effect-tags-types-of-side-effects\" class=\"phenomic-HeadingAnchor\">#</a>Side effect tags (types of side effects)</h3>\n<pre><code>type TypeOfSideEffect = number\n\nNoEffect: 0, //           0b0000000\nPlacement: 1, //          0b0000001\nUpdate: 2, //             0b0000010\nPlacementAndUpdate: 3, // 0b0000011\nDeletion: 4, //           0b0000100\nContentReset: 8, //       0b0001000\nCallback: 16, //          0b0010000\nErr: 32, //               0b0100000\nRef: 64, //               0b1000000\n</code></pre>\n<p>Having the tags defined like this allows using the binary operations in a handy\nway. (I mean adding new tags by <code>effectTag |= Placement</code>, removing them\nwith <code>effectTag &#x26;= ~Placement</code> etc.)</p>\n<p><a id=\"orgdd07bda\"></a></p>\n<h3 id=\"fiber-vs-fiber\"><a href=\"#fiber-vs-fiber\" class=\"phenomic-HeadingAnchor\">#</a>Fiber vs fiber</h3>\n<p>Whenever I refer to Fiber with a capital F, I mean React Fiber, the new reconciler.\nWhenever I refer to a fiber with a lowercase f, I mean the data structure\nrepresenting the basic unit of work related to a React component.\nThe data structure like this (I'm leaving most of Facebook's comments as\nthey're very good):</p>\n<pre><code>type Fiber = {\n  // These fields conceptually belong to an instance of the component\n  // this fiber is related to.\n\n  // Tag identifying the type of fiber.\n  tag: TypeOfWork,\n\n  // Unique identifier of this child.\n  key: null | string,\n\n  // The function/class/module associated with this fiber.\n  type: any,\n\n  // The local state associated with this fiber.\n  stateNode: any,\n\n  // Remaining fields belong to Fiber\n\n  // The Fiber to return to after finishing processing this one.\n  // This is effectively the parent, but there can be multiple parents (two)\n  // so this is only the parent of the thing we're currently processing.\n  // It is conceptually the same as the return address of a stack frame.\n  return: Fiber | null,\n\n  // Singly Linked List Tree Structure.\n  child: Fiber | null,\n  sibling: Fiber | null,\n  index: number,\n\n  // The ref last used to attach this node.\n  // I'll avoid adding an owner field for prod and model that as functions.\n  ref: null | (((handle: mixed) => void) &#x26; {_stringRef: ?string}),\n\n  // Input is the data coming into process this fiber. Arguments. Props.\n  pendingProps: any, // This type will be more specific once we overload the tag.\n  memoizedProps: any, // The props used to create the output.\n\n  // A queue of state updates and callbacks.\n  updateQueue: UpdateQueue | null,\n\n  // The state used to create the output\n  memoizedState: any,\n\n  // Bitfield that describes properties about the fiber and its subtree. E.g.\n  // the AsyncUpdates flag indicates whether the subtree should be async-by-\n  // default. When a fiber is created, it inherits the internalContextTag of its\n  // parent. Additional flags can be set at creation time, but after than the\n  // value should remain unchanged throughout the fiber's lifetime, particularly\n  // before its child fibers are created.\n  internalContextTag: TypeOfInternalContext,\n\n  // Effect\n  effectTag: TypeOfSideEffect,\n\n  // Singly linked list fast path to the next fiber with side-effects.\n  nextEffect: Fiber | null,\n\n  // The first and last fiber with side-effect within this subtree. This allows\n  // us to reuse a slice of the linked list when we reuse the work done within\n  // this fiber.\n  firstEffect: Fiber | null,\n  lastEffect: Fiber | null,\n\n  // This will be used to quickly determine if a subtree has no pending changes.\n  pendingWorkPriority: PriorityLevel,\n\n  // This value represents the priority level that was last used to process this\n  // component. This indicates whether it is better to continue from the\n  // progressed work or if it is better to continue from the current state.\n  progressedPriority: PriorityLevel,\n\n  // If work bails out on a Fiber that already had some work started at a lower\n  // priority, then we need to store the progressed work somewhere. This holds\n  // the started child set until we need to get back to working on it. It may\n  // or may not be the same as the \"current\" child.\n  progressedChild: Fiber | null,\n\n  // When we reconcile children onto progressedChild it is possible that we have\n  // to delete some child fibers. We need to keep track of this side-effects so\n  // that if we continue later on, we have to include those effects. Deletions\n  // are added in the reverse order from sibling pointers.\n  progressedFirstDeletion: Fiber | null,\n  progressedLastDeletion: Fiber | null,\n\n  // This is a pooled version of a Fiber. Every fiber that gets updated will\n  // eventually have a pair. There are cases when we can clean up pairs to save\n  // memory if we need to.\n  alternate: Fiber | null,\n\n  // Conceptual aliases\n  // workInProgress : Fiber ->  alternate The alternate used for reuse happens\n  // to be the same as work in progress.\n};\n</code></pre>\n<p><a id=\"orgab66cc2\"></a></p>\n","__filename":"blog/look-inside-fiber.md","__url":"/blog/look-inside-fiber/","__resourceUrl":"/blog/look-inside-fiber/index.html","__dataUrl":"/blog/look-inside-fiber/index.html.3f9ab5a42349ae23b7ea5df292d65ff6.json","type":"Post"}}}</script><script data-react-helmet="true" src="https://cdn.polyfill.io/v2/polyfill.min.js"></script><script src="/phenomic.browser.0f07dd3e99e533d0db49.js"></script></body></html>
