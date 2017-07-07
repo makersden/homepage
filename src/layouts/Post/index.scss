@@ -15,8 +15,16 @@
   max-width: $width + 2 * $padding;
   padding: 9rem $padding;
   margin: 0 auto;
-  width: calc(100%);
+  width: 100%;
   color: rgba(white, 0.9);
+
+  @include media('<=desktop') {
+    $padding: 1 / 12 * 100%;
+    padding: 9rem $padding;
+    max-width: calc(11/12 * 100%);
+    width: calc(11/12 * 100%);
+    background: linear-gradient(to right, transparent, $background $padding, $background calc(100% - #{$padding}), transparent);
+  }
 
   header {
     font-style: italic;
