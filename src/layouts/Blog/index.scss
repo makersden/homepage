@@ -1,10 +1,12 @@
-@import 'src/variables.global';
+@import 'src/blocks.global';
 
 .main {
+  @extend %invisibleScrollbar;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-bottom: 1rem;
 }
 
 .noPosts {
@@ -16,6 +18,12 @@
 }
 
 .introduction {
+  @extend %centered;
   font-size: x-large;
-  margin: 4rem 0 6rem 0;
+  margin: 4rem 0;
+
+  @include media('>=tablet') {
+    text-align: center;
+    margin-bottom: 6rem;
+  }
 }

@@ -18,6 +18,7 @@ const PagePreview = ({ __url, title, date, description, tags = [] }) => {
         <h2>
           { title }
         </h2>
+      </header>
         {
           pageDate &&
           <small>
@@ -27,7 +28,6 @@ const PagePreview = ({ __url, title, date, description, tags = [] }) => {
             </time>
           </small>
         }
-      </header>
       {tags && tags.length > 0 && (
         <ul className={styles.tags}>
           {tags.map(Tag)}
