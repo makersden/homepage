@@ -1,4 +1,4 @@
-@import 'src/variables.global';
+@import 'src/blocks.global';
 @import 'src/include-media.global';
 
 :root {
@@ -16,6 +16,8 @@
 }
 
 .nav {
+  @extend %centered;
+
   padding: $home-offset 0;
   font-family: $font-secondary;
   display: flex;
@@ -35,6 +37,8 @@
     font-weight: 400;
     font-size: 1.5rem;
     text-align: center;
+    height: $home-size;
+    line-height: $home-size;
 
     &.homeLink {
       font-family: $font-brand;

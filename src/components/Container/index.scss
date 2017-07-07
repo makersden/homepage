@@ -1,11 +1,11 @@
 @import '../../blocks.global';
 
 .container {
-  @extend %centered;
   height: 100vh;
   display: flex;
   flex-direction: column;
   position: relative;
+  width: 100%;
 }
 
 // n is number of stars required
