@@ -86,10 +86,14 @@ h2 {
   width: var(--phenomic-HeadingAnchor-width);
   line-height: var(--phenomic-HeadingAnchor-width);
   text-decoration: none;
-  opacity: 0.1;
+  opacity: 0.3;
   transition: opacity 0.2s;
 
   @nest :--headings:hover & {
+    opacity: 1;
+  }
+
+  &:hover {
     opacity: 1;
   }
 }
