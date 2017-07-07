@@ -60,11 +60,17 @@
       }
 
       @include media('<=1280px') {
-        font-size: 4.5rem;
+        $size: 4.5rem;
+        font-size: $size;
+        line-height: $size;
+        height: $size;
       }
 
       @include media('<=tablet') {
-        font-size: 3.5rem;
+        $size: 3.5rem;
+        font-size: $size;
+        line-height: $size;
+        height: $size;
       }
     }
 

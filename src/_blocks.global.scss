@@ -21,10 +21,15 @@ $scrollbar-size: 15px;
 
 %invisibleScrollbar {
   overflow-y: auto;
-  overflow-x: hidden;
-  -webkit-mask-image: linear-gradient(to bottom, transparent, rgba(0,0,0,1) #{$home-size/2});
+  overflow-y: scroll; /* has to be scroll, not auto */
+  -webkit-overflow-scrolling: touch;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, rgba(0,0,0,1) #{$home-size});
   // Bye bye, scrollbar
   width: calc(100% + #{$scrollbar-hiding-offset});
   padding-right: $scrollbar-hiding-offset - $scrollbar-size;
   outline: 0;
+
+  @include media('<=1280px') {
+    -webkit-mask-image: linear-gradient(to bottom, transparent, rgba(0,0,0,1) #{$home-size * 4});
+  }
 }

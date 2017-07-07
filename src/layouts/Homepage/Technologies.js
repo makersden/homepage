@@ -19,16 +19,12 @@ import googleanalytics from 'assets/images/tech/googleanalytics.svg';
 const technologies = {
   nodejs,
   akka,
-  angular,
   aws,
   react,
-  heroku,
   java,
-  meteor,
   scala,
   googleanalytics,
   play,
-  rails,
 };
 
 const Technology = (name) => (

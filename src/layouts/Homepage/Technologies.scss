@@ -10,11 +10,11 @@ $spacing: 32px;
 }
 
 .technologies {
+  margin: 0 auto;
   @include columns(3);
   -moz-column-gap: $spacing / 2;
   -webkit-column-gap: $spacing / 2;
   column-gap: $spacing / 2;
-  width: 100%;
   padding: 16px 32px;
 
   @include media('<=tablet') {
@@ -33,10 +33,6 @@ $spacing: 32px;
   border-radius: 5px;
   text-align: center;
   transition: background 0.3s, border-color 0.3s;
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.05);
-  }
 
   span, svg {
     max-height: 300px;

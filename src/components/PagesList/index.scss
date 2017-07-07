@@ -1,7 +1,7 @@
-@import 'src/variables.global';
+@import 'src/blocks.global';
 
 .posts {
-  width: 50%;
+  @extend %centered;
 }
 
 .post {
