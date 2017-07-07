@@ -24,6 +24,7 @@ $segment-size: calc(100vh - #{$home-size} - #{2 * $home-offset}});
   @extend %invisibleScrollbar;
 
   > * {
+    @extend %centered;
     min-height: $segment-size;
     display: flex;
     flex-direction: column;
