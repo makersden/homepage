@@ -1,12 +1,18 @@
 import React, { PropTypes } from 'react';
-
 import styles from './index.scss';
+import classNames from 'classnames';
 
-const Container = props => {
+const shouldFadeStars = (splat = '') => splat.indexOf('blog/') === 0;
+
+const Container = (props) => {
   return (
   <section className={styles.container}>
-    <section className={styles.background}>
-      <section className={styles.stars}>
+    <section className={classNames(styles.background, {
+      [styles.faded]: shouldFadeStars(props.params.splat),
+    })}>
+      <section className={classNames(styles.stars, {
+          [styles.faded]: shouldFadeStars(props.params.splat),
+        })}>
         <section className={styles.bigStars} />
         <section className={styles.mediumStars} />
         <section className={styles.smallStars} />

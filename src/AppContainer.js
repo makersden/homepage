@@ -10,9 +10,9 @@ import Header from "./components/Header"
 import Content from './components/Content';
 // import Footer from "./components/Footer"
 
-const AppContainer = props => {
+const AppContainer = (props) => {
   return (
-  <Container>
+  <Container params={props.params}>
     <DefaultHeadMeta />
     <Header location={props.location} />
     <Content>

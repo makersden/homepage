@@ -35,6 +35,12 @@ $shadows-big:    multiple-box-shadow(100);
 .stars {
   height: 0;
   width: 100%;
+  opacity: 1;
+  transition: opacity 0.3s;
+
+  &.faded {
+    opacity: 0;
+  }
 }
 
 .smallStars {
@@ -94,7 +100,13 @@ $shadows-big:    multiple-box-shadow(100);
   bottom: 0;
   left: 0;
   right: 0;
-  background: radial-gradient(ellipse at bottom, $background-color-light 0%, $background-color 100%);
+  transition: background-color 0.3s;
+  background-color: radial-gradient(ellipse at bottom, $background-color-light 0%, $background-color 100%);
+
+  &.faded {
+    background-color: $background-color-light;
+  }
+
   overflow: hidden;
 
   & ~ * {

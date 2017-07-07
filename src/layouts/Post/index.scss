@@ -10,21 +10,9 @@
 .article {
   $width: 55rem;
   $padding: 25rem;
-  $background: $background-color;
-  background: linear-gradient(to right, transparent, $background $padding, $background calc(100% - #{$padding}), transparent);
-  max-width: $width + 2 * $padding;
-  padding: 4rem $padding;
-  margin: 0 auto;
+  margin: 6rem auto;
   width: 100%;
-  color: rgba(white, 0.9);
-
-  @include media('<=desktop') {
-    $padding: 1 / 12 * 100%;
-    padding: 2rem $padding;
-    max-width: calc(11/12 * 100%);
-    width: calc(11/12 * 100%);
-    background: linear-gradient(to right, transparent, $background $padding, $background calc(100% - #{$padding}), transparent);
-  }
+  color: rgba(white, 0.85);
 
   header {
     font-style: italic;
@@ -168,13 +156,6 @@
         margin-top: 14px;
       }
 
-      // &:before {
-      //   -webkit-font-feature-settings: "liga" on,"lnum" on;
-      //   padding-right: 12px;
-      //   counter-increment: post;
-      //   content: counter(post) ".";
-      // }
-
       &:last-child {
         margin-bottom: 0;
       }
@@ -183,7 +164,7 @@
 
   code, pre {
     font-family: Menlo,Monaco,Inconsolata,"Courier New",Courier,monospace;
-    background: rgba(0,0,0,.8);
+    background: rgba(0,0,0,.3);
   }
 
   code {
@@ -193,10 +174,15 @@
 
   pre {
     font-size: 18px;
+    margin-top: 38px;
 
     padding: 20px;
     white-space: pre-wrap;
 
     overflow: auto;
+
+    code {
+      background: transparent;
+    }
   }
 }
