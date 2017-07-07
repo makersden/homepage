@@ -40,13 +40,21 @@
       font-weight: 300;
     }
 
-    @include media('<=tablet') {
-      margin: $size / 2 0 0 0;
+    @include media('<=desktop') {
+      margin: $size / 2 0;
 
       h4 {
         font-size: 1.5rem;
         line-height: 1.5;
       }
+    }
+
+    @include media('<tablet') {
+      margin: 1rem 0;
+    }
+
+    @include media('<=phone') {
+      margin: 0;
     }
   }
 
