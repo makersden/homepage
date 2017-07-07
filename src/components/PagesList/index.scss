@@ -1,7 +1,12 @@
 @import 'src/blocks.global';
+@import 'src/include-media.global';
 
 .posts {
   @extend %centered;
+
+  @include media('>desktop') {
+    width: calc(5 / 12 * 100%);
+  }
 }
 
 .post {
@@ -22,6 +27,8 @@
     letter-spacing: -.028em;
     font-weight: 700;
     text-decoration: none;
+
+    margin-right: 1rem;
   }
 
   header {
