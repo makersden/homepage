@@ -147,11 +147,7 @@
   },
   "dependencies": {
     "react-disqus-comments": "^1.0.3",
-    "react-disqus-thread": "^0.4.0",
     "react-ga": "^2.1.2",
-    "react-sticky": "^5.0.5",
-    "react-typist": "^1.0.3",
-    "smoothscroll": "^0.3.0",
-    "typographic-underline-canvas": "^0.1.2"
+    "smoothscroll": "^0.3.0"
   }
 }

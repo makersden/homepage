@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import ReactDisqusComments from 'react-disqus-comments';
 
 import Page from '../Page';
 
@@ -11,7 +12,6 @@ class Post extends Component {
 
   componentDidMount() {
     this.main.focus();
-    console.log('focus');
   }
 
   render() {
@@ -20,6 +20,8 @@ class Post extends Component {
     // it's up to you to choose what to do with this layout ;)
     const pageDate = props.head.date ? new Date(props.head.date) : null;
     const author = props.head.author;
+
+    console.log(props.head.title.replace(/\s/g, ''));
 
     return (
       <main className={styles.main} tabIndex={-1} ref={e => this.main = e}>
@@ -35,6 +37,13 @@ class Post extends Component {
               </header>
             }
           />
+          <section>
+            <ReactDisqusComments
+              shortname="makersden-io"
+              identifier={`123-456-7890`}
+              category_id="123"
+            />
+          </section>
         </article>
       </main>
     );

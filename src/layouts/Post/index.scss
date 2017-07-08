@@ -9,7 +9,6 @@
 }
 
 .article {
-  @include smart-underline($background-color-light, white, rgb(5, 100, 215), 100%);
   $width: 55rem;
   $padding: 25rem;
   margin: 6rem auto;
@@ -21,6 +20,10 @@
     text-align: right;
     margin-top: 24px;
     opacity: 0.7;
+  }
+
+  p, ul, ol {
+    @include smart-underline($background-color-light, white, rgb(5, 100, 215), 100%);
   }
 
   h1 {
