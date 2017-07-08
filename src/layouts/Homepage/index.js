@@ -30,27 +30,31 @@ const segments = [
 const shouldScroll = (url) => segments.indexOf(url) !== -1;
 
 class Homepage extends Component {
-  scrollTo = (target, immediate) => {
+  smoothScrollTo = (target, immediate) => {
     if (!(target && this[target])) return;
 
     const offset = this[target].offsetTop;
 
     if (immediate) {
-      this.scrollContext.scrollTop = offset;
+      this.scrollContext.smoothScrollTop = offset;
+      requestAnimationFrame(() => {
+        this[target].scrollIntoView();
+      });
+    } else {
+      smoothscroll(
+        offset,
+        300,
+        () => {},
+        this.scrollContext
+      );
     }
 
-    smoothscroll(
-      offset,
-      300,
-      () => {},
-      this.scrollContext
-    );
   }
 
   scrollIfNeeded({props = this.props, immediate = false}) {
     const url = props.__url.replace(/\//g, '');
     if (shouldScroll(url)) {
-      this.scrollTo(url, immediate);
+      this.smoothScrollTo(url, immediate);
     }
   }
 
@@ -92,9 +96,9 @@ class Homepage extends Component {
 
   shouldUpdateScroll = (prevRouterProps, { location: { hash }}) => {
     const target = hash.slice(1);
-    const updateScroll = shouldScroll(target);
+    const immediate = !prevRouterProps || prevRouterProps.location.pathname  !== '/';
     if (shouldScroll(target)) {
-      this.scrollTo(target, !prevRouterProps);
+      this.smoothScrollTo(target, immediate);
     }
 
     return updateScroll;
