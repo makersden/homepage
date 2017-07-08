@@ -1,4 +1,5 @@
 @import 'src/blocks.global';
+@import 'src/mixins.global';
 
 @import url('https://fonts.googleapis.com/css?family=Inconsolata');
 
@@ -8,6 +9,7 @@
 }
 
 .article {
+  @include smart-underline($background-color-light, white, rgb(5, 100, 215), 100%);
   $width: 55rem;
   $padding: 25rem;
   margin: 6rem auto;
@@ -155,6 +157,13 @@
       ul {
         margin-top: 14px;
       }
+
+      // &:before {
+      //   -webkit-font-feature-settings: "liga" on,"lnum" on;
+      //   padding-right: 12px;
+      //   counter-increment: post;
+      //   content: counter(post) ".";
+      // }
 
       &:last-child {
         margin-bottom: 0;
