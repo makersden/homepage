@@ -13,9 +13,17 @@ tags:
   - architecture
 ---
 
-As we all know by now, a big change is coming inside of React with version 0.16.
+As we all know by now, a big change is coming inside of React. ~~with version 0.16.
 It's a significant one, because it will affect the performance of more complex
-React applications.
+React applications.~~
+
+*(EDIT: As Dan Abramov pointed out in his comment, even though 0.16 will be
+running on Fiber, it will run in synchronous mode, mimicking the "traditional" 
+approach to rendering. This will not confer any changes in application behavior or
+performance and the async Fiber APIs will not be exposed. We will reap the
+benefits of Fiber at a later point in time. Read on nevertheless!)*
+
+
 The crux of the change is transitioning from processing updates in a synchronous,
 recursive way to relying on asynchronous scheduling and prioritization of
 interface changes.
@@ -25,7 +33,7 @@ It's been a while since the announcement already, and
 [have been said](<https://www.youtube.com/watch?v=ZCuYPiUIONs>)
 [and written](<https://github.com/acdlite/react-fiber-architecture>).
 However, I like to see things for myself and understand how they work from the ground
-up. There were also a few topics that lacked "press coverage"
+up. There were also a few topics that lacked "press coverage".
 
 Thus, down the rabbit hole I went!
 
