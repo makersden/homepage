@@ -19,7 +19,6 @@ class Post extends Component {
   };
 
   componentDidMount() {
-    this.main.focus();
     setOverflow('auto');
   }
 
