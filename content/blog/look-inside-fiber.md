@@ -20,8 +20,8 @@ React applications.~~
 *(EDIT: As Dan Abramov pointed out in his comment, even though 0.16 will be
 running on Fiber, it will run in synchronous mode, mimicking the "traditional" 
 approach to rendering. This will not confer any changes in application behavior or
-performance and the async Fiber APIs will not be exposed. We will reap the
-benefits of Fiber at a later point in time. Read on nevertheless!)*
+performance. The async Fiber APIs will be exposed in some ways but will not be
+the default mode of operation. Read on nevertheless!)*
 
 
 The crux of the change is transitioning from processing updates in a synchronous,
