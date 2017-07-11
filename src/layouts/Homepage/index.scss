@@ -61,6 +61,20 @@ $segment-size: calc(100vh - #{$home-size} - #{2 * $home-offset}});
   }
 }
 
+:global(#work) {
+  .workHeader {
+    margin-bottom: 1rem;
+  }
+
+  p {
+    margin-bottom: 1rem;
+  }
+
+  strong {
+    font-weight: 400;
+  }
+}
+
 footer {
   transition: opacity 0.3s 0.1s;
   opacity: 1;
