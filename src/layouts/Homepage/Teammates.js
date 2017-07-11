@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Teammates.scss';
 
-import rts from 'assets/images/rts.jpg';
+import md from 'assets/images/md.jpg';
 import kb from 'assets/images/kb.jpg';
 import kc from 'assets/images/kc.jpg';
 
@@ -14,9 +14,9 @@ const mates = [{
     experience: 6,
     photo: kc,
   }, {
-    name: 'Robert Tochman-Szewc',
+    name: 'Memas Deligeorgakis',
     experience: 6,
-    photo: rts,
+    photo: md,
   }];
 
 const Teammate = ({name, photo }) => (
