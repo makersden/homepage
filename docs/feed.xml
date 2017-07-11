@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[makers-den-homepage]]></title><description><![CDATA[makers-den-homepage]]></description><link>http://makersden.io/</link><generator>RSS for Node</generator><lastBuildDate>Sat, 08 Jul 2017 19:07:15 GMT</lastBuildDate><atom:link href="http://makersden.io/feed.xml" rel="self" type="application/rss+xml"/><item><title><![CDATA[A look inside React Fiber - how work will get done.]]></title><description><![CDATA[<p>As we all know by now, a big change is coming inside of React with version 0.16.
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[makers-den]]></title><description><![CDATA[makers-den]]></description><link>http://makersden.io/</link><generator>RSS for Node</generator><lastBuildDate>Tue, 11 Jul 2017 08:59:52 GMT</lastBuildDate><atom:link href="http://makersden.io/feed.xml" rel="self" type="application/rss+xml"/><item><title><![CDATA[A look inside React Fiber - how work will get done.]]></title><description><![CDATA[<p>As we all know by now, a big change is coming inside of React with version 0.16.
 It's a significant one, because it will affect the performance of more complex
 React applications.
 The crux of the change is transitioning from processing updates in a synchronous,
@@ -118,10 +118,10 @@ in your component. It tells its <code>updater</code> to enqueue a <code>setState
 <p>   It's just getting a thing from the <code>ReactInstanceMap</code> - which is just that, a
 map, nothing fancy. One perhaps slightly interesting thing about it is that
 it maps from public facing instances to internal methods. Example:
-<br>
-get: function(key) {
-return key._reactInternalInstance;
-},</p>
+</p>
+<pre><code class="hljs language-javascript">get: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">key</span>) </span>{
+  <span class="hljs-keyword">return</span> key._reactInternalInstance;
+},</code></pre>
 <h3 id="2-ask-the-scheduler-about-the-priority-level-for-this-fiber"><a href="#2-ask-the-scheduler-about-the-priority-level-for-this-fiber" class="phenomic-HeadingAnchor">#</a>2. Ask the <code>Scheduler</code> about the priority level for this fiber.</h3>
 <p>   There is a <code>Scheduler</code> method called <code>getPriorityContext</code> that provides a
 suitable priority level for a fiber update. For all intents and purposes,
@@ -213,45 +213,44 @@ which work is currently supposed to be processed and bails out if it's not.</p>
 since we're deep enough and they would take <strong>a lot</strong> of space to describe.
 In short, what happens here depends on the work-in-progress fiber type, and is
 handled by a big <code>switch</code> statement:</p>
-<pre><code>switch (workInProgress.tag) {
-  case IndeterminateComponent:
-    return mountIndeterminateComponent(
+<pre><code class="hljs language-javascript"><span class="hljs-keyword">switch</span> (workInProgress.tag) {
+  <span class="hljs-keyword">case</span> IndeterminateComponent:
+    <span class="hljs-keyword">return</span> mountIndeterminateComponent(
       current,
       workInProgress,
       priorityLevel,
     );
-  case FunctionalComponent:
-    return updateFunctionalComponent(current, workInProgress);
-  case ClassComponent:
-    return updateClassComponent(current, workInProgress, priorityLevel);
-  case HostRoot:
-    return updateHostRoot(current, workInProgress, priorityLevel);
-  case HostComponent:
-    return updateHostComponent(current, workInProgress);
-  case HostText:
-    return updateHostText(current, workInProgress);
-  case CoroutineHandlerPhase:
-    // This is a restart. Reset the tag to the initial phase.
+  <span class="hljs-keyword">case</span> FunctionalComponent:
+    <span class="hljs-keyword">return</span> updateFunctionalComponent(current, workInProgress);
+  <span class="hljs-keyword">case</span> ClassComponent:
+    <span class="hljs-keyword">return</span> updateClassComponent(current, workInProgress, priorityLevel);
+  <span class="hljs-keyword">case</span> HostRoot:
+    <span class="hljs-keyword">return</span> updateHostRoot(current, workInProgress, priorityLevel);
+  <span class="hljs-keyword">case</span> HostComponent:
+    <span class="hljs-keyword">return</span> updateHostComponent(current, workInProgress);
+  <span class="hljs-keyword">case</span> HostText:
+    <span class="hljs-keyword">return</span> updateHostText(current, workInProgress);
+  <span class="hljs-keyword">case</span> CoroutineHandlerPhase:
+    <span class="hljs-comment">// This is a restart. Reset the tag to the initial phase.</span>
     workInProgress.tag = CoroutineComponent;
-  // Intentionally fall through since this is now the same.
-  case CoroutineComponent:
-    return updateCoroutineComponent(current, workInProgress);
-  case YieldComponent:
-    // A yield component is just a placeholder, we can just run through the
-    // next one immediately.
-    return null;
-  case HostPortal:
-    return updatePortalComponent(current, workInProgress);
-  case Fragment:
-    return updateFragment(current, workInProgress);
-  default:
+  <span class="hljs-comment">// Intentionally fall through since this is now the same.</span>
+  <span class="hljs-keyword">case</span> CoroutineComponent:
+    <span class="hljs-keyword">return</span> updateCoroutineComponent(current, workInProgress);
+  <span class="hljs-keyword">case</span> YieldComponent:
+    <span class="hljs-comment">// A yield component is just a placeholder, we can just run through the</span>
+    <span class="hljs-comment">// next one immediately.</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
+  <span class="hljs-keyword">case</span> HostPortal:
+    <span class="hljs-keyword">return</span> updatePortalComponent(current, workInProgress);
+  <span class="hljs-keyword">case</span> Fragment:
+    <span class="hljs-keyword">return</span> updateFragment(current, workInProgress);
+  <span class="hljs-keyword">default</span>:
     invariant(
-      false,
-      'Unknown unit of work tag. This error is likely caused by a bug in ' +
-        'React. Please file an issue.',
+      <span class="hljs-literal">false</span>,
+      <span class="hljs-string">'Unknown unit of work tag. This error is likely caused by a bug in '</span> +
+        <span class="hljs-string">'React. Please file an issue.'</span>,
     );
-}
-</code></pre>
+}</code></pre>
 <p>The following, however, is crucial:</p>
 <ul>
 <li>Those <code>update</code> functions merge component states with the <code>pendingState</code> values
@@ -396,42 +395,39 @@ out of context.</p>
 <p><a id="org8c13c72"></a></p>
 <h3 id="update"><a href="#update" class="phenomic-HeadingAnchor">#</a>Update</h3>
 <p>An <code>Update</code> looks like this:</p>
-<pre><code>type Update = {
-  priorityLevel: PriorityLevel,
-  partialState: PartialState&#x3C;any, any>,
-  callback: Callback | null,
-  isReplace: boolean,
-  isForced: boolean,
-  isTopLevelUnmount: boolean,
-  next: Update | null,
-};
-</code></pre>
+<pre><code class="hljs language-javascript">type Update = {
+  <span class="hljs-attr">priorityLevel</span>: PriorityLevel,
+  <span class="hljs-attr">partialState</span>: PartialState&#x3C;any, any>,
+  <span class="hljs-attr">callback</span>: Callback | <span class="hljs-literal">null</span>,
+  <span class="hljs-attr">isReplace</span>: boolean,
+  <span class="hljs-attr">isForced</span>: boolean,
+  <span class="hljs-attr">isTopLevelUnmount</span>: boolean,
+  <span class="hljs-attr">next</span>: Update | <span class="hljs-literal">null</span>,
+};</code></pre>
 <p>Where <code>PartialState</code> is what you pass into <code>setState</code>: either an object or a
 <code>(prevState, props) => partialState</code> function.</p>
 <p><a id="org4c0e3af"></a></p>
 <h3 id="update-queue"><a href="#update-queue" class="phenomic-HeadingAnchor">#</a>Update queue</h3>
 <p>A fiber's update queue looks like this:</p>
-<pre><code>export type UpdateQueue = {
-  first: Update | null,
-  last: Update | null,
-  hasForceUpdate: boolean,
-  callbackList: null | Array&#x3C;Callback>,
-};
-</code></pre>
+<pre><code class="hljs language-javascript"><span class="hljs-keyword">export</span> type UpdateQueue = {
+  <span class="hljs-attr">first</span>: Update | <span class="hljs-literal">null</span>,
+  <span class="hljs-attr">last</span>: Update | <span class="hljs-literal">null</span>,
+  <span class="hljs-attr">hasForceUpdate</span>: boolean,
+  <span class="hljs-attr">callbackList</span>: <span class="hljs-literal">null</span> | <span class="hljs-built_in">Array</span>&#x3C;Callback>,
+};</code></pre>
 <p>The <code>callbackList</code> holds the <code>callback</code> values you passed in to
 <code>setState(stateUpdater, [callback])</code>, if any.</p>
 <p><a id="orgdd96006"></a></p>
 <h3 id="priority-levels"><a href="#priority-levels" class="phenomic-HeadingAnchor">#</a>Priority levels</h3>
-<pre><code>type PriorityLevel = 0 | 1 | 2 | 3 | 4 | 5 | 6;
+<pre><code class="hljs language-javascript">type PriorityLevel = <span class="hljs-number">0</span> | <span class="hljs-number">1</span> | <span class="hljs-number">2</span> | <span class="hljs-number">3</span> | <span class="hljs-number">4</span> | <span class="hljs-number">5</span> | <span class="hljs-number">6</span>;
 
-NoWork: 0, // No work is pending.
-SynchronousPriority: 1, // For controlled text inputs. Synchronous side-effects.
-TaskPriority: 2, // Completes at the end of the current tick.
-AnimationPriority: 3, // Needs to complete before the next frame.
-HighPriority: 4, // Interaction that needs to complete pretty soon to feel responsive.
-LowPriority: 5, // Data fetching, or result from updating stores.
-OffscreenPriority: 6, // Won't be visible but do the work in case it becomes visible.
-</code></pre>
+NoWork: <span class="hljs-number">0</span>, <span class="hljs-comment">// No work is pending.</span>
+SynchronousPriority: <span class="hljs-number">1</span>, <span class="hljs-comment">// For controlled text inputs. Synchronous side-effects.</span>
+TaskPriority: <span class="hljs-number">2</span>, <span class="hljs-comment">// Completes at the end of the current tick.</span>
+AnimationPriority: <span class="hljs-number">3</span>, <span class="hljs-comment">// Needs to complete before the next frame.</span>
+HighPriority: <span class="hljs-number">4</span>, <span class="hljs-comment">// Interaction that needs to complete pretty soon to feel responsive.</span>
+LowPriority: <span class="hljs-number">5</span>, <span class="hljs-comment">// Data fetching, or result from updating stores.</span>
+OffscreenPriority: <span class="hljs-number">6</span>, <span class="hljs-comment">// Won't be visible but do the work in case it becomes visible.</span></code></pre>
 <p>When Fiber schedules work, <code>SynchronousWork</code> is scheduled immediately on the UI
 thread, <code>AnimationPriority</code> is scheduled with <code>requestAnimationFrame</code> and the
 lower priorities with <code>requestIdleCallback</code>.</p>
@@ -440,18 +436,17 @@ for <code>NoWork</code>".
 The code always checks for that priority level separately.</p>
 <p><a id="org4ecef3c"></a></p>
 <h3 id="side-effect-tags-types-of-side-effects"><a href="#side-effect-tags-types-of-side-effects" class="phenomic-HeadingAnchor">#</a>Side effect tags (types of side effects)</h3>
-<pre><code>type TypeOfSideEffect = number
+<pre><code class="hljs language-javascript">type TypeOfSideEffect = number
 
-NoEffect: 0, //           0b0000000
-Placement: 1, //          0b0000001
-Update: 2, //             0b0000010
-PlacementAndUpdate: 3, // 0b0000011
-Deletion: 4, //           0b0000100
-ContentReset: 8, //       0b0001000
-Callback: 16, //          0b0010000
-Err: 32, //               0b0100000
-Ref: 64, //               0b1000000
-</code></pre>
+NoEffect: <span class="hljs-number">0</span>, <span class="hljs-comment">//           0b0000000</span>
+Placement: <span class="hljs-number">1</span>, <span class="hljs-comment">//          0b0000001</span>
+Update: <span class="hljs-number">2</span>, <span class="hljs-comment">//             0b0000010</span>
+PlacementAndUpdate: <span class="hljs-number">3</span>, <span class="hljs-comment">// 0b0000011</span>
+Deletion: <span class="hljs-number">4</span>, <span class="hljs-comment">//           0b0000100</span>
+ContentReset: <span class="hljs-number">8</span>, <span class="hljs-comment">//       0b0001000</span>
+Callback: <span class="hljs-number">16</span>, <span class="hljs-comment">//          0b0010000</span>
+Err: <span class="hljs-number">32</span>, <span class="hljs-comment">//               0b0100000</span>
+Ref: <span class="hljs-number">64</span>, <span class="hljs-comment">//               0b1000000</span></code></pre>
 <p>Having the tags defined like this allows using the binary operations in a handy
 way. (I mean adding new tags by <code>effectTag |= Placement</code>, removing them
 with <code>effectTag &#x26;= ~Placement</code> etc.)</p>
@@ -462,99 +457,98 @@ Whenever I refer to a fiber with a lowercase f, I mean the data structure
 representing the basic unit of work related to a React component.
 The data structure like this (I'm leaving most of Facebook's comments as
 they're very good):</p>
-<pre><code>type Fiber = {
-  // These fields conceptually belong to an instance of the component
-  // this fiber is related to.
+<pre><code class="hljs language-javascript">type Fiber = {
+  <span class="hljs-comment">// These fields conceptually belong to an instance of the component</span>
+  <span class="hljs-comment">// this fiber is related to.</span>
 
-  // Tag identifying the type of fiber.
+  <span class="hljs-comment">// Tag identifying the type of fiber.</span>
   tag: TypeOfWork,
 
-  // Unique identifier of this child.
-  key: null | string,
+  <span class="hljs-comment">// Unique identifier of this child.</span>
+  key: <span class="hljs-literal">null</span> | string,
 
-  // The function/class/module associated with this fiber.
+  <span class="hljs-comment">// The function/class/module associated with this fiber.</span>
   type: any,
 
-  // The local state associated with this fiber.
+  <span class="hljs-comment">// The local state associated with this fiber.</span>
   stateNode: any,
 
-  // Remaining fields belong to Fiber
+  <span class="hljs-comment">// Remaining fields belong to Fiber</span>
 
-  // The Fiber to return to after finishing processing this one.
-  // This is effectively the parent, but there can be multiple parents (two)
-  // so this is only the parent of the thing we're currently processing.
-  // It is conceptually the same as the return address of a stack frame.
-  return: Fiber | null,
+  <span class="hljs-comment">// The Fiber to return to after finishing processing this one.</span>
+  <span class="hljs-comment">// This is effectively the parent, but there can be multiple parents (two)</span>
+  <span class="hljs-comment">// so this is only the parent of the thing we're currently processing.</span>
+  <span class="hljs-comment">// It is conceptually the same as the return address of a stack frame.</span>
+  <span class="hljs-keyword">return</span>: Fiber | <span class="hljs-literal">null</span>,
 
-  // Singly Linked List Tree Structure.
-  child: Fiber | null,
-  sibling: Fiber | null,
-  index: number,
+  <span class="hljs-comment">// Singly Linked List Tree Structure.</span>
+  child: Fiber | <span class="hljs-literal">null</span>,
+  <span class="hljs-attr">sibling</span>: Fiber | <span class="hljs-literal">null</span>,
+  <span class="hljs-attr">index</span>: number,
 
-  // The ref last used to attach this node.
-  // I'll avoid adding an owner field for prod and model that as functions.
-  ref: null | (((handle: mixed) => void) &#x26; {_stringRef: ?string}),
+  <span class="hljs-comment">// The ref last used to attach this node.</span>
+  <span class="hljs-comment">// I'll avoid adding an owner field for prod and model that as functions.</span>
+  ref: <span class="hljs-literal">null</span> | <span class="hljs-function">(<span class="hljs-params">((handle: mixed</span>) =></span> <span class="hljs-keyword">void</span>) &#x26; {<span class="hljs-attr">_stringRef</span>: ?string}),
 
-  // Input is the data coming into process this fiber. Arguments. Props.
-  pendingProps: any, // This type will be more specific once we overload the tag.
-  memoizedProps: any, // The props used to create the output.
+  <span class="hljs-comment">// Input is the data coming into process this fiber. Arguments. Props.</span>
+  pendingProps: any, <span class="hljs-comment">// This type will be more specific once we overload the tag.</span>
+  memoizedProps: any, <span class="hljs-comment">// The props used to create the output.</span>
 
-  // A queue of state updates and callbacks.
-  updateQueue: UpdateQueue | null,
+  <span class="hljs-comment">// A queue of state updates and callbacks.</span>
+  updateQueue: UpdateQueue | <span class="hljs-literal">null</span>,
 
-  // The state used to create the output
+  <span class="hljs-comment">// The state used to create the output</span>
   memoizedState: any,
 
-  // Bitfield that describes properties about the fiber and its subtree. E.g.
-  // the AsyncUpdates flag indicates whether the subtree should be async-by-
-  // default. When a fiber is created, it inherits the internalContextTag of its
-  // parent. Additional flags can be set at creation time, but after than the
-  // value should remain unchanged throughout the fiber's lifetime, particularly
-  // before its child fibers are created.
+  <span class="hljs-comment">// Bitfield that describes properties about the fiber and its subtree. E.g.</span>
+  <span class="hljs-comment">// the AsyncUpdates flag indicates whether the subtree should be async-by-</span>
+  <span class="hljs-comment">// default. When a fiber is created, it inherits the internalContextTag of its</span>
+  <span class="hljs-comment">// parent. Additional flags can be set at creation time, but after than the</span>
+  <span class="hljs-comment">// value should remain unchanged throughout the fiber's lifetime, particularly</span>
+  <span class="hljs-comment">// before its child fibers are created.</span>
   internalContextTag: TypeOfInternalContext,
 
-  // Effect
+  <span class="hljs-comment">// Effect</span>
   effectTag: TypeOfSideEffect,
 
-  // Singly linked list fast path to the next fiber with side-effects.
-  nextEffect: Fiber | null,
+  <span class="hljs-comment">// Singly linked list fast path to the next fiber with side-effects.</span>
+  nextEffect: Fiber | <span class="hljs-literal">null</span>,
 
-  // The first and last fiber with side-effect within this subtree. This allows
-  // us to reuse a slice of the linked list when we reuse the work done within
-  // this fiber.
-  firstEffect: Fiber | null,
-  lastEffect: Fiber | null,
+  <span class="hljs-comment">// The first and last fiber with side-effect within this subtree. This allows</span>
+  <span class="hljs-comment">// us to reuse a slice of the linked list when we reuse the work done within</span>
+  <span class="hljs-comment">// this fiber.</span>
+  firstEffect: Fiber | <span class="hljs-literal">null</span>,
+  <span class="hljs-attr">lastEffect</span>: Fiber | <span class="hljs-literal">null</span>,
 
-  // This will be used to quickly determine if a subtree has no pending changes.
+  <span class="hljs-comment">// This will be used to quickly determine if a subtree has no pending changes.</span>
   pendingWorkPriority: PriorityLevel,
 
-  // This value represents the priority level that was last used to process this
-  // component. This indicates whether it is better to continue from the
-  // progressed work or if it is better to continue from the current state.
+  <span class="hljs-comment">// This value represents the priority level that was last used to process this</span>
+  <span class="hljs-comment">// component. This indicates whether it is better to continue from the</span>
+  <span class="hljs-comment">// progressed work or if it is better to continue from the current state.</span>
   progressedPriority: PriorityLevel,
 
-  // If work bails out on a Fiber that already had some work started at a lower
-  // priority, then we need to store the progressed work somewhere. This holds
-  // the started child set until we need to get back to working on it. It may
-  // or may not be the same as the "current" child.
-  progressedChild: Fiber | null,
+  <span class="hljs-comment">// If work bails out on a Fiber that already had some work started at a lower</span>
+  <span class="hljs-comment">// priority, then we need to store the progressed work somewhere. This holds</span>
+  <span class="hljs-comment">// the started child set until we need to get back to working on it. It may</span>
+  <span class="hljs-comment">// or may not be the same as the "current" child.</span>
+  progressedChild: Fiber | <span class="hljs-literal">null</span>,
 
-  // When we reconcile children onto progressedChild it is possible that we have
-  // to delete some child fibers. We need to keep track of this side-effects so
-  // that if we continue later on, we have to include those effects. Deletions
-  // are added in the reverse order from sibling pointers.
-  progressedFirstDeletion: Fiber | null,
-  progressedLastDeletion: Fiber | null,
+  <span class="hljs-comment">// When we reconcile children onto progressedChild it is possible that we have</span>
+  <span class="hljs-comment">// to delete some child fibers. We need to keep track of this side-effects so</span>
+  <span class="hljs-comment">// that if we continue later on, we have to include those effects. Deletions</span>
+  <span class="hljs-comment">// are added in the reverse order from sibling pointers.</span>
+  progressedFirstDeletion: Fiber | <span class="hljs-literal">null</span>,
+  <span class="hljs-attr">progressedLastDeletion</span>: Fiber | <span class="hljs-literal">null</span>,
 
-  // This is a pooled version of a Fiber. Every fiber that gets updated will
-  // eventually have a pair. There are cases when we can clean up pairs to save
-  // memory if we need to.
-  alternate: Fiber | null,
+  <span class="hljs-comment">// This is a pooled version of a Fiber. Every fiber that gets updated will</span>
+  <span class="hljs-comment">// eventually have a pair. There are cases when we can clean up pairs to save</span>
+  <span class="hljs-comment">// memory if we need to.</span>
+  alternate: Fiber | <span class="hljs-literal">null</span>,
 
-  // Conceptual aliases
-  // workInProgress : Fiber ->  alternate The alternate used for reuse happens
-  // to be the same as work in progress.
-};
-</code></pre>
+  <span class="hljs-comment">// Conceptual aliases</span>
+  <span class="hljs-comment">// workInProgress : Fiber ->  alternate The alternate used for reuse happens</span>
+  <span class="hljs-comment">// to be the same as work in progress.</span>
+};</code></pre>
 <p><a id="orgab66cc2"></a></p>
 ]]></description><link>http://makersden.io/blog/look-inside-fiber/</link><guid isPermaLink="true">http://makersden.io/blog/look-inside-fiber/</guid><dc:creator><![CDATA[Korneliusz Caputa]]></dc:creator><pubDate>Fri, 07 Jul 2017 15:00:00 GMT</pubDate></item></channel></rss>
