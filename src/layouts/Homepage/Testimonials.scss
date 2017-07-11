@@ -20,11 +20,11 @@
   .testimonial {
     $size: 10rem;
     min-height: $size;
-    margin: $size 0;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
+    margin: $size / 2 0;
 
     h4 {
       display: block;
@@ -41,8 +41,6 @@
     }
 
     @include media('<=desktop') {
-      margin: $size / 2 0;
-
       h4 {
         font-size: 1.5rem;
         line-height: 1.5;

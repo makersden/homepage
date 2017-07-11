@@ -120,7 +120,7 @@ class Homepage extends Component {
               Software development by Veterans
             </h1>
             <h2>
-              Let our veterans guide you.
+              Let us guide you.
             </h2>
           </section>
           <section id="team" ref={setRefById}>
@@ -141,10 +141,10 @@ class Homepage extends Component {
               We have successfully launched over 50 projects into space.
             </h2>
             <p>
-              Each of us is a freelance professional with a passion for creating products. Because of that, our full-stack experience doesn't come solely from customer work. We also set in motion creations of our own.
+              Each of us is a professional experienced in flying solo as well as parts of large teams. We've worked with high-profile brands as well as budding startups and our prototypes have travelled the globe with big expos.
             </p>
             <p>
-              We feel comfortable experimenting, but have a trusty set of tools we all know well and apply expertly.
+              We like to experiment with new technologies, but what counts for us the most is doing the best job possible. Because of that we have a baseline set of tools which we use and which we know back to back.
             </p>
             <Technologies />
           </section>
