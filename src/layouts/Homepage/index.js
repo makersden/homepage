@@ -97,7 +97,8 @@ class Homepage extends Component {
   shouldUpdateScroll = (prevRouterProps, { location: { hash }}) => {
     const target = hash.slice(1);
     const immediate = !prevRouterProps || prevRouterProps.location.pathname  !== '/';
-    if (shouldScroll(target)) {
+    const updateScroll = shouldScroll(target);
+    if (updateScroll) {
       this.smoothScrollTo(target, immediate);
     }
 

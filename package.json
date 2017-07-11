@@ -1,5 +1,5 @@
 {
-  "name": "makers-den-homepage",
+  "name": "makers-den",
   "homepage": "http://makersden.io/",
   "twitter": "makers_den",
   "repository": "https://github.com/makersden/homepage",
@@ -146,6 +146,7 @@
     "whatwg-fetch": "^0.11.0"
   },
   "dependencies": {
+    "rc-progress": "^2.2.1",
     "react-disqus-comments": "^1.0.3",
     "react-ga": "^2.1.2",
     "smoothscroll": "^0.3.0"

@@ -152,9 +152,12 @@ Let's go through the 4 responsibilities.
    map, nothing fancy. One perhaps slightly interesting thing about it is that
    it maps from public facing instances to internal methods. Example:
     
-        get: function(key) {
-          return key._reactInternalInstance;
-        },
+```javascript
+get: function(key) {
+  return key._reactInternalInstance;
+},
+```
+
 ### 2. Ask the `Scheduler` about the priority level for this fiber.
    There is a `Scheduler` method called `getPriorityContext` that provides a
    suitable priority level for a fiber update. For all intents and purposes,
@@ -270,44 +273,46 @@ since we're deep enough and they would take **a lot** of space to describe.
 In short, what happens here depends on the work-in-progress fiber type, and is
 handled by a big `switch` statement:
 
-    switch (workInProgress.tag) {
-      case IndeterminateComponent:
-        return mountIndeterminateComponent(
-          current,
-          workInProgress,
-          priorityLevel,
-        );
-      case FunctionalComponent:
-        return updateFunctionalComponent(current, workInProgress);
-      case ClassComponent:
-        return updateClassComponent(current, workInProgress, priorityLevel);
-      case HostRoot:
-        return updateHostRoot(current, workInProgress, priorityLevel);
-      case HostComponent:
-        return updateHostComponent(current, workInProgress);
-      case HostText:
-        return updateHostText(current, workInProgress);
-      case CoroutineHandlerPhase:
-        // This is a restart. Reset the tag to the initial phase.
-        workInProgress.tag = CoroutineComponent;
-      // Intentionally fall through since this is now the same.
-      case CoroutineComponent:
-        return updateCoroutineComponent(current, workInProgress);
-      case YieldComponent:
-        // A yield component is just a placeholder, we can just run through the
-        // next one immediately.
-        return null;
-      case HostPortal:
-        return updatePortalComponent(current, workInProgress);
-      case Fragment:
-        return updateFragment(current, workInProgress);
-      default:
-        invariant(
-          false,
-          'Unknown unit of work tag. This error is likely caused by a bug in ' +
-            'React. Please file an issue.',
-        );
-    }
+```javascript
+switch (workInProgress.tag) {
+  case IndeterminateComponent:
+    return mountIndeterminateComponent(
+      current,
+      workInProgress,
+      priorityLevel,
+    );
+  case FunctionalComponent:
+    return updateFunctionalComponent(current, workInProgress);
+  case ClassComponent:
+    return updateClassComponent(current, workInProgress, priorityLevel);
+  case HostRoot:
+    return updateHostRoot(current, workInProgress, priorityLevel);
+  case HostComponent:
+    return updateHostComponent(current, workInProgress);
+  case HostText:
+    return updateHostText(current, workInProgress);
+  case CoroutineHandlerPhase:
+    // This is a restart. Reset the tag to the initial phase.
+    workInProgress.tag = CoroutineComponent;
+  // Intentionally fall through since this is now the same.
+  case CoroutineComponent:
+    return updateCoroutineComponent(current, workInProgress);
+  case YieldComponent:
+    // A yield component is just a placeholder, we can just run through the
+    // next one immediately.
+    return null;
+  case HostPortal:
+    return updatePortalComponent(current, workInProgress);
+  case Fragment:
+    return updateFragment(current, workInProgress);
+  default:
+    invariant(
+      false,
+      'Unknown unit of work tag. This error is likely caused by a bug in ' +
+        'React. Please file an issue.',
+    );
+}
+```
 
 The following, however, is crucial:
 
@@ -482,15 +487,17 @@ out of context.
 
 An `Update` looks like this:
 
-    type Update = {
-      priorityLevel: PriorityLevel,
-      partialState: PartialState<any, any>,
-      callback: Callback | null,
-      isReplace: boolean,
-      isForced: boolean,
-      isTopLevelUnmount: boolean,
-      next: Update | null,
-    };
+```javascript
+type Update = {
+  priorityLevel: PriorityLevel,
+  partialState: PartialState<any, any>,
+  callback: Callback | null,
+  isReplace: boolean,
+  isForced: boolean,
+  isTopLevelUnmount: boolean,
+  next: Update | null,
+};
+```
 
 Where `PartialState` is what you pass into `setState`: either an object or a
 `(prevState, props) => partialState` function.
@@ -502,12 +509,14 @@ Where `PartialState` is what you pass into `setState`: either an object or a
 
 A fiber's update queue looks like this:
 
-    export type UpdateQueue = {
-      first: Update | null,
-      last: Update | null,
-      hasForceUpdate: boolean,
-      callbackList: null | Array<Callback>,
-    };
+```javascript
+export type UpdateQueue = {
+  first: Update | null,
+  last: Update | null,
+  hasForceUpdate: boolean,
+  callbackList: null | Array<Callback>,
+};
+```
 
 The `callbackList` holds the `callback` values you passed in to
 `setState(stateUpdater, [callback])`, if any.
@@ -516,16 +525,17 @@ The `callbackList` holds the `callback` values you passed in to
 <a id="orgdd96006"></a>
 
 ### Priority levels
+```javascript
+type PriorityLevel = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 
-    type PriorityLevel = 0 | 1 | 2 | 3 | 4 | 5 | 6;
-    
-    NoWork: 0, // No work is pending.
-    SynchronousPriority: 1, // For controlled text inputs. Synchronous side-effects.
-    TaskPriority: 2, // Completes at the end of the current tick.
-    AnimationPriority: 3, // Needs to complete before the next frame.
-    HighPriority: 4, // Interaction that needs to complete pretty soon to feel responsive.
-    LowPriority: 5, // Data fetching, or result from updating stores.
-    OffscreenPriority: 6, // Won't be visible but do the work in case it becomes visible.
+NoWork: 0, // No work is pending.
+SynchronousPriority: 1, // For controlled text inputs. Synchronous side-effects.
+TaskPriority: 2, // Completes at the end of the current tick.
+AnimationPriority: 3, // Needs to complete before the next frame.
+HighPriority: 4, // Interaction that needs to complete pretty soon to feel responsive.
+LowPriority: 5, // Data fetching, or result from updating stores.
+OffscreenPriority: 6, // Won't be visible but do the work in case it becomes visible.
+```
 
 When Fiber schedules work, `SynchronousWork` is scheduled immediately on the UI
 thread, `AnimationPriority` is scheduled with `requestAnimationFrame` and the
@@ -540,17 +550,19 @@ The code always checks for that priority level separately.
 
 ### Side effect tags (types of side effects)
 
-    type TypeOfSideEffect = number
-    
-    NoEffect: 0, //           0b0000000
-    Placement: 1, //          0b0000001
-    Update: 2, //             0b0000010
-    PlacementAndUpdate: 3, // 0b0000011
-    Deletion: 4, //           0b0000100
-    ContentReset: 8, //       0b0001000
-    Callback: 16, //          0b0010000
-    Err: 32, //               0b0100000
-    Ref: 64, //               0b1000000
+```javascript
+type TypeOfSideEffect = number
+
+NoEffect: 0, //           0b0000000
+Placement: 1, //          0b0000001
+Update: 2, //             0b0000010
+PlacementAndUpdate: 3, // 0b0000011
+Deletion: 4, //           0b0000100
+ContentReset: 8, //       0b0001000
+Callback: 16, //          0b0010000
+Err: 32, //               0b0100000
+Ref: 64, //               0b1000000
+```
 
 Having the tags defined like this allows using the binary operations in a handy
 way. (I mean adding new tags by `effectTag |= Placement`, removing them
@@ -567,99 +579,101 @@ representing the basic unit of work related to a React component.
 The data structure like this (I'm leaving most of Facebook's comments as
 they're very good):
 
-    type Fiber = {
-      // These fields conceptually belong to an instance of the component
-      // this fiber is related to.
-    
-      // Tag identifying the type of fiber.
-      tag: TypeOfWork,
-    
-      // Unique identifier of this child.
-      key: null | string,
-    
-      // The function/class/module associated with this fiber.
-      type: any,
-    
-      // The local state associated with this fiber.
-      stateNode: any,
-    
-      // Remaining fields belong to Fiber
-    
-      // The Fiber to return to after finishing processing this one.
-      // This is effectively the parent, but there can be multiple parents (two)
-      // so this is only the parent of the thing we're currently processing.
-      // It is conceptually the same as the return address of a stack frame.
-      return: Fiber | null,
-    
-      // Singly Linked List Tree Structure.
-      child: Fiber | null,
-      sibling: Fiber | null,
-      index: number,
-    
-      // The ref last used to attach this node.
-      // I'll avoid adding an owner field for prod and model that as functions.
-      ref: null | (((handle: mixed) => void) & {_stringRef: ?string}),
-    
-      // Input is the data coming into process this fiber. Arguments. Props.
-      pendingProps: any, // This type will be more specific once we overload the tag.
-      memoizedProps: any, // The props used to create the output.
-    
-      // A queue of state updates and callbacks.
-      updateQueue: UpdateQueue | null,
-    
-      // The state used to create the output
-      memoizedState: any,
-    
-      // Bitfield that describes properties about the fiber and its subtree. E.g.
-      // the AsyncUpdates flag indicates whether the subtree should be async-by-
-      // default. When a fiber is created, it inherits the internalContextTag of its
-      // parent. Additional flags can be set at creation time, but after than the
-      // value should remain unchanged throughout the fiber's lifetime, particularly
-      // before its child fibers are created.
-      internalContextTag: TypeOfInternalContext,
-    
-      // Effect
-      effectTag: TypeOfSideEffect,
-    
-      // Singly linked list fast path to the next fiber with side-effects.
-      nextEffect: Fiber | null,
-    
-      // The first and last fiber with side-effect within this subtree. This allows
-      // us to reuse a slice of the linked list when we reuse the work done within
-      // this fiber.
-      firstEffect: Fiber | null,
-      lastEffect: Fiber | null,
-    
-      // This will be used to quickly determine if a subtree has no pending changes.
-      pendingWorkPriority: PriorityLevel,
-    
-      // This value represents the priority level that was last used to process this
-      // component. This indicates whether it is better to continue from the
-      // progressed work or if it is better to continue from the current state.
-      progressedPriority: PriorityLevel,
-    
-      // If work bails out on a Fiber that already had some work started at a lower
-      // priority, then we need to store the progressed work somewhere. This holds
-      // the started child set until we need to get back to working on it. It may
-      // or may not be the same as the "current" child.
-      progressedChild: Fiber | null,
-    
-      // When we reconcile children onto progressedChild it is possible that we have
-      // to delete some child fibers. We need to keep track of this side-effects so
-      // that if we continue later on, we have to include those effects. Deletions
-      // are added in the reverse order from sibling pointers.
-      progressedFirstDeletion: Fiber | null,
-      progressedLastDeletion: Fiber | null,
-    
-      // This is a pooled version of a Fiber. Every fiber that gets updated will
-      // eventually have a pair. There are cases when we can clean up pairs to save
-      // memory if we need to.
-      alternate: Fiber | null,
-    
-      // Conceptual aliases
-      // workInProgress : Fiber ->  alternate The alternate used for reuse happens
-      // to be the same as work in progress.
-    };
+```javascript
+type Fiber = {
+  // These fields conceptually belong to an instance of the component
+  // this fiber is related to.
+
+  // Tag identifying the type of fiber.
+  tag: TypeOfWork,
+
+  // Unique identifier of this child.
+  key: null | string,
+
+  // The function/class/module associated with this fiber.
+  type: any,
+
+  // The local state associated with this fiber.
+  stateNode: any,
+
+  // Remaining fields belong to Fiber
+
+  // The Fiber to return to after finishing processing this one.
+  // This is effectively the parent, but there can be multiple parents (two)
+  // so this is only the parent of the thing we're currently processing.
+  // It is conceptually the same as the return address of a stack frame.
+  return: Fiber | null,
+
+  // Singly Linked List Tree Structure.
+  child: Fiber | null,
+  sibling: Fiber | null,
+  index: number,
+
+  // The ref last used to attach this node.
+  // I'll avoid adding an owner field for prod and model that as functions.
+  ref: null | (((handle: mixed) => void) & {_stringRef: ?string}),
+
+  // Input is the data coming into process this fiber. Arguments. Props.
+  pendingProps: any, // This type will be more specific once we overload the tag.
+  memoizedProps: any, // The props used to create the output.
+
+  // A queue of state updates and callbacks.
+  updateQueue: UpdateQueue | null,
+
+  // The state used to create the output
+  memoizedState: any,
+
+  // Bitfield that describes properties about the fiber and its subtree. E.g.
+  // the AsyncUpdates flag indicates whether the subtree should be async-by-
+  // default. When a fiber is created, it inherits the internalContextTag of its
+  // parent. Additional flags can be set at creation time, but after than the
+  // value should remain unchanged throughout the fiber's lifetime, particularly
+  // before its child fibers are created.
+  internalContextTag: TypeOfInternalContext,
+
+  // Effect
+  effectTag: TypeOfSideEffect,
+
+  // Singly linked list fast path to the next fiber with side-effects.
+  nextEffect: Fiber | null,
+
+  // The first and last fiber with side-effect within this subtree. This allows
+  // us to reuse a slice of the linked list when we reuse the work done within
+  // this fiber.
+  firstEffect: Fiber | null,
+  lastEffect: Fiber | null,
+
+  // This will be used to quickly determine if a subtree has no pending changes.
+  pendingWorkPriority: PriorityLevel,
+
+  // This value represents the priority level that was last used to process this
+  // component. This indicates whether it is better to continue from the
+  // progressed work or if it is better to continue from the current state.
+  progressedPriority: PriorityLevel,
+
+  // If work bails out on a Fiber that already had some work started at a lower
+  // priority, then we need to store the progressed work somewhere. This holds
+  // the started child set until we need to get back to working on it. It may
+  // or may not be the same as the "current" child.
+  progressedChild: Fiber | null,
+
+  // When we reconcile children onto progressedChild it is possible that we have
+  // to delete some child fibers. We need to keep track of this side-effects so
+  // that if we continue later on, we have to include those effects. Deletions
+  // are added in the reverse order from sibling pointers.
+  progressedFirstDeletion: Fiber | null,
+  progressedLastDeletion: Fiber | null,
+
+  // This is a pooled version of a Fiber. Every fiber that gets updated will
+  // eventually have a pair. There are cases when we can clean up pairs to save
+  // memory if we need to.
+  alternate: Fiber | null,
+
+  // Conceptual aliases
+  // workInProgress : Fiber ->  alternate The alternate used for reuse happens
+  // to be the same as work in progress.
+};
+```
 
 
 <a id="orgab66cc2"></a>

@@ -5,6 +5,14 @@ import Page from '../Page';
 
 import styles from './index.scss';
 
+const setOverflow = (overflow) => {
+  const html = document.querySelector('html');
+  const body = document.body;
+
+  html.style.overflow = overflow;
+  body.style.overflow = overflow;
+}
+
 class Post extends Component {
   static propTypes = {
     head: PropTypes.object.isRequired,
@@ -12,6 +20,11 @@ class Post extends Component {
 
   componentDidMount() {
     this.main.focus();
+    setOverflow('auto');
+  }
+
+  componentWillUnmount() {
+    setOverflow('hidden');
   }
 
   render() {
@@ -20,8 +33,6 @@ class Post extends Component {
     // it's up to you to choose what to do with this layout ;)
     const pageDate = props.head.date ? new Date(props.head.date) : null;
     const author = props.head.author;
-
-    console.log(props.head.title.replace(/\s/g, ''));
 
     return (
       <main className={styles.main} tabIndex={-1} ref={e => this.main = e}>
@@ -37,13 +48,11 @@ class Post extends Component {
               </header>
             }
           />
-          <section>
-            <ReactDisqusComments
-              shortname="makersden-io"
-              identifier={`123-456-7890`}
-              category_id="123"
-            />
-          </section>
+          <ReactDisqusComments
+            shortname='makersden-io'
+            title={props.head.title}
+            identifier={props.head.title.replace(/\s/g, '') + pageDate}
+          />
         </article>
       </main>
     );
