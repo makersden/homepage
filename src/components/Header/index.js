@@ -26,7 +26,7 @@ const Header = ({ location: { hash, pathname } }, { metadata: { pkg } }) => {
   return (
     <nav className={styles.nav}>
       {hashLink('team', 'Our Team')}
-      {hashLink('honors', 'Our Honors')}
+      {hashLink('work', 'Our Work')}
       <Link to="/#home" className={cx('homeLink', 'navLink', { active: isHome })}>
         Makers' Den
       </Link>

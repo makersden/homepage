@@ -117,10 +117,10 @@ class Homepage extends Component {
               <img src={rocket} className={styles.rocket} />
             </section>
             <h1>
-              Software development by Veterans
+              Software development<br/>by Veterans
             </h1>
             <h2>
-              Let us guide you.
+              We'll guide you.
             </h2>
           </section>
           <section id="team" ref={setRefById}>
@@ -132,13 +132,13 @@ class Homepage extends Component {
               </section>
               <Teammates />
               <p className={styles.teamValues}>
-                We believe in using <strong>the right tools</strong>, <strong>consistent shipping</strong> of <strong>quality results</strong> and <strong>crystal clear communication</strong> to get the job done. We put <strong>laser focus on project success</strong>. We are fast and hungry learners, <strong>never discouraged by the unknown</strong>.
+                We believe in using <strong>the right tools</strong>, <strong>consistent shipping</strong> of <strong>quality results</strong> and <strong>crystal clear communication</strong> to get the job done. We put <strong>laser focus on project success</strong>. We thrive <strong>on the unknown</strong>.
               </p>
             </section>
           </section>
           <section id="work"  ref={setRefById}>
             <h2 className={styles.workHeader}>
-              We have successfully launched over 50 projects into space.
+              We have successfully launched over 50 projects
             </h2>
             <p>
               We are experienced in flying solo as well as supporting large teams.
