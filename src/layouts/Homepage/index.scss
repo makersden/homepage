@@ -5,6 +5,18 @@
 
 $segment-size: calc(100vh - #{$home-size} - #{2 * $home-offset}});
 
+
+%accentLink {
+  color: $accent-color;
+  font-weight: 400;
+  transition: text-shadow 0.3s, color 0.3s;
+
+  &:hover {
+    color: white;
+    text-shadow: 0 0 1rem $accent-color;
+  }
+}
+
 .homepage {
   position: absolute;
   padding: 1rem;
@@ -72,6 +84,13 @@ $segment-size: calc(100vh - #{$home-size} - #{2 * $home-offset}});
 
   strong {
     font-weight: 400;
+  }
+}
+
+.blogLink {
+  text-align: center;
+  a {
+    @extend %accentLink;
   }
 }
 
@@ -143,13 +162,7 @@ footer {
 
 .contact {
   a {
-    color: $accent-color;
-    transition: color 0.3s;
-    font-weight: 400;
-
-    &:hover {
-      color: white;
-    }
+    @extend %accentLink;
   }
 
   .planet {

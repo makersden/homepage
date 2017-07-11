@@ -146,7 +146,12 @@ class Homepage extends Component {
               We've worked with high-profile brands as well as budding startups and our prototypes have travelled the globe alongside prominent expos.
             </p>
             <p>
-              As passionate technologists, we like to experiment with new technologies. However <strong>what we value the most is your success</strong>. That's why focus on a core set of tools which we know back to back.
+              We love what we do, hence we are driven to experiment and embrace new technologies.
+              However <strong>what we value the most is your success</strong>.
+              That's why focus on a core set of tools which we know back to back.
+            </p>
+            <p className={styles.blogLink}>
+              <Link to="/blog">We share our insights and discoveries on our blog.</Link>
             </p>
             <Technologies />
           </section>
