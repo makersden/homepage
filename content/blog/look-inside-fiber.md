@@ -13,11 +13,11 @@ tags:
   - architecture
 ---
 
-As we all know by now, a big change is coming inside of React. ~~with version 0.16.
+As we all know by now, a big change is coming inside of React. ~~with version 16.
 It's a significant one, because it will affect the performance of more complex
 React applications.~~
 
-*(EDIT: As Dan Abramov pointed out in his comment, even though 0.16 will be
+*(EDIT: As Dan Abramov pointed out in his comment, even though 16 will be
 running on Fiber, it will run in synchronous mode, mimicking the "traditional" 
 approach to rendering. This will not confer any changes in application behavior or
 performance. The async Fiber APIs will be exposed in some ways but will not be
