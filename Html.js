@@ -3,6 +3,10 @@ import Helmet from "react-helmet";
 import { ServerStyleSheet, injectGlobal } from "styled-components";
 
 injectGlobal`
+  * {
+    box-sizing: border-box;
+  }
+
   html {
     font-size: 62.5%;
   }

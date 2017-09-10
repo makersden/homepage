@@ -1,15 +1,23 @@
 import React from "react";
 import { createContainer } from "@phenomic/preset-react-app/lib/client";
+import styled from "styled-components";
 
 import Header from "../components/Header";
+import { color } from "../theme";
 
-const Layout = (props, context) => {
+/* const Layout = styled.div`
+ *   background: radial-gradient(ellipse at bottom, ${color('backgroundLight')} 0%, ${color('backgroundDark')} 100%);
+ * `
+ * */
+const Layout = styled.div`background: ${color("backgroundDark")};`;
+
+const MainLayout = (props, context) => {
   return (
-    <div>
+    <Layout>
       <Header location={props.location} />
       {props.children}
-    </div>
+    </Layout>
   );
 };
 
-export default createContainer(Layout);
+export default createContainer(MainLayout);

@@ -6,14 +6,16 @@ import get from "lodash/fp/get";
 import Header from "../components/Header";
 
 const Segment = styled.div`
-  min-height: calc(100vh - 7rem);
+  min-height: calc(100vh - 4.8rem);
   display: flex;
   flex-direction: column;
+  padding: 2.4rem;
 `;
 
 const Hero = styled(Segment)`
   align-items: center;
   justify-content: center;
+  text-align: center;
 `;
 
 const Title = styled.h1`
@@ -27,7 +29,6 @@ const Subtitle = styled.span`
 `;
 
 const Container = styled.div`
-  background: ${get("theme.colors.backgroundDark")};
   position: relative;
   font-family: ${get("theme.font.primary")};
   color: ${get("theme.colors.text")};

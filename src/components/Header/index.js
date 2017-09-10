@@ -2,57 +2,82 @@ import React, { PropTypes } from "react";
 import Link from "@phenomic/plugin-renderer-react/lib/components/Link";
 import styled from "styled-components";
 import Svg from "react-svg-inline";
-import get from "lodash/fp/get";
 
-const activeClassName = btoa(Math.random());
+import { color, font } from "../../theme";
 
-const NavLink = styled(Link).attrs({
+const activeClassName = "nav-active";
+
+const StyledLink = styled(Link)`
+  font-family: ${font("primary")};
+  font-size: 2rem;
+  text-decoration: none;
+  &:not(:last-child) {
+    margin-right: 2.4rem;
+  }
+`;
+
+const NavLink = styled(StyledLink).attrs({
   activeClassName
 })`
-  color: #111;
-
+  color: ${color("textDark")};
   &.${activeClassName} {
     color: red;
   }
-
-  ${props =>
-    props.active &&
-    `
-    color: red;
-  `}
 `;
 
-const _hashLink = currentHash => (id, text) => {
-  return (
-    <NavLink active={id === currentHash} to={`/#${id}`}>
-      {text}
-    </NavLink>
-  );
-};
+const HashLink = styled(NavLink)`
+  &.${activeClassName} {
+    color: ${props => (props.active ? "red" : props.theme.colors.textDark)};
+  }
+`;
 
-const link = (to, text) => {
-  return <NavLink to={to}>{text}</NavLink>;
-};
+const BrandLink = styled(HashLink)`
+  font-size: 4.8rem;
+  letter-spacing: -0.16rem;
+  font-family: ${font("brand")};
+`;
 
-const Nav = styled.nav`
+const StyledHeader = styled.header`
   height: calc(7rem - 2px);
-  background-color: ${get("theme.colors.text")};
-  border-bottom: 2px solid #eee;
+  background-color: ${color("text")};
+  border-bottom: 2px solid #e5e5e5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2.4rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: calc(100vw - 4.8rem);
+  box-shadow: 0 0px 1rem 1rem rgba(255, 255, 255, 0.2);
+  z-index: 1;
 `;
 
 const Header = props => {
   const { location: { hash, pathname } } = props;
   const hashName = hash.slice(1);
-  const hashLink = _hashLink(hashName);
   const isHome = pathname === "/" && (!hashName || hashName === "home");
+  const isActive = target => hashName === target;
   return (
-    <Nav>
-      {hashLink("home", "Makers' Den")}
-      {hashLink("team", "Our Team")}
-      {hashLink("work", "Our Work")}
-      {hashLink("contact", "Contact Us!")}
-      {link("blog", "Our Blog")}
-    </Nav>
+    <StyledHeader>
+      <nav>
+        <BrandLink active={isHome} to="#home">
+          Makers' Den
+        </BrandLink>
+      </nav>
+      <nav>
+        <HashLink active={isActive("team")} to="#team">
+          Team
+        </HashLink>
+        <HashLink active={isActive("work")} to="#work">
+          Work
+        </HashLink>
+        <HashLink active={isActive("contact")} to="#contact">
+          Contact
+        </HashLink>
+        <NavLink to="blog">Blog</NavLink>
+      </nav>
+    </StyledHeader>
   );
 };
 

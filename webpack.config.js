@@ -84,6 +84,11 @@ export default (config = {}) => {
         },
         {
           test: /\.css$/,
+          loader: "style-loader!css-loader?modules",
+          include: /flexboxgrid/
+        },
+        {
+          test: /\.css$/,
           // depending on your need, you might need to scope node_modules
           // for global CSS if you want to keep CSS Modules by default
           // for your own CSS. If so, uncomment the line below
