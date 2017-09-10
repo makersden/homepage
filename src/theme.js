@@ -5,7 +5,7 @@ const theme = {
     accent: `rgb(21, 169, 206)`,
     backgroundDark: `#090a0f`,
     backgroundLight: `#1b2735`,
-    text: "#f5f5f5",
+    text: "#f2f2f2",
     textDark: "#111"
   },
   font: {

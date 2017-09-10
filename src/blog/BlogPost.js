@@ -1,7 +1,6 @@
 import React from "react";
 
 const BlogPost = ({ isLoading, page }) => {
-  console.log(page);
   return (
     <div>
       {isLoading && "Loading..."}

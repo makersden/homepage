@@ -3,19 +3,26 @@ import styled from "styled-components";
 import Helmet from "react-helmet";
 import get from "lodash/fp/get";
 
-import Header from "../components/Header";
+import { color } from "../theme";
 
-const Segment = styled.div`
-  min-height: calc(100vh - 4.8rem);
+import Work from "./Work";
+
+const TransparentSegment = styled.div`
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  padding: 2.4rem;
+  padding: 8rem;
 `;
 
-const Hero = styled(Segment)`
+const HeroSegment = styled(TransparentSegment)`
   align-items: center;
   justify-content: center;
   text-align: center;
+`;
+
+const LightSegment = styled(TransparentSegment)`
+  background: ${color("text")};
+  color: ${color("textDark")};
 `;
 
 const Title = styled.h1`
@@ -37,10 +44,13 @@ const Container = styled.div`
 const Home = () => {
   return (
     <Container>
-      <Hero>
+      <HeroSegment id="home">
         <Title>Software Development by Veterans</Title>
         <Subtitle>We'll guide you.</Subtitle>
-      </Hero>
+      </HeroSegment>
+      <LightSegment id="work">
+        <Work />
+      </LightSegment>
     </Container>
   );
 };

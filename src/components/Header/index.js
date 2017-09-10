@@ -1,13 +1,14 @@
 import React, { PropTypes } from "react";
 import Link from "@phenomic/plugin-renderer-react/lib/components/Link";
-import styled from "styled-components";
-import Svg from "react-svg-inline";
+import styled, { css } from "styled-components";
+import MediaQuery from "react-responsive";
 
 import { color, font } from "../../theme";
 
 const activeClassName = "nav-active";
 
 const StyledLink = styled(Link)`
+  transition: color 200ms;
   font-family: ${font("primary")};
   font-size: 2rem;
   text-decoration: none;
@@ -21,20 +22,20 @@ const NavLink = styled(StyledLink).attrs({
 })`
   color: ${color("textDark")};
   &.${activeClassName} {
-    color: red;
+    color: ${color("accent")};
   }
 `;
 
-const HashLink = styled(NavLink)`
-  &.${activeClassName} {
-    color: ${props => (props.active ? "red" : props.theme.colors.textDark)};
-  }
+const HashLink = styled(StyledLink)`
+  color: ${color("textDark")};
+  ${props => props.active && css`color: ${color("accent")};`};
 `;
 
 const BrandLink = styled(HashLink)`
   font-size: 4.8rem;
   letter-spacing: -0.16rem;
   font-family: ${font("brand")};
+  margin-right: 2.4rem;
 `;
 
 const StyledHeader = styled.header`
@@ -44,11 +45,11 @@ const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 2.4rem;
+  padding: 0 4.8rem;
   position: fixed;
   top: 0;
   left: 0;
-  width: calc(100vw - 4.8rem);
+  width: calc(100vw);
   box-shadow: 0 0px 1rem 1rem rgba(255, 255, 255, 0.2);
   z-index: 1;
 `;
@@ -62,7 +63,12 @@ const Header = props => {
     <StyledHeader>
       <nav>
         <BrandLink active={isHome} to="#home">
-          Makers' Den
+          <MediaQuery component="span" query="(max-width: 530px)">
+            MD
+          </MediaQuery>
+          <MediaQuery component="span" query="(min-width: 531px)">
+            Makers' Den
+          </MediaQuery>
         </BrandLink>
       </nav>
       <nav>
