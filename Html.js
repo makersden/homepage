@@ -18,8 +18,10 @@ injectGlobal`
 `;
 
 const Html = ({ App, render }) => {
-  const { Main, State, Script, Style } = render(<App />);
+  console.log(App);
   const sheet = new ServerStyleSheet();
+  console.log(sheet.collectStyles(<App />));
+  const { Main, State, Script } = render(sheet.collectStyles(<App />));
   const helmet = Helmet.renderStatic();
 
   return (

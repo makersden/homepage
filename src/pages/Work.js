@@ -4,7 +4,7 @@ import Helmet from "react-helmet";
 
 import { color } from "../theme";
 import { smartUnderline } from "../mixins";
-/* import friday from "../../assets/images/cases/friday.jpg";*/
+import friday from "../../assets/images/cases/friday.jpg";
 
 const Container = styled.div``;
 
@@ -93,7 +93,7 @@ const Home = () => {
       </Summary>
       <Cases>
         <Case>
-          <CaseImage src="" alt="FRI:DAY" />
+          <CaseImage src={friday} alt="FRI:DAY" />
           <CaseDescription>
             <CaseName href="https://friday.de" target="blank">
               FRI:DAY
