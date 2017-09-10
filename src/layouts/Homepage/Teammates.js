@@ -3,6 +3,7 @@ import styles from './Teammates.scss';
 
 import kb from 'assets/images/kb.jpg';
 import kc from 'assets/images/kc.jpg';
+import ky from 'assets/images/ky.jpg';
 
 const mates = [{
     name: 'Carl-Petter Bertell',
@@ -12,6 +13,10 @@ const mates = [{
     name: 'Korneliusz Caputa',
     experience: 6,
     photo: kc,
+  }, {
+    name: 'Kimi Ylilammi',
+    experience: 6,
+    photo: ky,
   }];
 
 const Teammate = ({name, photo }) => (
