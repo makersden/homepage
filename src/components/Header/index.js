@@ -1,48 +1,58 @@
 import React, { PropTypes } from "react";
-import { Link } from "phenomic";
-import classnames from "classnames/bind";
+import Link from "@phenomic/plugin-renderer-react/lib/components/Link";
+import styled from "styled-components";
 import Svg from "react-svg-inline";
+import get from "lodash/fp/get";
 
-import styles from "./index.scss";
+const activeClassName = btoa(Math.random());
 
-const cx = classnames.bind(styles);
+const NavLink = styled(Link).attrs({
+  activeClassName
+})`
+  color: #111;
+
+  &.${activeClassName} {
+    color: red;
+  }
+
+  ${props =>
+    props.active &&
+    `
+    color: red;
+  `}
+`;
 
 const _hashLink = currentHash => (id, text) => {
   return (
-    <Link
-      to={`/#${id}`}
-      className={cx("navLink", { active: id === currentHash })}
-    >
+    <NavLink active={id === currentHash} to={`/#${id}`}>
       {text}
-    </Link>
+    </NavLink>
   );
 };
 
 const link = (to, text) => {
-  return (
-    <Link to={to} className={cx("navLink")} activeClassName={cx("active")}>
-      {text}
-    </Link>
-  );
+  return <NavLink to={to}>{text}</NavLink>;
 };
 
-const Header = ({ location: { hash, pathname } }, { metadata: { pkg } }) => {
+const Nav = styled.nav`
+  height: calc(7rem - 2px);
+  background-color: ${get("theme.colors.text")};
+  border-bottom: 2px solid #eee;
+`;
+
+const Header = props => {
+  const { location: { hash, pathname } } = props;
   const hashName = hash.slice(1);
   const hashLink = _hashLink(hashName);
   const isHome = pathname === "/" && (!hashName || hashName === "home");
   return (
-    <nav className={styles.nav}>
+    <Nav>
+      {hashLink("home", "Makers' Den")}
       {hashLink("team", "Our Team")}
       {hashLink("work", "Our Work")}
-      <Link
-        to="/#home"
-        className={cx("homeLink", "navLink", { active: isHome })}
-      >
-        Makers' Den
-      </Link>
       {hashLink("contact", "Contact Us!")}
       {link("blog", "Our Blog")}
-    </nav>
+    </Nav>
   );
 };
 
