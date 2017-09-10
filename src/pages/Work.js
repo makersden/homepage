@@ -47,6 +47,7 @@ const Case = styled.li`
   align-items: stretch;
   font-size: 2.4rem;
   font-weight: 300;
+  width: 100%;
 `;
 
 const CaseImage = styled.img`

@@ -74,7 +74,7 @@ module.exports = (config = {}) => {
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false } })
       ]),
-      isDev && new webpack.NoErrorsPlugin(),
+      isDev && new webpack.NoEmitOnErrorsPlugin(),
       !isStatic && new webpack.HotModuleReplacementPlugin()
     ].filter(item => item),
 
