@@ -1,29 +1,28 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes } from "react";
 
-import './reset.global.css';
-import './index.global.css';
-import './highlight.global.css';
+import "./reset.global.css";
+import "./index.global.css";
+import "./highlight.global.css";
 
-import Container from './components/Container';
-import DefaultHeadMeta from './components/DefaultHeadMeta';
-import Header from "./components/Header"
-import Content from './components/Content';
+import Container from "./components/Container";
+import DefaultHeadMeta from "./components/DefaultHeadMeta";
+import Header from "./components/Header";
+import Content from "./components/Content";
 // import Footer from "./components/Footer"
 
-const AppContainer = (props) => {
+const AppContainer = props => {
   return (
-  <Container params={props.params}>
-    <DefaultHeadMeta />
-    <Header location={props.location} />
-    <Content>
-      { props.children }
-    </Content>
-    {/* <Footer />*/}
-  </Container>
-) };
+    <Container params={props.params}>
+      <DefaultHeadMeta />
+      <Header location={props.location} />
+      <Content>{props.children}</Content>
+      {/* <Footer />*/}
+    </Container>
+  );
+};
 
 AppContainer.propTypes = {
-  children: PropTypes.node,
+  children: PropTypes.node
 };
 
 export default AppContainer;

@@ -3,21 +3,19 @@ import {
   createContainer,
   query,
   BodyRenderer
-} from '@phenomic/preset-react-app/lib/client';
+} from "@phenomic/preset-react-app/lib/client";
 
-import BlogPost from './BlogPost'
+import BlogPost from "./BlogPost";
 
-const BlogPostContainer = createContainer(
-  BlogPost,
-  props => {
-  console.log(props)
+const BlogPostContainer = createContainer(BlogPost, props => {
+  console.log(props);
 
-  return ({
+  return {
     page: query({
-      collection: 'posts',
+      collection: "posts",
       id: props.params.splat
     })
-  });
+  };
 });
 
 export default BlogPostContainer;

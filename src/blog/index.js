@@ -1,5 +1,3 @@
-import BlogPostContainer from './BlogPostContainer'
+import BlogPostContainer from "./BlogPostContainer";
 
-export {
-  BlogPostContainer as BlogPost
-}
+export { BlogPostContainer as BlogPost };

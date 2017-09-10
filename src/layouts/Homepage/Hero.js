@@ -1,12 +1,9 @@
-import React from 'react';
+import React from "react";
 
-import styles from './hero.scss';
+import styles from "./hero.scss";
 
 const Home = () => {
-   return (
-      <section id="home" className={styles.hero}>
-      </section>
-   );
- };
+  return <section id="home" className={styles.hero} />;
+};
 
 export default Home;

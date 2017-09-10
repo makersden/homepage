@@ -1,23 +1,22 @@
-import React from 'react';
+import React from "react";
 
 const BlogPost = ({ isLoading, page }) => {
-  console.log(page)
+  console.log(page);
   return (
     <div>
-      {isLoading && 'Loading...'}
+      {isLoading && "Loading..."}
       {!isLoading &&
-        page.node &&
+      page.node && (
         <article>
           <h1>{page.node.title}</h1>
           <BodyRenderer>{page.node.body}</BodyRenderer>
-        </article>}
+        </article>
+      )}
       <footer>
         <Link to="/">Go to home</Link>
       </footer>
     </div>
   );
-
-
-}
+};
 
 export default BlogPost;
