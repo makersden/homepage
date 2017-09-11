@@ -22,13 +22,13 @@ const NavLink = styled(StyledLink).attrs({
 })`
   color: ${color("textDark")};
   &.${activeClassName} {
-    color: ${color("accent")};
+    color: ${color("backgroundLight")};
   }
 `;
 
 const HashLink = styled(StyledLink)`
   color: ${color("textDark")};
-  ${props => props.active && css`color: ${color("accent")};`};
+  ${props => props.active && css`color: ${color("backgroundLight")};`};
 `;
 
 const BrandLink = styled(HashLink)`
