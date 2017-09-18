@@ -4,6 +4,7 @@ import Helmet from "react-helmet";
 import get from "lodash/fp/get";
 
 import { color } from "../theme";
+import Stars from "../stars";
 
 import Work from "./Work";
 
@@ -44,6 +45,7 @@ const Container = styled.div`
 const Home = () => {
   return (
     <Container>
+      <Stars />
       <HeroSegment id="home">
         <Title>Software Development by Veterans</Title>
         <Subtitle>We'll guide you.</Subtitle>

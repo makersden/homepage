@@ -1,6 +1,11 @@
 import React from "react";
 import Helmet from "react-helmet";
 import { ServerStyleSheet, injectGlobal } from "styled-components";
+/* import AirstreamEOT from './assets/fonts/Airstream.eot'
+ * import AirstreamTTF from './assets/fonts/Airstream.ttf'
+ * import AirstreamSVG from './assets/fonts/Airstream.svg'
+ * import AirstreamWOFF from './assets/fonts/Airstream.woff'
+ * import AirstreamWOFF2 from './assets/fonts/Airstream.woff2'*/
 
 injectGlobal`
   * {
@@ -33,9 +38,14 @@ const Html = ({ App, render }) => {
         {helmet.script.toComponent()}
         {helmet.noscript.toComponent()}
         {sheet.getStyleElement()}
+
         <link
           rel="stylesheet"
           href="https://cdn.rawgit.com/konpa/devicon/df6431e323547add1b4cf45992913f15286456d3/devicon.min.css"
+        />
+        <link
+          href="https://fonts.googleapis.com/css?family=Lato:200,300,400"
+          rel="stylesheet"
         />
       </head>
       <body {...helmet.bodyAttributes.toComponent()}>

@@ -40,8 +40,8 @@ const BrandLink = styled(HashLink)`
 
 const StyledHeader = styled.header`
   height: calc(7rem - 2px);
-  background-color: ${color("text")};
-  border-bottom: 2px solid #e5e5e5;
+  background-color: #fafafa;
+  border-bottom: 2px solid #f5f5f5;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -50,8 +50,9 @@ const StyledHeader = styled.header`
   top: 0;
   left: 0;
   width: calc(100vw);
-  box-shadow: 0 0px 1rem 1rem rgba(255, 255, 255, 0.2);
   z-index: 1;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
 `;
 
 const Header = props => {
