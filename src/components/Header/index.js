@@ -2,6 +2,12 @@ import React, { PropTypes } from "react";
 import Link from "@phenomic/plugin-renderer-react/lib/components/Link";
 import styled, { css } from "styled-components";
 import MediaQuery from "react-responsive";
+import Isvg from "react-inlinesvg";
+
+import LogoFull from "../../../assets/logoFull.svg";
+import LogoShort from "../../../assets/logoShort.svg";
+
+import { media } from "../../styles/mediaQueries";
 
 import { color, font } from "../../theme";
 
@@ -22,20 +28,22 @@ const NavLink = styled(StyledLink).attrs({
 })`
   color: ${color("textDark")};
   &.${activeClassName} {
-    color: ${color("backgroundLight")};
+    color: black;
   }
 `;
 
 const HashLink = styled(StyledLink)`
   color: ${color("textDark")};
-  ${props => props.active && css`color: ${color("backgroundLight")};`};
+  ${props => props.active && css`color: black;`};
 `;
 
 const BrandLink = styled(HashLink)`
-  font-size: 4.8rem;
   letter-spacing: -0.16rem;
-  font-family: ${font("brand")};
   margin-right: 2.4rem;
+
+  svg {
+    height: 4.8rem;
+  }
 `;
 
 const StyledHeader = styled.header`
@@ -53,6 +61,10 @@ const StyledHeader = styled.header`
   z-index: 1;
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
+
+  ${media.phoneL`
+    padding: 0 2.4rem;
+  `};
 `;
 
 const Header = props => {
@@ -65,10 +77,10 @@ const Header = props => {
       <nav>
         <BrandLink active={isHome} to="#home">
           <MediaQuery component="span" query="(max-width: 530px)">
-            MD
+            <Isvg src={LogoShort} />
           </MediaQuery>
           <MediaQuery component="span" query="(min-width: 531px)">
-            Makers' Den
+            <Isvg src={LogoFull} />
           </MediaQuery>
         </BrandLink>
       </nav>

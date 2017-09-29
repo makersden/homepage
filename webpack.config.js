@@ -40,16 +40,6 @@ module.exports = (config = {}) => {
     module: {
       noParse: /\.min\.js/,
       rules: [
-        {
-          test: /\.js$/,
-          exclude: /node_modules/,
-          loader: require.resolve("babel-loader"),
-          options: {
-            babelrc: false,
-            presets: [require.resolve("@phenomic/babel-preset")],
-            plugins: [require.resolve("react-hot-loader/babel")]
-          }
-        },
         // "file" loader makes sure those assets get served by WebpackDevServer.
         // When you `import` an asset, you get its (virtual) filename.
         // In production, they would get copied to the `build` folder.
@@ -60,11 +50,49 @@ module.exports = (config = {}) => {
           // it's runtime that would otherwise processed through "file" loader.
           // Also exclude `html` and `json` extensions so they get processed
           // by webpacks internal loaders.
-          exclude: [/\.js$/, /\.html$/, /\.json$/],
+          exclude: [/\.js$/, /\.html$/, /\.json$/, /.svg$/],
           loader: require.resolve("file-loader"),
           options: {
             name: "static/media/[name].[hash:8].[ext]"
           }
+        },
+        {
+          test: /\.js$/,
+          exclude: /node_modules/,
+          loader: require.resolve("babel-loader"),
+          options: {
+            babelrc: false,
+            cacheDirectory: true,
+            presets: [require.resolve("@phenomic/babel-preset")],
+            plugins: [require.resolve("react-hot-loader/babel")]
+          }
+        },
+        {
+          test: /\.svg$/,
+          include: /assets/,
+          use: [
+            {
+              loader: "file-loader",
+              options: {
+                name: "static/media/[name].[hash:8].[ext]"
+              }
+            },
+            {
+              loader: require.resolve("svgo-loader"),
+              options: {
+                plugins: [
+                  {
+                    removeAttrs: { attrs: "(stroke|fill|fill-rule|font-size)" }
+                  },
+                  { convertColors: true },
+                  { convertPathData: true },
+                  { removeViewBox: true },
+                  { removeTitle: true },
+                  { removeEmptyAttrs: true }
+                ]
+              }
+            }
+          ]
         }
       ]
     },
