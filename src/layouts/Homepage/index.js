@@ -155,12 +155,12 @@ class Homepage extends Component {
             </p>
             <Technologies />
           </section>
-          <section id="honors" className={styles.testimonials} ref={setRefById}>
-            <h2 className={styles.testimonialsHeader}>
+          {/* <section id="honors" className={styles.testimonials} ref={setRefById}>
+              <h2 className={styles.testimonialsHeader}>
               But don't take just our word for it.
-            </h2>
-            <Testimonials />
-          </section>
+              </h2>
+              <Testimonials />
+              </section> */}
           <section id="contact" className={styles.contact} ref={setRefById}>
             <img src={planet} className={styles.planet} />
             <h2>
