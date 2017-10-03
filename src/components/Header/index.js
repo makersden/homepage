@@ -43,12 +43,13 @@ const BrandLink = styled(HashLink)`
 
   svg {
     height: 4.8rem;
+    fill: ${color("black")};
   }
 `;
 
 const StyledHeader = styled.header`
   height: calc(7rem - 2px);
-  background-color: #fafafa;
+  background-color: ${color("white")};
   border-bottom: 2px solid #f5f5f5;
   display: flex;
   justify-content: space-between;

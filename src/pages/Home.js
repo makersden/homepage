@@ -23,10 +23,14 @@ const HeroSegment = styled(TransparentSegment)`
   text-align: center;
 `;
 
-const ContactSegment = styled(HeroSegment)`min-height: 0;`;
+const ContactSegment = styled(HeroSegment)`
+  min-height: 0;
+  align-items: flex-start;
+  text-align: left;
+`;
 
 const LightSegment = styled(TransparentSegment)`
-  background: ${color("text")};
+  background: ${color("white")};
   color: ${color("textDark")};
 `;
 
@@ -82,7 +86,8 @@ const Home = () => {
       <ContactSegment id="home">
         <div>
           <StyledLogo src={LogoFull} />
-          <Address>Matternstraße 7, 10249 Berlin</Address>
+          <Address>Matternstr. 7</Address>
+          <Address>10249 Berlin</Address>
         </div>
       </ContactSegment>
     </Container>

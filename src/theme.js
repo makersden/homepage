@@ -2,6 +2,8 @@ import get from "lodash/fp/get";
 
 const theme = {
   colors: {
+    white: "#fafafa",
+    black: "#111",
     accent: `rgb(21, 169, 206)`,
     backgroundDark: `#090a0f`,
     backgroundLight: `#1b2735`,

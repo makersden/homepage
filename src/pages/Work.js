@@ -16,6 +16,7 @@ const Title = styled.h2`
   text-align: center;
   font-weight: 300;
   font-size: 4.8rem;
+  color: #111;
 `;
 
 const ListItem = styled.li``;
@@ -38,60 +39,28 @@ const Summary = styled.p`
   margin-bottom: 2.4rem;
 `;
 
-const Cases = styled.ul`
-  margin: 0;
-  list-style-type: none;
-  padding: 0;
+const Section = styled.section`
+  display: flex;
+  flex-direction: row;
+  :nth-child(2n + 1) {
+    flex-direction: row-reverse;
+  }
+
+  > * {
+    flex: 1;
+  }
 `;
 
-const CaseDescription = styled.div`
-  flex: 3;
-  padding-left: 4.8rem;
-  padding-bottom: 1.2rem;
+const Description = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
+  justify-content: space-around;
 `;
 
-const StyledCase = styled.li`
-  display: flex;
-  align-items: stretch;
+const Paragraph = styled.p`
   font-size: 2.4rem;
-  font-weight: 300;
-  width: 100%;
-  margin-top: 6rem;
-  &:nth-child(2n) {
-    flex-direction: row-reverse;
-    ${CaseDescription} {
-      padding-left: 0;
-      padding-right: 4.8rem;
-    }
-  }
-`;
-
-const CaseImage = styled.div`
-  flex: 2;
-
-  img {
-    max-height: 100%;
-    max-width: 100%;
-  }
-`;
-
-const CaseName = styled.a`
-  display: inline-block;
-  font-weight: 400;
-  font-size: 3.6rem;
-  margin: 0;
-  margin-bottom: 1.2rem;
+  font-weight: 500;
   color: ${color("textDark")};
-  ${props =>
-    smartUnderline({
-      background: props.theme.colors.text,
-      text: props.theme.colors.textDark,
-      selection: "transparent"
-    })};
 `;
 
 const Case = ({ technologies, image, name, link, children }) => (
@@ -113,70 +82,16 @@ const Home = () => {
   return (
     <Container>
       <Title>Our Work</Title>
-      <Summary>
-        We specialize in creating rich, modern Web applications. We care about{" "}
-        <strong>great UX</strong>, <strong>silky smooth performance</strong>,{" "}
-        <strong>efficient SEO</strong> and being{" "}
-        <strong>mobile-friendly</strong>.
-      </Summary>
-      <Summary>
-        Our key technologies are <strong>React</strong> and{" "}
-        <strong>Node.js</strong> in the <strong>AWS</strong> cloud. We are not
-        afraid of working on the <strong>JVM</strong> too.
-      </Summary>
-      <Cases>
-        <Case
-          name="FRI:DAY"
-          link="https://www.friday.de"
-          image={friday}
-          technologies={[
-            "amazonwebservices",
-            "javascript",
-            "typescript",
-            "react",
-            "sass",
-            "nodejs",
-            "babel",
-            "webpack",
-            "nginx"
-          ]}
-        >
-          <p>
-            An innovative car insurance solution rapidly taking over the German
-            market.
-          </p>
-          <p>
-            We helped create the mobile-friendly web application, sales funnel
-            and landing page. We established the cloud infrastructure.
-          </p>
-        </Case>
-        <Case
-          name="Tinki"
-          link="https://tinki.com/"
-          image={tinki}
-          technologies={[
-            "amazonwebservices",
-            "javascript",
-            "react",
-            "sass",
-            "nodejs",
-            "babel",
-            "webpack",
-            "nginx",
-            "postgres"
-          ]}
-        >
-          <p>
-            A fresh take on livening up the Finnish small job market. Connecting
-            private professional with customers.
-          </p>
-          <p>
-            We were responsible for full-stack development of the solution, from
-            architecture and infrastructure design, to backend and frontend
-            coding.
-          </p>
-        </Case>
-      </Cases>
+      <Section>
+        <div />
+        <Description>
+          <Paragraph standout>We engineer high quality services.</Paragraph>
+          <Paragraph>
+            Frontends, Backends, Data, Cloud. It's what we do.
+          </Paragraph>
+          <Paragraph>We like to use React, NodeJS, Scala and AWS.</Paragraph>
+        </Description>
+      </Section>
     </Container>
   );
 };
