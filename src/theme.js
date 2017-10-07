@@ -14,7 +14,6 @@ const theme = {
     // textDark: "#111",
   },
   font: {
-    brand: "Airstream, sans-serif",
     primary: "Lato, sans-serif"
   }
 };

@@ -90,10 +90,6 @@ module.exports = (config = {}) => {
               loader: require.resolve("svgo-loader"),
               options: {
                 plugins: [
-                  {
-                    removeAttrs: { attrs: "(stroke|fill|fill-rule|font-size)" }
-                  },
-                  { convertColors: true },
                   { convertPathData: true },
                   { removeViewBox: true },
                   { removeTitle: true },

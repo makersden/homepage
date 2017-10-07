@@ -7,6 +7,7 @@ import Isvg from "react-inlinesvg";
 import { color, font } from "../theme";
 import Stars from "../stars";
 import LogoFull from "../../assets/logoFull.svg";
+import FadeWithoutFont from "../FadeWithoutFont";
 
 import Work from "./Work";
 
@@ -72,18 +73,24 @@ const Address = styled.p`
   letter-spacing: -0.08rem;
 `;
 
+const segments = ["home", "work", "team", "contact"];
+
+const shouldScroll = url => segments.indexOf(url) !== -1;
+
 const Home = () => {
   return (
     <Container>
       <Stars />
-      <HeroSegment id="home">
-        <Title>Software Development by Veterans</Title>
-        <Subtitle>We'll guide you.</Subtitle>
-      </HeroSegment>
+      <FadeWithoutFont>
+        <HeroSegment id="home">
+          <Title>Software Development by Veterans</Title>
+          <Subtitle>We'll guide you.</Subtitle>
+        </HeroSegment>
+      </FadeWithoutFont>
       <LightSegment id="work">
         <Work />
       </LightSegment>
-      <ContactSegment id="home">
+      <ContactSegment id="contact">
         <div>
           <StyledLogo src={LogoFull} />
           <Address>Matternstr. 7</Address>

@@ -1,11 +1,20 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import Helmet from "react-helmet";
+import Image from "react-imageloader";
+import Isvg from "react-inlinesvg";
+import LazyLoad from "react-lazyload";
 
 import { mix } from "../polished";
 import { borderCorners, smartUnderline } from "../mixins";
 import { color } from "../theme";
 import TechStack from "../components/TechStack";
+import OnScreenDetect from "../OnScreenDetect";
+
+import epimap3d from "../../assets/images/epimap_3d.jpg";
+import pointmap from "../../assets/images/3d_pointmap.jpg";
+import diagram from "../../assets/images/Web App Reference Architecture.svg";
+import revenue from "../../assets/images/dark_dashboard.jpg";
 
 const Container = styled.div``;
 
@@ -15,7 +24,7 @@ const Title = styled.h2`
   text-align: center;
   font-weight: 300;
   font-size: 4.8rem;
-  color: #111;
+  color: ${color("black")};
 `;
 
 const ListItem = styled.li``;
@@ -25,6 +34,7 @@ const Description = styled.div`
   flex-direction: column;
   justify-content: center;
   max-width: 80rem;
+  flex: 1;
 `;
 
 const Section = styled.section`
@@ -49,16 +59,14 @@ const Section = styled.section`
     > * {
       :first-child {
         margin-left: 2.4rem;
+        margin-right: 0;
       }
 
       :last-child {
         margin-right: 2.4rem;
+        margin-left: 0;
       }
     }
-  }
-
-  > * {
-    flex: 1;
   }
 `;
 
@@ -73,8 +81,11 @@ const Paragraph = styled.p`
 const ImagePlaceholder = styled.div`
   max-width: ${props => props.width};
   height: ${props => props.height};
+  flex: 1;
 
-  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+
+  background: rgba(0, 0, 0, 0.05);
 `;
 
 const Quote = styled.blockquote`
@@ -114,11 +125,7 @@ const CallToAction = styled.a`
   text-align: center;
   text-decoration: none;
   align-self: center;
-
-  ${props =>
-    borderCorners({ color: "accent" })} transition: background-color 200ms,
-    border-color 200ms,
-    color 200ms,
+  transition: background-color 200ms, border-color 200ms, color 200ms,
     font-size 200ms;
 
   :hover {
@@ -127,14 +134,59 @@ const CallToAction = styled.a`
     font-size: 3.2rem;
     background-color: ${color("accent")};
   }
+
+  ${borderCorners({ color: "accent" })};
 `;
+
+const ResponsiveImage = styled(Image)`
+  transition: opacity 200ms;
+  max-width: 100%;
+  max-height: 100%;
+`;
+
+const ArchitectureSvg = styled(Isvg)`
+  width: 100%;
+  height: 56rem;
+
+  svg {
+    width: 100%;
+    height: 56rem;
+
+    // POC - elements should have IDs not to fall apart during the transition.
+    * {
+      transition: transform 1s;
+      transform: translateY(${props => (props.show ? "0rem" : "-100rem")});
+      :nth-child(2n + 1) {
+        transition-duration: 1.2s;
+      }
+    }
+  }
+`;
+
+const Crop = styled.div`
+  ${props =>
+    "width" in props &&
+    `
+    width: ${props.width};
+  `} ${props =>
+      "height" in props &&
+      `
+    height: ${props.height};
+  `} overflow: hidden;
+`;
+
+const renderArchitectureSvg = ({ isOnScreen }) => (
+  <ArchitectureSvg src={diagram} show={isOnScreen} />
+);
 
 const Home = () => {
   return (
     <Container>
       <Title>Our Work</Title>
       <Section>
-        <ImagePlaceholder width="100%" height="500px" />
+        <Crop width="50%">
+          <OnScreenDetect once render={renderArchitectureSvg} />
+        </Crop>
         <Description>
           <Paragraph standout>
             We engineer high quality services, back to back.
@@ -146,14 +198,18 @@ const Home = () => {
         </Description>
       </Section>
       <Section>
-        <ImagePlaceholder width="470px" height="760px" />
+        <Crop width="48rem">
+          <Image
+            src={epimap3d}
+            preloader={() => <ImagePlaceholder width="100%" height="76rem" />}
+          />
+        </Crop>
         <Description>
           <Paragraph align="right">
-            We created machine learning algorithms together with iHealth Finland
-            that forecast the spread of pathogens. Through our web based
-            interface, doctors and pharma companies can visualize at which time
-            and which parts of the country epidemics occur with a high
-            probability.
+            Together with iHealth Finland we created machine learning algorithms
+            forecasting the spread of pathogens. Using our web based interface,
+            doctors and pharma companies can see when and where in the country
+            epidemics are likely to occur.
           </Paragraph>
           <Quote>
             “They provided advice, UI design, frontend and backend code, cloud
@@ -170,7 +226,10 @@ const Home = () => {
         </Description>
       </Section>
       <Section>
-        <ImagePlaceholder width="470px" height="490px" />
+        <Image
+          src={pointmap}
+          preloader={() => <ImagePlaceholder width="47rem" height="49rem" />}
+        />
         <Description>
           <Quote>
             “Without big data analytics, companies are blind and deaf, wandering
@@ -186,11 +245,14 @@ const Home = () => {
         </Description>
       </Section>
       <Section>
-        <ImagePlaceholder width="550px" height="665px" />
+        <Image
+          src={revenue}
+          preloader={() => <ImagePlaceholder width="55rem" height="66rem" />}
+        />
         <Description>
-          <Paragraph align="center">What are your needs?</Paragraph>
+          <Paragraph align="center">What about you?</Paragraph>
           <CallToAction href="mailto:korneliusz@makersden.io">
-            <span>Let's make them real.</span>
+            <span>Let's talk.</span>
           </CallToAction>
         </Description>
       </Section>

@@ -113,4 +113,9 @@ const borderCorners = optionsInput => {
   `;
 };
 
-export { borderCorners, smartUnderline };
+const fade = css`
+  transition: opacity 300ms;
+  opacity: ${props => (props.show ? 1 : 0)};
+`;
+
+export { borderCorners, fade, smartUnderline };
