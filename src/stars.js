@@ -1,5 +1,6 @@
 import React from "react";
 import styled, { css, keyframes } from "styled-components";
+import { transparentize } from "polished";
 
 import { color } from "./theme";
 
@@ -84,10 +85,10 @@ const StarsBackground = styled.div`
   left: 0;
   right: 0;
   transition: background-color 0.3s;
-  background-color: radial-gradient(
-    ellipse at bottom,
-    ${color("backgroundLight")} 0%,
-    ${color("backgroundDark")} 100%
+  background: radial-gradient(
+    ellipse at 50% 250%,
+    ${props => transparentize(0.5, props.theme.colors.backgroundLight)} 0%,
+    transparent 100%
   );
 
   & ~ * {

@@ -14,7 +14,7 @@ const TransparentSegment = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  padding: 8rem;
+  padding: 4.8rem;
 `;
 
 const HeroSegment = styled(TransparentSegment)`
@@ -67,7 +67,7 @@ const StyledLogo = styled(Isvg)`
 const Address = styled.p`
   margin: 0;
   margin-top: 1.2rem;
-  font-weight: 200;
+  font-weight: 300;
   font-size: 2.4rem;
   letter-spacing: -0.08rem;
 `;

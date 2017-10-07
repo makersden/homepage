@@ -64,7 +64,16 @@ module.exports = (config = {}) => {
             babelrc: false,
             cacheDirectory: true,
             presets: [require.resolve("@phenomic/babel-preset")],
-            plugins: [require.resolve("react-hot-loader/babel")]
+            plugins: [
+              require.resolve("react-hot-loader/babel"),
+              [
+                require.resolve("babel-plugin-styled-components"),
+                {
+                  displayName: true,
+                  minify: false
+                }
+              ]
+            ]
           }
         },
         {

@@ -47,7 +47,7 @@ const Html = ({ App, render }) => {
           href="https://cdn.rawgit.com/konpa/devicon/df6431e323547add1b4cf45992913f15286456d3/devicon.min.css"
         />
         <link
-          href="https://fonts.googleapis.com/css?family=Lato:200,300,400"
+          href="https://fonts.googleapis.com/css?family=Lato:200,300,400,700"
           rel="stylesheet"
         />
       </head>

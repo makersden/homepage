@@ -5,10 +5,6 @@ import styled from "styled-components";
 import Header from "../components/Header";
 import { color } from "../theme";
 
-/* const Layout = styled.div`
- *   background: radial-gradient(ellipse at bottom, ${color('backgroundLight')} 0%, ${color('backgroundDark')} 100%);
- * `
- * */
 const Layout = styled.div`background: ${color("backgroundDark")};`;
 
 const MainLayout = (props, context) => {
