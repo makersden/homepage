@@ -3,6 +3,7 @@ import get from "lodash/fp/get";
 const theme = {
   colors: {
     white: "#fafafa",
+    whiteAlt: `#f1f4fa`,
     black: "#111",
     accent: `#4990e2`,
     backgroundDark: `#090a0f`,

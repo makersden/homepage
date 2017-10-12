@@ -9,7 +9,8 @@ import Stars from "../stars";
 import LogoFull from "../../assets/logoFull.svg";
 import FadeWithoutFont from "../FadeWithoutFont";
 
-import Work from "./Work";
+import Work from "../components/Work";
+import Team from "../components/Team";
 
 const TransparentSegment = styled.div`
   min-height: 100vh;
@@ -33,6 +34,9 @@ const ContactSegment = styled(HeroSegment)`
 const LightSegment = styled(TransparentSegment)`
   background: ${color("white")};
   color: ${color("textDark")};
+  :nth-child(2n) {
+    background: ${color("whiteAlt")};
+  }
 `;
 
 const Title = styled.h1`
@@ -89,6 +93,9 @@ const Home = () => {
       </FadeWithoutFont>
       <LightSegment id="work">
         <Work />
+      </LightSegment>
+      <LightSegment id="team">
+        <Team />
       </LightSegment>
       <ContactSegment id="contact">
         <div>

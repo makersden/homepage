@@ -88,6 +88,14 @@ const ImagePlaceholder = styled.div`
   background: rgba(0, 0, 0, 0.05);
 `;
 
+const StyledImage = styled(Image)`
+  max-width: 50%;
+  img {
+    width: 100%;
+    max-height: 100%;
+  }
+`;
+
 const Quote = styled.blockquote`
   margin-left: 0;
   font-size: 2.4rem;
@@ -146,11 +154,11 @@ const ResponsiveImage = styled(Image)`
 
 const ArchitectureSvg = styled(Isvg)`
   width: 100%;
-  height: 56rem;
+  height: auto;
 
   svg {
     width: 100%;
-    height: 56rem;
+    height: auto;
 
     // POC - elements should have IDs not to fall apart during the transition.
     * {
@@ -199,7 +207,7 @@ const Home = () => {
       </Section>
       <Section>
         <Crop width="48rem">
-          <Image
+          <StyledImage
             src={epimap3d}
             preloader={() => <ImagePlaceholder width="100%" height="76rem" />}
           />
@@ -226,7 +234,7 @@ const Home = () => {
         </Description>
       </Section>
       <Section>
-        <Image
+        <StyledImage
           src={pointmap}
           preloader={() => <ImagePlaceholder width="47rem" height="49rem" />}
         />
@@ -245,7 +253,7 @@ const Home = () => {
         </Description>
       </Section>
       <Section>
-        <Image
+        <StyledImage
           src={revenue}
           preloader={() => <ImagePlaceholder width="55rem" height="66rem" />}
         />
