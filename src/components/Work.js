@@ -18,7 +18,7 @@ import revenue from "../../assets/images/dark_dashboard.jpg";
 
 const Container = styled.div``;
 
-const Title = styled.h2`
+const Header = styled.h2`
   margin: 0;
   margin-bottom: 4.8rem;
   text-align: center;
@@ -190,7 +190,7 @@ const renderArchitectureSvg = ({ isOnScreen }) => (
 const Home = () => {
   return (
     <Container>
-      <Title>Our Work</Title>
+      <Header>Our Work</Header>
       <Section>
         <Crop width="50%">
           <OnScreenDetect once render={renderArchitectureSvg} />

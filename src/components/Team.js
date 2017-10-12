@@ -111,9 +111,11 @@ const ImagePlaceholder = styled.div`
   max-width: ${props => props.width};
   height: ${props => props.height};
   flex: 1;
-  border: 1px solid #979797;
-
-  border-radius: 1px;
+  ${props =>
+    props.border &&
+    `
+    border: 1px solid #979797;
+  `} border-radius: 1px;
 
   background: rgba(0, 0, 0, 0.05);
 `;
@@ -247,7 +249,7 @@ const Home = () => {
   return (
     <Container>
       <Section>
-        <ImagePlaceholder width="24rem" height="31rem" />
+        <ImagePlaceholder border width="24rem" height="31rem" />
         <Description>
           <Paragraph>
             <span>
@@ -274,7 +276,7 @@ const Home = () => {
         </Description>
       </Section>
       <Section>
-        <ImagePlaceholder width="32rem" height="44rem" />
+        <ImagePlaceholder border width="32rem" height="44rem" />
         <Description>
           <Paragraph>
             <span>
@@ -302,7 +304,7 @@ const Home = () => {
         </Description>
       </Section>
       <Section kimi>
-        <ImagePlaceholder width="13rem" height="51rem" />
+        <ImagePlaceholder border width="13rem" height="51rem" />
         <Description>
           <Paragraph>
             <span>

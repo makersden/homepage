@@ -11,6 +11,7 @@ import FadeWithoutFont from "../FadeWithoutFont";
 
 import Work from "../components/Work";
 import Team from "../components/Team";
+import Contact from "../components/Contact";
 
 const TransparentSegment = styled.div`
   min-height: 100vh;
@@ -25,7 +26,7 @@ const HeroSegment = styled(TransparentSegment)`
   text-align: center;
 `;
 
-const ContactSegment = styled(HeroSegment)`
+const Footer = styled(HeroSegment)`
   min-height: 0;
   align-items: flex-start;
   text-align: left;
@@ -34,9 +35,18 @@ const ContactSegment = styled(HeroSegment)`
 const LightSegment = styled(TransparentSegment)`
   background: ${color("white")};
   color: ${color("textDark")};
+  position: relative;
   :nth-child(2n) {
     background: ${color("whiteAlt")};
   }
+`;
+
+const ContactSegment = styled(LightSegment)`
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 80rem;
 `;
 
 const Title = styled.h1`
@@ -98,12 +108,15 @@ const Home = () => {
         <Team />
       </LightSegment>
       <ContactSegment id="contact">
+        <Contact />
+      </ContactSegment>
+      <Footer id="footer">
         <div>
           <StyledLogo src={LogoFull} />
           <Address>Matternstr. 7</Address>
           <Address>10249 Berlin</Address>
         </div>
-      </ContactSegment>
+      </Footer>
     </Container>
   );
 };
