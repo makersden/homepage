@@ -31,7 +31,7 @@ const TemplateWrapper = props => (
   <ThemeProvider theme={theme}>
     <Layout>
       <Helmet
-        title="Gatsby Default Starter"
+        title="Makers' Den"
         meta={[
           { name: "description", content: "Sample" },
           { name: "keywords", content: "sample, something" }

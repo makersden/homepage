@@ -198,6 +198,7 @@ const EpimapImage = styled(GracefulImage).attrs({
 })`
   min-height: 76rem;
   min-width: 64rem;
+  border-radius: 4px;
 `;
 
 const PointMapImage = styled(GracefulImage).attrs({
@@ -205,20 +206,29 @@ const PointMapImage = styled(GracefulImage).attrs({
 })`
   min-width: 77rem;
   min-height: 49rem;
+  border-radius: 4px;
 `;
 
+// TODO viewbox? native dimensions?
 const RevenueImage = styled(Isvg).attrs({
   src: revenue
 })`
+  flex: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
   svg {
-    min-width: 55rem;
-    min-height: 60rem;
+    width: 100%;
+    height: auto;
+    max-height: 30rem;
   }
 
   .axes {
-    stroke: ${color("black")};
+    stroke: ${color("backgroundDark")};
     fill: none;
-    stroke-width: 0.2;
+    stroke-width: 0.1;
   }
 
   .guide {
@@ -233,9 +243,11 @@ const RevenueImage = styled(Isvg).attrs({
   .chartline {
     fill: none;
     stroke: ${color("accent")};
-    animation: runchart 5s infinite;
+    animation: runchart 6s infinite;
     stroke-dasharray: 50;
-    stroke-width: 0.5;
+    stroke-width: 0.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
   }
 
   @keyframes runchart {
@@ -249,6 +261,7 @@ const RevenueImage = styled(Isvg).attrs({
     }
 
     to {
+      stroke-dashoffset: 0;
       opacity: 0;
     }
   }
@@ -273,7 +286,7 @@ const Home = () => {
         </Description>
       </Section>
       <Section>
-        <Crop width="48rem">
+        <Crop>
           <EpimapImage />
         </Crop>
         <Description>
@@ -298,7 +311,7 @@ const Home = () => {
         </Description>
       </Section>
       <Section>
-        <Crop width="60rem">
+        <Crop>
           <PointMapImage />
         </Crop>
         <Description>

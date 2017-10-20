@@ -5,7 +5,8 @@ import OnScreenDetect from "./OnScreenDetect";
 
 const Img = styled.img`
   opacity: ${props => (props.loaded ? "1" : "0")};
-  transition: opacity 400ms;
+  transform: translateY(${props => (props.loaded ? "0px" : "-20px")});
+  transition: opacity 800ms, transform 1000ms;
   ${props =>
     !props.loaded &&
     css`

@@ -19,15 +19,6 @@ const Container = styled.div`
   background-position-x: 100%;
 `;
 
-const BackgroundCover = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: ${transparentize(0.9, "white")};
-`;
-
 const Content = styled.div`
   position: absolute;
   top: 0;
@@ -72,9 +63,9 @@ const Header = styled.h2`
   color: ${color("black")};
 `;
 
+// TOOD video of berlin in background?
 const Contact = () => (
   <Container>
-    {/* <BackgroundCover /> */}
     <Content>
       <h2>Let's get in touch.</h2>
       <p>

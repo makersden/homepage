@@ -164,8 +164,4 @@ const Header = props => {
   );
 };
 
-Header.contextTypes = {
-  metadata: PropTypes.object.isRequired
-};
-
 export default Header;
