@@ -1,11 +1,6 @@
 import React from "react";
 import Helmet from "react-helmet";
 import { ServerStyleSheet, injectGlobal } from "styled-components";
-/* import AirstreamEOT from './assets/fonts/Airstream.eot'
- * import AirstreamTTF from './assets/fonts/Airstream.ttf'
- * import AirstreamSVG from './assets/fonts/Airstream.svg'
- * import AirstreamWOFF from './assets/fonts/Airstream.woff'
- * import AirstreamWOFF2 from './assets/fonts/Airstream.woff2'*/
 
 injectGlobal`
   * {
@@ -24,6 +19,7 @@ injectGlobal`
 
 const Html = ({ App, render }) => {
   const sheet = new ServerStyleSheet();
+  console.log(render(sheet.collectStyles(<App />)));
   const { Main, State, Script } = render(sheet.collectStyles(<App />));
   const helmet = Helmet.renderStatic();
 

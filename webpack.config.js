@@ -116,6 +116,7 @@ module.exports = (config = {}) => {
       extensions: [".web.js", ".js", ".json"],
       alias: {
         "react-native": "react-native-web",
+        "styled-components": "styled-components/lib",
 
         // to ensure a single module is used
         react: path.resolve(path.join(process.cwd(), "node_modules", "react")),

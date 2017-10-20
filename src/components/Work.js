@@ -10,6 +10,7 @@ import { borderCorners, smartUnderline } from "../mixins";
 import { color } from "../theme";
 import TechStack from "../components/TechStack";
 import OnScreenDetect from "../OnScreenDetect";
+import GracefulImage from "../GracefulImage";
 
 import epimap3d from "../../assets/images/epimap_3d.jpg";
 import pointmap from "../../assets/images/3d_pointmap.jpg";
@@ -160,12 +161,17 @@ const ArchitectureSvg = styled(Isvg)`
     width: 100%;
     height: auto;
 
-    // POC - elements should have IDs not to fall apart during the transition.
-    * {
+    .drop {
       transition: transform 1s;
       transform: translateY(${props => (props.show ? "0rem" : "-100rem")});
-      :nth-child(2n + 1) {
-        transition-duration: 1.2s;
+      ${Array.from({ length: 30 }).map(
+        (_, i) => css`
+          :nth-child(${i + 1}) {
+            transition-delay: ${i * 200}ms;
+          }
+        `
+      )} &.labels {
+        transition-delay: 300ms;
       }
     }
   }
@@ -207,7 +213,7 @@ const Home = () => {
       </Section>
       <Section>
         <Crop width="48rem">
-          <StyledImage
+          <GracefulImage
             src={epimap3d}
             preloader={() => <ImagePlaceholder width="100%" height="76rem" />}
           />
@@ -234,7 +240,7 @@ const Home = () => {
         </Description>
       </Section>
       <Section>
-        <StyledImage
+        <GracefulImage
           src={pointmap}
           preloader={() => <ImagePlaceholder width="47rem" height="49rem" />}
         />
@@ -253,7 +259,7 @@ const Home = () => {
         </Description>
       </Section>
       <Section>
-        <StyledImage
+        <GracefulImage
           src={revenue}
           preloader={() => <ImagePlaceholder width="55rem" height="66rem" />}
         />

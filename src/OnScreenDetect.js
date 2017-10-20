@@ -8,16 +8,13 @@ class OnScreenDetect extends PureComponent {
   };
 
   checkIsOnScreen = () => {
-    const { scrollY } = window;
     const { element } = this;
     const { once } = this.props;
-
-    const offsetTop =
-      element.offsetTop +
-      getOr(0, "offsetParent.offsetTop", element) -
-      element.offsetHeight;
-
-    const isOnScreen = scrollY >= offsetTop;
+    const rect = element.getBoundingClientRect();
+    const isOnScreen =
+      rect.top >= 0 &&
+      rect.bottom <=
+        0 + (window.innerHeight || document.documentElement.clientHeight);
 
     this.setState({
       isOnScreen
@@ -28,6 +25,7 @@ class OnScreenDetect extends PureComponent {
     }
   };
 
+  setPreviousScroll = () => this.setState({});
   onScroll = debounce(this.checkIsOnScreen, 100);
 
   componentDidMount() {
@@ -42,9 +40,13 @@ class OnScreenDetect extends PureComponent {
 
   render() {
     const { isOnScreen } = this.state;
-    const { render } = this.props;
+    const { render, children } = this.props;
 
-    return <div ref={e => (this.element = e)}>{render({ isOnScreen })}</div>;
+    return (
+      <div ref={e => (this.element = e)}>
+        {(render || children)({ isOnScreen })}
+      </div>
+    );
   }
 }
 

@@ -1,5 +1,5 @@
 import React, { PropTypes } from "react";
-import Link from "@phenomic/plugin-renderer-react/lib/components/Link";
+import Link from "gatsby-link";
 import styled, { css } from "styled-components";
 import MediaQuery from "react-responsive";
 import Isvg from "react-inlinesvg";
@@ -79,7 +79,11 @@ const NavLink = styled(StyledLink).attrs({
 
 const HashLink = styled(StyledLink)`
   color: ${color("textDark")};
-  ${props => props.active && css`color: black;`};
+  ${props =>
+    props.active &&
+    css`
+      color: black;
+    `};
 `;
 
 const BrandLink = styled(HashLink)`
@@ -119,7 +123,11 @@ const StyledHeader = styled.header`
   `};
 `;
 
-const GracefulSvg = styled(Isvg)`${fade} &.loaded {opacity: 1;}`;
+const GracefulSvg = styled(Isvg)`
+  ${fade} &.loaded {
+    opacity: 1;
+  }
+`;
 
 const Header = props => {
   const { location: { hash, pathname } } = props;

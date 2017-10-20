@@ -12,14 +12,11 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   position: absolute;
-`;
-
-const Background = styled(GracefulImage)`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  background: url(${berlin});
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position-x: 100%;
 `;
 
 const BackgroundCover = styled.div`
@@ -28,7 +25,7 @@ const BackgroundCover = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: ${transparentize(0.1, "white")};
+  background: ${transparentize(0.9, "white")};
 `;
 
 const Content = styled.div`
@@ -43,7 +40,10 @@ const Content = styled.div`
   align-items: center;
   justify-content: center;
 
+  color: ${color("white")};
+
   font-size: 3.2rem;
+  background-color: ${transparentize(0.1, "black")};
 `;
 
 const Link = styled.a`
@@ -74,11 +74,9 @@ const Header = styled.h2`
 
 const Contact = () => (
   <Container>
-    <Background src={berlin} />
-    <BackgroundCover />
-    <Header>Contact</Header>
+    {/* <BackgroundCover /> */}
     <Content>
-      <p>0049 123 456 789</p>
+      <h2>Let's get in touch.</h2>
       <p>
         <Link href="mailto:korneliusz@makersden.io">
           korneliusz@makersden.io
