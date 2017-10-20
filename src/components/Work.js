@@ -15,7 +15,7 @@ import GracefulImage from "../GracefulImage";
 import epimap3d from "../../assets/images/epimap_3d.jpg";
 import pointmap from "../../assets/images/3d_pointmap.jpg";
 import diagram from "../../assets/images/Web App Reference Architecture.svg";
-import revenue from "../../assets/images/dark_dashboard.jpg";
+import revenue from "../../assets/images/revenue.svg";
 
 const Container = styled.div``;
 
@@ -193,6 +193,67 @@ const renderArchitectureSvg = ({ isOnScreen }) => (
   <ArchitectureSvg src={diagram} show={isOnScreen} />
 );
 
+const EpimapImage = styled(GracefulImage).attrs({
+  src: epimap3d
+})`
+  min-height: 76rem;
+  min-width: 64rem;
+`;
+
+const PointMapImage = styled(GracefulImage).attrs({
+  src: pointmap
+})`
+  min-width: 77rem;
+  min-height: 49rem;
+`;
+
+const RevenueImage = styled(Isvg).attrs({
+  src: revenue
+})`
+  svg {
+    min-width: 55rem;
+    min-height: 60rem;
+  }
+
+  .axes {
+    stroke: ${color("black")};
+    fill: none;
+    stroke-width: 0.2;
+  }
+
+  .guide {
+    fill: none;
+    stroke: ${color("black")};
+    stroke-width: 0.2;
+    stroke-opacity: 0.2;
+    stroke-dasharray: 2;
+    stroke-dashoffset: 4;
+  }
+
+  .chartline {
+    fill: none;
+    stroke: ${color("accent")};
+    animation: runchart 5s infinite;
+    stroke-dasharray: 50;
+    stroke-width: 0.5;
+  }
+
+  @keyframes runchart {
+    from {
+      stroke-dashoffset: 50;
+    }
+
+    90% {
+      stroke-dashoffset: 0;
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0;
+    }
+  }
+`;
+
 const Home = () => {
   return (
     <Container>
@@ -213,10 +274,7 @@ const Home = () => {
       </Section>
       <Section>
         <Crop width="48rem">
-          <GracefulImage
-            src={epimap3d}
-            preloader={() => <ImagePlaceholder width="100%" height="76rem" />}
-          />
+          <EpimapImage />
         </Crop>
         <Description>
           <Paragraph align="right">
@@ -240,10 +298,9 @@ const Home = () => {
         </Description>
       </Section>
       <Section>
-        <GracefulImage
-          src={pointmap}
-          preloader={() => <ImagePlaceholder width="47rem" height="49rem" />}
-        />
+        <Crop width="60rem">
+          <PointMapImage />
+        </Crop>
         <Description>
           <Quote>
             “Without big data analytics, companies are blind and deaf, wandering
@@ -259,10 +316,7 @@ const Home = () => {
         </Description>
       </Section>
       <Section>
-        <GracefulImage
-          src={revenue}
-          preloader={() => <ImagePlaceholder width="55rem" height="66rem" />}
-        />
+        <RevenueImage />
         <Description>
           <Paragraph align="center">What about you?</Paragraph>
           <CallToAction href="mailto:korneliusz@makersden.io">

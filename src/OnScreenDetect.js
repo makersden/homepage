@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import debounce from "lodash/debounce";
+import throttle from "lodash/throttle";
 import getOr from "lodash/fp/getOr";
 
 class OnScreenDetect extends PureComponent {
@@ -11,10 +11,9 @@ class OnScreenDetect extends PureComponent {
     const { element } = this;
     const { once } = this.props;
     const rect = element.getBoundingClientRect();
-    const isOnScreen =
-      rect.top >= 0 &&
-      rect.bottom <=
-        0 + (window.innerHeight || document.documentElement.clientHeight);
+    const windowHeight =
+      window.innerHeight || document.documentElement.clientHeight;
+    const isOnScreen = rect.top >= 0 && rect.bottom <= windowHeight;
 
     this.setState({
       isOnScreen
@@ -25,13 +24,12 @@ class OnScreenDetect extends PureComponent {
     }
   };
 
-  setPreviousScroll = () => this.setState({});
-  onScroll = debounce(this.checkIsOnScreen, 100);
+  onScroll = throttle(this.checkIsOnScreen, 100);
 
   componentDidMount() {
-    this.checkIsOnScreen();
-
     window.addEventListener("scroll", this.onScroll);
+
+    this.checkIsOnScreen();
   }
 
   componentWillUnmount() {
