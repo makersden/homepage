@@ -66,6 +66,9 @@ const Title = styled.h1`
 const Subtitle = styled(Box)`
   font-size: 3.6rem;
   align-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
   span {
     display: block;
   }
@@ -113,8 +116,10 @@ const Home = () => {
           <Title>We are a software workshop.</Title>
           <StyledCogs />
           <Subtitle w={6 / 12} mx={4} px={4}>
-            <span>We solve hard problems</span>
-            <span>to realize amazing ideas.</span>
+            <div>
+              <span>We solve hard problems</span>
+              <span>to realize amazing ideas.</span>
+            </div>
           </Subtitle>
         </HeroSegment>
       </FadeWithoutFont>
