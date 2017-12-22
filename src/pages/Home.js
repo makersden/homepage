@@ -1,32 +1,37 @@
 import React from "react";
 import styled from "styled-components";
+import { Flex, Box } from "grid-styled";
+
 import Helmet from "react-helmet";
 import get from "lodash/fp/get";
 import Isvg from "react-inlinesvg";
 
 import { color, font } from "../theme";
-import Stars from "../stars";
 import LogoFull from "../../assets/logoFull.svg";
 import FadeWithoutFont from "../FadeWithoutFont";
 
 import Work from "../components/Work";
 import Team from "../components/Team";
 import Contact from "../components/Contact";
+import Cogs from "../components/Cogs";
 
 const TransparentSegment = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  padding: 4.8rem;
 `;
 
-const HeroSegment = styled(TransparentSegment)`
+const HeroSegment = styled(Box)`
+  height: calc(100vh - 192px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+const Footer = styled(TransparentSegment)`
   align-items: center;
   justify-content: center;
   text-align: center;
-`;
-
-const Footer = styled(HeroSegment)`
   min-height: 0;
   align-items: flex-start;
   text-align: left;
@@ -50,25 +55,27 @@ const ContactSegment = styled(LightSegment)`
 `;
 
 const Title = styled.h1`
-  font-weight: 300;
-  font-size: 4.2rem;
+  font-family: ${font("display")};
+  letter-spacing: 1px;
+  margin: 0;
+
+  font-size: 6.4rem;
+  font-weight: normal;
 `;
 
-const Subtitle = styled.span`
-  font-weight: 500;
+const Subtitle = styled(Box)`
   font-size: 3.6rem;
+  align-self: flex-end;
 `;
 
-const Container = styled.div`
-  position: relative;
-  font-family: ${get("theme.font.primary")};
+const Container = styled(Flex).attrs({ column: true })`
+  font-family: ${font("primary")};
   color: ${get("theme.colors.text")};
 `;
 
 const StyledLogo = styled(Isvg)`
   margin: 0;
   letter-spacing: -0.16rem;
-  font-family: ${font("brand")};
   color: ${color("text")};
   margin-bottom: 1.2rem;
   display: inline-block;
@@ -91,13 +98,20 @@ const segments = ["home", "work", "team", "contact"];
 
 const shouldScroll = url => segments.indexOf(url) !== -1;
 
+const StyledCogs = styled(Cogs)`
+  align-self: center;
+`;
+
 const Home = () => {
   return (
     <Container>
       <FadeWithoutFont>
-        <HeroSegment id="home">
-          <Title>Software Development by Veterans</Title>
-          <Subtitle>We'll guide you.</Subtitle>
+        <HeroSegment p={4} m={4} id="home">
+          <Title>We are a software workshop.</Title>
+          <StyledCogs />
+          <Subtitle w={1 / 4} pr={4} mr={4}>
+            We solve hard problems to realize amazing ideas.
+          </Subtitle>
         </HeroSegment>
       </FadeWithoutFont>
       <LightSegment id="work">

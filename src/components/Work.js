@@ -1,14 +1,11 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import Helmet from "react-helmet";
 import Image from "react-imageloader";
 import Isvg from "react-inlinesvg";
-import LazyLoad from "react-lazyload";
 
 import { mix } from "../polished";
-import { borderCorners, smartUnderline } from "../mixins";
+import { borderCorners } from "../mixins";
 import { color } from "../theme";
-import TechStack from "../components/TechStack";
 import OnScreenDetect from "../OnScreenDetect";
 import GracefulImage from "../GracefulImage";
 

@@ -11,13 +11,9 @@ import LogoShort from "../../../assets/logoShort.svg";
 import { media } from "../../styles/mediaQueries";
 import { transparentize } from "../../polished";
 import { fade } from "../../mixins";
-import { color, font } from "../../theme";
+import { color, duration, font } from "../../theme";
 import FadeWithoutFont from "../../FadeWithoutFont";
-
 const activeClassName = "nav-active";
-
-const fastDuration = "200ms";
-const slowDuration = "1s";
 
 const linkHighlight = css`
   position: relative;
@@ -32,7 +28,7 @@ const linkHighlight = css`
     z-index: -1;
 
     transform: translateX(${props => (props.active ? "100%" : "-100%")});
-    transition: transform ${fastDuration};
+    transition: transform ${duration("fast")};
   }
 
   ::before {
@@ -60,7 +56,7 @@ const linkHighlight = css`
 `;
 
 const StyledLink = styled(Link)`
-  transition: color ${props => (props.light ? slowDuration : fastDuration)};
+  transition: color ${props => duration(props.light ? "slow" : "fast")(props)};
   font-family: ${font("primary")};
   font-size: 2rem;
   text-decoration: none;
@@ -90,7 +86,7 @@ const BrandLink = styled(HashLink)`
   svg {
     height: 4.8rem;
     fill: ${props => color(props.light ? "white" : "black")(props)};
-    transition: fill ${props => (props.light ? slowDuration : fastDuration)};
+    transition: fill ${props => duration(props.light ? "slow" : "fast")(props)};
   }
 
   ::before,
@@ -100,15 +96,15 @@ const BrandLink = styled(HashLink)`
 `;
 
 const StyledHeader = styled.header`
-  transition: background 1s;
+  transition: background ${duration("slow")};
   height: calc(9rem - 2px);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 4.8rem;
+  padding: 0 3.2rem;
   top: 0;
   left: 0;
-  width: calc(100vw);
+  width: 100%;
   z-index: 1;
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
@@ -126,7 +122,7 @@ const StyledHeader = styled.header`
     props.sticky &&
     `
      position: fixed;
-     transition-duration: ${fastDuration};
+     transition-duration: ${duration("fast")};
   `} ${media.phoneL`
     padding: 0 2.4rem;
   `};
@@ -139,10 +135,6 @@ const GracefulSvg = styled(Isvg)`
 `;
 
 class Header extends PureComponent {
-  componentWillReceiveProps(nextProps) {
-    console.log({ nextProps });
-  }
-
   render() {
     const { location: { hash, pathname } } = this.props;
     const hashName = hash.slice(1);

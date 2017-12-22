@@ -19,10 +19,17 @@ const theme = {
   font: {
     primary: "Work Sans, sans-serif",
     display: "Womby, sans-serif"
+  },
+  duration: {
+    fast: "300ms",
+    slow: "1s"
   }
 };
 
-export const color = name => get(`theme.colors.${name}`);
-export const font = name => get(`theme.font.${name}`);
+const getter = setName => propName => get(`theme.${setName}.${propName}`);
+
+export const color = getter("colors");
+export const font = getter("font");
+export const duration = getter("duration");
 
 export default theme;

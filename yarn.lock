@@ -5298,6 +5298,10 @@ math-expression-evaluator@^1.2.14:
   version "1.2.17"
   resolved "https://registry.yarnpkg.com/math-expression-evaluator/-/math-expression-evaluator-1.2.17.tgz#de819fdbcd84dccd8fae59c6aeb79615b9d266ac"
 
+matter-js@^0.14.0:
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/matter-js/-/matter-js-0.14.0.tgz#413858ebb76613161579a0415cb9017ad4b5dcae"
+
 md5-file@^3.1.1:
   version "3.2.3"
   resolved "https://registry.yarnpkg.com/md5-file/-/md5-file-3.2.3.tgz#f9bceb941eca2214a4c0727f5e700314e770f06f"
