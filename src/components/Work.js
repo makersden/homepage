@@ -27,12 +27,18 @@ const Container = styled.div`
   background-size: 30%;
 `;
 
-const Content = styled(Flex)`
+const Curtain = styled.div`
   background: linear-gradient(
     180deg,
     ${color("backgroundDark")} 0%,
     rgba(0, 0, 0, 0) 18.23%
   );
+`;
+const Content = styled(Flex)`
+  max-width: 144rem;
+  margin: 0 auto;
+  padding-top: ${size(7)};
+  width: 100%;
 `;
 
 const Description = styled(Box)`
@@ -392,98 +398,101 @@ const RevenueImage = styled(Isvg).attrs({
 const Home = () => {
   return (
     <Container>
-      <Content column>
-        <ArchitectureSection w={10 / 12} p={4} m={4} ml={0}>
-          <Title>High quality services and apps</Title>
-          <Background />
-          <OnScreenDetect once render={renderArchitectureSvg} />
-          <Description w={6 / 12} p={4}>
-            <Paragraph>
-              Engineering stellar frontends and backends, weaponizing data,
-              managing the cloud.
-            </Paragraph>
-            <Paragraph>It's what we do best.</Paragraph>
-            <Paragraph>We excel at React, Node.js, Scala and AWS.</Paragraph>
-          </Description>
-        </ArchitectureSection>
-        <EpimapSection w={10 / 12} p={4} m={4}>
-          <Background />
-          <Title>Full-stack development</Title>
-          <SectionContent>
-            <Description w={7 / 12} p={4}>
+      <Curtain>
+        <Content column>
+          <ArchitectureSection w={10 / 12} p={4} m={4} ml={0}>
+            <Title>High quality services and apps</Title>
+            <Background />
+            <OnScreenDetect once render={renderArchitectureSvg} />
+            <Description w={6 / 12} p={4}>
               <Paragraph>
-                Together with iHealth Finland we created machine learning
-                algorithms forecasting the spread of pathogens. Using our web
-                based interface, doctors and pharma companies can see when and
-                where in the country epidemics are likely to occur.
+                Engineering stellar frontends and backends, weaponizing data,
+                managing the cloud.
+              </Paragraph>
+              <Paragraph>It's what we do best.</Paragraph>
+              <Paragraph>We excel at React, Node.js, Scala and AWS.</Paragraph>
+            </Description>
+          </ArchitectureSection>
+          <EpimapSection w={10 / 12} p={4} m={4}>
+            <Background />
+            <Title>Full-stack development</Title>
+            <SectionContent>
+              <Description w={7 / 12} p={4}>
+                <Paragraph>
+                  Together with iHealth Finland we created machine learning
+                  algorithms forecasting the spread of pathogens. Using our web
+                  based interface, doctors and pharma companies can see when and
+                  where in the country epidemics are likely to occur.
+                </Paragraph>
+                <Quote>
+                  “They provided advice, UI design, frontend and backend code,
+                  cloud infrastructure and data analysis algorithms. All on
+                  time, very communicative and flexible with adjusting features
+                  as the project went along. It’s reassuring to know your
+                  product is in the hands of real professionals. Impeccable work
+                  - I can recommend them without hesitation.”
+                </Quote>
+                <Author>
+                  <span>Dr. Otto Helve</span>
+                  <span>
+                    CEO of iHealth Finland and board member of Duodecim Oy.
+                  </span>
+                </Author>
+              </Description>
+              <EpimapImage />
+            </SectionContent>
+          </EpimapSection>
+          <MissionreadySection w={11 / 12} p={4} m="0 auto">
+            <Background />
+            <MissionreadyImage />
+            <Title>Rock-solid technical expertise</Title>
+            <Description w={6 / 12} p={4}>
+              <Paragraph>
+                Missionready trusts us to make sure their platform is
+                production-ready in terms of performance and scalability.
               </Paragraph>
               <Quote>
-                “They provided advice, UI design, frontend and backend code,
-                cloud infrastructure and data analysis algorithms. All on time,
-                very communicative and flexible with adjusting features as the
-                project went along. It’s reassuring to know your product is in
-                the hands of real professionals. Impeccable work - I can
-                recommend them without hesitation.”
+                “Makers’ Den helped us evaluate our current platform and find
+                the bottlenecks for scale. Thanks to thorough analysis and
+                actionable advice from the team, we feel confident in the
+                platform and our ability to grow without limits.”
               </Quote>
               <Author>
-                <span>Dr. Otto Helve</span>
-                <span>
-                  CEO of iHealth Finland and board member of Duodecim Oy.
-                </span>
+                <span>Aki Ranin</span>
+                <span>CEO of Missionready</span>
               </Author>
             </Description>
-            <EpimapImage />
-          </SectionContent>
-        </EpimapSection>
-        <MissionreadySection w={11 / 12} p={4} m="0 auto">
-          <Background />
-          <MissionreadyImage />
-          <Title>Rock-solid technical expertise</Title>
-          <Description w={6 / 12} p={4}>
-            <Paragraph>
-              Missionready trusts us to make sure their platform is
-              production-ready in terms of performance and scalability.
-            </Paragraph>
-            <Quote>
-              “Makers’ Den helped us evaluate our current platform and find the
-              bottlenecks for scale. Thanks to thorough analysis and actionable
-              advice from the team, we feel confident in the platform and our
-              ability to grow without limits.”
-            </Quote>
-            <Author>
-              <span>Aki Ranin</span>
-              <span>CEO of Missionready</span>
-            </Author>
-          </Description>
-        </MissionreadySection>
-        <Section mt={4} pt={4} style={{ marginTop: size(7) }}>
-          <Crop>
-            <PointMapImage />
-          </Crop>
-          <Description>
-            <Quote>
-              “Without big data analytics, companies are blind and deaf,
-              wandering out onto the web like deer on a freeway.”
-            </Quote>
-            <Author>
-              <span>Geoffrey Moore</span>
-            </Author>
-            <Paragraph>
-              We help our clients harvest relevant data from their services and
-              unlock its potential through intuitively visualized insights.
-            </Paragraph>
-          </Description>
-        </Section>
-        <Section>
-          <RevenueImage />
-          <Description>
-            <Paragraph align="center">What about you?</Paragraph>
-            <CallToAction href="mailto:korneliusz@makersden.io">
-              <span>Let's talk.</span>
-            </CallToAction>
-          </Description>
-        </Section>
-      </Content>
+          </MissionreadySection>
+          <Section mt={4} pt={4} style={{ marginTop: size(7) }}>
+            <Crop>
+              <PointMapImage />
+            </Crop>
+            <Description>
+              <Quote>
+                “Without big data analytics, companies are blind and deaf,
+                wandering out onto the web like deer on a freeway.”
+              </Quote>
+              <Author>
+                <span>Geoffrey Moore</span>
+              </Author>
+              <Paragraph>
+                We help our clients harvest relevant data from their services
+                and unlock its potential through intuitively visualized
+                insights.
+              </Paragraph>
+            </Description>
+          </Section>
+          <Section>
+            <RevenueImage />
+            <Description>
+              <Paragraph align="center">What about you?</Paragraph>
+              <CallToAction href="mailto:korneliusz@makersden.io">
+                <span>Let's talk.</span>
+              </CallToAction>
+            </Description>
+          </Section>
+        </Content>
+      </Curtain>
     </Container>
   );
 };
