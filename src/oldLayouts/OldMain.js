@@ -5,7 +5,9 @@ import styled from "styled-components";
 import Header from "../components/Header";
 import { color } from "../theme";
 
-const Layout = styled.div`background: ${color("backgroundDark")};`;
+const Layout = styled.div`
+  background: ${color("backgroundDark")};
+`;
 let lastHash;
 
 function scrollToAnchor() {

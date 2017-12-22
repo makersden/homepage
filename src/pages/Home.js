@@ -94,7 +94,6 @@ const shouldScroll = url => segments.indexOf(url) !== -1;
 const Home = () => {
   return (
     <Container>
-      <Stars />
       <FadeWithoutFont>
         <HeroSegment id="home">
           <Title>Software Development by Veterans</Title>

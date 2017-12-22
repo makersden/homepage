@@ -1,4 +1,4 @@
-import React, { PropTypes } from "react";
+import React, { PureComponent, PropTypes } from "react";
 import Link from "gatsby-link";
 import styled, { css } from "styled-components";
 import MediaQuery from "react-responsive";
@@ -129,39 +129,46 @@ const GracefulSvg = styled(Isvg)`
   }
 `;
 
-const Header = props => {
-  const { location: { hash, pathname } } = props;
-  const hashName = hash.slice(1);
-  const isHome = pathname === "/" && (!hashName || hashName === "home");
-  const isActive = target => hashName === target;
-  return (
-    <StyledHeader>
-      <nav>
-        <BrandLink active={isHome} to="#home">
-          <MediaQuery component="span" query="(max-width: 530px)">
-            <GracefulSvg src={LogoShort} />
-          </MediaQuery>
-          <MediaQuery component="span" query="(min-width: 531px)">
-            <GracefulSvg src={LogoFull} />
-          </MediaQuery>
-        </BrandLink>
-      </nav>
-      <FadeWithoutFont>
+class Header extends PureComponent {
+  componentWillReceiveProps(nextProps) {
+    console.log({ nextProps });
+  }
+
+  render() {
+    const { location: { hash, pathname } } = this.props;
+    const hashName = hash.slice(1);
+    const isHome = pathname === "/" && (!hashName || hashName === "home");
+    const isActive = target => hashName === target;
+
+    return (
+      <StyledHeader>
         <nav>
-          <HashLink active={isActive("team")} to="#team">
-            Team
-          </HashLink>
-          <HashLink active={isActive("work")} to="#work">
-            Work
-          </HashLink>
-          <HashLink active={isActive("contact")} to="#contact">
-            Contact
-          </HashLink>
-          <NavLink to="blog">Blog</NavLink>
+          <BrandLink active={isHome} to="#home">
+            <MediaQuery component="span" query="(max-width: 530px)">
+              <GracefulSvg src={LogoShort} />
+            </MediaQuery>
+            <MediaQuery component="span" query="(min-width: 531px)">
+              <GracefulSvg src={LogoFull} />
+            </MediaQuery>
+          </BrandLink>
         </nav>
-      </FadeWithoutFont>
-    </StyledHeader>
-  );
-};
+        <FadeWithoutFont>
+          <nav>
+            <HashLink active={isActive("team")} to="#team">
+              Team
+            </HashLink>
+            <HashLink active={isActive("work")} to="#work">
+              Work
+            </HashLink>
+            <HashLink active={isActive("contact")} to="#contact">
+              Contact
+            </HashLink>
+            <NavLink to="blog">Blog</NavLink>
+          </nav>
+        </FadeWithoutFont>
+      </StyledHeader>
+    );
+  }
+}
 
 export default Header;
