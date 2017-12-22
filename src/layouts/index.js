@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Link from "gatsby-link";
 import Helmet from "react-helmet";
 import styled, { injectGlobal, ThemeProvider } from "styled-components";
+import { StickyContainer } from "react-sticky";
 
 import Header from "../components/Header";
 
@@ -37,8 +38,10 @@ const TemplateWrapper = props => (
           { name: "keywords", content: "sample, something" }
         ]}
       />
-      <Header {...props} />
-      {props.children()}
+      <StickyContainer>
+        <Header {...props} />
+        {props.children()}
+      </StickyContainer>
     </Layout>
   </ThemeProvider>
 );

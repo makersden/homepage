@@ -3,6 +3,7 @@ import Link from "gatsby-link";
 import styled, { css } from "styled-components";
 import MediaQuery from "react-responsive";
 import Isvg from "react-inlinesvg";
+import { Sticky } from "react-sticky";
 
 import LogoFull from "../../../assets/logoFull.svg";
 import LogoShort from "../../../assets/logoShort.svg";
@@ -14,6 +15,9 @@ import { color, font } from "../../theme";
 import FadeWithoutFont from "../../FadeWithoutFont";
 
 const activeClassName = "nav-active";
+
+const fastDuration = "200ms";
+const slowDuration = "1s";
 
 const linkHighlight = css`
   position: relative;
@@ -28,7 +32,7 @@ const linkHighlight = css`
     z-index: -1;
 
     transform: translateX(${props => (props.active ? "100%" : "-100%")});
-    transition: transform 200ms;
+    transition: transform ${fastDuration};
   }
 
   ::before {
@@ -56,7 +60,7 @@ const linkHighlight = css`
 `;
 
 const StyledLink = styled(Link)`
-  transition: color 200ms;
+  transition: color ${props => (props.light ? slowDuration : fastDuration)};
   font-family: ${font("primary")};
   font-size: 2rem;
   text-decoration: none;
@@ -71,19 +75,11 @@ const StyledLink = styled(Link)`
 const NavLink = styled(StyledLink).attrs({
   activeClassName
 })`
-  color: ${color("textDark")};
-  &.${activeClassName} {
-    color: black;
-  }
+  color: ${props => color(props.light ? "white" : "textDark")(props)};
 `;
 
 const HashLink = styled(StyledLink)`
-  color: ${color("textDark")};
-  ${props =>
-    props.active &&
-    css`
-      color: black;
-    `};
+  color: ${props => color(props.light ? "white" : "textDark")(props)};
 `;
 
 const BrandLink = styled(HashLink)`
@@ -93,7 +89,8 @@ const BrandLink = styled(HashLink)`
 
   svg {
     height: 4.8rem;
-    fill: ${color("black")};
+    fill: ${props => color(props.light ? "white" : "black")(props)};
+    transition: fill ${props => (props.light ? slowDuration : fastDuration)};
   }
 
   ::before,
@@ -103,14 +100,12 @@ const BrandLink = styled(HashLink)`
 `;
 
 const StyledHeader = styled.header`
-  height: calc(7rem - 2px);
-  background-color: ${color("white")};
-  border-bottom: 2px solid #f5f5f5;
+  transition: background 1s;
+  height: calc(9rem - 2px);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 4.8rem;
-  position: fixed;
   top: 0;
   left: 0;
   width: calc(100vw);
@@ -118,7 +113,21 @@ const StyledHeader = styled.header`
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
 
-  ${media.phoneL`
+  background-color: ${color("white")};
+  border-bottom: 2px solid #f5f5f5;
+  ${props =>
+    props.dark &&
+    css`
+      background-color: transparent;
+      border-color: transparent;
+    `};
+
+  ${props =>
+    props.sticky &&
+    `
+     position: fixed;
+     transition-duration: ${fastDuration};
+  `} ${media.phoneL`
     padding: 0 2.4rem;
   `};
 `;
@@ -141,32 +150,50 @@ class Header extends PureComponent {
     const isActive = target => hashName === target;
 
     return (
-      <StyledHeader>
-        <nav>
-          <BrandLink active={isHome} to="#home">
-            <MediaQuery component="span" query="(max-width: 530px)">
-              <GracefulSvg src={LogoShort} />
-            </MediaQuery>
-            <MediaQuery component="span" query="(min-width: 531px)">
-              <GracefulSvg src={LogoFull} />
-            </MediaQuery>
-          </BrandLink>
-        </nav>
-        <FadeWithoutFont>
-          <nav>
-            <HashLink active={isActive("team")} to="#team">
-              Team
-            </HashLink>
-            <HashLink active={isActive("work")} to="#work">
-              Work
-            </HashLink>
-            <HashLink active={isActive("contact")} to="#contact">
-              Contact
-            </HashLink>
-            <NavLink to="blog">Blog</NavLink>
-          </nav>
-        </FadeWithoutFont>
-      </StyledHeader>
+      <Sticky topOffset={1}>
+        {({ isSticky }) => (
+          <StyledHeader dark={!isSticky} sticky={isSticky}>
+            <nav>
+              <BrandLink active={isHome} to="#home" light={!isSticky}>
+                <MediaQuery component="span" query="(max-width: 530px)">
+                  <GracefulSvg src={LogoShort} />
+                </MediaQuery>
+                <MediaQuery component="span" query="(min-width: 531px)">
+                  <GracefulSvg src={LogoFull} />
+                </MediaQuery>
+              </BrandLink>
+            </nav>
+            <FadeWithoutFont>
+              <nav>
+                <HashLink
+                  active={isActive("team")}
+                  to="#team"
+                  light={!isSticky}
+                >
+                  Team
+                </HashLink>
+                <HashLink
+                  active={isActive("work")}
+                  to="#work"
+                  light={!isSticky}
+                >
+                  Work
+                </HashLink>
+                <HashLink
+                  active={isActive("contact")}
+                  to="#contact"
+                  light={!isSticky}
+                >
+                  Contact
+                </HashLink>
+                <NavLink to="blog" light={!isSticky}>
+                  Blog
+                </NavLink>
+              </nav>
+            </FadeWithoutFont>
+          </StyledHeader>
+        )}
+      </Sticky>
     );
   }
 }
