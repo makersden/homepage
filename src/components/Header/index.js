@@ -105,7 +105,7 @@ const StyledHeader = styled.header`
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1;
+  z-index: 2;
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
 

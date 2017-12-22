@@ -1,6 +1,8 @@
 import React from "react";
 
-import {
+import Matter from "matter-js";
+
+const {
   Bodies,
   Body,
   Composite,
@@ -10,7 +12,7 @@ import {
   Vertices,
   Render,
   Runner
-} from "matter-js";
+} = Matter;
 const { PI, cos, sin, random } = Math;
 
 let ballCreatedAt = 0;
@@ -103,8 +105,8 @@ const initialize = ({ canvas, height, width }) => {
     engine: engine,
     options: {
       width: 1200,
-      height: 600,
-      pixelRatio: 2,
+      height: 300,
+      pixelRatio: 3,
       wireframeBackground: "transparent"
     }
   });
