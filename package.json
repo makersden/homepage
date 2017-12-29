@@ -98,6 +98,7 @@
     "react-disqus-comments": "^1.0.3",
     "react-flexbox-grid": "^1.1.5",
     "react-ga": "^2.1.2",
+    "react-headroom": "^2.2.2",
     "react-imageloader": "^2.1.0",
     "react-inlinesvg": "^0.6.2",
     "react-lazyload": "^2.2.7",

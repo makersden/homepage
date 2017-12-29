@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import Link from "gatsby-link";
 import styled, { css } from "styled-components";
 import MediaQuery from "react-responsive";
-import { Sticky } from "react-sticky";
+import Headroom from "react-headroom";
 
 import LogoFull from "../../../assets/logoFull.svg";
 import LogoShort from "../../../assets/logoShort.svg";
@@ -102,12 +102,10 @@ const StyledHeader = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 0 3.2rem;
-  top: 0;
-  left: 0;
   width: 100%;
   z-index: 2;
-  border-bottom-left-radius: 2px;
-  border-bottom-right-radius: 2px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 
   background-color: ${color("white")};
   border-bottom: 2px solid #f5f5f5;
@@ -118,68 +116,75 @@ const StyledHeader = styled.header`
       border-color: transparent;
     `};
 
-  ${props =>
-    props.sticky &&
-    `
-     position: fixed;
-     transition-duration: ${duration("fast")};
-  `} ${media.phoneL`
+  ${media.phoneL`
     padding: 0 2.4rem;
   `};
 `;
 
+const pinTolerance = 20;
+
 class Header extends PureComponent {
+  state = {
+    isSticky: false
+  };
+
+  onUnpin = () => {
+    const home = document.getElementById("home");
+    this.setState(() => ({
+      isSticky: window.scrollY >= home.offsetHeight - 88
+    }));
+  };
+
   render() {
     const { location: { hash, pathname } } = this.props;
     const hashName = hash.slice(1);
     const isHome = pathname === "/" && (!hashName || hashName === "home");
     const isActive = target => hashName === target;
+    const { isSticky } = this.state;
 
     return (
-      <Sticky topOffset={1}>
-        {({ isSticky }) => (
-          <StyledHeader dark={!isSticky} sticky={isSticky}>
+      <Headroom
+        onUnfix={() => this.setState(() => ({ isSticky: false }))}
+        onUnpin={this.onUnpin}
+        upTolerance={pinTolerance}
+        downTolerance={pinTolerance}
+        style={{
+          zIndex: 10
+        }}
+      >
+        <StyledHeader dark={!isSticky} sticky={isSticky}>
+          <nav>
+            <BrandLink active={isHome} to="#home" light={!isSticky}>
+              <MediaQuery component="span" query="(max-width: 530px)">
+                <GracefulSvg src={LogoShort} />
+              </MediaQuery>
+              <MediaQuery component="span" query="(min-width: 531px)">
+                <GracefulSvg src={LogoFull} />
+              </MediaQuery>
+            </BrandLink>
+          </nav>
+          <FadeWithoutFont>
             <nav>
-              <BrandLink active={isHome} to="#home" light={!isSticky}>
-                <MediaQuery component="span" query="(max-width: 530px)">
-                  <GracefulSvg src={LogoShort} />
-                </MediaQuery>
-                <MediaQuery component="span" query="(min-width: 531px)">
-                  <GracefulSvg src={LogoFull} />
-                </MediaQuery>
-              </BrandLink>
+              <HashLink active={isActive("team")} to="#team" light={!isSticky}>
+                Team
+              </HashLink>
+              <HashLink active={isActive("work")} to="#work" light={!isSticky}>
+                Work
+              </HashLink>
+              <HashLink
+                active={isActive("contact")}
+                to="#contact"
+                light={!isSticky}
+              >
+                Contact
+              </HashLink>
+              <NavLink to="blog" light={!isSticky}>
+                Blog
+              </NavLink>
             </nav>
-            <FadeWithoutFont>
-              <nav>
-                <HashLink
-                  active={isActive("team")}
-                  to="#team"
-                  light={!isSticky}
-                >
-                  Team
-                </HashLink>
-                <HashLink
-                  active={isActive("work")}
-                  to="#work"
-                  light={!isSticky}
-                >
-                  Work
-                </HashLink>
-                <HashLink
-                  active={isActive("contact")}
-                  to="#contact"
-                  light={!isSticky}
-                >
-                  Contact
-                </HashLink>
-                <NavLink to="blog" light={!isSticky}>
-                  Blog
-                </NavLink>
-              </nav>
-            </FadeWithoutFont>
-          </StyledHeader>
-        )}
-      </Sticky>
+          </FadeWithoutFont>
+        </StyledHeader>
+      </Headroom>
     );
   }
 }
