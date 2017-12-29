@@ -1,9 +1,9 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import styled from "styled-components";
 
 import { fade } from "./mixins";
 
-class WithLoadedFont extends PureComponent {
+class WithLoadedFont extends React.PureComponent {
   state = { loaded: false };
 
   componentDidMount() {
@@ -19,17 +19,21 @@ class WithLoadedFont extends PureComponent {
   }
 }
 
-const Fade = styled.div`${fade};`;
+const Fade = styled.div`
+  ${fade};
+`;
 
-class FadeWithoutFont extends PureComponent {
+export default class FadeWithoutFontComponent extends React.PureComponent {
   render() {
-    const { children } = this.props;
+    const { children, className } = this.props;
     return (
       <WithLoadedFont>
-        {({ loaded }) => <Fade show={loaded}>{children}</Fade>}
+        {({ loaded }) => (
+          <Fade className={className} show={loaded}>
+            {children}
+          </Fade>
+        )}
       </WithLoadedFont>
     );
   }
 }
-
-export default FadeWithoutFont;

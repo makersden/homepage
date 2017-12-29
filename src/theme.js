@@ -34,6 +34,9 @@ export const duration = getter("duration");
 export const size = (step, unit = "px") =>
   Math.pow(2, Math.max(0, step) + 2) + unit;
 
+export const sumSize = (...sizes) =>
+  sizes.reduce((res, s) => res + size(s, 0), 0);
+
 export const column = size => size / 12 * 100 + "%";
 
 export default theme;

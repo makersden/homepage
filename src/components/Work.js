@@ -5,9 +5,11 @@ import Isvg from "react-inlinesvg";
 import { Flex } from "grid-styled";
 
 import { mix } from "../polished";
-import { color, column, font, size } from "../theme";
+import { color, column, font, size, sumSize } from "../theme";
 import OnScreenDetect from "../OnScreenDetect";
 import GracefulImage from "../GracefulImage";
+import GracefulSvg from "../GracefulSvg";
+import FWF from "../FadeWithoutFont";
 
 import epimap3d from "../../assets/images/epimap_3d.jpg";
 import missionready from "../../assets/images/missionready.jpg";
@@ -222,6 +224,7 @@ const DataSection = styled(Section)`
       rgba(245, 142, 241, 0.198) 74.88%
     );
   }
+
   ${Title} {
     position: absolute;
     bottom: ${size(4)};
@@ -232,16 +235,23 @@ const DataSection = styled(Section)`
   }
 `;
 
-const dash = 20;
+const dash = 0;
 
-const YourProjectImage = styled(Isvg).attrs({
+const YourProjectImage = styled(GracefulSvg).attrs({
   src: revenue
 })`
-  &,
   svg {
     max-height: 100%;
     max-width: 100%;
+    width: 80rem;
+    height: 50rem;
   }
+
+  width: 80rem;
+  height: 50rem;
+  min-height: 50rem;
+  min-width: 80rem;
+
 
   [id^='path5_stroke'],
   [id^='path6_stroke'] {
@@ -313,11 +323,6 @@ const YourProjectSection = styled(Section)`
     margin-top: -${size(5)};
   }
 
-  ${YourProjectImage} {
-    width: 80rem;
-    height: 50rem;
-  }
-
   ${Background} {
     background: linear-gradient(
       224.32deg,
@@ -341,7 +346,7 @@ const YourProjectSection = styled(Section)`
 
   ${Description} {
     position: absolute;
-    bottom: -29%;
+    bottom: -${sumSize(5, 4, 3)}px;
   }
 `;
 
@@ -441,43 +446,53 @@ const Home = () => {
       <Curtain>
         <Content column>
           <ArchitectureSection w={10 / 12} p={4} m={4} ml={0}>
-            <Title>High quality services and apps</Title>
+            <Title>
+              <FWF>High quality services and apps</FWF>
+            </Title>
             <Background />
             <OnScreenDetect once render={renderArchitectureSvg} />
             <Description w={6 / 12} p={4}>
-              <Paragraph>
-                Engineering stellar frontends and backends, weaponizing data,
-                managing the cloud.
-              </Paragraph>
-              <Paragraph>It's what we do best.</Paragraph>
-              <Paragraph>We excel at React, Node.js, Scala and AWS.</Paragraph>
+              <FWF>
+                <Paragraph>
+                  Engineering stellar frontends and backends, weaponizing data,
+                  managing the cloud.
+                </Paragraph>
+                <Paragraph>It's what we do best.</Paragraph>
+                <Paragraph>
+                  We excel at React, Node.js, Scala and AWS.
+                </Paragraph>
+              </FWF>
             </Description>
           </ArchitectureSection>
           <EpimapSection w={10 / 12} p={4} m={4}>
             <Background />
-            <Title>Full-stack development</Title>
+            <Title>
+              <FWF>Full-stack development</FWF>
+            </Title>
             <SectionContent>
               <Description w={7 / 12} p={4}>
-                <Paragraph>
-                  Together with iHealth Finland we created machine learning
-                  algorithms forecasting the spread of pathogens. Using our web
-                  based interface, doctors and pharma companies can see when and
-                  where in the country epidemics are likely to occur.
-                </Paragraph>
-                <Quote>
-                  “They provided advice, UI design, frontend and backend code,
-                  cloud infrastructure and data analysis algorithms. All on
-                  time, very communicative and flexible with adjusting features
-                  as the project went along. It’s reassuring to know your
-                  product is in the hands of real professionals. Impeccable work
-                  - I can recommend them without hesitation.”
-                </Quote>
-                <Author>
-                  <span>Dr. Otto Helve</span>
-                  <span>
-                    CEO of iHealth Finland and board member of Duodecim Oy.
-                  </span>
-                </Author>
+                <FWF>
+                  <Paragraph>
+                    Together with iHealth Finland we created machine learning
+                    algorithms forecasting the spread of pathogens. Using our
+                    web based interface, doctors and pharma companies can see
+                    when and where in the country epidemics are likely to occur.
+                  </Paragraph>
+                  <Quote>
+                    “They provided advice, UI design, frontend and backend code,
+                    cloud infrastructure and data analysis algorithms. All on
+                    time, very communicative and flexible with adjusting
+                    features as the project went along. It’s reassuring to know
+                    your product is in the hands of real professionals.
+                    Impeccable work - I can recommend them without hesitation.”
+                  </Quote>
+                  <Author>
+                    <span>Dr. Otto Helve</span>
+                    <span>
+                      CEO of iHealth Finland and board member of Duodecim Oy.
+                    </span>
+                  </Author>
+                </FWF>
               </Description>
               <EpimapImage />
             </SectionContent>
@@ -485,22 +500,26 @@ const Home = () => {
           <MissionreadySection w={11 / 12} p={4} m="0 auto">
             <Background />
             <MissionreadyImage />
-            <Title>Rock-solid technical expertise</Title>
+            <Title>
+              <FWF>Rock-solid technical expertise</FWF>
+            </Title>
             <Description w={6 / 12} p={4}>
-              <Paragraph>
-                Missionready trusts us to make sure their platform is
-                production-ready in terms of performance and scalability.
-              </Paragraph>
-              <Quote>
-                “Makers’ Den helped us evaluate our current platform and find
-                the bottlenecks for scale. Thanks to thorough analysis and
-                actionable advice from the team, we feel confident in the
-                platform and our ability to grow without limits.”
-              </Quote>
-              <Author>
-                <span>Aki Ranin</span>
-                <span>CEO of Missionready</span>
-              </Author>
+              <FWF>
+                <Paragraph>
+                  Missionready trusts us to make sure their platform is
+                  production-ready in terms of performance and scalability.
+                </Paragraph>
+                <Quote>
+                  “Makers’ Den helped us evaluate our current platform and find
+                  the bottlenecks for scale. Thanks to thorough analysis and
+                  actionable advice from the team, we feel confident in the
+                  platform and our ability to grow without limits.”
+                </Quote>
+                <Author>
+                  <span>Aki Ranin</span>
+                  <span>CEO of Missionready</span>
+                </Author>
+              </FWF>
             </Description>
           </MissionreadySection>
           <DataSection p={4} pt={0} pr={4} w={9 / 12}>
@@ -508,38 +527,48 @@ const Home = () => {
             <Crop width="64.2rem" height="54.2rem">
               <DataImage />
               <Title>
-                <span>Data +</span>
-                <span>Algorithm +</span>
-                <span>UX = Product</span>
+                <FWF>
+                  <span>Data +</span>
+                  <span>Algorithm +</span>
+                  <span>UX = Product</span>
+                </FWF>
               </Title>
             </Crop>
             <Description w={6 / 12} p={4}>
-              <Paragraph>
-                Data is of no use without actionable information and appropriate
-                visualization. We help companies turn their data into new
-                insights.
-              </Paragraph>
-              <Quote>
-                “Without big data analytics, companies are blind and deaf,
-                wandering out onto the web like deer on a freeway.”
-              </Quote>
-              <Author>
-                <span>Geoffrey Moore</span>
-              </Author>
+              <FWF>
+                <Paragraph>
+                  Data is of no use without actionable information and
+                  appropriate visualization. We help companies turn their data
+                  into new insights.
+                </Paragraph>
+                <Quote>
+                  “Without big data analytics, companies are blind and deaf,
+                  wandering out onto the web like deer on a freeway.”
+                </Quote>
+                <Author>
+                  <span>Geoffrey Moore</span>
+                </Author>
+              </FWF>
             </Description>
           </DataSection>
           <YourProjectSection w={10 / 12}>
             <Background />
             <YourProjectImageContainer>
-              <Title>Your service?</Title>
+              <Title>
+                <FWF>At your service?</FWF>
+              </Title>
               <YourProjectImage />
             </YourProjectImageContainer>
             <Description p={4} w={5 / 12}>
-              <Paragraph>
-                Would you like assistance with your next project?
-              </Paragraph>
+              <FWF>
+                <Paragraph>
+                  Would you like assistance with your next project?
+                </Paragraph>
+              </FWF>
               <CallToAction href="mailto:korneliusz@makersden.io">
-                <span>Let's talk.</span>
+                <FWF>
+                  <span>Let's talk.</span>
+                </FWF>
               </CallToAction>
             </Description>
           </YourProjectSection>

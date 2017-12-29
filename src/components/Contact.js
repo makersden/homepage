@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { color, font, size } from "../theme";
 import { transparentize } from "../polished";
 import berlin from "../../assets/images/berlin-sharp.jpg";
+import FadeWithoutFont from "../FadeWithoutFont";
 
 const Container = styled.div`
   top: 0;
@@ -11,7 +12,7 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   position: absolute;
-  background: url(${berlin});
+  background: ${color("black")} url(${berlin});
   background-size: cover;
   background-attachment: fixed;
   background-repeat: no-repeat;
@@ -23,14 +24,25 @@ const Curtain = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
+
+  color: ${color("white")};
+
+  background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 0%,
+      ${transparentize(0.87, "accent")} 100%
+    ),
+    ${transparentize(0.1, "black")};
 `;
 
 const Content = styled.div`
-  font-weight: 300;
   position: absolute;
   left: 0;
   width: 100%;
   height: 100%;
+
+  font-size: 3.2rem;
+  font-weight: 300;
 
   padding: ${size(6)} 0;
 
@@ -38,16 +50,6 @@ const Content = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-
-  color: ${color("white")};
-
-  font-size: 3.2rem;
-  background: linear-gradient(
-      180deg,
-      rgba(0, 0, 0, 0) 0%,
-      ${transparentize(0.87, "accent")} 100%
-    ),
-    ${transparentize(0.1, "black")};
 
   > * {
     margin: 0;
@@ -77,13 +79,17 @@ const Header = styled.h2`
 // TOOD video of berlin in background?
 const Contact = () => (
   <Container>
-    <Content>
-      <Header>Let's get in touch.</Header>
-      <p>
-        <Link href="mailto:hello@makersden.io">hello@makersden.io</Link>
-      </p>
-      <p>We're based in Berlin.</p>
-    </Content>
+    <Curtain>
+      <FadeWithoutFont>
+        <Content>
+          <Header>Let's get in touch.</Header>
+          <p>
+            <Link href="mailto:hello@makersden.io">hello@makersden.io</Link>
+          </p>
+          <p>We're based in Berlin.</p>
+        </Content>
+      </FadeWithoutFont>
+    </Curtain>
   </Container>
 );
 

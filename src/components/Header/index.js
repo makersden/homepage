@@ -1,8 +1,7 @@
-import React, { PureComponent, PropTypes } from "react";
+import React, { PureComponent } from "react";
 import Link from "gatsby-link";
 import styled, { css } from "styled-components";
 import MediaQuery from "react-responsive";
-import Isvg from "react-inlinesvg";
 import { Sticky } from "react-sticky";
 
 import LogoFull from "../../../assets/logoFull.svg";
@@ -10,9 +9,10 @@ import LogoShort from "../../../assets/logoShort.svg";
 
 import { media } from "../../styles/mediaQueries";
 import { transparentize } from "../../polished";
-import { fade } from "../../mixins";
 import { color, duration, font } from "../../theme";
 import FadeWithoutFont from "../../FadeWithoutFont";
+import GracefulSvg from "../../GracefulSvg";
+
 const activeClassName = "nav-active";
 
 const linkHighlight = css`
@@ -126,12 +126,6 @@ const StyledHeader = styled.header`
   `} ${media.phoneL`
     padding: 0 2.4rem;
   `};
-`;
-
-const GracefulSvg = styled(Isvg)`
-  ${fade} &.loaded {
-    opacity: 1;
-  }
 `;
 
 class Header extends PureComponent {

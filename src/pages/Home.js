@@ -2,12 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { Flex, Box } from "grid-styled";
 
-import Helmet from "react-helmet";
 import get from "lodash/fp/get";
-import Isvg from "react-inlinesvg";
 
 import { color, font } from "../theme";
-import LogoFull from "../../assets/logoFull.svg";
 import FadeWithoutFont from "../FadeWithoutFont";
 
 import Work from "../components/Work";
