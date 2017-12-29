@@ -1,10 +1,9 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { color } from "../theme";
 import { transparentize } from "../polished";
 import berlin from "../../assets/images/berlin-sharp.jpg";
-import GracefulImage from "../GracefulImage";
 
 const Container = styled.div`
   top: 0;
@@ -69,9 +68,7 @@ const Contact = () => (
     <Content>
       <h2>Let's get in touch.</h2>
       <p>
-        <Link href="mailto:korneliusz@makersden.io">
-          korneliusz@makersden.io
-        </Link>
+        <Link href="mailto:hello@makersden.io">hello@makersden.io</Link>
       </p>
       <p>We're based in Berlin.</p>
     </Content>

@@ -14,9 +14,6 @@ const theme = {
     backgroundLight: `#1A1F1F`,
     text: "#ecf0f1",
     textDark: "#2c3e50"
-    // NOTE: Also try these colors
-    // text: "#f5f5f5",
-    // textDark: "#111",
   },
   font: {
     primary: "Work Sans, sans-serif",

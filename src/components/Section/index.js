@@ -1,5 +1,5 @@
 import { Flex, Box } from "grid-styled";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { transparentize } from "../../polished";
 import { color, size } from "../../theme";
@@ -19,7 +19,7 @@ export const Quote = styled.blockquote`
   margin-bottom: 4.8rem;
 `;
 
-export const Author = styled.span`
+export const authorStyle = css`
   color: ${color("black")};
   position: relative;
 
@@ -34,6 +34,10 @@ export const Author = styled.span`
     display: block;
     margin-left: 2.4rem;
   }
+`;
+
+export const Author = styled.span`
+  ${authorStyle};
 `;
 
 export const Paragraph = styled.p`
