@@ -16,6 +16,19 @@ import diagram from "../../assets/images/Web App Reference Architecture.svg";
 import missionready from "../../assets/images/missionready.jpg";
 import revenue from "../../assets/images/revenue.svg";
 import waves from "../../assets/images/waves.png";
+import data from "../../assets/images/data.png";
+
+const Crop = styled.div`
+  ${props =>
+    "width" in props &&
+    `
+    width: ${props.width};
+  `} ${props =>
+      "height" in props &&
+      `
+    height: ${props.height};
+  `} overflow: hidden;
+`;
 
 const Container = styled.div`
   width: 100%;
@@ -24,20 +37,23 @@ const Container = styled.div`
   background: url(${waves});
   background-repeat: repeat;
   background-attachment: fixed;
-  background-size: 30%;
+  background-size: 25%;
 `;
 
 const Curtain = styled.div`
   background: linear-gradient(
     180deg,
     ${color("backgroundDark")} 0%,
-    rgba(0, 0, 0, 0) 18.23%
+    rgba(0, 0, 0, 0) 18.23%,
+    rgba(0, 0, 0, 0) 81.77%,
+    #333 100%
   );
 `;
+
 const Content = styled(Flex)`
   max-width: 144rem;
   margin: 0 auto;
-  padding-top: ${size(7)};
+  padding: ${size(7)} 0;
   width: 100%;
 `;
 
@@ -78,6 +94,48 @@ const Title = styled.h2`
   font-size: ${size(4)};
   color: ${color("white")};
   margin: 0;
+`;
+
+const Quote = styled.blockquote`
+  margin-left: 0;
+  font-weight: 300;
+  margin-bottom: 4.8rem;
+`;
+
+const Author = styled.span`
+  color: ${color("black")};
+  position: relative;
+
+  ::before {
+    content: "–";
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  > span {
+    display: block;
+    margin-left: 2.4rem;
+  }
+`;
+
+const Paragraph = styled.p`
+  font-weight: 500;
+  color: ${color("textDark")};
+  text-align: ${props => props.align || "left"};
+  > span {
+    display: block;
+  }
+
+  margin: ${size(2)} 0;
+
+  :first-child {
+    margin-top: 0;
+  }
+
+  :last-child {
+    margin-bottom: 0;
+  }
 `;
 
 const Section = styled(Box)`
@@ -137,7 +195,7 @@ const EpimapSection = styled(Section)`
 
   ${EpimapImage} {
     align-self: flex-end;
-    margin-top: -${size(6)};
+    margin-top: -${size(6, 0) + size(5, 0)}px;
     position: relative;
     left: ${size(7)};
   }
@@ -166,24 +224,27 @@ const EpimapSection = styled(Section)`
 const MissionreadyImage = styled(StyledGracefulImage).attrs({
   src: missionready
 })`
-  width: 49rem;
+  max-width: 100%;
+  max-height: 100%;
   min-width: 49rem;
+  height: 70.6rem;
+  min-height: 70.6rem;
 `;
 
 const MissionreadySection = styled(Section)`
   margin-top: ${size(7)};
+  min-height: ${size(7)};
 
   ${MissionreadyImage} {
     position: absolute;
     left: 0;
-    margin-top: -${size(3)};
-    top: -${size(5)};
+    top: -${size(6)};
   }
 
   ${Description} {
     position: absolute;
     left: ${column(3)};
-    margin-top: ${size(4)};
+    margin-top: ${size(4, 0) + size(4, 0) + size(2, 0)}px;
     top: ${size(6)};
     z-index: 2;
   }
@@ -196,98 +257,170 @@ const MissionreadySection = styled(Section)`
     );
   }
   ${Title} {
-    margin-left: ${size(7)};
+    margin-left: ${column(6)};
     padding-left: ${size(3)};
   }
 `;
 
-const Paragraph = styled.p`
-  font-weight: 500;
-  color: ${color("textDark")};
-  text-align: ${props => props.align || "left"};
-  > span {
-    display: block;
-  }
-
-  margin: ${size(2)} 0;
-
-  :first-child {
-    margin-top: 0;
-  }
-
-  :last-child {
-    margin-bottom: 0;
-  }
+const DataImage = styled(StyledGracefulImage).attrs({
+  src: data
+})`
+  max-width: 100%;
+  max-height: 100%;
+  width: 100%;
+  height: 100%;
 `;
 
-const ImagePlaceholder = styled.div`
-  max-width: ${props => props.width};
-  height: ${props => props.height};
-  flex: 1;
+const DataSection = styled(Section)`
+  margin-left: ${column(2)};
+  margin-top: ${size(7)};
 
-  border-radius: 4px;
-
-  background: rgba(0, 0, 0, 0.05);
-`;
-
-const StyledImage = styled(LoadedImage)`
-  max-width: 50%;
-  img {
-    width: 100%;
-    max-height: 100%;
+  ${Crop} {
+    position: relative;
+    margin-left: ${column(3)};
+    margin-top: ${size(5, 0) + size(3, 0)}px;
   }
-`;
 
-const Quote = styled.blockquote`
-  margin-left: 0;
-  font-weight: 300;
-  margin-bottom: 4.8rem;
-`;
-
-const Author = styled.span`
-  color: ${color("black")};
-  position: relative;
-
-  ::before {
-    content: "–";
+  ${Description} {
     position: absolute;
-    left: 0;
-    top: 0;
+    top: ${size(5)};
+    left: -${size(4, 0) + size(4, 0)}px;
+    z-index: 2;
   }
 
-  > span {
-    display: block;
-    margin-left: 2.4rem;
+  ${Background} {
+    background: linear-gradient(
+      216.12deg,
+      rgba(255, 197, 48, 0.342) 6.61%,
+      rgba(245, 142, 241, 0.198) 74.88%
+    );
   }
+  ${Title} {
+    position: absolute;
+    bottom: ${size(4)};
+    left: ${size(5, 0) + size(2, 0)}px;
+    span {
+      display: block;
+    }
+  }
+`;
+
+const dash = 20;
+
+const YourProjectImage = styled(Isvg).attrs({
+  src: revenue
+})`
+  &,
+  svg {
+    max-height: 100%;
+    max-width: 100%;
+  }
+
+  [id^='path5_stroke'],
+  [id^='path6_stroke'] {
+    stroke-dasharray: ${dash};
+  }
+
+  @keyframes runchart {
+    from {
+      stroke-dashoffset: ${dash};
+    }
+
+    90% {
+      stroke-dashoffset: 0;
+      opacity: 1;
+    }
+
+    to {
+      stroke-dashoffset: 0;
+      opacity: 0;
+    }
+  }
+`;
+
+const YourProjectImageContainer = styled.div`
+  background: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: ${size(4)} ${size(5)};
 `;
 
 const CallToAction = styled.a`
-  border: 1px solid ${mix(0.5, "accent", "white")};
-  background-color: ${mix(0.1, "accent", "white")};
-  color: ${color("accent")};
-  font-weight: 700;
-  font-size: 2.4rem;
-  padding: 3.2rem 4.8rem;
-  text-align: center;
+  width: 100%;
+  display: block;
+  border-radius: 10px;
+  min-height: 16.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.12rem;
+  background-color: ${mix(0.1, "accent", "black")};
+  font-weight: bold;
+  transition: background-color 200ms, border-color 200ms;
   text-decoration: none;
-  align-self: center;
-  transition: background-color 200ms, border-color 200ms, color 200ms,
-    font-size 200ms;
+
+  span {
+    color: ${color("accent")};
+    font-size: 24px;
+    transition: color 200ms, font-size 200ms;
+  }
 
   :hover {
     border-color: ${color("accent")};
-    color: ${color("white")};
-    font-size: 3.2rem;
     background-color: ${color("accent")};
+    span {
+      color: white;
+      font-size: ${size(3)};
+    }
+  }
+`;
+
+const YourProjectSection = styled(Section)`
+  align-items: center;
+  margin: ${size(7)} auto 0 auto;
+  padding: ${size(4)};
+
+  ${YourProjectImageContainer} {
+    margin-top: -${size(5)};
   }
 
-  ${borderCorners({ color: "accent" })};
+  ${YourProjectImage} {
+    width: 80rem;
+    height: 50rem;
+  }
+
+  ${Background} {
+    background: linear-gradient(
+      224.32deg,
+      rgba(255, 197, 48, 0.342) 10.18%,
+      rgba(245, 142, 241, 0.198) 72.27%
+    );
+  }
+
+  ${Paragraph} {
+    font-weight: bold;
+    line-height: 1.12;
+    font-size: 2.4rem;
+    letter-spacing: 0.12rem;
+    margin-bottom: ${size(3)};
+    text-align: center;
+  }
+
+  ${CallToAction} {
+    margin-top: ${size(3)};
+  }
+
+  ${Description} {
+    position: absolute;
+    bottom: -29%;
+  }
 `;
 
 const ResponsiveImage = styled(LoadedImage)`
   transition: opacity 200ms;
   max-width: 100%;
-  max-height: 100%;
 `;
 
 const ArchitectureSvg = styled(Isvg)`
@@ -315,27 +448,7 @@ const ArchitectureSvg = styled(Isvg)`
   }
 `;
 
-const Crop = styled.div`
-  ${props =>
-    "width" in props &&
-    `
-    width: ${props.width};
-  `} ${props =>
-      "height" in props &&
-      `
-    height: ${props.height};
-  `} overflow: hidden;
-`;
-
 const renderArchitectureSvg = ({ isOnScreen }) => <DivPlace />;
-
-const PointMapImage = styled(StyledGracefulImage).attrs({
-  src: pointmap
-})`
-  min-width: 77rem;
-  min-height: 49rem;
-  border-radius: 4px;
-`;
 
 // TODO viewbox? native dimensions?
 const RevenueImage = styled(Isvg).attrs({
@@ -463,11 +576,22 @@ const Home = () => {
               </Author>
             </Description>
           </MissionreadySection>
-          <Section mt={4} pt={4} style={{ marginTop: size(7) }}>
-            <Crop>
-              <PointMapImage />
+          <DataSection p={4} pt={0} pr={4} w={9 / 12}>
+            <Background />
+            <Crop width="64.2rem" height="54.2rem">
+              <DataImage />
+              <Title>
+                <span>Data +</span>
+                <span>Algorithm +</span>
+                <span>UX = Product</span>
+              </Title>
             </Crop>
-            <Description>
+            <Description w={6 / 12} p={4}>
+              <Paragraph>
+                Data is of no use without actionable information and appropriate
+                visualization. We help companies turn their data into new
+                insights.
+              </Paragraph>
               <Quote>
                 “Without big data analytics, companies are blind and deaf,
                 wandering out onto the web like deer on a freeway.”
@@ -475,22 +599,23 @@ const Home = () => {
               <Author>
                 <span>Geoffrey Moore</span>
               </Author>
-              <Paragraph>
-                We help our clients harvest relevant data from their services
-                and unlock its potential through intuitively visualized
-                insights.
-              </Paragraph>
             </Description>
-          </Section>
-          <Section>
-            <RevenueImage />
-            <Description>
-              <Paragraph align="center">What about you?</Paragraph>
+          </DataSection>
+          <YourProjectSection w={10 / 12}>
+            <Background />
+            <YourProjectImageContainer>
+              <Title>Your service?</Title>
+              <YourProjectImage />
+            </YourProjectImageContainer>
+            <Description p={4} w={5 / 12}>
+              <Paragraph>
+                Would you like assistance with your next project?
+              </Paragraph>
               <CallToAction href="mailto:korneliusz@makersden.io">
                 <span>Let's talk.</span>
               </CallToAction>
             </Description>
-          </Section>
+          </YourProjectSection>
         </Content>
       </Curtain>
     </Container>
