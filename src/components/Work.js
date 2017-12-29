@@ -2,21 +2,27 @@ import React from "react";
 import styled, { css } from "styled-components";
 import LoadedImage from "react-imageloader";
 import Isvg from "react-inlinesvg";
-import { Flex, Box } from "grid-styled";
+import { Flex } from "grid-styled";
 
-import { mix, transparentize } from "../polished";
-import { borderCorners } from "../mixins";
+import { mix } from "../polished";
 import { color, column, font, size } from "../theme";
 import OnScreenDetect from "../OnScreenDetect";
 import GracefulImage from "../GracefulImage";
 
 import epimap3d from "../../assets/images/epimap_3d.jpg";
-import pointmap from "../../assets/images/3d_pointmap.jpg";
-import diagram from "../../assets/images/Web App Reference Architecture.svg";
 import missionready from "../../assets/images/missionready.jpg";
 import revenue from "../../assets/images/revenue.svg";
 import waves from "../../assets/images/waves.png";
 import data from "../../assets/images/data.png";
+
+import {
+  Author,
+  Background,
+  Description,
+  Paragraph,
+  Quote,
+  Section
+} from "./Section";
 
 const Crop = styled.div`
   ${props =>
@@ -46,7 +52,7 @@ const Curtain = styled.div`
     ${color("backgroundDark")} 0%,
     rgba(0, 0, 0, 0) 18.23%,
     rgba(0, 0, 0, 0) 81.77%,
-    #333 100%
+    ${color("darkGrey")} 99%
   );
 `;
 
@@ -57,32 +63,10 @@ const Content = styled(Flex)`
   width: 100%;
 `;
 
-const Description = styled(Box)`
-  background: ${transparentize(0.05, "superWhite")};
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  max-width: 80rem;
-
-  * {
-    font-size: 1.8rem;
-    line-height: 2.4rem;
-  }
-`;
-
 const DivPlace = styled.div`
   background: black;
   width: 980px;
   height: 630px;
-`;
-
-const Background = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
 `;
 
 const StyledGracefulImage = styled(GracefulImage)``;
@@ -94,63 +78,6 @@ const Title = styled.h2`
   font-size: ${size(4)};
   color: ${color("white")};
   margin: 0;
-`;
-
-const Quote = styled.blockquote`
-  margin-left: 0;
-  font-weight: 300;
-  margin-bottom: 4.8rem;
-`;
-
-const Author = styled.span`
-  color: ${color("black")};
-  position: relative;
-
-  ::before {
-    content: "–";
-    position: absolute;
-    left: 0;
-    top: 0;
-  }
-
-  > span {
-    display: block;
-    margin-left: 2.4rem;
-  }
-`;
-
-const Paragraph = styled.p`
-  font-weight: 500;
-  color: ${color("textDark")};
-  text-align: ${props => props.align || "left"};
-  > span {
-    display: block;
-  }
-
-  margin: ${size(2)} 0;
-
-  :first-child {
-    margin-top: 0;
-  }
-
-  :last-child {
-    margin-bottom: 0;
-  }
-`;
-
-const Section = styled(Box)`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-  * {
-    border-radius: 20px;
-
-    &:not(${Background}) {
-      position: relative;
-      z-index: 1;
-    }
-  }
 `;
 
 const ArchitectureSection = styled(Section)`
