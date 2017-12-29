@@ -28,15 +28,6 @@ const HeroSegment = styled(Box)`
   justify-content: space-between;
 `;
 
-const Footer = styled(TransparentSegment)`
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  min-height: 0;
-  align-items: flex-start;
-  text-align: left;
-`;
-
 const LightSegment = styled(TransparentSegment)`
   background: ${color("white")};
   color: ${color("textDark")};
@@ -51,7 +42,7 @@ const ContactSegment = styled(LightSegment)`
   align-items: center;
   justify-content: center;
   text-align: center;
-  min-height: 80rem;
+  min-height: 80vh;
 `;
 
 const Title = styled.h1`
@@ -75,29 +66,7 @@ const Subtitle = styled(Box)`
 `;
 
 const Container = styled(Flex).attrs({ column: true })`
-  font-family: ${font("primary")};
   color: ${get("theme.colors.text")};
-`;
-
-const StyledLogo = styled(Isvg)`
-  margin: 0;
-  letter-spacing: -0.16rem;
-  color: ${color("text")};
-  margin-bottom: 1.2rem;
-  display: inline-block;
-
-  svg {
-    height: 4.8rem;
-    fill: ${color("text")};
-  }
-`;
-
-const Address = styled.p`
-  margin: 0;
-  margin-top: 1.2rem;
-  font-weight: 300;
-  font-size: 2.4rem;
-  letter-spacing: -0.08rem;
 `;
 
 const segments = ["home", "work", "team", "contact"];
@@ -132,13 +101,6 @@ const Home = () => {
       <ContactSegment id="contact">
         <Contact />
       </ContactSegment>
-      <Footer id="footer">
-        <div>
-          <StyledLogo src={LogoFull} />
-          <Address>Matternstr. 7</Address>
-          <Address>10249 Berlin</Address>
-        </div>
-      </Footer>
     </Container>
   );
 };

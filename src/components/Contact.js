@@ -32,7 +32,7 @@ const Content = styled.div`
   width: 100%;
   height: 100%;
 
-  padding: ${size(5)} 0;
+  padding: ${size(6)} 0;
 
   display: flex;
   flex-direction: column;
