@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { color } from "../theme";
+import { color, font, size } from "../theme";
 import { transparentize } from "../polished";
 import berlin from "../../assets/images/berlin-sharp.jpg";
 
@@ -18,22 +18,40 @@ const Container = styled.div`
   background-position-x: 100%;
 `;
 
-const Content = styled.div`
+const Curtain = styled.div`
   position: absolute;
-  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+`;
+
+const Content = styled.div`
+  font-weight: 300;
+  position: absolute;
   left: 0;
   width: 100%;
   height: 100%;
 
+  padding: ${size(5)} 0;
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 
   color: ${color("white")};
 
   font-size: 3.2rem;
-  background-color: ${transparentize(0.1, "black")};
+  background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 0%,
+      ${transparentize(0.87, "accent")} 100%
+    ),
+    ${transparentize(0.1, "black")};
+
+  > * {
+    margin: 0;
+  }
 `;
 
 const Link = styled.a`
@@ -43,7 +61,6 @@ const Link = styled.a`
   &:link {
     color: ${color("accent")} !important;
     transition: opacity 200ms;
-    font-weight: 500;
     text-decoration: none;
     &:hover {
       opacity: 0.8;
@@ -52,21 +69,16 @@ const Link = styled.a`
 `;
 
 const Header = styled.h2`
-  position: relative;
-  align-self: center;
-  justify-self: flex-start;
-  margin: 4.8rem 0;
-  text-align: center;
-  font-weight: 300;
-  font-size: 4.8rem;
-  color: ${color("black")};
+  color: ${color("accent")};
+  font-weight: 500;
+  font-family: ${font("display")};
 `;
 
 // TOOD video of berlin in background?
 const Contact = () => (
   <Container>
     <Content>
-      <h2>Let's get in touch.</h2>
+      <Header>Let's get in touch.</Header>
       <p>
         <Link href="mailto:hello@makersden.io">hello@makersden.io</Link>
       </p>
