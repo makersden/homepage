@@ -83,23 +83,13 @@ const KalleImage = styled(GracefulImage).attrs({
 `;
 
 const AuthorSpan = styled.span`
-  ${authorStyle} color: ${color("black")};
+  ${authorStyle};
+  color: ${color("black")};
 `;
 
-const AuthorLink = styled.a.attrs({
-  target: "blank"
-})`
-  &,
-  &:active,
-  &:visited,
-  &:link {
-    ${authorStyle} color: ${color("whiteAlt")} !important;
-    transition: opacity 200ms;
-    font-weight: 500;
-    &:hover {
-      opacity: 0.8;
-    }
-  }
+const AuthorLink = styled(SectionModule.AuthorLink)`
+  ${authorStyle};
+  color: ${color("whiteAlt")} !important;
 `;
 
 const Author = ({ children, href }) =>

@@ -56,6 +56,7 @@ const Subtitle = styled(Box)`
   align-self: flex-end;
   display: flex;
   flex-direction: column;
+  font-family: monospace;
   align-items: flex-end;
   span {
     display: block;
@@ -83,7 +84,7 @@ const Home = () => {
           <StyledCogs />
           <Subtitle w={6 / 12} mx={4} px={4}>
             <div>
-              <span>We solve hard problems</span>
+              <span>We solve gnarly problems</span>
               <span>to realize amazing ideas.</span>
             </div>
           </Subtitle>

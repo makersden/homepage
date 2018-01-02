@@ -28,6 +28,11 @@ injectGlobal`
     padding: 0;
     overflow-x: hidden;
   }
+
+  a,
+  a:link {
+    text-decoration-skip: ink;
+  }
 `;
 
 const TemplateWrapper = props => (

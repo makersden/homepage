@@ -5,8 +5,10 @@ import { Box } from "grid-styled";
 import LogoFull from "../../assets/logoFull.svg";
 import LogoShort from "../../assets/logoShort.svg";
 import GracefulImage from "../GracefulImage";
+import FadeWithoutFont from "../FadeWithoutFont";
 
 import { color, size } from "../theme";
+import { transition } from "../mixins";
 import GracefulSvg from "../GracefulSvg";
 import facebook from "../../assets/images/facebook.svg";
 import twitter from "../../assets/images/twitter.svg";
@@ -56,9 +58,10 @@ const SocialLink = styled.a.attrs({
 })`
   text-decoration: none;
   opacity: 0.9;
-  transition: opacity 200ms;
+  ${transition("opacity", "transform")};
   :hover {
     opacity: 1;
+    transform: scale(1.2);
   }
 `;
 
@@ -83,26 +86,28 @@ const Address = styled.p`
 `;
 
 const Footer = () => (
-  <StyledFooter id="footer" p={3}>
-    <div>
-      <StyledLogo src={LogoFull} />
-      <Box mt={3}>
-        <Socials>
-          <SocialLink href="https://www.facebook.com/wearemakersden/">
-            <SocialIcon src={facebook} />
-          </SocialLink>
-          <SocialLink href="https://twitter.com/makers_den">
-            <SocialIcon src={twitter} />
-          </SocialLink>
-        </Socials>
-        <Address>Germaniastr. 1, 12345 Berlin</Address>
-      </Box>
-    </div>
-    <TaglineSection>
-      <span>All you need is</span>
-      <SmallStyledLogo />
-    </TaglineSection>
-  </StyledFooter>
+  <FadeWithoutFont>
+    <StyledFooter id="footer" p={3}>
+      <div>
+        <StyledLogo src={LogoFull} />
+        <Box mt={3}>
+          <Socials>
+            <SocialLink href="https://www.facebook.com/wearemakersden/">
+              <SocialIcon src={facebook} />
+            </SocialLink>
+            <SocialLink href="https://twitter.com/makers_den">
+              <SocialIcon src={twitter} />
+            </SocialLink>
+          </Socials>
+          <Address>Germaniastr. 1, 12345 Berlin</Address>
+        </Box>
+      </div>
+      <TaglineSection>
+        <span>All you need is</span>
+        <SmallStyledLogo />
+      </TaglineSection>
+    </StyledFooter>
+  </FadeWithoutFont>
 );
 
 export default Footer;

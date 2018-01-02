@@ -6,20 +6,27 @@ import OnScreenDetect from "./OnScreenDetect";
 import { fade } from "./mixins";
 
 const StyledGracefulSvg = styled(Isvg)`
-  ${fade} &.loaded {
+  ${fade} svg {
+    ${fade};
+  }
+
+  &.loaded {
     opacity: 1;
+    svg {
+      opacity: 1;
+    }
   }
 `;
 
 const GracefulSvg = props => {
-  const preload = props.preload || <div className={props.className} />;
+  const preloader = props.preloader || <div className={props.className} />;
   return (
     <OnScreenDetect once>
       {({ isOnScreen }) =>
         isOnScreen ? (
-          <StyledGracefulSvg {...props} preload={preload} />
+          <StyledGracefulSvg {...props} preloader={preloader} />
         ) : (
-          preload
+          preloader
         )}
     </OnScreenDetect>
   );

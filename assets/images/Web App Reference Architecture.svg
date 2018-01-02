@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1792" height="1063" viewBox="-992 -32 1792 1063">
+<!-- <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1792" height="1063" viewBox="-992 -32 1792 1063"> -->
+<!-- #4286c5 -->
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="1702" height="913" viewBox="-30 150 92 733">
   <defs>
     <style type="text/css">@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');</style>
   </defs>
@@ -21,14 +23,14 @@
         <g>
           <g transform="translate(0 0)">
             <svg x="0" y="222" overflow="visible" style="user-select:none;">
-              <polygon points="0 0, 192 111, -192 333, -384 222" fill="#e8e8e8" stroke="#e8e8e8" stroke-width="40" />
+              <polygon points="0 0, 192 111, -192 333, -384 222" fill="#444" stroke="#444" stroke-width="40" />
             </svg>
           </g>
         </g>
         <g>
           <g transform="translate(0 0)">
             <svg x="256" y="370" overflow="visible" style="user-select:none;">
-              <polygon points="0 0, 192 111, -192 333, -384 222" fill="#e8e8e8" stroke="#e8e8e8" stroke-width="40" />
+              <polygon points="0 0, 192 111, -192 333, -384 222" fill="#444" stroke="#444" stroke-width="40" />
             </svg>
           </g>
         </g>
@@ -69,183 +71,183 @@
         <g>
           <g>
             <g>
-              <line x1="80" y1="213" x2="32" y2="241" stroke="#000000" stroke-width="2" stroke-linecap="none" />
+              <line x1="80" y1="213" x2="32" y2="241" stroke="#f2f2f2" stroke-width="2" stroke-linecap="none" />
             </g>
             <g>
-              <line x1="112" y1="213" x2="80" y2="213" stroke="#000000" stroke-width="2" stroke-linecap="round" />
+              <line x1="112" y1="213" x2="80" y2="213" stroke="#f2f2f2" stroke-width="2" stroke-linecap="round" />
             </g>
             <g>
-              <line x1="223" y1="277" x2="159" y2="314" stroke="#000000" stroke-width="2" stroke-linecap="none" />
+              <line x1="223" y1="277" x2="159" y2="314" stroke="#f2f2f2" stroke-width="2" stroke-linecap="none" />
             </g>
             <g>
-              <line x1="350" y1="351" x2="286" y2="388" stroke="#000000" stroke-width="2" stroke-linecap="none" />
+              <line x1="350" y1="351" x2="286" y2="388" stroke="#f2f2f2" stroke-width="2" stroke-linecap="none" />
             </g>
             <g>
-              <line x1="462" y1="433" x2="414" y2="461" stroke="#000000" stroke-width="2" stroke-linecap="none" />
+              <line x1="462" y1="433" x2="414" y2="461" stroke="#f2f2f2" stroke-width="2" stroke-linecap="none" />
             </g>
             <g>
-              <line x1="462" y1="415" x2="462" y2="433" stroke="#000000" stroke-width="2" stroke-linecap="round" />
+              <line x1="462" y1="415" x2="462" y2="433" stroke="#f2f2f2" stroke-width="2" stroke-linecap="round" />
             </g>
             <g>
-              <line x1="112" y1="213" x2="462" y2="415" stroke="#000000" stroke-width="2" stroke-linecap="round" />
+              <line x1="112" y1="213" x2="462" y2="415" stroke="#f2f2f2" stroke-width="2" stroke-linecap="round" />
             </g>
             <g>
-              <line x1="288" y1="315" x2="342" y2="283" stroke="#000000" stroke-width="2" stroke-linecap="round" />
-              <polygon points="352 278, 326 283, 340 285, 343 292, 352 278" stroke-linejoin="round" fill="#000000" stroke="#000000" stroke-width="1" />
+              <line x1="288" y1="315" x2="342" y2="283" stroke="#f2f2f2" stroke-width="2" stroke-linecap="round" />
+              <polygon points="352 278, 326 283, 340 285, 343 292, 352 278" stroke-linejoin="round" fill="#f2f2f2" stroke="#f2f2f2" stroke-width="1" />
             </g>
           </g>
         </g>
         <g>
           <g>
-            <line x1="-608" y1="426" x2="-502" y2="364" stroke="#000000" stroke-width="2" stroke-linecap="round" />
-            <polygon points="-493 359, -518 364, -505 366, -502 374, -493 359" stroke-linejoin="round" fill="#000000" stroke="#000000" stroke-width="1" />
+            <line x1="-608" y1="426" x2="-502" y2="364" stroke="#f2f2f2" stroke-width="2" stroke-linecap="round" />
+            <polygon points="-493 359, -518 364, -505 366, -502 374, -493 359" stroke-linejoin="round" fill="#f2f2f2" stroke="#f2f2f2" stroke-width="1" />
           </g>
         </g>
         <g>
           <g>
-            <line x1="416" y1="278" x2="502" y2="327" stroke="#000000" stroke-width="2" stroke-dasharray="8,6" stroke-linecap="butt" />
-            <polygon points="512 333, 503 318, 500 326, 486 328, 512 333" stroke-linejoin="round" fill="#000000" stroke="#000000" stroke-width="1" />
+            <line x1="416" y1="278" x2="502" y2="327" stroke="#f2f2f2" stroke-width="2" stroke-dasharray="8,6" stroke-linecap="butt" />
+            <polygon points="512 333, 503 318, 500 326, 486 328, 512 333" stroke-linejoin="round" fill="#f2f2f2" stroke="#f2f2f2" stroke-width="1" />
           </g>
         </g>
         <g>
           <g>
-            <line x1="-448" y1="740" x2="-320" y2="814" stroke="#000000" stroke-width="2" stroke-linecap="round" />
+            <line x1="-448" y1="740" x2="-320" y2="814" stroke="#f2f2f2" stroke-width="2" stroke-linecap="round" />
           </g>
         </g>
         <g>
           <g>
-            <line x1="-416" y1="722" x2="-416" y2="685" stroke="#000000" stroke-width="2" stroke-linecap="round" />
-          </g>
-        </g>
-        <g>
-          <g>
-            <g>
-              <line x1="-80" y1="305" x2="-42" y2="283" stroke="#000000" stroke-width="2" stroke-linecap="none" />
-              <polygon points="-32 278, -58 283, -44 285, -41 292, -32 278" stroke-linejoin="round" fill="#000000" stroke="#000000" stroke-width="1" />
-            </g>
-            <g>
-              <line x1="-80" y1="324" x2="-80" y2="305" stroke="#000000" stroke-width="2" stroke-linecap="round" />
-            </g>
-            <g>
-              <line x1="31" y1="388" x2="86" y2="357" stroke="#000000" stroke-width="2" stroke-linecap="none" />
-              <polygon points="95 351, 70 356, 83 358, 86 366, 95 351" stroke-linejoin="round" fill="#000000" stroke="#000000" stroke-width="1" />
-            </g>
-            <g>
-              <line x1="158" y1="462" x2="213" y2="430" stroke="#000000" stroke-width="2" stroke-linecap="none" />
-              <polygon points="222 425, 197 430, 210 432, 213 439, 222 425" stroke-linejoin="round" fill="#000000" stroke="#000000" stroke-width="1" />
-            </g>
-            <g>
-              <line x1="302" y1="526" x2="340" y2="504" stroke="#000000" stroke-width="2" stroke-linecap="none" />
-              <polygon points="350 498, 324 504, 337 505, 340 513, 350 498" stroke-linejoin="round" fill="#000000" stroke="#000000" stroke-width="1" />
-            </g>
-            <g>
-              <line x1="270" y1="526" x2="302" y2="526" stroke="#000000" stroke-width="2" stroke-linecap="round" />
-            </g>
-            <g>
-              <line x1="-80" y1="324" x2="270" y2="526" stroke="#000000" stroke-width="2" stroke-linecap="round" />
-            </g>
-            <g>
-              <line x1="81" y1="434" x2="96" y2="426" stroke="#000000" stroke-width="2" stroke-linecap="round" />
-            </g>
-          </g>
-        </g>
-        <g>
-          <g>
-            <line x1="-416" y1="685" x2="-470" y2="653" stroke="#000000" stroke-width="2" stroke-linecap="round" />
-            <polygon points="-480 648, -471 662, -468 655, -454 653, -480 648" stroke-linejoin="round" fill="#000000" stroke="#000000" stroke-width="1" />
-          </g>
-        </g>
-        <g>
-          <g>
-            <line x1="-608" y1="574" x2="-608" y2="426" stroke="#000000" stroke-width="2" stroke-linecap="round" />
-          </g>
-        </g>
-        <g>
-          <g>
-            <line x1="-320" y1="814" x2="-323" y2="813" stroke="#000000" stroke-width="2" stroke-linecap="round" />
-            <polygon points="-313 818, -322 803, -325 811, -338 813, -313 818" stroke-linejoin="round" fill="#000000" stroke="#000000" stroke-width="1" />
-          </g>
-        </g>
-        <g>
-          <g>
-            <line x1="-476" y1="756" x2="-448" y2="740" stroke="#000000" stroke-width="2" stroke-linecap="round" />
-          </g>
-        </g>
-        <g>
-          <g>
-            <line x1="-556" y1="603" x2="-608" y2="574" stroke="#000000" stroke-width="2" stroke-linecap="round" />
-          </g>
-        </g>
-        <g>
-          <g>
-            <line x1="-476" y1="756" x2="-416" y2="722" stroke="#000000" stroke-width="2" stroke-linecap="round" />
+            <line x1="-416" y1="722" x2="-416" y2="685" stroke="#f2f2f2" stroke-width="2" stroke-linecap="round" />
           </g>
         </g>
         <g>
           <g>
             <g>
-              <line x1="-336" y1="527" x2="-298" y2="505" stroke="#000000" stroke-width="2" stroke-linecap="none" />
-              <polygon points="-288 500, -314 505, -300 507, -297 514, -288 500" stroke-linejoin="round" fill="#000000" stroke="#000000" stroke-width="1" />
+              <line x1="-80" y1="305" x2="-42" y2="283" stroke="#f2f2f2" stroke-width="2" stroke-linecap="none" />
+              <polygon points="-32 278, -58 283, -44 285, -41 292, -32 278" stroke-linejoin="round" fill="#f2f2f2" stroke="#f2f2f2" stroke-width="1" />
             </g>
             <g>
-              <line x1="-336" y1="546" x2="-336" y2="527" stroke="#000000" stroke-width="2" stroke-linecap="round" />
+              <line x1="-80" y1="324" x2="-80" y2="305" stroke="#f2f2f2" stroke-width="2" stroke-linecap="round" />
             </g>
             <g>
-              <line x1="-288" y1="574" x2="-234" y2="542" stroke="#000000" stroke-width="2" stroke-linecap="none" />
-              <polygon points="-224 537, -250 542, -236 544, -233 551, -224 537" stroke-linejoin="round" fill="#000000" stroke="#000000" stroke-width="1" />
+              <line x1="31" y1="388" x2="86" y2="357" stroke="#f2f2f2" stroke-width="2" stroke-linecap="none" />
+              <polygon points="95 351, 70 356, 83 358, 86 366, 95 351" stroke-linejoin="round" fill="#f2f2f2" stroke="#f2f2f2" stroke-width="1" />
             </g>
             <g>
-              <line x1="-160" y1="648" x2="-106" y2="616" stroke="#000000" stroke-width="2" stroke-linecap="none" />
-              <polygon points="-96 611, -122 616, -108 618, -105 625, -96 611" stroke-linejoin="round" fill="#000000" stroke="#000000" stroke-width="1" />
+              <line x1="158" y1="462" x2="213" y2="430" stroke="#f2f2f2" stroke-width="2" stroke-linecap="none" />
+              <polygon points="222 425, 197 430, 210 432, 213 439, 222 425" stroke-linejoin="round" fill="#f2f2f2" stroke="#f2f2f2" stroke-width="1" />
             </g>
             <g>
-              <line x1="-80" y1="675" x2="-42" y2="653" stroke="#000000" stroke-width="2" stroke-linecap="none" />
-              <polygon points="-32 648, -58 653, -44 655, -41 662, -32 648" stroke-linejoin="round" fill="#000000" stroke="#000000" stroke-width="1" />
+              <line x1="302" y1="526" x2="340" y2="504" stroke="#f2f2f2" stroke-width="2" stroke-linecap="none" />
+              <polygon points="350 498, 324 504, 337 505, 340 513, 350 498" stroke-linejoin="round" fill="#f2f2f2" stroke="#f2f2f2" stroke-width="1" />
             </g>
             <g>
-              <line x1="-112" y1="675" x2="-80" y2="675" stroke="#000000" stroke-width="2" stroke-linecap="round" />
+              <line x1="270" y1="526" x2="302" y2="526" stroke="#f2f2f2" stroke-width="2" stroke-linecap="round" />
             </g>
             <g>
-              <line x1="-336" y1="546" x2="-112" y2="675" stroke="#000000" stroke-width="2" stroke-linecap="round" />
+              <line x1="-80" y1="324" x2="270" y2="526" stroke="#f2f2f2" stroke-width="2" stroke-linecap="round" />
             </g>
             <g>
-              <line x1="-271" y1="638" x2="-224" y2="611" stroke="#000000" stroke-width="2" stroke-linecap="round" />
+              <line x1="81" y1="434" x2="96" y2="426" stroke="#f2f2f2" stroke-width="2" stroke-linecap="round" />
+            </g>
+          </g>
+        </g>
+        <g>
+          <g>
+            <line x1="-416" y1="685" x2="-470" y2="653" stroke="#f2f2f2" stroke-width="2" stroke-linecap="round" />
+            <polygon points="-480 648, -471 662, -468 655, -454 653, -480 648" stroke-linejoin="round" fill="#f2f2f2" stroke="#f2f2f2" stroke-width="1" />
+          </g>
+        </g>
+        <g>
+          <g>
+            <line x1="-608" y1="574" x2="-608" y2="426" stroke="#f2f2f2" stroke-width="2" stroke-linecap="round" />
+          </g>
+        </g>
+        <g>
+          <g>
+            <line x1="-320" y1="814" x2="-323" y2="813" stroke="#f2f2f2" stroke-width="2" stroke-linecap="round" />
+            <polygon points="-313 818, -322 803, -325 811, -338 813, -313 818" stroke-linejoin="round" fill="#f2f2f2" stroke="#f2f2f2" stroke-width="1" />
+          </g>
+        </g>
+        <g>
+          <g>
+            <line x1="-476" y1="756" x2="-448" y2="740" stroke="#f2f2f2" stroke-width="2" stroke-linecap="round" />
+          </g>
+        </g>
+        <g>
+          <g>
+            <line x1="-556" y1="603" x2="-608" y2="574" stroke="#f2f2f2" stroke-width="2" stroke-linecap="round" />
+          </g>
+        </g>
+        <g>
+          <g>
+            <line x1="-476" y1="756" x2="-416" y2="722" stroke="#f2f2f2" stroke-width="2" stroke-linecap="round" />
+          </g>
+        </g>
+        <g>
+          <g>
+            <g>
+              <line x1="-336" y1="527" x2="-298" y2="505" stroke="#f2f2f2" stroke-width="2" stroke-linecap="none" />
+              <polygon points="-288 500, -314 505, -300 507, -297 514, -288 500" stroke-linejoin="round" fill="#f2f2f2" stroke="#f2f2f2" stroke-width="1" />
+            </g>
+            <g>
+              <line x1="-336" y1="546" x2="-336" y2="527" stroke="#f2f2f2" stroke-width="2" stroke-linecap="round" />
+            </g>
+            <g>
+              <line x1="-288" y1="574" x2="-234" y2="542" stroke="#f2f2f2" stroke-width="2" stroke-linecap="none" />
+              <polygon points="-224 537, -250 542, -236 544, -233 551, -224 537" stroke-linejoin="round" fill="#f2f2f2" stroke="#f2f2f2" stroke-width="1" />
+            </g>
+            <g>
+              <line x1="-160" y1="648" x2="-106" y2="616" stroke="#f2f2f2" stroke-width="2" stroke-linecap="none" />
+              <polygon points="-96 611, -122 616, -108 618, -105 625, -96 611" stroke-linejoin="round" fill="#f2f2f2" stroke="#f2f2f2" stroke-width="1" />
+            </g>
+            <g>
+              <line x1="-80" y1="675" x2="-42" y2="653" stroke="#f2f2f2" stroke-width="2" stroke-linecap="none" />
+              <polygon points="-32 648, -58 653, -44 655, -41 662, -32 648" stroke-linejoin="round" fill="#f2f2f2" stroke="#f2f2f2" stroke-width="1" />
+            </g>
+            <g>
+              <line x1="-112" y1="675" x2="-80" y2="675" stroke="#f2f2f2" stroke-width="2" stroke-linecap="round" />
+            </g>
+            <g>
+              <line x1="-336" y1="546" x2="-112" y2="675" stroke="#f2f2f2" stroke-width="2" stroke-linecap="round" />
+            </g>
+            <g>
+              <line x1="-271" y1="638" x2="-224" y2="611" stroke="#f2f2f2" stroke-width="2" stroke-linecap="round" />
             </g>
           </g>
         </g>
         <g>
           <g>
             <g>
-              <line x1="-176" y1="435" x2="-224" y2="463" stroke="#000000" stroke-width="2" stroke-linecap="none" />
+              <line x1="-176" y1="435" x2="-224" y2="463" stroke="#f2f2f2" stroke-width="2" stroke-linecap="none" />
             </g>
             <g>
-              <line x1="-144" y1="435" x2="-176" y2="435" stroke="#000000" stroke-width="2" stroke-linecap="round" />
+              <line x1="-144" y1="435" x2="-176" y2="435" stroke="#f2f2f2" stroke-width="2" stroke-linecap="round" />
             </g>
             <g>
-              <line x1="-96" y1="463" x2="-160" y2="500" stroke="#000000" stroke-width="2" stroke-linecap="none" />
+              <line x1="-96" y1="463" x2="-160" y2="500" stroke="#f2f2f2" stroke-width="2" stroke-linecap="none" />
             </g>
             <g>
-              <line x1="32" y1="537" x2="-32" y2="574" stroke="#000000" stroke-width="2" stroke-linecap="none" />
+              <line x1="32" y1="537" x2="-32" y2="574" stroke="#f2f2f2" stroke-width="2" stroke-linecap="none" />
             </g>
             <g>
-              <line x1="80" y1="583" x2="32" y2="611" stroke="#000000" stroke-width="2" stroke-linecap="none" />
+              <line x1="80" y1="583" x2="32" y2="611" stroke="#f2f2f2" stroke-width="2" stroke-linecap="none" />
             </g>
             <g>
-              <line x1="80" y1="564" x2="80" y2="583" stroke="#000000" stroke-width="2" stroke-linecap="round" />
+              <line x1="80" y1="564" x2="80" y2="583" stroke="#f2f2f2" stroke-width="2" stroke-linecap="round" />
             </g>
             <g>
-              <line x1="-144" y1="435" x2="80" y2="564" stroke="#000000" stroke-width="2" stroke-linecap="round" />
+              <line x1="-144" y1="435" x2="80" y2="564" stroke="#f2f2f2" stroke-width="2" stroke-linecap="round" />
             </g>
             <g>
-              <line x1="-32" y1="500" x2="-10" y2="487" stroke="#000000" stroke-width="2" stroke-linecap="round" />
-              <polygon points="0 481, -26 486, -12 488, -9 496, 0 481" stroke-linejoin="round" fill="#000000" stroke="#000000" stroke-width="1" />
+              <line x1="-32" y1="500" x2="-10" y2="487" stroke="#f2f2f2" stroke-width="2" stroke-linecap="round" />
+              <polygon points="0 481, -26 486, -12 488, -9 496, 0 481" stroke-linejoin="round" fill="#f2f2f2" stroke="#f2f2f2" stroke-width="1" />
             </g>
           </g>
         </g>
         <g>
           <g>
-            <line x1="-416" y1="722" x2="-362" y2="690" stroke="#000000" stroke-width="2" stroke-linecap="round" />
-            <polygon points="-352 685, -378 690, -364 692, -361 699, -352 685" stroke-linejoin="round" fill="#000000" stroke="#000000" stroke-width="1" />
+            <line x1="-416" y1="722" x2="-362" y2="690" stroke="#f2f2f2" stroke-width="2" stroke-linecap="round" />
+            <polygon points="-352 685, -378 690, -364 692, -361 699, -352 685" stroke-linejoin="round" fill="#f2f2f2" stroke="#f2f2f2" stroke-width="1" />
           </g>
         </g>
       </g>
@@ -561,7 +563,7 @@
             <svg x="-608" y="426" overflow="visible">
               <g transform="scale(0.8944271909999159) matrix(0.707 0.409 -0.707 0.409 0 0)">
                 <circle cx="0" cy="0" fill="#ffc107" r="23" />
-                <svg x="-13.5" y="-16" style="fill:#ffffff;">
+                <svg x="-13.5" y="-16" style="fill:#444;">
                   <svg width="27" height="32" viewBox="0 0 27 32">
                     <path d="M26.214 6.786c.661.661 1.214 1.982 1.214 2.929v20.571c0 .946-.768 1.714-1.714 1.714h-24A1.715 1.715 0 0 1 0 30.286V1.715C0 .769.768.001 1.714.001h16c.946 0 2.268.554 2.929 1.214zm-7.928-4.357v6.714H25c-.107-.304-.268-.607-.393-.732l-5.589-5.589c-.125-.125-.429-.286-.732-.393zm6.857 27.285V11.428h-7.429A1.715 1.715 0 0 1 16 9.714V2.285H2.286v27.429h22.857zM6.857 14.286c0-.321.25-.571.571-.571h12.571c.321 0 .571.25.571.571v1.143c0 .321-.25.571-.571.571H7.428a.564.564 0 0 1-.571-.571v-1.143zm13.143 4c.321 0 .571.25.571.571V20c0 .321-.25.571-.571.571H7.429A.564.564 0 0 1 6.858 20v-1.143c0-.321.25-.571.571-.571H20zm0 4.571c.321 0 .571.25.571.571v1.143c0 .321-.25.571-.571.571H7.429a.564.564 0 0 1-.571-.571v-1.143c0-.321.25-.571.571-.571H20z" />
                   </svg>
@@ -574,7 +576,7 @@
           <g transform="translate(0 0)">
             <svg x="-416" y="722" overflow="visible">
               <g transform="scale(0.8944271909999159) matrix(0.707 0.409 -0.707 0.409 0 0)">
-                <circle cx="0" cy="0" fill="#000000" r="23" />
+                <circle cx="0" cy="0" fill="#444" r="23" />
                 <svg x="-10.5" y="-16" style="fill:#ffffff;">
                   <svg width="21" height="32" viewBox="0 0 21 32">
                     <path d="M5.714 13.714h9.143v-3.429c0-2.518-2.054-4.571-4.571-4.571s-4.571 2.054-4.571 4.571v3.429zm14.857 1.715v10.286c0 .946-.768 1.714-1.714 1.714H1.714A1.715 1.715 0 0 1 0 25.715V15.429c0-.946.768-1.714 1.714-1.714h.571v-3.429c0-4.393 3.607-8 8-8s8 3.607 8 8v3.429h.571c.946 0 1.714.768 1.714 1.714z" />
@@ -589,7 +591,7 @@
         <g>
           <g transform="translate(0 0)">
             <svg x="-192" y="796" overflow="visible" style="user-select:none;">
-              <text stroke="#ffffff" stroke-width="4" font-family="Open Sans" y="25.099999999999998" font-size="15pt" fill="#f5b720" font-weight="bold" transform="matrix(0.707 0.409 -0.707 0.409 0 0)">
+              <text font-family="Open Sans" y="25.099999999999998" font-size="15pt" fill="#f5b720" font-weight="bold" transform="matrix(0.707 0.409 -0.707 0.409 0 0)">
                 <tspan x="8" dy="0">Amazon</tspan>
               </text>
               <text font-family="Open Sans" y="25.099999999999998" font-size="15pt" fill="#f5b720" font-weight="bold" transform="matrix(0.707 0.409 -0.707 0.409 0 0)">
@@ -601,7 +603,7 @@
         <g>
           <g transform="translate(0 0)">
             <svg x="-208" y="805" overflow="visible" style="user-select:none;">
-              <text stroke="#ffffff" stroke-width="4" font-family="Open Sans" y="36.5" font-size="25pt" fill="#f5b720" font-weight="bold" transform="matrix(0.707 0.409 -0.707 0.409 0 0)">
+              <text font-family="Open Sans" y="36.5" font-size="25pt" fill="#f5b720" font-weight="bold" transform="matrix(0.707 0.409 -0.707 0.409 0 0)">
                 <tspan x="8" dy="0">Route 53</tspan>
               </text>
               <text font-family="Open Sans" y="36.5" font-size="25pt" fill="#f5b720" font-weight="bold" transform="matrix(0.707 0.409 -0.707 0.409 0 0)">
@@ -625,11 +627,11 @@
         <g>
           <g transform="translate(0 0)">
             <svg x="80" y="768" overflow="visible" style="user-select:none;">
-              <text stroke="#ffffff" stroke-width="4" font-family="Open Sans" y="36.5" font-size="25pt" fill="#004b91" font-weight="bold" transform="matrix(0.707 -0.409 0.707 0.409 0 0)">
+              <text font-family="Open Sans" y="36.5" font-size="25pt" fill="#4286c5" font-weight="bold" transform="matrix(0.707 -0.409 0.707 0.409 0 0)">
                 <tspan x="8" dy="0">Auto Scaling</tspan>
                 <tspan x="8" dy="1.1em">Api Services</tspan>
               </text>
-              <text font-family="Open Sans" y="36.5" font-size="25pt" fill="#004b91" font-weight="bold" transform="matrix(0.707 -0.409 0.707 0.409 0 0)">
+              <text font-family="Open Sans" y="36.5" font-size="25pt" fill="#4286c5" font-weight="bold" transform="matrix(0.707 -0.409 0.707 0.409 0 0)">
                 <tspan x="8" dy="0">Auto Scaling</tspan>
                 <tspan x="8" dy="1.1em">Api Services</tspan>
               </text>
@@ -639,11 +641,11 @@
         <g>
           <g transform="translate(0 0)">
             <svg x="384" y="592" overflow="visible" style="user-select:none;">
-              <text stroke="#ffffff" stroke-width="4" font-family="Open Sans" y="36.5" font-size="25pt" fill="#004b91" font-weight="bold" transform="matrix(0.707 -0.409 0.707 0.409 0 0)">
+              <text font-family="Open Sans" y="36.5" font-size="25pt" fill="#4286c5" font-weight="bold" transform="matrix(0.707 -0.409 0.707 0.409 0 0)">
                 <tspan x="8" dy="0">Auto Scaling</tspan>
                 <tspan x="8" dy="1.1em">Micro Services</tspan>
               </text>
-              <text font-family="Open Sans" y="36.5" font-size="25pt" fill="#004b91" font-weight="bold" transform="matrix(0.707 -0.409 0.707 0.409 0 0)">
+              <text font-family="Open Sans" y="36.5" font-size="25pt" fill="#4286c5" font-weight="bold" transform="matrix(0.707 -0.409 0.707 0.409 0 0)">
                 <tspan x="8" dy="0">Auto Scaling</tspan>
                 <tspan x="8" dy="1.1em">Micro Services</tspan>
               </text>
@@ -653,7 +655,7 @@
         <g>
           <g transform="translate(0 0)">
             <svg x="-240" y="657" overflow="visible" style="user-select:none;">
-              <text stroke="#ffffff" stroke-width="4" font-family="Open Sans" y="36.5" font-size="25pt" fill="#f5b720" font-weight="bold" transform="matrix(0.707 0.409 -0.707 0.409 0 0)">
+              <text font-family="Open Sans" y="36.5" font-size="25pt" fill="#f5b720" font-weight="bold" transform="matrix(0.707 0.409 -0.707 0.409 0 0)">
                 <tspan x="8" dy="0">Elastic Load</tspan>
                 <tspan x="8" dy="1.1em">Balancing</tspan>
               </text>
@@ -667,7 +669,7 @@
         <g>
           <g transform="translate(0 0)">
             <svg x="64" y="481" overflow="visible" style="user-select:none;">
-              <text stroke="#ffffff" stroke-width="4" font-family="Open Sans" y="36.5" font-size="25pt" fill="#f5b720" font-weight="bold" transform="matrix(0.707 0.409 -0.707 0.409 0 0)">
+              <text font-family="Open Sans" y="36.5" font-size="25pt" fill="#f5b720" font-weight="bold" transform="matrix(0.707 0.409 -0.707 0.409 0 0)">
                 <tspan x="8" dy="0">Elastic Load</tspan>
                 <tspan x="8" dy="1.1em">Balancing</tspan>
               </text>
@@ -681,7 +683,7 @@
         <g>
           <g transform="translate(0 0)">
             <svg x="256" y="148" overflow="visible" style="user-select:none;">
-              <text stroke="#ffffff" stroke-width="4" font-family="Open Sans" y="36.5" font-size="25pt" fill="#f5b720" font-weight="bold" transform="matrix(0.707 0.409 -0.707 0.409 0 0)">
+              <text font-family="Open Sans" y="36.5" font-size="25pt" fill="#f5b720" font-weight="bold" transform="matrix(0.707 0.409 -0.707 0.409 0 0)">
                 <tspan x="8" dy="0">RDS</tspan>
               </text>
               <text font-family="Open Sans" y="36.5" font-size="25pt" fill="#f5b720" font-weight="bold" transform="matrix(0.707 0.409 -0.707 0.409 0 0)">
@@ -693,7 +695,7 @@
         <g>
           <g transform="translate(0 0)">
             <svg x="224" y="167" overflow="visible" style="user-select:none;">
-              <text stroke="#ffffff" stroke-width="4" font-family="Open Sans" y="25.099999999999998" font-size="15pt" fill="#f5b720" font-weight="bold" transform="matrix(0.707 0.409 -0.707 0.409 0 0)">
+              <text font-family="Open Sans" y="25.099999999999998" font-size="15pt" fill="#f5b720" font-weight="bold" transform="matrix(0.707 0.409 -0.707 0.409 0 0)">
                 <tspan x="8" dy="0">Master</tspan>
               </text>
               <text font-family="Open Sans" y="25.099999999999998" font-size="15pt" fill="#f5b720" font-weight="bold" transform="matrix(0.707 0.409 -0.707 0.409 0 0)">
@@ -705,7 +707,7 @@
         <g>
           <g transform="translate(0 0)">
             <svg x="-592" y="620" overflow="visible" style="user-select:none;">
-              <text stroke="#ffffff" stroke-width="4" font-family="Open Sans" y="36.5" font-size="25pt" fill="#ffc107" font-weight="bold" transform="matrix(0.707 0.409 -0.707 0.409 0 0)">
+              <text font-family="Open Sans" y="36.5" font-size="25pt" fill="#ffc107" font-weight="bold" transform="matrix(0.707 0.409 -0.707 0.409 0 0)">
                 <tspan x="8" dy="0">CDN</tspan>
               </text>
               <text font-family="Open Sans" y="36.5" font-size="25pt" fill="#ffc107" font-weight="bold" transform="matrix(0.707 0.409 -0.707 0.409 0 0)">
@@ -717,7 +719,7 @@
         <g>
           <g transform="translate(0 0)">
             <svg x="-451" y="350" overflow="visible" style="user-select:none;">
-              <text stroke="#ffffff" stroke-width="4" font-family="Open Sans" y="36.5" font-size="25pt" fill="#ffc107" font-weight="bold" transform="matrix(0.707 0.409 -0.707 0.409 0 0)">
+              <text font-family="Open Sans" y="36.5" font-size="25pt" fill="#ffc107" font-weight="bold" transform="matrix(0.707 0.409 -0.707 0.409 0 0)">
                 <tspan x="8" dy="0">S3</tspan>
               </text>
               <text font-family="Open Sans" y="36.5" font-size="25pt" fill="#ffc107" font-weight="bold" transform="matrix(0.707 0.409 -0.707 0.409 0 0)">
@@ -729,7 +731,7 @@
         <g>
           <g transform="translate(0 0)">
             <svg x="640" y="370" overflow="visible" style="user-select:none;">
-              <text stroke="#ffffff" stroke-width="4" font-family="Open Sans" y="36.5" font-size="25pt" fill="#ffc107" font-weight="bold" transform="matrix(0.707 0.409 -0.707 0.409 0 0)">
+              <text font-family="Open Sans" y="36.5" font-size="25pt" fill="#ffc107" font-weight="bold" transform="matrix(0.707 0.409 -0.707 0.409 0 0)">
                 <tspan x="8" dy="0">RDS</tspan>
               </text>
               <text font-family="Open Sans" y="36.5" font-size="25pt" fill="#ffc107" font-weight="bold" transform="matrix(0.707 0.409 -0.707 0.409 0 0)">
@@ -741,7 +743,7 @@
         <g>
           <g transform="translate(0 0)">
             <svg x="608" y="389" overflow="visible" style="user-select:none;">
-              <text stroke="#ffffff" stroke-width="4" font-family="Open Sans" y="25.099999999999998" font-size="15pt" fill="#f5b720" font-weight="bold" transform="matrix(0.707 0.409 -0.707 0.409 0 0)">
+              <text font-family="Open Sans" y="25.099999999999998" font-size="15pt" fill="#f5b720" font-weight="bold" transform="matrix(0.707 0.409 -0.707 0.409 0 0)">
                 <tspan x="8" dy="0">Slave</tspan>
               </text>
               <text font-family="Open Sans" y="25.099999999999998" font-size="15pt" fill="#f5b720" font-weight="bold" transform="matrix(0.707 0.409 -0.707 0.409 0 0)">
@@ -753,7 +755,7 @@
         <g>
           <g transform="translate(0 0)">
             <svg x="416" y="296" overflow="visible" style="user-select:none;">
-              <text stroke="#ffffff" stroke-width="4" font-family="Open Sans" y="25.099999999999998" font-size="15pt" fill="#607d8b" font-weight="bold" transform="matrix(0.707 0.409 -0.707 0.409 0 0)">
+              <text font-family="Open Sans" y="25.099999999999998" font-size="15pt" fill="#607d8b" font-weight="bold" transform="matrix(0.707 0.409 -0.707 0.409 0 0)">
                 <tspan x="8" dy="0">Cross-AZ</tspan>
                 <tspan x="8" dy="1.1em">Replication</tspan>
               </text>
@@ -767,7 +769,7 @@
         <g>
           <g transform="translate(0 0)">
             <svg x="-272" y="361" overflow="visible" style="user-select:none;">
-              <text stroke="#000000" stroke-width="2" font-family="Open Sans" y="25.099999999999998" font-size="15pt" fill="#ffffff" font-weight="bold" transform="matrix(0.707 -0.409 0.707 0.409 0 0)">
+              <text font-family="Open Sans" y="25.099999999999998" font-size="15pt" fill="#ffffff" font-weight="bold" transform="matrix(0.707 -0.409 0.707 0.409 0 0)">
                 <tspan x="8" dy="0">Availability Zone</tspan>
               </text>
               <text font-family="Open Sans" y="25.099999999999998" font-size="15pt" fill="#ffffff" font-weight="bold" transform="matrix(0.707 -0.409 0.707 0.409 0 0)">
@@ -779,7 +781,7 @@
         <g>
           <g transform="translate(0 0)">
             <svg x="192" y="629" overflow="visible" style="user-select:none;">
-              <text stroke="#000000" stroke-width="2" font-family="Open Sans" y="25.099999999999998" font-size="15pt" fill="#ffffff" font-weight="bold" transform="matrix(0.707 -0.409 0.707 0.409 0 0)">
+              <text font-family="Open Sans" y="25.099999999999998" font-size="15pt" fill="#ffffff" font-weight="bold" transform="matrix(0.707 -0.409 0.707 0.409 0 0)">
                 <tspan x="8" dy="0">Availability Zone</tspan>
               </text>
               <text font-family="Open Sans" y="25.099999999999998" font-size="15pt" fill="#ffffff" font-weight="bold" transform="matrix(0.707 -0.409 0.707 0.409 0 0)">
@@ -802,8 +804,8 @@
         </g>
         <g>
           <g transform="translate(0 0)">
-            <svg x="-685" y="408" overflow="visible" style="user-select:none;">
-              <text stroke="#ffffff" stroke-width="4" font-family="Open Sans" y="25.099999999999998" font-size="15pt" fill="#607d8b" font-weight="bold" transform="matrix(0.707 -0.409 0.707 0.409 0 0)">
+            <svg x="-680" y="403" overflow="visible" style="user-select:none;">
+              <text font-family="Open Sans" y="25.099999999999998" font-size="15pt" fill="#607d8b" font-weight="bold" transform="matrix(0.707 -0.409 0.707 0.409 0 0)">
                 <tspan x="8" dy="0">Static</tspan>
                 <tspan x="8" dy="1.1em">Resources</tspan>
               </text>
@@ -853,10 +855,10 @@
         <g>
           <g transform="translate(0 0)">
             <svg x="-608" y="722" overflow="visible" style="user-select:none;">
-              <text stroke="#ffffff" stroke-width="4" font-family="Open Sans" y="36.5" font-size="25pt" fill="#004b91" font-weight="bold" transform="matrix(0.707 0.409 -0.707 0.409 0 0)">
+              <text font-family="Open Sans" y="36.5" font-size="25pt" fill="#4286c5" font-weight="bold" transform="matrix(0.707 0.409 -0.707 0.409 0 0)">
                 <tspan x="8" dy="0">React Frontend</tspan>
               </text>
-              <text font-family="Open Sans" y="36.5" font-size="25pt" fill="#004b91" font-weight="bold" transform="matrix(0.707 0.409 -0.707 0.409 0 0)">
+              <text font-family="Open Sans" y="36.5" font-size="25pt" fill="#4286c5" font-weight="bold" transform="matrix(0.707 0.409 -0.707 0.409 0 0)">
                 <tspan x="8" dy="0">React Frontend</tspan>
               </text>
             </svg>

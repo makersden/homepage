@@ -10,7 +10,7 @@ const smartUnderlineDefaults = {
   size: "1px"
 };
 
-const smartUnderline = optionsInput => {
+export const smartUnderline = optionsInput => {
   const { background, text, selection, position, size } = Object.assign(
     {},
     smartUnderlineDefaults,
@@ -74,7 +74,7 @@ const borderCornerDefaults = {
   size: "0.5rem"
 };
 
-const borderCorners = optionsInput => {
+export const borderCorners = optionsInput => {
   const options = Object.assign({}, borderCornerDefaults, optionsInput);
 
   const { size } = options;
@@ -119,9 +119,17 @@ const borderCorners = optionsInput => {
   `;
 };
 
-const fade = css`
-  transition: opacity 300ms;
+export const fade = css`
+  transition: opacity 300ms 100ms;
   opacity: ${props => (props.show ? 1 : 0)};
 `;
 
-export { borderCorners, fade, smartUnderline };
+export const transition = (...props) => css`
+  transition: ${props.map(prop => `${prop} 200ms`).join(", ")};
+`;
+
+export const circle = size => css`
+  border-radius: 50%;
+  height: ${size};
+  width: ${size};
+`;

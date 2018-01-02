@@ -16,7 +16,14 @@ export const Background = styled.div`
 export const Quote = styled.blockquote`
   margin-left: 0;
   font-weight: 300;
-  margin-bottom: 4.8rem;
+  margin-bottom: ${size(2)};
+  ::before {
+    content: "“";
+  }
+
+  ::after {
+    content: "”";
+  }
 `;
 
 export const authorStyle = css`
@@ -30,14 +37,35 @@ export const authorStyle = css`
     top: 0;
   }
 
-  > span {
+  > * {
     display: block;
-    margin-left: 2.4rem;
+    margin-left: ${size(2)};
   }
 `;
 
 export const Author = styled.span`
   ${authorStyle};
+  img {
+    border-radius: 50%;
+    height: 7.5rem;
+    width: 7.5rem;
+  }
+`;
+
+export const AuthorLink = styled.a.attrs({
+  target: "blank"
+})`
+  &,
+  &:active,
+  &:visited,
+  &:link {
+    color: ${color("black")};
+    transition: opacity 200ms;
+    font-weight: 500;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
 `;
 
 export const Paragraph = styled.p`

@@ -5,8 +5,11 @@ import OnScreenDetect from "./OnScreenDetect";
 
 const Img = styled.img`
   opacity: ${props => (props.loaded ? "1" : "0")};
-  transform: translateY(${props => (props.loaded ? "0px" : "-20px")});
-  transition: opacity 800ms, transform 1000ms;
+  ${props =>
+    !props.static &&
+    css`
+      transform: translateY(${props => (props.loaded ? "0px" : "-20px")});
+    `} transition: opacity 800ms, transform 1000ms;
   ${props =>
     !props.loaded &&
     css`
@@ -32,7 +35,7 @@ class GracefulImage extends PureComponent {
   listenToLoad = element => element.addEventListener("load", this.onLoaded);
 
   render() {
-    const { className, src, alt } = this.props;
+    const { className } = this.props;
     const { loaded } = this.state;
 
     const Preloader =
@@ -42,13 +45,7 @@ class GracefulImage extends PureComponent {
       <OnScreenDetect once>
         {({ isOnScreen }) =>
           isOnScreen ? (
-            <Img
-              src={src}
-              alt={alt}
-              innerRef={this.listenToLoad}
-              loaded={loaded}
-              className={className}
-            />
+            <Img {...this.props} innerRef={this.listenToLoad} loaded={loaded} />
           ) : (
             <Preloader />
           )}

@@ -5,20 +5,25 @@ import Isvg from "react-inlinesvg";
 import { Flex } from "grid-styled";
 
 import { mix } from "../polished";
+import { circle } from "../mixins";
 import { color, column, font, size, sumSize } from "../theme";
 import OnScreenDetect from "../OnScreenDetect";
 import GracefulImage from "../GracefulImage";
 import GracefulSvg from "../GracefulSvg";
 import FWF from "../FadeWithoutFont";
 
+import architecture from "../../assets/images/Web App Reference Architecture.svg";
 import epimap3d from "../../assets/images/epimap_3d.jpg";
 import missionready from "../../assets/images/missionready.jpg";
 import revenue from "../../assets/images/revenue.svg";
 import waves from "../../assets/images/waves.png";
 import data from "../../assets/images/data.png";
+import otto from "../../assets/images/otto.png";
+import aki from "../../assets/images/aki.png";
 
 import {
-  Author,
+  authorStyle,
+  AuthorLink,
   Background,
   Description,
   Paragraph,
@@ -38,13 +43,35 @@ const Crop = styled.div`
   `} overflow: hidden;
 `;
 
+const Author = styled.figure`
+  display: flex;
+  align-items: center;
+  margin-left: 0;
+  margin-right: 0;
+
+  img {
+    ${circle("7.5rem")};
+  }
+
+  figcaption {
+    ${authorStyle} margin-left: ${size(2)};
+
+    span {
+      font-weight: 300;
+    }
+  }
+`;
+
+const AuthorImage = styled(GracefulImage).attrs({
+  static: true
+})``;
+
 const Container = styled.div`
   width: 100%;
   overflow-x: hidden;
   position: relative;
   background: url(${waves});
   background-repeat: repeat;
-  background-attachment: fixed;
   background-size: 25%;
 `;
 
@@ -235,8 +262,6 @@ const DataSection = styled(Section)`
   }
 `;
 
-const dash = 0;
-
 const YourProjectImage = styled(GracefulSvg).attrs({
   src: revenue
 })`
@@ -251,28 +276,6 @@ const YourProjectImage = styled(GracefulSvg).attrs({
   height: 50rem;
   min-height: 50rem;
   min-width: 80rem;
-
-
-  [id^='path5_stroke'],
-  [id^='path6_stroke'] {
-    stroke-dasharray: ${dash};
-  }
-
-  @keyframes runchart {
-    from {
-      stroke-dashoffset: ${dash};
-    }
-
-    90% {
-      stroke-dashoffset: 0;
-      opacity: 1;
-    }
-
-    to {
-      stroke-dashoffset: 0;
-      opacity: 0;
-    }
-  }
 `;
 
 const YourProjectImageContainer = styled.div`
@@ -334,7 +337,7 @@ const YourProjectSection = styled(Section)`
   ${Paragraph} {
     font-weight: bold;
     line-height: 1.12;
-    font-size: 2.4rem;
+    font-size: 2.2rem;
     letter-spacing: 0.12rem;
     margin-bottom: ${size(3)};
     text-align: center;
@@ -355,32 +358,43 @@ const ResponsiveImage = styled(LoadedImage)`
   max-width: 100%;
 `;
 
-const ArchitectureSvg = styled(Isvg)`
+const ArchitectureSvg = styled(Isvg).attrs({
+  src: architecture
+})`
   width: 98rem;
   height: auto;
   background: black;
+  display: block;
+  padding: ${size(4)};
+
+  &.loaded {
+    svg {
+      .drop {
+        transition: transform 1s, opacity 1.5s;
+        transform: translateY(${props => (props.show ? "0rem" : "-100rem")});
+        opacity: ${props => (props.show ? 1 : 0)};
+        ${Array.from({ length: 30 }).map(
+          (_, i) => css`
+            :nth-child(${i + 1}) {
+              transition-delay: ${i * 200}ms;
+            }
+          `
+        )}
+        }
+
+        &.labels {
+          transition-delay: 300ms;
+        }
+      }
+  }
 
   svg {
+    max-height: 100%;
+    max-width: 100%;
     width: 100%;
     height: auto;
-
-    .drop {
-      transition: transform 1s;
-      transform: translateY(${props => (props.show ? "0rem" : "-100rem")});
-      ${Array.from({ length: 30 }).map(
-        (_, i) => css`
-          :nth-child(${i + 1}) {
-            transition-delay: ${i * 200}ms;
-          }
-        `
-      )} &.labels {
-        transition-delay: 300ms;
-      }
-    }
   }
 `;
-
-const renderArchitectureSvg = ({ isOnScreen }) => <DivPlace />;
 
 // TODO viewbox? native dimensions?
 const RevenueImage = styled(Isvg).attrs({
@@ -450,7 +464,9 @@ const Home = () => {
               <FWF>High quality services and apps</FWF>
             </Title>
             <Background />
-            <OnScreenDetect once render={renderArchitectureSvg} />
+            <OnScreenDetect once>
+              {({ isOnScreen }) => <ArchitectureSvg show={isOnScreen} />}
+            </OnScreenDetect>
             <Description w={6 / 12} p={4}>
               <FWF>
                 <Paragraph>
@@ -479,18 +495,21 @@ const Home = () => {
                     when and where in the country epidemics are likely to occur.
                   </Paragraph>
                   <Quote>
-                    “They provided advice, UI design, frontend and backend code,
+                    They provided advice, UI design, frontend and backend code,
                     cloud infrastructure and data analysis algorithms. All on
                     time, very communicative and flexible with adjusting
                     features as the project went along. It’s reassuring to know
                     your product is in the hands of real professionals.
-                    Impeccable work - I can recommend them without hesitation.”
+                    Impeccable work - I can recommend them without hesitation.
                   </Quote>
                   <Author>
-                    <span>Dr. Otto Helve</span>
-                    <span>
-                      CEO of iHealth Finland and board member of Duodecim Oy.
-                    </span>
+                    <AuthorImage src={otto} />
+                    <figcaption>
+                      <AuthorLink href="https://www.linkedin.com/in/otto-helve-665a6b4b/">
+                        Dr. Otto Helve
+                      </AuthorLink>
+                      <span>CEO of iHealth Finland</span>
+                    </figcaption>
                   </Author>
                 </FWF>
               </Description>
@@ -510,14 +529,19 @@ const Home = () => {
                   production-ready in terms of performance and scalability.
                 </Paragraph>
                 <Quote>
-                  “Makers’ Den helped us evaluate our current platform and find
+                  Makers’ Den helped us evaluate our current platform and find
                   the bottlenecks for scale. Thanks to thorough analysis and
                   actionable advice from the team, we feel confident in the
-                  platform and our ability to grow without limits.”
+                  platform and our ability to grow without limits.
                 </Quote>
                 <Author>
-                  <span>Aki Ranin</span>
-                  <span>CEO of Missionready</span>
+                  <AuthorImage src={aki} />
+                  <figcaption>
+                    <AuthorLink href="https://www.linkedin.com/in/otto-helve-665a6b4b/">
+                      Aki Ranin
+                    </AuthorLink>
+                    <span>CEO of Missionready</span>
+                  </figcaption>
                 </Author>
               </FWF>
             </Description>
@@ -542,8 +566,8 @@ const Home = () => {
                   into new insights.
                 </Paragraph>
                 <Quote>
-                  “Without big data analytics, companies are blind and deaf,
-                  wandering out onto the web like deer on a freeway.”
+                  Without big data analytics, companies are blind and deaf,
+                  wandering out onto the web like deer on a freeway.
                 </Quote>
                 <Author>
                   <span>Geoffrey Moore</span>
@@ -559,13 +583,15 @@ const Home = () => {
               </Title>
               <YourProjectImage />
             </YourProjectImageContainer>
-            <Description p={4} w={5 / 12}>
+            <Description px={3} py={4} w={5 / 12}>
               <FWF>
                 <Paragraph>
-                  Would you like assistance with your next project?
+                  Looking to build something new?
+                  <br />
+                  Improving an existing product?
                 </Paragraph>
               </FWF>
-              <CallToAction href="mailto:korneliusz@makersden.io">
+              <CallToAction href="mailto:hello@makersden.io">
                 <FWF>
                   <span>Let's talk.</span>
                 </FWF>

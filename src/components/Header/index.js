@@ -121,17 +121,18 @@ const StyledHeader = styled.header`
   `};
 `;
 
-const pinTolerance = 20;
+const pinTolerance = 10;
 
 class Header extends PureComponent {
   state = {
     isSticky: false
   };
 
-  onUnpin = () => {
-    const home = document.getElementById("home");
+  handlePin = () => {
+    const home = this.state.home || document.getElementById("home");
     this.setState(() => ({
-      isSticky: window.scrollY >= home.offsetHeight - 88
+      isSticky: window.scrollY >= home.offsetHeight - 88,
+      home
     }));
   };
 
@@ -145,7 +146,8 @@ class Header extends PureComponent {
     return (
       <Headroom
         onUnfix={() => this.setState(() => ({ isSticky: false }))}
-        onUnpin={this.onUnpin}
+        onPin={this.handlePin}
+        onUnpin={this.handlePin}
         upTolerance={pinTolerance}
         downTolerance={pinTolerance}
         style={{
