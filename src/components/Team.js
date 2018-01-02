@@ -1,6 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import { Flex } from "grid-styled";
+import Isvg from "react-inlinesvg";
 
 import { color, font, size, column } from "../theme";
 import GracefulImage from "../GracefulImage";
@@ -9,6 +10,7 @@ import * as SectionModule from "./Section";
 import kalle from "../../assets/images/kalle.png";
 import korneliusz from "../../assets/images/korneliusz2.jpg";
 import partners from "../../assets/images/partners.png";
+import giantCog from "../../assets/images/GiantCog.svg";
 
 const Title = styled.h2`
   font-family: ${font("display")};
@@ -18,6 +20,30 @@ const Title = styled.h2`
   font-size: ${size(4)};
   font-weight: 300;
   color: ${color("accent")};
+`;
+
+const GiantCog = styled(Isvg).attrs({
+  src: giantCog
+})`
+  position: absolute;
+  right: -50vh;
+  top: calc(50% - 50vh);
+
+  animation: rotate 120s linear infinite;
+
+  @keyframes rotate {
+   from {
+     transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  svg {
+    width: 100vh;
+    height: 100vh;
+  }
 `;
 
 const Section = styled(SectionModule.Section)`
@@ -170,6 +196,7 @@ const Home = () => {
     <Container>
       <Title>The A-Team</Title>
       <Content column>
+        <GiantCog />
         <KalleSection w={10 / 12} p={4}>
           <Background />
           <KalleImage />

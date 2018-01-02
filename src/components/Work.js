@@ -223,8 +223,6 @@ const DataImage = styled(StyledGracefulImage).attrs({
 })`
   max-width: 100%;
   max-height: 100%;
-  width: 100%;
-  height: 100%;
 `;
 
 const DataSection = styled(Section)`
@@ -296,7 +294,7 @@ const CallToAction = styled.a`
   align-items: center;
   justify-content: center;
   letter-spacing: 0.12rem;
-  background-color: ${mix(0.1, "accent", "black")};
+  background-color: ${color("black")};
   font-weight: bold;
   transition: background-color 200ms, border-color 200ms;
   text-decoration: none;
@@ -490,9 +488,9 @@ const Home = () => {
                 <FWF>
                   <Paragraph>
                     Together with iHealth Finland we created machine learning
-                    algorithms forecasting the spread of pathogens. Using our
-                    web based interface, doctors and pharma companies can see
-                    when and where in the country epidemics are likely to occur.
+                    algorithms forecasting the spread of pathogens. Doctors and
+                    pharma companies use our web-based interface to monitor when
+                    and where in the country epidemics are likely to occur.
                   </Paragraph>
                   <Quote>
                     They provided advice, UI design, frontend and backend code,
