@@ -1,17 +1,26 @@
 import React, { PureComponent } from "react";
 import Link from "gatsby-link";
 import styled, { css } from "styled-components";
-import MediaQuery from "react-responsive";
 import Headroom from "react-headroom";
 
 import LogoFull from "../../../assets/logoFull.svg";
 import LogoShort from "../../../assets/logoShort.svg";
 
-import { media } from "../../styles/mediaQueries";
+import MediaQueries, { media } from "../../styles/mediaQueries";
 import { transparentize } from "../../polished";
-import { color, duration, font } from "../../theme";
+import { transition } from "../../mixins";
+import { color, duration, font, size, sumSize } from "../../theme";
 import FadeWithoutFont from "../../FadeWithoutFont";
 import GracefulSvg from "../../GracefulSvg";
+
+const {
+  BelowPhone,
+  AbovePhone,
+  BelowBigPhone,
+  AboveBigPhone,
+  AboveTablet,
+  BelowTablet
+} = MediaQueries;
 
 const activeClassName = "nav-active";
 
@@ -43,10 +52,6 @@ const linkHighlight = css`
     top: calc(100% - 0.2rem);
   }
 
-  &.${activeClassName} {
-    transform: translateX(100%);
-  }
-
   :hover {
     ::before,
     ::after {
@@ -56,32 +61,29 @@ const linkHighlight = css`
 `;
 
 const StyledLink = styled(Link)`
-  transition: color ${props => duration(props.light ? "slow" : "fast")(props)};
+  transition: color ${duration("slow")}, background-color ${duration("slow")};
   font-family: ${font("primary")};
   font-size: 2rem;
   text-decoration: none;
   padding: 0 0.8rem;
-  &:not(:last-child) {
-    margin-right: 2.4rem;
-  }
 
   ${linkHighlight};
+  color: ${props => color(props.light ? "white" : "textDark")(props)};
+  background: ${props =>
+    props.light ? transparentize(0.01, "backgroundDark") : color("white")};
 `;
 
 const NavLink = styled(StyledLink).attrs({
   activeClassName
-})`
-  color: ${props => color(props.light ? "white" : "textDark")(props)};
-`;
+})``;
 
-const HashLink = styled(StyledLink)`
-  color: ${props => color(props.light ? "white" : "textDark")(props)};
-`;
+const HashLink = styled(StyledLink)``;
 
 const BrandLink = styled(HashLink)`
   letter-spacing: -0.16rem;
   margin-right: 2.4rem;
   padding: 0;
+  background: transparent;
 
   svg {
     height: 4.8rem;
@@ -96,6 +98,60 @@ const BrandLink = styled(HashLink)`
   ::after {
     display: none;
   }
+`;
+
+const Nav = styled.nav`
+  display: flex;
+  ${media.belowTablet`
+    pointer-evsnts: none;
+    opacity: 0;
+    flex-direction: column;
+    ${transition("opacity")};
+    position: absolute;
+    top: calc(100% - 5px);
+    right: 0;
+
+    > * {
+      height: ${size(4)};
+      display: flex;
+      align-items: center;
+      margin: 0;
+      height: ${size(4)};
+      padding: 0 ${size(4)};
+      transform: translateY(0);
+      ${transition("transform")};
+
+      ${Array.from({ length: 4 }).map(
+        (_, i) => css`
+          &:nth-child(${i + 1}) {
+            z-index: ${4 - i + 1};
+            ${props =>
+              !props.show &&
+              css`
+                transform: translateY(-${i * sumSize(4)}px);
+                transition-delay: ${(4 - i) * 25}ms;
+              `} ${props =>
+                props.show &&
+                css`
+                  transition-delay: ${i * 25}ms;
+                `};
+          }
+        `
+      )}
+
+      &:last-child {
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+      }
+    }
+
+    ${props =>
+      props.show &&
+      css`
+        opacity: 1;
+        pointer-events: all;
+      `}
+  `};
 `;
 
 const StyledHeader = styled.header`
@@ -119,8 +175,11 @@ const StyledHeader = styled.header`
       border-color: transparent;
     `};
 
-  ${media.tablet`
+  ${media.aboveTablet`
     padding: 0 3.2rem;
+    &:not(:last-child) {
+      margin-right: 2.4rem;
+    }
   `};
 `;
 
@@ -128,16 +187,22 @@ const pinTolerance = 10;
 
 class Header extends PureComponent {
   state = {
-    isSticky: false
+    isSticky: false,
+    navVisible: false
   };
 
   handlePin = () => {
     const home = this.state.home || document.getElementById("home");
+    const isSticky = window.scrollY >= home.offsetHeight - 88;
     this.setState(() => ({
-      isSticky: window.scrollY >= home.offsetHeight - 88,
+      isSticky,
+      navVisible: false,
       home
     }));
   };
+
+  toggleNav = () =>
+    this.setState(() => ({ navVisible: !this.state.navVisible }));
 
   render() {
     const { location: { hash, pathname } } = this.props;
@@ -160,16 +225,19 @@ class Header extends PureComponent {
         <StyledHeader dark={!isSticky} sticky={isSticky}>
           <nav>
             <BrandLink active={isHome} to="#home" light={!isSticky}>
-              <MediaQuery component="span" query="(max-width: 530px)">
+              <BelowBigPhone component="span">
                 <GracefulSvg src={LogoShort} />
-              </MediaQuery>
-              <MediaQuery component="span" query="(min-width: 531px)">
+              </BelowBigPhone>
+              <AboveBigPhone component="span">
                 <GracefulSvg src={LogoFull} />
-              </MediaQuery>
+              </AboveBigPhone>
             </BrandLink>
           </nav>
           <FadeWithoutFont>
-            <nav>
+            <BelowTablet component="button" onClick={this.toggleNav}>
+              Menu
+            </BelowTablet>
+            <Nav show={this.state.navVisible}>
               <HashLink active={isActive("team")} to="#team" light={!isSticky}>
                 Team
               </HashLink>
@@ -186,7 +254,7 @@ class Header extends PureComponent {
               <NavLink to="blog" light={!isSticky}>
                 Blog
               </NavLink>
-            </nav>
+            </Nav>
           </FadeWithoutFont>
         </StyledHeader>
       </Headroom>

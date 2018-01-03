@@ -13,6 +13,8 @@ import { breakpoints } from "../styles/mediaQueries";
 const Layout = styled.div`
   background: ${color("backgroundDark")};
   font-family: ${font("primary")};
+  min-width: 32rem;
+  overflow-x: hidden;
 `;
 
 injectGlobal`

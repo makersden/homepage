@@ -26,7 +26,7 @@ const HeroSegment = styled(Box)`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  ${media.tablet`
+  ${media.aboveTablet`
     height: calc(100vh - 192px);
   `};
 `;
@@ -55,7 +55,7 @@ const Title = styled.h1`
   font-size: ${sumSize(3, 1) / 10}rem;
   font-weight: normal;
 
-  ${media.tablet`
+  ${media.aboveTablet`
     font-size: ${size(4)};
   `};
 `;
@@ -71,8 +71,8 @@ const Subtitle = styled(Box)`
     display: block;
   }
 
-  ${media.tablet`
-    font-size: ${size(4)};
+  ${media.aboveTablet`
+    font-size: ${size(3)};
   `};
 `;
 

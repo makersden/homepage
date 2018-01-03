@@ -1,25 +1,87 @@
+import React from "react";
 import { css } from "styled-components";
+import MQ from "react-responsive";
 import values from "lodash/fp/values";
+import map from "lodash/fp/map";
+import uncappedReduce from "lodash/fp/reduce";
+
+const reduce = uncappedReduce.convert({ cap: false });
 
 const breakpoints = {
-  desktop: 144,
-  laptop: 102.4,
-  tablet: 76.8,
-  phone: 32
+  desktop: 1440,
+  laptop: 1024,
+  tablet: 768,
+  bigPhone: 412, // e.g. iPhone 6+
+  phone: 320
+};
+
+const capitalize = str => str[0].toUpperCase() + str.slice(1);
+
+const maxSizes = reduce(
+  (result, breakpoint, label) => ({
+    ...result,
+    ["below" + capitalize(label)]: breakpoint - 1
+  }),
+  {}
+)(breakpoints);
+
+const minSizes = reduce(
+  (result, breakpoint, label) => ({
+    ...result,
+    ["above" + capitalize(label)]: breakpoint
+  }),
+  {}
+)(breakpoints);
+
+const breakpointQuery = type => breakpoint => `(${type}: ${breakpoint}px)`;
+
+const mediaQueries = sizeCondition =>
+  reduce(
+    (acc, size, label) => ({
+      ...acc,
+      [label]: (...args) => css`
+        @media ${breakpointQuery(sizeCondition)(size)} {
+          ${css(...args)};
+        }
+      `
+    }),
+    {}
+  );
+
+/**
+ * Styled components media query templates
+ */
+export const media = {
+  ...mediaQueries("max-width")(maxSizes),
+  ...mediaQueries("min-width")(minSizes)
 };
 
 const breakpointValues = values(breakpoints).reverse();
 
+/**
+ * Grid-styled responsive breakpoint values
+ */
 export { breakpointValues as breakpoints };
 
-// iterate through the breakpoints and create a media template
-export const media = Object.keys(breakpoints).reduce((accumulator, label) => {
-  // use em in breakpoints to work properly cross-browser and support users
-  // changing their browsers font-size: https://zellwk.com/blog/media-query-units/
-  accumulator[label] = (...args) => css`
-    @media (min-width: ${breakpoints[label]}rem) {
-      ${css(...args)};
-    }
-  `;
-  return accumulator;
-}, {});
+const makeMediaQueryComponent = query => props => (
+  <MQ {...props} query={query} />
+);
+
+const makeMediaQueryComponents = (name, breakpoint) => ({
+  [`Below${capitalize(name)}`]: makeMediaQueryComponent(
+    breakpointQuery("max-width")(breakpoint - 1)
+  ),
+  [`Above${capitalize(name)}`]: makeMediaQueryComponent(
+    breakpointQuery("min-width")(breakpoint)
+  )
+});
+
+const mediaQueryComponents = reduce(
+  (result, breakpoint, name) => ({
+    ...result,
+    ...makeMediaQueryComponents(name, breakpoint)
+  }),
+  {}
+)(breakpoints);
+
+export default mediaQueryComponents;
