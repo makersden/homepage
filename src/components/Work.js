@@ -49,10 +49,6 @@ const Author = styled.figure`
   margin-left: 0;
   margin-right: 0;
 
-  img {
-    ${circle("7.5rem")};
-  }
-
   figcaption {
     ${authorStyle} margin-left: ${size(2)};
 
@@ -64,7 +60,9 @@ const Author = styled.figure`
 
 const AuthorImage = styled(GracefulImage).attrs({
   static: true
-})``;
+})`
+  ${circle("7.5rem")};
+`;
 
 const Container = styled.div`
   width: 100%;
@@ -104,9 +102,9 @@ const Title = styled.h2`
   font-family: ${font("display")};
   font-weight: normal;
   letter-spacing: 1px;
-  font-size: ${size(4)};
   color: ${color("white")};
   margin: 0;
+  font-size: ${size(4)};
 `;
 
 const ArchitectureSection = styled(Section)`
@@ -478,7 +476,7 @@ const Home = () => {
               </FWF>
             </Description>
           </ArchitectureSection>
-          <EpimapSection w={10 / 12} p={4} m={4}>
+          <EpimapSection w={[1, 10 / 12]} p={4} m={4}>
             <Background />
             <Title>
               <FWF>Full-stack development</FWF>

@@ -4,7 +4,9 @@ import { Flex, Box } from "grid-styled";
 
 import get from "lodash/fp/get";
 
-import { color, font } from "../theme";
+import { color, font, size, sumSize } from "../theme";
+import { media } from "../styles/mediaQueries";
+
 import FadeWithoutFont from "../FadeWithoutFont";
 
 import Work from "../components/Work";
@@ -16,13 +18,17 @@ const TransparentSegment = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 `;
 
 const HeroSegment = styled(Box)`
-  height: calc(100vh - 192px);
+  height: calc(100vh - 152px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  ${media.tablet`
+    height: calc(100vh - 192px);
+  `};
 `;
 
 const LightSegment = styled(TransparentSegment)`
@@ -46,13 +52,16 @@ const Title = styled.h1`
   font-family: ${font("display")};
   letter-spacing: 1px;
   margin: 0;
-
-  font-size: 6.4rem;
+  font-size: ${sumSize(3, 1) / 10}rem;
   font-weight: normal;
+
+  ${media.tablet`
+    font-size: ${size(4)};
+  `};
 `;
 
 const Subtitle = styled(Box)`
-  font-size: 3.6rem;
+  font-size: ${sumSize(2, 1) / 10}rem;
   align-self: flex-end;
   display: flex;
   flex-direction: column;
@@ -61,6 +70,10 @@ const Subtitle = styled(Box)`
   span {
     display: block;
   }
+
+  ${media.tablet`
+    font-size: ${size(4)};
+  `};
 `;
 
 const Container = styled(Flex).attrs({ column: true })`
@@ -79,10 +92,10 @@ const Home = () => {
   return (
     <Container>
       <FadeWithoutFont>
-        <HeroSegment p={4} m={4} mb={4} id="home">
+        <HeroSegment p={[0, 4]} m={[3, 4]} id="home">
           <Title>We are a software workshop.</Title>
-          <StyledCogs />
-          <Subtitle w={6 / 12} mx={4} px={4}>
+          {/* <StyledCogs /> */}
+          <Subtitle w={[1, 6 / 12]} mx={[0, 4]} px={[0, 4]}>
             <div>
               <span>We solve gnarly problems</span>
               <span>to realize amazing ideas.</span>

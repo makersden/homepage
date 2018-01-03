@@ -30,12 +30,18 @@ const getter = setName => propName => get(`theme.${setName}.${propName}`);
 export const color = getter("colors");
 export const font = getter("font");
 export const duration = getter("duration");
+
 // Power of 2 scale, with step 1 = 8px (0.8 rem).
-export const size = (step, unit = "px") =>
-  Math.pow(2, Math.max(0, step) + 2) + unit;
+const sizeWithUnit = (unit, mult = 1) => step =>
+  Math.pow(2, Math.max(0, step) + 2) * mult + unit;
+
+export const size = sizeWithUnit("rem", 1 / 10);
+export const sizePx = sizeWithUnit("px");
+
+const sizeForComputation = sizeWithUnit(0);
 
 export const sumSize = (...sizes) =>
-  sizes.reduce((res, s) => res + size(s, 0), 0);
+  sizes.reduce((res, s) => res + sizeForComputation(s), 0);
 
 export const column = size => size / 12 * 100 + "%";
 

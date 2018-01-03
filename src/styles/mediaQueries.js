@@ -1,22 +1,23 @@
-// these sizes are arbitrary and you can set them to whatever you wish
 import { css } from "styled-components";
+import values from "lodash/fp/values";
 
-const sizes = {
-  desktop: 1440,
-  laptop: 1024,
-  tablet: 768,
-  phoneL: 425,
-  phoneM: 375,
-  phoneS: 320
+const breakpoints = {
+  desktop: 144,
+  laptop: 102.4,
+  tablet: 76.8,
+  phone: 32
 };
 
-// iterate through the sizes and create a media template
-export const media = Object.keys(sizes).reduce((accumulator, label) => {
+const breakpointValues = values(breakpoints).reverse();
+
+export { breakpointValues as breakpoints };
+
+// iterate through the breakpoints and create a media template
+export const media = Object.keys(breakpoints).reduce((accumulator, label) => {
   // use em in breakpoints to work properly cross-browser and support users
   // changing their browsers font-size: https://zellwk.com/blog/media-query-units/
-  const emSize = sizes[label] / 10;
   accumulator[label] = (...args) => css`
-    @media (max-width: ${emSize}em) {
+    @media (min-width: ${breakpoints[label]}rem) {
       ${css(...args)};
     }
   `;

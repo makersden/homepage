@@ -8,6 +8,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 import theme, { color, font } from "../theme";
+import { breakpoints } from "../styles/mediaQueries";
 
 const Layout = styled.div`
   background: ${color("backgroundDark")};
@@ -36,7 +37,12 @@ injectGlobal`
 `;
 
 const TemplateWrapper = props => (
-  <ThemeProvider theme={theme}>
+  <ThemeProvider
+    theme={{
+      ...theme,
+      breakpoints
+    }}
+  >
     <Layout>
       <Helmet
         title="Makers' Den"

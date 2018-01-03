@@ -85,8 +85,11 @@ const BrandLink = styled(HashLink)`
 
   svg {
     height: 4.8rem;
-    fill: ${props => color(props.light ? "white" : "black")(props)};
-    transition: fill ${props => duration(props.light ? "slow" : "fast")(props)};
+    path {
+      fill: ${props => color(props.light ? "white" : "black")(props)};
+      transition: fill
+        ${props => duration(props.light ? "slow" : "fast")(props)};
+    }
   }
 
   ::before,
@@ -101,7 +104,7 @@ const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 3.2rem;
+  padding: 0 2.4rem;
   width: 100%;
   z-index: 2;
   border-bottom-left-radius: 5px;
@@ -116,8 +119,8 @@ const StyledHeader = styled.header`
       border-color: transparent;
     `};
 
-  ${media.phoneL`
-    padding: 0 2.4rem;
+  ${media.tablet`
+    padding: 0 3.2rem;
   `};
 `;
 
