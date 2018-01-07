@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import Link from "gatsby-link";
 import styled, { css } from "styled-components";
 import Headroom from "react-headroom";
+import Hamburger from "react-hamburgers";
 
 import LogoFull from "../../../assets/logoFull.svg";
 import LogoShort from "../../../assets/logoShort.svg";
@@ -223,7 +224,7 @@ class Header extends PureComponent {
     const hashName = hash.slice(1);
     const isHome = pathname === "/" && (!hashName || hashName === "home");
     const isActive = target => hashName === target;
-    const { isSticky } = this.state;
+    const { isSticky, navVisible } = this.state;
 
     return (
       <Headroom
@@ -248,9 +249,13 @@ class Header extends PureComponent {
             </BrandLink>
           </BrandNav>
           <FadeWithoutFont>
-            <BelowTablet component="button" onClick={this.toggleNav}>
-              Menu
-            </BelowTablet>
+            <BelowTablet
+              active={navVisible}
+              component={Hamburger}
+              light={!isSticky}
+              type="emphatic"
+              onClick={this.toggleNav}
+            />
             <Nav show={this.state.navVisible}>
               <HashLink active={isActive("team")} to="#team" light={!isSticky}>
                 Team
