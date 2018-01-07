@@ -41,33 +41,14 @@ const Inner = styled.span`
   }
 `;
 
-const StyledButton = styled.button`
-  padding: 15px 15px;
-  outline: none;
-  display: inline-block;
-  cursor: pointer;
-  transition-property: opacity, filter;
-  transition-duration: 0.15s;
-  transition-timing-function: linear;
-  font: inherit;
-  color: inherit;
-  text-transform: none;
-  background-color: transparent;
-  border: 0;
-  margin: 0;
-  overflow: visible;
-  &:hover {
-    opacity: 0.7;
-  }
-`;
-
-const Emphatic = css`
+const emphatic = css`
   overflow: hidden;
   ${Inner} {
     transition: background-color 0.125s 0.175s ease-in;
     ${props =>
       props.active &&
       css`
+        transition: background-color 0.125s 0 ease-out;
         transition-delay: 0s;
         transition-timing-function: ease-out;
         background-color: transparent;
@@ -104,11 +85,34 @@ const Emphatic = css`
   }
 `;
 
+const StyledButton = styled.button`
+  padding: 15px 15px;
+  outline: none;
+  display: inline-block;
+  cursor: pointer;
+  transition-property: opacity, filter;
+  transition-duration: 0.15s;
+  transition-timing-function: linear;
+  font: inherit;
+  color: inherit;
+  text-transform: none;
+  background-color: transparent;
+  border: 0;
+  margin: 0;
+  overflow: visible;
+  &:hover {
+    opacity: 0.7;
+  }
+
+  ${emphatic};
+`;
+
 export default function Hamburger({ active, type, onClick, ...props }) {
+  console.log({ light: props.light });
   return (
     <StyledButton active={active} type={type} onClick={onClick}>
-      <Box className="hamburger-box">
-        <Inner className="hamburger-inner" {...props} />
+      <Box>
+        <Inner {...props} />
       </Box>
     </StyledButton>
   );

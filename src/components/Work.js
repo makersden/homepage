@@ -33,6 +33,13 @@ import {
   Section
 } from "./Section";
 
+const sectionSpacing = css`
+  margin-top: ${size(6)};
+  ${media.aboveLaptop`
+    margin-top: ${size(7)};
+  `};
+`;
+
 const Crop = styled.div`
   ${props =>
     "width" in props &&
@@ -231,8 +238,7 @@ const EpimapSection = styled(Section)`
   padding: ${size(3)};
   width: ${column(12)};
   margin-top: ${size(6)};
-
-  ${EpimapImage} {
+  ${sectionSpacing} ${EpimapImage} {
     position: absolute;
     top: -${size(3)};
     right: 0;
@@ -306,12 +312,10 @@ const MissionreadyImage = styled(StyledGracefulImage).attrs({
 
 const MissionreadySection = styled(Section)`
   margin: 0 auto;
-  margin-top: ${size(5)};
   min-height: ${size(7)};
   width: ${column(12)};
   padding: ${size(2)};
-
-  ${MissionreadyImage} {
+  ${sectionSpacing} ${MissionreadyImage} {
     position: relative;
     top: -${size(5)};
   }
@@ -337,7 +341,7 @@ const MissionreadySection = styled(Section)`
     position: absolute;
     top: ${size(2)};
     width: ${column(6)};
-    left: ${column(3)};
+    left: ${size(4)};
   }
 
   ${media.aboveTablet`
@@ -375,11 +379,9 @@ const DataImage = styled(StyledGracefulImage).attrs({
 
 const DataSection = styled(Section)`
   position: relative;
-  margin-top: ${size(7)};
   padding: ${size(3)};
   width: ${column(12)};
-
-  ${Description} {
+  ${sectionSpacing} ${Description} {
     margin-top: -${sumSize(4, 3, 2)};
     margin-left: ${size(3)};
     width: ${column(12)};
@@ -495,10 +497,9 @@ const CallToAction = styled.a`
 
 const YourProjectSection = styled(Section)`
   align-items: center;
-  margin: ${size(6)} auto 0 auto;
+  margin: 0 auto;
   width: ${column(12)};
-
-  ${YourProjectImageContainer} {
+  ${sectionSpacing} ${YourProjectImageContainer} {
     margin-top: -${size(4)};
     padding: ${size(3)} 0;
     width: 100%;

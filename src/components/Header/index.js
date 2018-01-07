@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import Link from "gatsby-link";
 import styled, { css } from "styled-components";
 import Headroom from "react-headroom";
-import Hamburger from "react-hamburgers";
+import Hamburger from "./Hamburger";
 
 import LogoFull from "../../../assets/logoFull.svg";
 import LogoShort from "../../../assets/logoShort.svg";
@@ -253,7 +253,6 @@ class Header extends PureComponent {
               active={navVisible}
               component={Hamburger}
               light={!isSticky}
-              type="emphatic"
               onClick={this.toggleNav}
             />
             <Nav show={this.state.navVisible}>
