@@ -2,10 +2,9 @@ import React from "react";
 import { css } from "styled-components";
 import MQ from "react-responsive";
 import values from "lodash/fp/values";
-import map from "lodash/fp/map";
-import uncappedReduce from "lodash/fp/reduce";
+import cappedReduce from "lodash/fp/reduce";
 
-const reduce = uncappedReduce.convert({ cap: false });
+const reduce = cappedReduce.convert({ cap: false });
 
 const breakpoints = {
   desktop: 1440,

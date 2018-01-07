@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import { color, font, size } from "../theme";
+import { media } from "../styles/mediaQueries";
+import { color, font, size, sumSize } from "../theme";
 import { transparentize } from "../polished";
 import berlin from "../../assets/images/berlin-sharp.jpg";
 import FadeWithoutFont from "../FadeWithoutFont";
@@ -41,19 +42,24 @@ const Content = styled.div`
   width: 100%;
   height: 100%;
 
-  font-size: 3.2rem;
+  font-size: ${sumSize(2, 1)};
   font-weight: 300;
-
-  padding: ${size(6)} 0;
 
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  padding: ${size(4)} ${size(3)};
   justify-content: space-between;
 
   > * {
     margin: 0;
   }
+
+  ${media.aboveTablet`
+    font-size: ${size(3)};
+    padding: ${size(6)} ${size(4)};
+  `};
 `;
 
 const Link = styled.a`

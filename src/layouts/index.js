@@ -20,6 +20,7 @@ const Layout = styled.div`
 injectGlobal`
   * {
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
   }
 
   html {
