@@ -168,12 +168,12 @@ const ArchitectureSection = styled(Section)`
   }
 
   ${Title} {
-    margin: -${sumSize(5, 2)}px 0 ${size(3)} 0;
+    margin: -${sumSize(5, 2)}0 ${size(3)} 0;
     width: ${column(12)};
     z-index: 3;
 
     ${media.belowBigPhone`
-      margin-top: -${sumSize(5, 4, 3)}px;
+      margin-top: -${sumSize(5, 4, 3)};
     `};
   }
 
@@ -185,10 +185,10 @@ const ArchitectureSection = styled(Section)`
 
     ${ArchitectureSvg} {
       position: static;
-      margin-top: -${sumSize(5, 4)}px;
+      margin-top: -${sumSize(5, 4)};
       margin-left: ${size(4)};
       padding: ${size(4)};
-      padding-top: ${sumSize(5, 3)}px;
+      padding-top: ${sumSize(5, 3)};
       width: 98rem;
       height: auto;
     }
@@ -209,7 +209,7 @@ const ArchitectureSection = styled(Section)`
 
     ${Title} {
       margin: 0;
-      margin-top: -${sumSize(5)}px;
+      margin-top: -${sumSize(5)};
       width: ${column(7)};
     }
   `};
@@ -267,9 +267,9 @@ const EpimapSection = styled(Section)`
 
     ${EpimapImage} {
       position: static;
-      margin-top: -${sumSize(7, 6, 4)}px;
+      margin-top: -${sumSize(7, 6, 4)};
       margin-left: ${size(7)};
-      width: calc(100% - ${sumSize(6, 4)}px);
+      width: calc(100% - ${sumSize(6, 4)});
     }
 
     ${Description} {
@@ -319,7 +319,7 @@ const MissionreadySection = styled(Section)`
   ${Description} {
     position: absolute;
     left: ${column(1)};
-    top: ${sumSize(5, 3)}px;
+    top: ${sumSize(5, 3)};
     margin-top: ${size(2)};
     width: ${column(10)};
     z-index: 2;
@@ -355,12 +355,12 @@ const MissionreadySection = styled(Section)`
     ${Title} {
       position: static;
       margin-left: ${column(6)};
-      padding-left: ${sumSize(4)}px;
+      padding-left: ${sumSize(4)};
     }
 
     ${Description} {
       left: ${column(3)};
-      top: ${sumSize(6, 4, 3, 1)}px;
+      top: ${sumSize(6, 4, 3, 1)};
       width: ${column(6)};
     }
   `};
@@ -380,7 +380,7 @@ const DataSection = styled(Section)`
   width: ${column(12)};
 
   ${Description} {
-    margin-top: -${sumSize(4, 3, 2)}px;
+    margin-top: -${sumSize(4, 3, 2)};
     margin-left: ${size(3)};
     width: ${column(12)};
     z-index: 2;
@@ -406,18 +406,18 @@ const DataSection = styled(Section)`
   ${media.aboveTablet`
     margin-left: ${column(3)};
     padding: ${size(4)};
-    padding-top: ${sumSize(4, 3)}px;
+    padding-top: ${sumSize(4, 3)};
     width: ${column(9)};
 
     ${Crop} {
       position: relative;
       margin-left: ${column(4)};
-      margin-top: ${size(5, 0) + size(3, 0)}px;
+      margin-top: ${sumSize(5, 3)};
     }
 
     ${Description} {
       position: absolute;
-      bottom: ${sumSize(5, 3, 2, 1)}px;
+      bottom: ${sumSize(5, 3, 2, 1)};
       left: -${column(1)};
       width: ${column(6)};
     }
@@ -425,7 +425,7 @@ const DataSection = styled(Section)`
     ${Title} {
       position: absolute;
       bottom: ${size(3)};
-      left: ${sumSize(5)}px;
+      left: ${sumSize(5)};
     }
   `};
 `;
@@ -527,7 +527,7 @@ const YourProjectSection = styled(Section)`
   }
 
   ${Description} {
-    margin-top: -${sumSize(4, 2, 1)}px;
+    margin-top: -${sumSize(4, 2, 1)};
     margin-bottom: ${size(3)};
     width: ${column(8)};
     font-size: ${size(3)};
@@ -551,19 +551,19 @@ const YourProjectSection = styled(Section)`
       margin-top: ${size(3)};
       min-height: 16.7rem;
       span {
-        font-size: ${sumSize(2, 1)}px;
+        font-size: ${sumSize(2, 1)};
       }
     }
 
     ${Description} {
       position: absolute;
-      bottom: -${sumSize(6, 4, 2, 1)}px;
+      bottom: -${sumSize(6, 4, 2, 1)};
       width: ${column(5)};
     }
 
     ${Paragraph} {
       margin-bottom: ${size(3)};
-      font-size: ${sumSize(2, 1)}px;
+      font-size: ${sumSize(2, 1)};
     }
   `};
 `;

@@ -45,14 +45,13 @@ const ContactSegment = styled(LightSegment)`
   align-items: center;
   justify-content: center;
   text-align: center;
-  min-height: 80vh;
 `;
 
 const Title = styled.h1`
   font-family: ${font("display")};
   letter-spacing: 1px;
   margin: 0;
-  font-size: ${sumSize(3, 1) / 10}rem;
+  font-size: ${sumSize(3, 1)};
   font-weight: normal;
 
   ${media.aboveTablet`
@@ -61,7 +60,7 @@ const Title = styled.h1`
 `;
 
 const Subtitle = styled(Box)`
-  font-size: ${sumSize(2, 1) / 10}rem;
+  font-size: ${sumSize(2, 1)};
   align-self: flex-end;
   display: flex;
   flex-direction: column;

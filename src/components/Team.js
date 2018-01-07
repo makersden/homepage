@@ -3,9 +3,10 @@ import styled, { css } from "styled-components";
 import { Flex } from "grid-styled";
 import Isvg from "react-inlinesvg";
 
-import { color, font, size, column } from "../theme";
+import { color, font, size, sumSize, column } from "../theme";
 import GracefulImage from "../GracefulImage";
 import * as SectionModule from "./Section";
+import { media } from "../styles/mediaQueries";
 
 import kalle from "../../assets/images/kalle.png";
 import korneliusz from "../../assets/images/korneliusz2.jpg";
@@ -17,9 +18,13 @@ const Title = styled.h2`
   letter-spacing: 1px;
   margin: ${size(5)} 0;
   text-align: center;
-  font-size: ${size(4)};
   font-weight: 300;
   color: ${color("accent")};
+  font-size: ${size(3)};
+
+  ${media.aboveDesktop`
+    font-size: ${size(4)};
+  `};
 `;
 
 const GiantCog = styled(Isvg).attrs({
@@ -65,7 +70,6 @@ const Background = styled(SectionModule.Background)`
 
 const Paragraph = styled(SectionModule.Paragraph)`
   color: ${color("whiteAlt")};
-  font-size: 1.8rem;
 `;
 
 const Description = styled(SectionModule.Description)`
@@ -126,11 +130,11 @@ const Author = ({ children, href }) =>
   );
 
 const KalleSection = styled(Section)`
-  margin-left: ${column(1)};
+  margin-left: ${column(2)};
+  width: ${column(9)};
+  padding: ${size(4)};
   ${KalleImage} {
     margin-left: ${size(5)};
-    min-width: 107.7rem;
-    min-height: 74.4rem;
   }
 
   ${Description} {
@@ -138,6 +142,12 @@ const KalleSection = styled(Section)`
     left: ${size(4)};
     top: ${size(5)};
   }
+
+  ${media.aboveDesktop`
+    ${KalleImage} {
+      min-height: 68.8rem;
+    }
+  `};
 `;
 
 const KorneliuszImage = styled(GracefulImage).attrs({
@@ -148,6 +158,9 @@ const KorneliuszImage = styled(GracefulImage).attrs({
 `;
 
 const KorneliuszSection = styled(Section)`
+  margin-left: ${column(1)};
+  width: ${column(6)};
+  padding: ${size(4)} 0;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
@@ -155,6 +168,8 @@ const KorneliuszSection = styled(Section)`
   ${Description} {
     position: absolute;
     right: -${size(6)};
+    padding: ${size(3)};
+    width: ${column(8)};
   }
 
   ${KorneliuszImage} {
@@ -173,6 +188,7 @@ const PartnersImage = styled(GracefulImage).attrs({
 `;
 
 const PartnersSection = styled(Section)`
+  width: ${column(9)};
   align-items: center;
   justify-content: center;
   margin-left: ${column(3)};
@@ -186,8 +202,10 @@ const PartnersSection = styled(Section)`
 
   ${Description} {
     position: absolute;
-    right: ${size(5, 0) + size(4, 0)}px;
-    bottom: ${size(4, 0)}px;
+    bottom: ${sumSize(4, 3)};
+    right: ${sumSize(5, 3)};
+    padding: ${size(3)};
+    width: ${column(7)};
   }
 `;
 
@@ -197,7 +215,7 @@ const Home = () => {
       <Title>The A-Team</Title>
       <Content column>
         <GiantCog />
-        <KalleSection w={10 / 12} p={4}>
+        <KalleSection>
           <Background />
           <KalleImage />
           <Description w={5 / 12} p={3}>
@@ -227,10 +245,10 @@ const Home = () => {
             </Author>
           </Description>
         </KalleSection>
-        <KorneliuszSection w={6 / 12} py={4}>
+        <KorneliuszSection>
           <Background />
           <KorneliuszImage />
-          <Description w={8 / 12} p={3}>
+          <Description>
             <Name>Korneliusz Caputa</Name>
             <Paragraph>
               Managing Director and a seasoned software engineer. Passionate
@@ -252,11 +270,10 @@ const Home = () => {
             </Author>
           </Description>
         </KorneliuszSection>
-        <PartnersSection w={9 / 12} p={4}>
+        <PartnersSection>
           <Background />
           <PartnersImage />
-          {/* <ImagePlaceholder border width="13rem" height="51rem" /> */}
-          <Description w={7 / 12} p={3}>
+          <Description>
             <Name>Our network of Trusted Partners</Name>
             <Paragraph>
               We are connected to a wide range of industry experts within

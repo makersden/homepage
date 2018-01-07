@@ -36,12 +36,16 @@ const sizeWithUnit = (unit, mult = 1) => step =>
   Math.pow(2, Math.max(0, step) + 2) * mult + unit;
 
 export const size = sizeWithUnit("rem", 1 / 10);
-export const sizePx = sizeWithUnit("px");
+
+export const sizeWithoutUnit = sizeWithUnit(0);
 
 const sizeForComputation = sizeWithUnit(0);
 
 export const sumSize = (...sizes) =>
-  sizes.reduce((res, s) => res + sizeForComputation(s), 0);
+  sizes.reduce((res, s) => res + sizeForComputation(s), 0) / 10 + "rem";
+
+export const sumSizePx = (...sizes) =>
+  sizes.reduce((res, s) => res + sizeForComputation(s), 0) + "px";
 
 export const column = size => size / 12 * 100 + "%";
 

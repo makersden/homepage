@@ -9,7 +9,14 @@ import LogoShort from "../../../assets/logoShort.svg";
 import MediaQueries, { media } from "../../styles/mediaQueries";
 import { transparentize } from "../../polished";
 import { transition } from "../../mixins";
-import { color, duration, font, size, sumSize } from "../../theme";
+import {
+  color,
+  duration,
+  font,
+  size,
+  sizeWithoutUnit,
+  sumSize
+} from "../../theme";
 import FadeWithoutFont from "../../FadeWithoutFont";
 import GracefulSvg from "../../GracefulSvg";
 
@@ -135,7 +142,7 @@ const Nav = styled.nav`
             ${props =>
               !props.show &&
               css`
-                transform: translateY(-${(i + 0.5) * sumSize(4)}px);
+                transform: translateY(-${(i + 0.5) * sizeWithoutUnit(4)}px);
                 transition-delay: ${(4 - i) * 25}ms;
               `} ${props =>
                 props.show &&
