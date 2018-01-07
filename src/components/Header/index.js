@@ -100,10 +100,14 @@ const BrandLink = styled(HashLink)`
   }
 `;
 
+const BrandNav = styled.nav`
+  z-index: 10;
+`;
+
 const Nav = styled.nav`
   display: flex;
   ${media.belowTablet`
-    pointer-evsnts: none;
+    pointer-events: none;
     opacity: 0;
     flex-direction: column;
     ${transition("opacity")};
@@ -117,7 +121,10 @@ const Nav = styled.nav`
       align-items: center;
       margin: 0;
       height: ${size(4)};
-      padding: 0 ${size(4)};
+      padding: 0 ${size(3)};
+      justify-content: flex-end;
+      width: 100vw;
+      text-align: right;
       transform: translateY(0);
       ${transition("transform")};
 
@@ -128,7 +135,7 @@ const Nav = styled.nav`
             ${props =>
               !props.show &&
               css`
-                transform: translateY(-${i * sumSize(4)}px);
+                transform: translateY(-${(i + 0.5) * sumSize(4)}px);
                 transition-delay: ${(4 - i) * 25}ms;
               `} ${props =>
                 props.show &&
@@ -223,7 +230,7 @@ class Header extends PureComponent {
         }}
       >
         <StyledHeader dark={!isSticky} sticky={isSticky}>
-          <nav>
+          <BrandNav>
             <BrandLink active={isHome} to="#home" light={!isSticky}>
               <BelowBigPhone component="span">
                 <GracefulSvg src={LogoShort} />
@@ -232,7 +239,7 @@ class Header extends PureComponent {
                 <GracefulSvg src={LogoFull} />
               </AboveBigPhone>
             </BrandLink>
-          </nav>
+          </BrandNav>
           <FadeWithoutFont>
             <BelowTablet component="button" onClick={this.toggleNav}>
               Menu

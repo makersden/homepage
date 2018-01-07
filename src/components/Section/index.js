@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 
 import { transparentize } from "../../polished";
 import { color, size } from "../../theme";
+import { media } from "../../styles/mediaQueries";
 
 export const Background = styled.div`
   position: absolute;
@@ -15,6 +16,7 @@ export const Background = styled.div`
 
 export const Quote = styled.blockquote`
   margin-left: 0;
+  margin-right: 0;
   font-weight: 300;
   margin-bottom: ${size(2)};
   ::before {
@@ -93,12 +95,14 @@ export const Section = styled(Box)`
   justify-content: center;
   position: relative;
   * {
-    border-radius: 20px;
+      border-radius: 5px;
+      ${media.aboveTablet`
+        border-radius: 20px;
+      `}
 
-    &:not(${Background}) {
-      position: relative;
-      z-index: 1;
-    }
+      &:not(${Background}) {
+        z-index: 1;
+      }
   }
 `;
 
@@ -108,8 +112,10 @@ export const Description = styled(Box)`
   flex-direction: column;
   justify-content: center;
   max-width: 80rem;
-
-  * {
+  padding: ${size(4)};
+  ${media.belowTablet`
+    padding: ${size(3)};
+  `} * {
     font-size: 1.8rem;
     line-height: 2.4rem;
   }

@@ -32,7 +32,8 @@ class GracefulImage extends PureComponent {
       loaded: true
     }));
 
-  listenToLoad = element => element.addEventListener("load", this.onLoaded);
+  listenToLoad = element =>
+    element && element.addEventListener("load", this.onLoaded);
 
   render() {
     const { className } = this.props;

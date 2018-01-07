@@ -1,12 +1,12 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import LoadedImage from "react-imageloader";
 import Isvg from "react-inlinesvg";
 import { Flex } from "grid-styled";
+import Link from "gatsby-link";
 
-import { mix } from "../polished";
-import { circle } from "../mixins";
+import { circle, transition } from "../mixins";
 import { color, column, font, size, sumSize } from "../theme";
+import MQs, { media } from "../styles/mediaQueries";
 import OnScreenDetect from "../OnScreenDetect";
 import GracefulImage from "../GracefulImage";
 import GracefulSvg from "../GracefulSvg";
@@ -20,6 +20,8 @@ import waves from "../../assets/images/waves.png";
 import data from "../../assets/images/data.png";
 import otto from "../../assets/images/otto.png";
 import aki from "../../assets/images/aki.png";
+
+const { AboveTablet, BelowTablet } = MQs;
 
 import {
   authorStyle,
@@ -46,8 +48,7 @@ const Crop = styled.div`
 const Author = styled.figure`
   display: flex;
   align-items: center;
-  margin-left: 0;
-  margin-right: 0;
+  margin: 0;
 
   figcaption {
     ${authorStyle} margin-left: ${size(2)};
@@ -88,12 +89,7 @@ const Content = styled(Flex)`
   margin: 0 auto;
   padding: ${size(7)} 0;
   width: 100%;
-`;
-
-const DivPlace = styled.div`
-  background: black;
-  width: 980px;
-  height: 630px;
+  overflow: hidden;
 `;
 
 const StyledGracefulImage = styled(GracefulImage)``;
@@ -104,264 +100,17 @@ const Title = styled.h2`
   letter-spacing: 1px;
   color: ${color("white")};
   margin: 0;
-  font-size: ${size(4)};
-`;
-
-const ArchitectureSection = styled(Section)`
-  ${StyledGracefulImage}, ${DivPlace} {
-    margin-top: -${size(5)};
-    margin-left: ${size(4)};
-  }
-
-  ${Description} {
-    position: absolute;
-    right: -${size(5)};
-  }
-
-  ${Background} {
-    background: linear-gradient(
-      32.24deg,
-      rgba(189, 138, 255, 0.4) 16.65%,
-      rgba(255, 138, 0, 0.14) 44.57%
-    );
-  }
-
-  ${Title} {
-    margin-top: -${size(5)};
-    width: ${column(7)};
-    z-index: 3;
-  }
-`;
-
-const SectionContent = styled.div`
-  margin: 0 -${size(4)};
-`;
-
-const EpimapImage = styled(StyledGracefulImage).attrs({
-  src: epimap3d
-})`
-  min-height: 106.8rem;
-  min-width: 64rem;
-`;
-
-const EpimapSection = styled(Section)`
-  margin-top: ${size(6)};
-
-  ${EpimapImage} {
-    align-self: flex-end;
-    margin-top: -${size(6, 0) + size(5, 0)}px;
-    position: relative;
-    left: ${size(7)};
-  }
-
-  ${Description} {
-    position: absolute;
-    left: ${size(5)};
-    z-index: 2;
-  }
-
-  ${Background} {
-    background: linear-gradient(
-      180deg,
-      rgba(189, 138, 255, 0.4) 0%,
-      rgba(255, 138, 0, 0.14) 100%
-    );
-  }
-  ${Title} {
-    margin-left: ${size(4)};
-    margin-top: ${size(3)};
-    margin-bottom: ${size(4)};
-    z-index: 3;
-  }
-`;
-
-const MissionreadyImage = styled(StyledGracefulImage).attrs({
-  src: missionready
-})`
-  max-width: 100%;
-  max-height: 100%;
-  min-width: 49rem;
-  height: 70.6rem;
-  min-height: 70.6rem;
-`;
-
-const MissionreadySection = styled(Section)`
-  margin-top: ${size(7)};
-  min-height: ${size(7)};
-
-  ${MissionreadyImage} {
-    position: absolute;
-    left: 0;
-    top: -${size(6)};
-  }
-
-  ${Description} {
-    position: absolute;
-    left: ${column(3)};
-    margin-top: ${size(4, 0) + size(4, 0) + size(2, 0)}px;
-    top: ${size(6)};
-    z-index: 2;
-  }
-
-  ${Background} {
-    background: linear-gradient(
-      180deg,
-      rgba(189, 138, 255, 0.4) 0%,
-      rgba(255, 138, 0, 0.14) 100%
-    );
-  }
-  ${Title} {
-    margin-left: ${column(6)};
-    padding-left: ${size(3)};
-  }
-`;
-
-const DataImage = styled(StyledGracefulImage).attrs({
-  src: data
-})`
-  max-width: 100%;
-  max-height: 100%;
-`;
-
-const DataSection = styled(Section)`
-  margin-left: ${column(2)};
-  margin-top: ${size(7)};
-
-  ${Crop} {
-    position: relative;
-    margin-left: ${column(3)};
-    margin-top: ${size(5, 0) + size(3, 0)}px;
-  }
-
-  ${Description} {
-    position: absolute;
-    top: ${size(5)};
-    left: -${size(4, 0) + size(4, 0)}px;
-    z-index: 2;
-  }
-
-  ${Background} {
-    background: linear-gradient(
-      216.12deg,
-      rgba(255, 197, 48, 0.342) 6.61%,
-      rgba(245, 142, 241, 0.198) 74.88%
-    );
-  }
-
-  ${Title} {
-    position: absolute;
-    bottom: ${size(4)};
-    left: ${size(5, 0) + size(2, 0)}px;
-    span {
-      display: block;
-    }
-  }
-`;
-
-const YourProjectImage = styled(GracefulSvg).attrs({
-  src: revenue
-})`
-  svg {
-    max-height: 100%;
-    max-width: 100%;
-    width: 80rem;
-    height: 50rem;
-  }
-
-  width: 80rem;
-  height: 50rem;
-  min-height: 50rem;
-  min-width: 80rem;
-`;
-
-const YourProjectImageContainer = styled.div`
-  background: black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  padding: ${size(4)} ${size(5)};
-`;
-
-const CallToAction = styled.a`
-  width: 100%;
-  display: block;
-  border-radius: 10px;
-  min-height: 16.7rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  letter-spacing: 0.12rem;
-  background-color: ${color("black")};
-  font-weight: bold;
-  transition: background-color 200ms, border-color 200ms;
-  text-decoration: none;
-
-  span {
-    color: ${color("accent")};
-    font-size: 24px;
-    transition: color 200ms, font-size 200ms;
-  }
-
-  :hover {
-    border-color: ${color("accent")};
-    background-color: ${color("accent")};
-    span {
-      color: white;
-      font-size: ${size(3)};
-    }
-  }
-`;
-
-const YourProjectSection = styled(Section)`
-  align-items: center;
-  margin: ${size(7)} auto 0 auto;
-  padding: ${size(4)};
-
-  ${YourProjectImageContainer} {
-    margin-top: -${size(5)};
-  }
-
-  ${Background} {
-    background: linear-gradient(
-      224.32deg,
-      rgba(255, 197, 48, 0.342) 10.18%,
-      rgba(245, 142, 241, 0.198) 72.27%
-    );
-  }
-
-  ${Paragraph} {
-    font-weight: bold;
-    line-height: 1.12;
-    font-size: 2.2rem;
-    letter-spacing: 0.12rem;
-    margin-bottom: ${size(3)};
-    text-align: center;
-  }
-
-  ${CallToAction} {
-    margin-top: ${size(3)};
-  }
-
-  ${Description} {
-    position: absolute;
-    bottom: -${sumSize(5, 4, 3)}px;
-  }
-`;
-
-const ResponsiveImage = styled(LoadedImage)`
-  transition: opacity 200ms;
-  max-width: 100%;
+  font-size: ${size(3)};
+  ${media.aboveTablet`
+    font-size: ${size(4)};
+  `};
 `;
 
 const ArchitectureSvg = styled(Isvg).attrs({
   src: architecture
 })`
-  width: 98rem;
-  height: auto;
   background: black;
   display: block;
-  padding: ${size(4)};
 
   &.loaded {
     svg {
@@ -392,62 +141,431 @@ const ArchitectureSvg = styled(Isvg).attrs({
   }
 `;
 
-// TODO viewbox? native dimensions?
-const RevenueImage = styled(Isvg).attrs({
+const ArchitectureSection = styled(Section)`
+  position: relative;
+  width: ${column(12)};
+  padding: ${size(3)};
+  margin: 0;
+
+  ${ArchitectureSvg} {
+    width: calc(100% + ${size(3)});
+    padding: ${size(2)};
+    position: absolute;
+    left: -${size(2)};
+    right: -${size(3)};
+    bottom: -${size(5)};
+  }
+
+  ${Description} {
+  }
+
+  ${Background} {
+    background: linear-gradient(
+      32.24deg,
+      rgba(189, 138, 255, 0.4) 16.65%,
+      rgba(255, 138, 0, 0.14) 44.57%
+    );
+  }
+
+  ${Title} {
+    margin: -${sumSize(5, 2)}px 0 ${size(3)} 0;
+    width: ${column(12)};
+    z-index: 3;
+
+    ${media.belowBigPhone`
+      margin-top: -${sumSize(5, 4, 3)}px;
+    `};
+  }
+
+  ${media.aboveTablet`
+    width: ${column(10)};
+    padding: ${size(4)};
+    margin: ${size(4)};
+    margin-left: 0;
+
+    ${ArchitectureSvg} {
+      position: static;
+      margin-top: -${sumSize(5, 4)}px;
+      margin-left: ${size(4)};
+      padding: ${size(4)};
+      padding-top: ${sumSize(5, 3)}px;
+      width: 98rem;
+      height: auto;
+    }
+
+    ${Description} {
+      position: absolute;
+      right: -${size(5)};
+      width: ${column(6)};
+    }
+
+    ${Background} {
+      background: linear-gradient(
+        32.24deg,
+        rgba(189, 138, 255, 0.4) 16.65%,
+        rgba(255, 138, 0, 0.14) 44.57%
+      );
+    }
+
+    ${Title} {
+      margin: 0;
+      margin-top: -${sumSize(5)}px;
+      width: ${column(7)};
+    }
+  `};
+`;
+
+const SectionContent = styled.div`
+  ${media.aboveTablet`
+    margin: 0 -${size(4)};
+  `};
+`;
+
+const EpimapImage = styled(StyledGracefulImage).attrs({
+  src: epimap3d
+})`
+  max-width: 100%;
+`;
+
+const EpimapSection = styled(Section)`
+  padding: ${size(3)};
+  width: ${column(12)};
+  margin-top: ${size(6)};
+
+  ${EpimapImage} {
+    position: absolute;
+    top: -${size(3)};
+    right: 0;
+    left: ${size(4)};
+  }
+
+  ${Description} {
+    position: relative;
+    left: 0;
+    z-index: 2;
+    width: ${column(12)};
+  }
+
+  ${Background} {
+    background: linear-gradient(
+      180deg,
+      rgba(189, 138, 255, 0.4) 0%,
+      rgba(255, 138, 0, 0.14) 100%
+    );
+  }
+
+  ${Title} {
+    margin-bottom: ${size(3)};
+    z-index: 3;
+  }
+
+  ${media.aboveTablet`
+    margin: ${size(4)};
+    margin-top: ${size(6)};
+    padding: ${size(4)};
+    width: ${column(10)};
+
+    ${EpimapImage} {
+      position: static;
+      margin-top: -${sumSize(7, 6, 4)}px;
+      margin-left: ${size(7)};
+      width: calc(100% - ${sumSize(6, 4)}px);
+    }
+
+    ${Description} {
+      left: ${size(5)};
+      width: ${column(7)};
+    }
+
+    ${Background} {
+      background: linear-gradient(
+        180deg,
+        rgba(189, 138, 255, 0.4) 0%,
+        rgba(255, 138, 0, 0.14) 100%
+      );
+    }
+    ${Title} {
+      margin-bottom: ${size(4)};
+      margin-left: ${size(4)};
+      margin-top: ${size(3)};
+    }
+  `};
+`;
+
+const MissionreadyImage = styled(StyledGracefulImage).attrs({
+  src: missionready
+})`
+  max-width: 100%;
+  max-height: 100%;
+  ${media.aboveTablet`
+    height: 70.6rem;
+    min-width: 49rem;
+    min-height: 70.6rem;
+  `}
+`;
+
+const MissionreadySection = styled(Section)`
+  margin: 0 auto;
+  margin-top: ${size(5)};
+  min-height: ${size(7)};
+  width: ${column(12)};
+  padding: ${size(2)};
+
+  ${MissionreadyImage} {
+    position: relative;
+    top: -${size(5)};
+  }
+
+  ${Description} {
+    position: absolute;
+    left: ${column(1)};
+    top: ${sumSize(5, 3)}px;
+    margin-top: ${size(2)};
+    width: ${column(10)};
+    z-index: 2;
+  }
+
+  ${Background} {
+    background: linear-gradient(
+      121.27deg,
+      rgba(190, 84, 255, 0.348) 45.32%,
+      rgba(252, 162, 25, 0.216) 69.28%
+    );
+  }
+
+  ${Title} {
+    position: absolute;
+    top: ${size(2)};
+    width: ${column(6)};
+    left: ${column(3)};
+  }
+
+  ${media.aboveTablet`
+    width: ${column(10)};
+    margin-left: ${column(1)};
+    padding: ${size(4)};
+    margin-top: ${size(6)};
+
+    ${MissionreadyImage} {
+      position: absolute;
+      left: ${size(4)};
+      top: -${size(5)};
+    }
+
+    ${Title} {
+      position: static;
+      margin-left: ${column(6)};
+      padding-left: ${sumSize(4)}px;
+    }
+
+    ${Description} {
+      left: ${column(3)};
+      top: ${sumSize(6, 4, 3, 1)}px;
+      width: ${column(6)};
+    }
+  `};
+`;
+
+const DataImage = styled(StyledGracefulImage).attrs({
+  src: data
+})`
+  max-width: 100%;
+  max-height: 100%;
+`;
+
+const DataSection = styled(Section)`
+  position: relative;
+  margin-top: ${size(7)};
+  padding: ${size(3)};
+  width: ${column(12)};
+
+  ${Description} {
+    margin-top: -${sumSize(4, 3, 2)}px;
+    margin-left: ${size(3)};
+    width: ${column(12)};
+    z-index: 2;
+  }
+
+  ${Background} {
+    background: linear-gradient(
+      216.12deg,
+      rgba(255, 197, 48, 0.342) 6.61%,
+      rgba(245, 142, 241, 0.198) 74.88%
+    );
+  }
+
+  ${Title} {
+    position: absolute;
+    bottom: ${size(5)};
+    left: ${size(3)};
+    span {
+      display: block;
+    }
+  }
+
+  ${media.aboveTablet`
+    margin-left: ${column(3)};
+    padding: ${size(4)};
+    padding-top: ${sumSize(4, 3)}px;
+    width: ${column(9)};
+
+    ${Crop} {
+      position: relative;
+      margin-left: ${column(4)};
+      margin-top: ${size(5, 0) + size(3, 0)}px;
+    }
+
+    ${Description} {
+      position: absolute;
+      bottom: ${sumSize(5, 3, 2, 1)}px;
+      left: -${column(1)};
+      width: ${column(6)};
+    }
+
+    ${Title} {
+      position: absolute;
+      bottom: ${size(3)};
+      left: ${sumSize(5)}px;
+    }
+  `};
+`;
+
+const YourProjectImage = styled(GracefulSvg).attrs({
   src: revenue
 })`
-  flex: 1;
+  svg {
+    max-height: 100%;
+    max-width: 100%;
+    width: 100%;
+  }
 
+  ${media.aboveTablet`
+    svg {
+      width: 80rem;
+      height: 50rem;
+    }
+
+    width: 80rem;
+    min-width: 80rem;
+  `}
+`;
+
+const YourProjectImageContainer = styled.div`
+  background: black;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  margin: ${size(3)};
 
-  svg {
+  ${media.aboveTablet`
+    padding: ${size(4)} ${size(5)};
+  `};
+`;
+
+const CallToAction = styled.a`
+  width: 100%;
+  display: block;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 0.12rem;
+  background-color: ${color("black")};
+  font-weight: bold;
+  text-decoration: none;
+  ${transition("transform", "background-color")};
+  transform: scale(1);
+
+  span {
+    color: ${color("accent")};
+    ${transition("color")};
+  }
+
+  :hover {
+    border-color: ${color("accent")};
+    background-color: ${color("accent")};
+    transform: scale(1.1);
+
+    span {
+      color: white;
+    }
+  }
+`;
+
+const YourProjectSection = styled(Section)`
+  align-items: center;
+  margin: ${size(6)} auto 0 auto;
+  width: ${column(12)};
+
+  ${YourProjectImageContainer} {
+    margin-top: -${size(4)};
+    padding: ${size(3)} 0;
     width: 100%;
-    height: auto;
-    max-height: 30rem;
   }
 
-  .axes {
-    stroke: ${color("backgroundDark")};
-    fill: none;
-    stroke-width: 0.1;
+  ${Background} {
+    background: linear-gradient(
+      224.32deg,
+      rgba(255, 197, 48, 0.342) 10.18%,
+      rgba(245, 142, 241, 0.198) 72.27%
+    );
   }
 
-  .guide {
-    fill: none;
-    stroke: ${color("black")};
-    stroke-width: 0.2;
-    stroke-opacity: 0.2;
-    stroke-dasharray: 2;
-    stroke-dashoffset: 4;
+  ${Paragraph} {
+    font-weight: bold;
+    line-height: 1.12;
+    letter-spacing: 0.12rem;
+    margin-bottom: ${size(2)};
+    text-align: center;
   }
 
-  .chartline {
-    fill: none;
-    stroke: ${color("accent")};
-    animation: runchart 6s infinite;
-    stroke-dasharray: 50;
-    stroke-width: 0.4;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+  ${CallToAction} {
+    margin-top: ${size(2)};
+    font-size: ${size(2)};
+    padding: ${size(3)} 0;
   }
 
-  @keyframes runchart {
-    from {
-      stroke-dashoffset: 50;
+  ${Description} {
+    margin-top: -${sumSize(4, 2, 1)}px;
+    margin-bottom: ${size(3)};
+    width: ${column(8)};
+    font-size: ${size(3)};
+  }
+
+  ${Title} {
+    margin-bottom: ${size(2)};
+  }
+
+  ${media.aboveTablet`
+    margin-top: ${size(6)};
+    padding: 0 ${size(4)};
+    width: ${column(10)};
+
+    ${YourProjectImageContainer} {
+      margin: ${size(4)};
+      margin-top: -${size(4)};
     }
 
-    90% {
-      stroke-dashoffset: 0;
-      opacity: 1;
+    ${CallToAction} {
+      margin-top: ${size(3)};
+      min-height: 16.7rem;
+      span {
+        font-size: ${sumSize(2, 1)}px;
+      }
     }
 
-    to {
-      stroke-dashoffset: 0;
-      opacity: 0;
+    ${Description} {
+      position: absolute;
+      bottom: -${sumSize(6, 4, 2, 1)}px;
+      width: ${column(5)};
     }
-  }
+
+    ${Paragraph} {
+      margin-bottom: ${size(3)};
+      font-size: ${sumSize(2, 1)}px;
+    }
+  `};
 `;
 
 const Home = () => {
@@ -455,15 +573,15 @@ const Home = () => {
     <Container>
       <Curtain>
         <Content column>
-          <ArchitectureSection w={10 / 12} p={4} m={4} ml={0}>
+          <ArchitectureSection>
             <Title>
-              <FWF>High quality services and apps</FWF>
+              <FWF>Outstanding digital products</FWF>
             </Title>
             <Background />
             <OnScreenDetect once>
               {({ isOnScreen }) => <ArchitectureSvg show={isOnScreen} />}
             </OnScreenDetect>
-            <Description w={6 / 12} p={4}>
+            <Description>
               <FWF>
                 <Paragraph>
                   Engineering stellar frontends and backends, weaponizing data,
@@ -476,13 +594,13 @@ const Home = () => {
               </FWF>
             </Description>
           </ArchitectureSection>
-          <EpimapSection w={[1, 10 / 12]} p={4} m={4}>
+          <EpimapSection>
             <Background />
             <Title>
               <FWF>Full-stack development</FWF>
             </Title>
             <SectionContent>
-              <Description w={7 / 12} p={4}>
+              <Description>
                 <FWF>
                   <Paragraph>
                     Together with iHealth Finland we created machine learning
@@ -512,13 +630,13 @@ const Home = () => {
               <EpimapImage />
             </SectionContent>
           </EpimapSection>
-          <MissionreadySection w={11 / 12} p={4} m="0 auto">
+          <MissionreadySection>
             <Background />
             <MissionreadyImage />
             <Title>
               <FWF>Rock-solid technical expertise</FWF>
             </Title>
-            <Description w={6 / 12} p={4}>
+            <Description>
               <FWF>
                 <Paragraph>
                   Missionready trusts us to make sure their platform is
@@ -542,9 +660,21 @@ const Home = () => {
               </FWF>
             </Description>
           </MissionreadySection>
-          <DataSection p={4} pt={0} pr={4} w={9 / 12}>
+          <DataSection>
             <Background />
-            <Crop width="64.2rem" height="54.2rem">
+            <AboveTablet>
+              <Crop width="64.2rem" height="54.2rem">
+                <DataImage />
+                <Title>
+                  <FWF>
+                    <span>Data +</span>
+                    <span>Algorithm +</span>
+                    <span>UX = Product</span>
+                  </FWF>
+                </Title>
+              </Crop>
+            </AboveTablet>
+            <BelowTablet style={{ position: "relative" }}>
               <DataImage />
               <Title>
                 <FWF>
@@ -553,9 +683,16 @@ const Home = () => {
                   <span>UX = Product</span>
                 </FWF>
               </Title>
-            </Crop>
-            <Description w={6 / 12} p={4}>
+            </BelowTablet>
+            <Description>
               <FWF>
+                <Paragraph>
+                  <Link to="berlin-flights">
+                    To explain the importance of contextualizing facts, we
+                    visualized flight departures and arrivals in Berlin. Click
+                    here for the full story.
+                  </Link>
+                </Paragraph>
                 <Paragraph>
                   Data is of no use without actionable information and
                   appropriate visualization. We help companies turn their data
@@ -571,7 +708,7 @@ const Home = () => {
               </FWF>
             </Description>
           </DataSection>
-          <YourProjectSection w={10 / 12}>
+          <YourProjectSection>
             <Background />
             <YourProjectImageContainer>
               <Title>

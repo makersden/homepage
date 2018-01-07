@@ -79,7 +79,7 @@ const Name = styled.h3`
   margin: 0;
   font-size: 2.4rem;
   line-height: 2.8rem;
-  font-weight: 700;
+  font-weight: 500;
 `;
 
 const Quote = styled(SectionModule.Quote)`
