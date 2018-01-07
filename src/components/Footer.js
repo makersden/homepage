@@ -7,11 +7,14 @@ import LogoShort from "../../assets/logoShort.svg";
 import GracefulImage from "../GracefulImage";
 import FadeWithoutFont from "../FadeWithoutFont";
 
+import MQs from "../styles/mediaQueries";
 import { color, size } from "../theme";
 import { transition } from "../mixins";
 import GracefulSvg from "../GracefulSvg";
 import facebook from "../../assets/images/facebook.svg";
 import twitter from "../../assets/images/twitter.svg";
+
+const { AboveTablet } = MQs;
 
 const StyledLogo = styled(GracefulSvg)`
   min-height: 4.8rem;
@@ -102,10 +105,12 @@ const Footer = () => (
           <Address>Germaniastr. 1, 12345 Berlin</Address>
         </Box>
       </div>
-      <TaglineSection>
-        <span>All you need is</span>
-        <SmallStyledLogo />
-      </TaglineSection>
+      <AboveTablet>
+        <TaglineSection>
+          <span>All you need is</span>
+          <SmallStyledLogo />
+        </TaglineSection>
+      </AboveTablet>
     </StyledFooter>
   </FadeWithoutFont>
 );
