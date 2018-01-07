@@ -13,17 +13,26 @@ import korneliusz from "../../assets/images/korneliusz2.jpg";
 import partners from "../../assets/images/partners.png";
 import giantCog from "../../assets/images/GiantCog.svg";
 
+const sectionSpacing = css`
+  margin-top: ${size(4)};
+  ${media.aboveLaptop`
+    margin-top: ${size(5)};
+  `};
+`;
+
 const Title = styled.h2`
   font-family: ${font("display")};
   letter-spacing: 1px;
-  margin: ${size(5)} 0;
   text-align: center;
   font-weight: 300;
   color: ${color("accent")};
   font-size: ${size(3)};
+  margin: 0;
+  margin-top: ${size(3)};
 
-  ${media.aboveDesktop`
+  ${media.aboveLaptop`
     font-size: ${size(4)};
+    margin-top: ${size(4)};
   `};
 `;
 
@@ -57,6 +66,7 @@ const Section = styled(SectionModule.Section)`
 
 const Container = styled.div`
   background-color: ${color("darkGrey")};
+  padding-bottom: ${size(5)};
 `;
 
 const Content = styled(Flex)`
@@ -130,22 +140,37 @@ const Author = ({ children, href }) =>
   );
 
 const KalleSection = styled(Section)`
-  margin-left: ${column(2)};
-  width: ${column(9)};
-  padding: ${size(4)};
-  ${KalleImage} {
-    margin-left: ${size(5)};
+  margin: 0 ${size(3)};
+  padding-bottom: ${size(3)};
+  ${sectionSpacing} ${KalleImage} {
+    border-radius: 10px;
+  }
+
+  ${Background} {
+    border-radius: 20px;
   }
 
   ${Description} {
-    position: absolute;
-    left: ${size(4)};
-    top: ${size(5)};
+    margin-left: ${size(3)};
+    margin-top: -${size(4)};
+    width: ${column(12)};
   }
 
-  ${media.aboveDesktop`
+  ${media.aboveLaptop`
+    margin-left: ${column(2)};
+    width: ${column(9)};
+    padding: ${size(4)};
+
     ${KalleImage} {
       min-height: 68.8rem;
+      margin-left: ${size(5)};
+    }
+
+    ${Description} {
+      position: absolute;
+      left: ${size(4)};
+      top: ${size(5)};
+      margin: 0;
     }
   `};
 `;
@@ -158,26 +183,53 @@ const KorneliuszImage = styled(GracefulImage).attrs({
 `;
 
 const KorneliuszSection = styled(Section)`
-  margin-left: ${column(1)};
-  width: ${column(6)};
-  padding: ${size(4)} 0;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+  margin: 0 ${size(3)};
+  padding: ${size(3)} 0 0 ${size(3)};
+  ${sectionSpacing} ${Background} {
+    border-radius: 20px;
+  }
 
   ${Description} {
-    position: absolute;
-    right: -${size(6)};
-    padding: ${size(3)};
-    width: ${column(8)};
+    margin-top: -${size(4)};
+    margin-left: -${size(3)};
+    width: calc(${column(12)} + ${size(3)});
   }
 
   ${KorneliuszImage} {
-    margin-left: ${size(4)};
-    height: 63.5rem;
-    min-height: 63.5rem;
-    min-width: 49.5rem;
+    border-radius: 10px;
+    width: calc(100% - ${size(3)});
   }
+
+  ${media.aboveTablet} {
+    ${Description} {
+      margin-top: -${size(6)};
+    }
+  }
+
+  ${media.aboveLaptop`
+    margin: ${size(3)};
+    margin-top: ${size(5)};
+    margin-left: ${size(3)};
+    width: ${column(6)};
+    padding: ${size(4)} 0;
+
+    ${Description} {
+      margin: 0;
+      position: absolute;
+      right: -${size(6)};
+      padding: ${size(3)};
+      width: ${column(8)};
+    }
+
+    ${KorneliuszImage} {
+      margin: 0;
+      width: auto;
+      margin-left: ${size(4)};
+      height: 63.5rem;
+      min-height: 63.5rem;
+      min-width: 49.5rem;
+    }
+  `};
 `;
 
 const PartnersImage = styled(GracefulImage).attrs({
@@ -188,25 +240,38 @@ const PartnersImage = styled(GracefulImage).attrs({
 `;
 
 const PartnersSection = styled(Section)`
-  width: ${column(9)};
   align-items: center;
   justify-content: center;
-  margin-left: ${column(3)};
-  padding: ${size(5)};
-  padding-bottom: ${size(5, 0) + size(3, 0)}px;
-
-  ${PartnersImage} {
-    min-width: 75.1rem;
-    min-height: 56.3rem;
+  margin: ${size(3)};
+  margin-bottom: 0;
+  ${sectionSpacing} ${Background} {
+    border-radius: 20px;
   }
 
   ${Description} {
-    position: absolute;
-    bottom: ${sumSize(4, 3)};
-    right: ${sumSize(5, 3)};
-    padding: ${size(3)};
-    width: ${column(7)};
+    margin: ${size(3)};
+    margin-top: 0;
+    margin-top: -${size(4)};
   }
+
+  ${media.aboveLaptop`
+    width: ${column(9)};
+    margin-left: ${column(3)};
+    padding: ${size(5)};
+    padding-bottom: ${size(5, 0) + size(3, 0)}px;
+
+    ${PartnersImage} {
+      min-width: 75.1rem;
+      min-height: 56.3rem;
+    }
+
+    ${Description} {
+      position: absolute;
+      bottom: ${sumSize(4, 3)};
+      right: ${sumSize(5, 3)};
+      width: ${column(7)};
+    }
+  `};
 `;
 
 const Home = () => {
