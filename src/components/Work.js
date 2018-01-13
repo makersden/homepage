@@ -160,7 +160,8 @@ const ArchitectureSection = styled(Section)`
     padding: ${size(2)};
     margin-left: -${size(3)};
     margin-top: -${sumSize(5, 4, 2, 1)};
-    padding-bottom: ${sumSize(5, 3)};
+    padding-top: ${size(3)};
+    padding-bottom: ${sumSize(5, 2)};
   }
 
   ${Description} {
@@ -201,11 +202,12 @@ const ArchitectureSection = styled(Section)`
 
     ${ArchitectureSvg} {
       position: static;
-      margin-top: -${sumSize(5, 4)};
-      margin-left: ${size(4)};
+      margin-top: -${sumSize(6)};
+      margin-left: 0;
       padding: ${size(4)};
-      padding-top: ${sumSize(5, 3)};
-      width: 98rem;
+      padding-top: ${sumSize(5, 4)};
+      max-width: 98rem;
+      width: calc(${column(12)} + ${size(5)});
       height: auto;
     }
 
@@ -224,9 +226,24 @@ const ArchitectureSection = styled(Section)`
     }
 
     ${Title} {
-      position: static;
+      position: relative;
+      top: -${size(4)};
+      left: ${size(4)};
       margin: 0;
       margin-top: -${sumSize(5)};
+      width: ${column(12)};
+    }
+  `};
+
+  ${media.aboveDesktop`
+    ${ArchitectureSvg} {
+      margin-left: ${size(4)};
+    }
+
+
+    ${Title} {
+      left: ${size(5)};
+      top: -${sumSize(4, 2)};
       width: ${column(7)};
     }
   `};
@@ -248,11 +265,13 @@ const EpimapSection = styled(Section)`
   padding: ${size(3)};
   width: ${column(12)};
   margin-top: ${size(6)};
-  ${sectionSpacing} ${EpimapImage} {
+
+  ${sectionSpacing};
+  ${EpimapImage} {
     position: absolute;
-    top: -${size(3)};
+    top: -${size(4)};
     right: 0;
-    left: ${size(4)};
+    width: ${column(9)};
   }
 
   ${Description} {
@@ -282,28 +301,27 @@ const EpimapSection = styled(Section)`
     width: ${column(10)};
 
     ${EpimapImage} {
-      position: static;
-      margin-top: -${sumSize(7, 6, 4)};
-      margin-left: ${size(7)};
-      width: calc(100% - ${sumSize(6, 4)});
+      right: -${size(4)};
+    }
+
+    ${Title} {
+      margin-bottom: ${size(4)};
+      margin-left: ${size(4)};
+      margin-top: ${size(3)};
     }
 
     ${Description} {
       left: ${size(5)};
       width: ${column(7)};
     }
+  `};
 
-    ${Background} {
-      background: linear-gradient(
-        180deg,
-        rgba(189, 138, 255, 0.4) 0%,
-        rgba(255, 138, 0, 0.14) 100%
-      );
-    }
-    ${Title} {
-      margin-bottom: ${size(4)};
-      margin-left: ${size(4)};
-      margin-top: ${size(3)};
+  ${media.aboveDesktop`
+    ${EpimapImage} {
+      position: static;
+      margin-top: -${sumSize(7, 6, 4)};
+      margin-left: ${sumSize(7)};
+      width: calc(100% - ${sumSize(6, 4)});
     }
   `};
 `;
@@ -325,6 +343,7 @@ const MissionreadySection = styled(Section)`
   min-height: ${size(7)};
   width: ${column(12)};
   padding: ${size(2)};
+
   ${sectionSpacing} ${MissionreadyImage} {
     position: relative;
     top: -${size(5)};
@@ -351,7 +370,7 @@ const MissionreadySection = styled(Section)`
     position: absolute;
     top: ${size(2)};
     width: ${column(6)};
-    left: ${size(4)};
+    left: ${column(1)};
   }
 
   ${media.aboveTablet`
@@ -363,17 +382,18 @@ const MissionreadySection = styled(Section)`
     ${MissionreadyImage} {
       position: absolute;
       left: ${size(4)};
-      top: -${size(5)};
+      top: -${size(5, 4)};
     }
 
     ${Title} {
       position: static;
-      margin-left: calc(${column(6)} + ${sumSize(4, 3)});
+      margin-top: -${size(5)};
+      margin-left: calc(${column(6)} + ${sumSize(5)});
     }
 
     ${Description} {
       left: ${column(3)};
-      top: ${sumSize(6, 5)};
+      top: ${sumSize(6, 4, 3)};
       width: ${column(6)};
     }
   `};
@@ -416,6 +436,7 @@ const DataSection = styled(Section)`
   }
 
   ${media.aboveTablet`
+    margin-top: ${sumSize(7, 4)};
     margin-left: ${column(3)};
     padding: ${size(4)};
     padding-top: ${sumSize(4, 3)};
@@ -423,15 +444,16 @@ const DataSection = styled(Section)`
 
     ${Crop} {
       position: relative;
-      margin-left: ${column(4)};
+      margin-left: 0;
       margin-top: ${size(4)};
     }
 
     ${Description} {
       position: absolute;
-      bottom: ${sumSize(6, 1)};
-      left: -${column(1)};
-      width: ${column(6)};
+      bottom: ${sumSize(5, 3, 2)};
+      left: -${column(5)};
+      margin-left: ${size(4)};
+      width: ${column(7)};
     }
 
     ${Title} {
@@ -439,6 +461,20 @@ const DataSection = styled(Section)`
       bottom: ${size(3)};
       left: ${sumSize(5)};
     }
+  `};
+
+  ${media.aboveLaptop`
+    ${Crop} {
+      position: relative;
+      margin-left: ${column(4)};
+      margin-top: ${size(4)};
+    }
+
+      ${Description} {
+        bottom: ${sumSize(6, 1)};
+        left: -${column(1)};
+        width: ${column(6)};
+      }
   `};
 `;
 
@@ -513,7 +549,7 @@ const YourProjectSection = styled(Section)`
 
   ${YourProjectImageContainer} {
     margin-top: -${size(4)};
-    padding: ${size(3)} ${size(3)};
+    padding: ${size(3)};
     margin-left: ${size(2)};
     width: calc(${column(11)} + ${size(3)});
   }
@@ -541,6 +577,7 @@ const YourProjectSection = styled(Section)`
   }
 
   ${Description} {
+    padding: ${size(3)};
     margin-top: -${sumSize(4, 2, 1)};
     margin-bottom: ${size(3)};
     width: ${column(8)};
@@ -549,7 +586,9 @@ const YourProjectSection = styled(Section)`
   }
 
   ${Title} {
-    margin-bottom: ${size(3)};
+    margin-bottom: ${size(2)};
+    width: ${column(7)};
+    margin-left: calc(${column(5)} - ${size(3)});
   }
 
   ${media.aboveTablet`
@@ -562,10 +601,10 @@ const YourProjectSection = styled(Section)`
     ${YourProjectImageContainer} {
       margin: ${size(4)};
       margin-top: -${size(4)};
+      padding: ${size(4)};
     }
 
     ${CallToAction} {
-      margin-top: ${size(3)};
       padding: ${sumSize(3, 2)} 0;
       span {
         font-size: ${sumSize(2, 1)};
@@ -579,8 +618,27 @@ const YourProjectSection = styled(Section)`
     }
 
     ${Paragraph} {
-      margin-bottom: ${size(3)};
       font-size: ${sumSize(2, 1)};
+    }
+
+    ${Title} {
+      margin-left: ${size(2)};
+      width: ${column(12)};
+    }
+  `};
+
+  ${media.aboveLaptop`
+    ${Paragraph} {
+      margin-bottom: ${size(3)};
+    }
+
+    ${Description} {
+      width: ${column(5)};
+      padding: ${size(4)};
+    }
+
+    ${CallToAction} {
+      margin-top: ${size(3)};
     }
   `};
 `;
@@ -592,7 +650,7 @@ const Home = () => {
         <Content column>
           <ArchitectureSection>
             <Title>
-              <FWF>Supreme services and apps</FWF>
+              <FWF>Outstanding services and apps</FWF>
             </Title>
             <Background />
             <OnScreenDetect once>
@@ -601,8 +659,8 @@ const Home = () => {
             <Description>
               <FWF>
                 <Paragraph>
-                  Engineering stellar frontends and backends, weaponizing data,
-                  managing the cloud.
+                  Engineering smooth frontends and performant backends,
+                  weaponizing data, managing the cloud.
                 </Paragraph>
                 <Paragraph>It's what we do best.</Paragraph>
                 <Paragraph>
@@ -733,9 +791,11 @@ const Home = () => {
               </Title>
               <YourProjectImage />
             </YourProjectImageContainer>
-            <Description px={3} py={4} w={5 / 12}>
+            <Description>
               <FWF>
-                <Paragraph>Getting serious with your next venture?</Paragraph>
+                <Paragraph>
+                  Interested in getting support from a team of veterans?
+                </Paragraph>
               </FWF>
               <CallToAction href="mailto:hello@makersden.io">
                 <FWF>

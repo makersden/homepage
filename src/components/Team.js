@@ -204,8 +204,7 @@ const KorneliuszSection = styled(Section)`
   }
 
   ${Description} {
-    margin-top: -${sumSize(4, 2)};
-    margin-left: -${size(3)};
+    margin-left: -${size(4)};
     width: calc(${column(12)} + ${size(3)});
   }
 
@@ -216,8 +215,11 @@ const KorneliuszSection = styled(Section)`
 
   ${media.aboveTablet`
     ${Description} {
+      position: relative;
+      top: ${size(3)};
       margin-top: -${size(6)};
     }
+
   `} ${media.aboveLaptop`
     margin: ${size(3)};
     margin-top: ${size(5)};
@@ -256,7 +258,8 @@ const PartnersSection = styled(Section)`
   margin: ${size(3)};
   margin-bottom: 0;
   position: relative;
-  ${sectionSpacing} ${Background} {
+  ${sectionSpacing};
+  ${Background} {
     border-radius: 20px;
   }
 
@@ -266,22 +269,40 @@ const PartnersSection = styled(Section)`
     margin-top: -${size(4)};
   }
 
-  ${media.aboveLaptop`
+  ${media.aboveTablet`
+    ${PartnersImage} {
+      width: calc(${column(12)} - ${size(4)});
+      margin-left: ${size(3)};
+      margin-top: ${size(3)};
+    }
+
+    ${Description} {
+      position: relative;
+      left: ${size(5)};
+      margin: ${size(3)};
+      margin-left: ${size(3)};
+      margin-top: -${size(4)};
+    }
+  `} ${media.aboveLaptop`
     width: ${column(9)};
     margin-left: ${column(3)};
     padding: ${size(5)};
     padding-bottom: ${size(5, 0) + size(3, 0)}px;
 
     ${PartnersImage} {
+      margin: 0;
+      width: ${column(12)};
       min-width: 75.1rem;
       min-height: 56.3rem;
     }
 
     ${Description} {
-      position: absolute;
-      bottom: ${sumSize(2)};
-      right: ${sumSize(5, 3)};
-      width: ${column(7)};
+      position: static;
+      margin: 0;
+      margin-right: ${size(4)};
+      margin-top: -${size(5)};
+      align-self: flex-end;
+      width: ${column(8)};
     }
   `};
 `;
