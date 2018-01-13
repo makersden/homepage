@@ -171,6 +171,7 @@ const KalleSection = styled(Section)`
       left: ${size(4)};
       top: ${size(5)};
       margin: 0;
+      width: ${column(5)};
     }
   `};
 `;
@@ -190,7 +191,7 @@ const KorneliuszSection = styled(Section)`
   }
 
   ${Description} {
-    margin-top: -${size(4)};
+    margin-top: -${sumSize(4, 2)};
     margin-left: -${size(3)};
     width: calc(${column(12)} + ${size(3)});
   }
@@ -200,13 +201,11 @@ const KorneliuszSection = styled(Section)`
     width: calc(100% - ${size(3)});
   }
 
-  ${media.aboveTablet} {
+  ${media.aboveTablet`
     ${Description} {
       margin-top: -${size(6)};
     }
-  }
-
-  ${media.aboveLaptop`
+  `} ${media.aboveLaptop`
     margin: ${size(3)};
     margin-top: ${size(5)};
     margin-left: ${size(3)};
@@ -240,17 +239,17 @@ const PartnersImage = styled(GracefulImage).attrs({
 `;
 
 const PartnersSection = styled(Section)`
-  align-items: center;
   justify-content: center;
   margin: ${size(3)};
   margin-bottom: 0;
+  position: relative;
   ${sectionSpacing} ${Background} {
     border-radius: 20px;
   }
 
   ${Description} {
     margin: ${size(3)};
-    margin-top: 0;
+    margin-left: -${size(3)};
     margin-top: -${size(4)};
   }
 
@@ -267,7 +266,7 @@ const PartnersSection = styled(Section)`
 
     ${Description} {
       position: absolute;
-      bottom: ${sumSize(4, 3)};
+      bottom: ${sumSize(2)};
       right: ${sumSize(5, 3)};
       width: ${column(7)};
     }
@@ -283,7 +282,7 @@ const Home = () => {
         <KalleSection>
           <Background />
           <KalleImage />
-          <Description w={5 / 12} p={3}>
+          <Description>
             <Name>Carl-Petter (Kalle) Bertell</Name>
             <Paragraph>
               <span>
