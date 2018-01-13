@@ -90,9 +90,6 @@ const StyledButton = styled.button`
   outline: none;
   display: inline-block;
   cursor: pointer;
-  transition-property: opacity, filter;
-  transition-duration: 0.15s;
-  transition-timing-function: linear;
   font: inherit;
   color: inherit;
   text-transform: none;
@@ -100,15 +97,11 @@ const StyledButton = styled.button`
   border: 0;
   margin: 0;
   overflow: visible;
-  &:hover {
-    opacity: 0.7;
-  }
 
   ${emphatic};
 `;
 
 export default function Hamburger({ active, type, onClick, ...props }) {
-  console.log({ light: props.light });
   return (
     <StyledButton active={active} type={type} onClick={onClick}>
       <Box>

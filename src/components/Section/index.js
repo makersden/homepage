@@ -95,7 +95,7 @@ export const Section = styled(Box)`
   justify-content: center;
   position: relative;
   * {
-      border-radius: 5px;
+      border-radius: 10px;
       ${media.aboveTablet`
         border-radius: 20px;
       `}
@@ -107,16 +107,19 @@ export const Section = styled(Box)`
 `;
 
 export const Description = styled(Box)`
-  background: ${transparentize(0.05, "superWhite")};
+  background: ${color("white")};
   display: flex;
   flex-direction: column;
   justify-content: center;
   max-width: 80rem;
   padding: ${size(4)};
-  ${media.belowTablet`
-    padding: ${size(3)};
-  `} * {
+  * {
     font-size: 1.8rem;
     line-height: 2.4rem;
   }
+
+  ${media.belowTablet`
+    padding: ${size(3)};
+    background: ${transparentize(0.05, "superWhite")};
+  `};
 `;

@@ -36,14 +36,31 @@ const Title = styled.h2`
   `};
 `;
 
+const CogContainer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+`;
+
 const GiantCog = styled(Isvg).attrs({
   src: giantCog
 })`
   position: absolute;
-  right: -50vh;
-  top: calc(50% - 50vh);
+  top: 25%;
 
   animation: rotate 120s linear infinite;
+  svg {
+    height: 75%;
+  }
+
+  ${media.belowLaptop`
+    left: -32.75%;
+  `}
+  ${media.aboveLaptop`
+    right: -32.75%;
+  `}
 
   @keyframes rotate {
    from {
@@ -54,10 +71,6 @@ const GiantCog = styled(Isvg).attrs({
     }
   }
 
-  svg {
-    width: 100vh;
-    height: 100vh;
-  }
 `;
 
 const Section = styled(SectionModule.Section)`
@@ -278,7 +291,9 @@ const Home = () => {
     <Container>
       <Title>The A-Team</Title>
       <Content column>
-        <GiantCog />
+        <CogContainer>
+          <GiantCog />
+        </CogContainer>
         <KalleSection>
           <Background />
           <KalleImage />

@@ -88,7 +88,7 @@ const Contact = () => (
     <Curtain>
       <FadeWithoutFont>
         <Content>
-          <Header>Let's get in touch.</Header>
+          <Header>Let's get started.</Header>
           <p>
             <Link href="mailto:hello@makersden.io">hello@makersden.io</Link>
           </p>

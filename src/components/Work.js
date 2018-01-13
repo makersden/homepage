@@ -4,6 +4,7 @@ import Isvg from "react-inlinesvg";
 import { Flex } from "grid-styled";
 import Link from "gatsby-link";
 
+import { transparentize } from "../polished";
 import { circle, transition } from "../mixins";
 import { color, column, font, size, sumSize } from "../theme";
 import MQs, { media } from "../styles/mediaQueries";
@@ -155,15 +156,16 @@ const ArchitectureSection = styled(Section)`
   margin: 0;
 
   ${ArchitectureSvg} {
-    width: calc(100% + ${size(3)});
+    width: calc(${column(12)} + ${size(3)});
     padding: ${size(2)};
-    position: absolute;
-    left: -${size(2)};
-    right: -${size(3)};
-    bottom: -${size(5)};
+    margin-left: -${size(3)};
+    margin-top: -${sumSize(5, 4, 2, 1)};
+    padding-bottom: ${sumSize(5, 3)};
   }
 
   ${Description} {
+    margin-top: -${sumSize(3, 1)};
+    width: calc(${column(12)} + ${size(3)});
   }
 
   ${Background} {
@@ -175,14 +177,21 @@ const ArchitectureSection = styled(Section)`
   }
 
   ${Title} {
-    margin: -${sumSize(5, 2)}0 ${size(3)} 0;
+    position: relative;
+    top: ${size(5)};
+    margin: 0;
+    margin-bottom: ${sumSize(3, 1)};
     width: ${column(12)};
     z-index: 3;
-
-    ${media.belowBigPhone`
-      margin-top: -${sumSize(5, 4, 3)};
-    `};
   }
+
+  ${media.belowBigPhone`
+    ${Title} {
+      top: ${sumSize(5, 3, 2)};
+      margin-top: -${size(4)};
+      margin-bottom: ${sumSize(4, 3)};
+    }
+  `};
 
   ${media.aboveTablet`
     width: ${column(10)};
@@ -215,6 +224,7 @@ const ArchitectureSection = styled(Section)`
     }
 
     ${Title} {
+      position: static;
       margin: 0;
       margin-top: -${sumSize(5)};
       width: ${column(7)};
@@ -358,13 +368,12 @@ const MissionreadySection = styled(Section)`
 
     ${Title} {
       position: static;
-      margin-left: ${column(6)};
-      padding-left: ${sumSize(4)};
+      margin-left: calc(${column(6)} + ${sumSize(4, 3)});
     }
 
     ${Description} {
       left: ${column(3)};
-      top: ${sumSize(6, 4, 3, 1)};
+      top: ${sumSize(6, 5)};
       width: ${column(6)};
     }
   `};
@@ -381,6 +390,7 @@ const DataSection = styled(Section)`
   position: relative;
   padding: ${size(3)};
   width: ${column(12)};
+
   ${sectionSpacing} ${Description} {
     margin-top: -${sumSize(4, 3, 2)};
     margin-left: ${size(3)};
@@ -414,12 +424,12 @@ const DataSection = styled(Section)`
     ${Crop} {
       position: relative;
       margin-left: ${column(4)};
-      margin-top: ${sumSize(5, 3)};
+      margin-top: ${size(4)};
     }
 
     ${Description} {
       position: absolute;
-      bottom: ${sumSize(5, 3, 2, 1)};
+      bottom: ${sumSize(6, 1)};
       left: -${column(1)};
       width: ${column(6)};
     }
@@ -473,14 +483,14 @@ const CallToAction = styled.a`
   align-items: center;
   justify-content: center;
   letter-spacing: 0.12rem;
-  background-color: ${color("black")};
+  background-color: #735d83;
   font-weight: bold;
   text-decoration: none;
   ${transition("transform", "background-color")};
   transform: scale(1);
 
   span {
-    color: ${color("accent")};
+    color: ${transparentize(0.2, "white")};
     ${transition("color")};
   }
 
@@ -496,13 +506,16 @@ const CallToAction = styled.a`
 `;
 
 const YourProjectSection = styled(Section)`
-  align-items: center;
-  margin: 0 auto;
-  width: ${column(12)};
-  ${sectionSpacing} ${YourProjectImageContainer} {
+  margin: 0;
+  margin-left: ${column(1)};
+  width: ${column(11)};
+  ${sectionSpacing};
+
+  ${YourProjectImageContainer} {
     margin-top: -${size(4)};
-    padding: ${size(3)} 0;
-    width: 100%;
+    padding: ${size(3)} ${size(3)};
+    margin-left: ${size(2)};
+    width: calc(${column(11)} + ${size(3)});
   }
 
   ${Background} {
@@ -531,14 +544,17 @@ const YourProjectSection = styled(Section)`
     margin-top: -${sumSize(4, 2, 1)};
     margin-bottom: ${size(3)};
     width: ${column(8)};
+    margin-left: -${size(2)};
     font-size: ${size(3)};
   }
 
   ${Title} {
-    margin-bottom: ${size(2)};
+    margin-bottom: ${size(3)};
   }
 
   ${media.aboveTablet`
+    align-items: center;
+    margin: 0 auto;
     margin-top: ${size(6)};
     padding: 0 ${size(4)};
     width: ${column(10)};
@@ -550,7 +566,7 @@ const YourProjectSection = styled(Section)`
 
     ${CallToAction} {
       margin-top: ${size(3)};
-      min-height: 16.7rem;
+      padding: ${sumSize(3, 2)} 0;
       span {
         font-size: ${sumSize(2, 1)};
       }
@@ -558,7 +574,7 @@ const YourProjectSection = styled(Section)`
 
     ${Description} {
       position: absolute;
-      bottom: -${sumSize(6, 4, 2, 1)};
+      bottom: -${sumSize(5, 4, 3, 2, 1)};
       width: ${column(5)};
     }
 
@@ -576,7 +592,7 @@ const Home = () => {
         <Content column>
           <ArchitectureSection>
             <Title>
-              <FWF>Outstanding digital products</FWF>
+              <FWF>Supreme services and apps</FWF>
             </Title>
             <Background />
             <OnScreenDetect once>
@@ -688,16 +704,16 @@ const Home = () => {
             <Description>
               <FWF>
                 <Paragraph>
-                  <Link to="berlin-flights">
-                    To explain the importance of contextualizing facts, we
-                    visualized flight departures and arrivals in Berlin. Click
-                    here for the full story.
-                  </Link>
-                </Paragraph>
-                <Paragraph>
                   Data is of no use without actionable information and
                   appropriate visualization. We help companies turn their data
                   into new insights.
+                </Paragraph>
+                <Paragraph>
+                  To explain the importance of contextualizing facts, we
+                  visualized flight departures and arrivals in Berlin.&nbsp;
+                  <Link to="berlin-flights">
+                    Click here for the full story.
+                  </Link>
                 </Paragraph>
                 <Quote>
                   Without big data analytics, companies are blind and deaf,
@@ -719,11 +735,7 @@ const Home = () => {
             </YourProjectImageContainer>
             <Description px={3} py={4} w={5 / 12}>
               <FWF>
-                <Paragraph>
-                  Looking to build something new?
-                  <br />
-                  Improving an existing product?
-                </Paragraph>
+                <Paragraph>Getting serious with your next venture?</Paragraph>
               </FWF>
               <CallToAction href="mailto:hello@makersden.io">
                 <FWF>
