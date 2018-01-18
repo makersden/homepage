@@ -1,7 +1,7 @@
 ---
 slug: "first-post"
 path: "/blog/first-post"
-date: "2017-07-12T17:12:33.962Z"
+date: "2015-07-12T17:12:33.962Z"
 title: "My First Gatsby Post"
 image: "kitten.jpg"
 ---

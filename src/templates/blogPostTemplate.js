@@ -2,13 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import Img from "gatsby-image";
 import ReactDisqusComments from "react-disqus-comments";
+import Helmet from "react-helmet";
 
 import { transparentize } from "../polished";
 import { color, font, size } from "../theme";
 
 const Post = styled.article`
+  background: ${color("white")};
   margin: 0;
-  min-height: calc(100vh - 21rem - 8.8rem);
   font-size: 1.8rem;
   color: ${color("textDark")};
 `;
@@ -71,6 +72,22 @@ const Content = styled.section`
   li {
     margin-top: 0.5em;
   }
+
+  blockquote {
+    float: left;
+    max-width: 31.5rem;
+    margin: 2em;
+    margin-left: -5em;
+    p {
+      font-family: ${font("display")};
+      font-size: ${size(3)};
+      margin: 0;
+      &:last-child {
+        margin-top: 1rem;
+        font-size: ${size(2)};
+      }
+    }
+  }
 `;
 
 const Paragraph = styled.p``;
@@ -91,6 +108,7 @@ export default function Template({
   const { frontmatter, html } = markdownRemark;
   return (
     <Post>
+      <Helmet title={`${frontmatter.title} - Makers' Den blog`} />
       <TitleImage {...frontmatter.image.childImageSharp} />
       <Container>
         <Title>{frontmatter.title}</Title>

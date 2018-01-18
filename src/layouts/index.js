@@ -46,6 +46,11 @@ injectGlobal`
   }
 `;
 
+const Content = styled.div`
+  background: ${color("black")};
+  min-height: calc(100vh - 21rem - 8.8rem);
+`;
+
 const TemplateWrapper = props => (
   <ThemeProvider
     theme={{
@@ -63,7 +68,7 @@ const TemplateWrapper = props => (
       />
       <StickyContainer id="home">
         <Header {...props} />
-        {props.children()}
+        <Content>{props.children()}</Content>
         <Footer />
       </StickyContainer>
     </Layout>
