@@ -312,9 +312,9 @@ const Home = () => {
     <Container>
       <Title>The A-Team</Title>
       <Content column>
-        <CogContainer>
-          <GiantCog />
-        </CogContainer>
+        {/* <CogContainer>
+            <GiantCog />
+            </CogContainer> */}
         <KalleSection>
           <Background />
           <KalleImage />

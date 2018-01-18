@@ -4,19 +4,18 @@ import { Box } from "grid-styled";
 
 import LogoFull from "../../assets/logoFull.svg";
 import LogoShort from "../../assets/logoShort.svg";
-import GracefulImage from "../GracefulImage";
 import FadeWithoutFont from "../FadeWithoutFont";
 
 import MQs from "../styles/mediaQueries";
 import { color, size } from "../theme";
 import { transition } from "../mixins";
-import GracefulSvg from "../GracefulSvg";
 import facebook from "../../assets/images/facebook.svg";
 import twitter from "../../assets/images/twitter.svg";
 
 const { AboveTablet } = MQs;
+import { Image, Svg } from "./Section";
 
-const StyledLogo = styled(GracefulSvg)`
+const StyledLogo = styled(Svg)`
   min-height: 4.8rem;
   margin: 0;
   letter-spacing: -0.16rem;
@@ -68,7 +67,9 @@ const SocialLink = styled.a.attrs({
   }
 `;
 
-const SocialIcon = styled(GracefulImage)`
+const SocialIcon = styled(Image).attrs({
+  "data-aos": "zoom-in"
+})`
   max-width: 100%;
   max-height: 100%;
   width: 4.1rem;

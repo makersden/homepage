@@ -3,14 +3,12 @@ import styled, { css } from "styled-components";
 import Isvg from "react-inlinesvg";
 import { Flex } from "grid-styled";
 import Link from "gatsby-link";
+import Observer from "react-intersection-observer";
 
 import { transparentize } from "../polished";
 import { circle, transition } from "../mixins";
 import { color, column, font, size, sumSize } from "../theme";
 import MQs, { media } from "../styles/mediaQueries";
-import OnScreenDetect from "../OnScreenDetect";
-import GracefulImage from "../GracefulImage";
-import GracefulSvg from "../GracefulSvg";
 import FWF from "../FadeWithoutFont";
 
 import architecture from "../../assets/images/Web App Reference Architecture.svg";
@@ -31,7 +29,10 @@ import {
   Description,
   Paragraph,
   Quote,
-  Section
+  Section,
+  Image,
+  Svg,
+  Title
 } from "./Section";
 
 const sectionSpacing = css`
@@ -41,17 +42,18 @@ const sectionSpacing = css`
   `};
 `;
 
-const Crop = styled.div`
-  ${props =>
-    "width" in props &&
-    `
-    width: ${props.width};
-  `} ${props =>
-      "height" in props &&
-      `
-    height: ${props.height};
-  `} overflow: hidden;
-`;
+const DataImageContainer = styled.div``;
+/* const Crop = styled.div`
+ *   ${props =>
+ *     "width" in props &&
+ *     `
+ *     width: ${props.width};
+ *   `} ${props =>
+ *       "height" in props &&
+ *       `
+ *     height: ${props.height};
+ *   `} overflow: hidden;
+ * `;*/
 
 const Author = styled.figure`
   display: flex;
@@ -67,7 +69,7 @@ const Author = styled.figure`
   }
 `;
 
-const AuthorImage = styled(GracefulImage).attrs({
+const AuthorImage = styled(Image).attrs({
   static: true
 })`
   ${circle("7.5rem")};
@@ -98,20 +100,6 @@ const Content = styled(Flex)`
   padding: ${size(7)} 0;
   width: 100%;
   overflow: hidden;
-`;
-
-const StyledGracefulImage = styled(GracefulImage)``;
-
-const Title = styled.h2`
-  font-family: ${font("display")};
-  font-weight: normal;
-  letter-spacing: 1px;
-  color: ${color("white")};
-  margin: 0;
-  font-size: ${size(3)};
-  ${media.aboveTablet`
-    font-size: ${size(4)};
-  `};
 `;
 
 const ArchitectureSvg = styled(Isvg).attrs({
@@ -255,7 +243,7 @@ const SectionContent = styled.div`
   `};
 `;
 
-const EpimapImage = styled(StyledGracefulImage).attrs({
+const EpimapImage = styled(Image).attrs({
   src: epimap3d
 })`
   max-width: 100%;
@@ -326,7 +314,7 @@ const EpimapSection = styled(Section)`
   `};
 `;
 
-const MissionreadyImage = styled(StyledGracefulImage).attrs({
+const MissionreadyImage = styled(Image).attrs({
   src: missionready
 })`
   max-width: 100%;
@@ -399,11 +387,18 @@ const MissionreadySection = styled(Section)`
   `};
 `;
 
-const DataImage = styled(StyledGracefulImage).attrs({
+const DataImage = styled(Image).attrs({
   src: data
 })`
   max-width: 100%;
   max-height: 100%;
+  min-height: 50rem;
+  ${media.aboveTablet`
+    min-height: 55rem;
+  `}
+  ${media.aboveLaptop`
+    min-height: 60rem;
+  `}
 `;
 
 const DataSection = styled(Section)`
@@ -411,7 +406,8 @@ const DataSection = styled(Section)`
   padding: ${size(3)};
   width: ${column(12)};
 
-  ${sectionSpacing} ${Description} {
+  ${sectionSpacing};
+  ${Description} {
     margin-top: -${sumSize(4, 3, 2)};
     margin-left: ${size(3)};
     width: ${column(12)};
@@ -442,7 +438,7 @@ const DataSection = styled(Section)`
     padding-top: ${sumSize(4, 3)};
     width: ${column(9)};
 
-    ${Crop} {
+    ${DataImageContainer} {
       position: relative;
       margin-left: 0;
       margin-top: ${size(4)};
@@ -464,7 +460,7 @@ const DataSection = styled(Section)`
   `};
 
   ${media.aboveLaptop`
-    ${Crop} {
+    ${DataImageContainer} {
       position: relative;
       margin-left: ${column(4)};
       margin-top: ${size(4)};
@@ -478,7 +474,7 @@ const DataSection = styled(Section)`
   `};
 `;
 
-const YourProjectImage = styled(GracefulSvg).attrs({
+const YourProjectImage = styled(Svg).attrs({
   src: revenue
 })`
   svg {
@@ -486,6 +482,10 @@ const YourProjectImage = styled(GracefulSvg).attrs({
     max-width: 100%;
     width: 100%;
   }
+
+  min-height: 17.5rem;
+  min-width: 30rem;
+  width: 100%;
 
   ${media.aboveTablet`
     svg {
@@ -495,6 +495,7 @@ const YourProjectImage = styled(GracefulSvg).attrs({
 
     width: 80rem;
     min-width: 80rem;
+    min-height: 50rem;
   `}
 `;
 
@@ -519,7 +520,7 @@ const CallToAction = styled.a`
   align-items: center;
   justify-content: center;
   letter-spacing: 0.12rem;
-  background-color: #735d83;
+  background-color: #8d7b99;
   font-weight: bold;
   text-decoration: none;
   ${transition("transform", "background-color")};
@@ -649,14 +650,14 @@ const Home = () => {
       <Curtain>
         <Content column>
           <ArchitectureSection>
-            <Title>
+            <Title data-aos="fade-down">
               <FWF>Outstanding services and apps</FWF>
             </Title>
             <Background />
-            <OnScreenDetect once>
-              {({ isOnScreen }) => <ArchitectureSvg show={isOnScreen} />}
-            </OnScreenDetect>
-            <Description>
+            <Observer triggerOnce>
+              {inView => <ArchitectureSvg show={inView} />}
+            </Observer>
+            <Description data-aos="fade-left">
               <FWF>
                 <Paragraph>
                   Engineering smooth frontends and performant backends,
@@ -671,11 +672,11 @@ const Home = () => {
           </ArchitectureSection>
           <EpimapSection>
             <Background />
-            <Title>
+            <Title data-aos="fade-down">
               <FWF>Full-stack development</FWF>
             </Title>
             <SectionContent>
-              <Description>
+              <Description data-aos="fade-up">
                 <FWF>
                   <Paragraph>
                     Together with iHealth Finland we created machine learning
@@ -702,16 +703,16 @@ const Home = () => {
                   </Author>
                 </FWF>
               </Description>
-              <EpimapImage />
+              <EpimapImage data-aos="fade-left" />
             </SectionContent>
           </EpimapSection>
           <MissionreadySection>
             <Background />
-            <MissionreadyImage />
-            <Title>
+            <MissionreadyImage data-aos="fade-right" />
+            <Title data-aos="fade-up">
               <FWF>Rock-solid technical expertise</FWF>
             </Title>
-            <Description>
+            <Description data-aos="fade-left">
               <FWF>
                 <Paragraph>
                   Missionready trusts us to make sure their platform is
@@ -738,8 +739,8 @@ const Home = () => {
           <DataSection>
             <Background />
             <AboveTablet>
-              <Crop width="64.2rem" height="54.2rem">
-                <DataImage />
+              <DataImageContainer>
+                <DataImage data-aos="fade-right" />
                 <Title>
                   <FWF>
                     <span>Data +</span>
@@ -747,7 +748,7 @@ const Home = () => {
                     <span>UX = Product</span>
                   </FWF>
                 </Title>
-              </Crop>
+              </DataImageContainer>
             </AboveTablet>
             <BelowTablet style={{ position: "relative" }}>
               <DataImage />
@@ -786,12 +787,12 @@ const Home = () => {
           <YourProjectSection>
             <Background />
             <YourProjectImageContainer>
-              <Title>
+              <Title data-aos="fade-right">
                 <FWF>At your service?</FWF>
               </Title>
               <YourProjectImage />
             </YourProjectImageContainer>
-            <Description>
+            <Description data-aos="fade-down">
               <FWF>
                 <Paragraph>
                   Interested in getting support from a team of veterans?

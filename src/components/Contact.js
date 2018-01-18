@@ -7,20 +7,39 @@ import { transparentize } from "../polished";
 import berlin from "../../assets/images/berlin-sharp.jpg";
 import FadeWithoutFont from "../FadeWithoutFont";
 
+const duration = 3000;
+
 const Container = styled.div`
+  background: linear-gradient(180deg, ${color("darkGrey")} 0%, transparent 30%),
+    transparent;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   position: absolute;
-  background: ${color("black")} url(${berlin});
+`;
+
+const Background = styled.div.attrs({
+  "data-aos": "fade",
+  "data-aos-delay": 500,
+  "data-aos-duration": duration
+})`
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-image: url(${berlin});
   background-size: cover;
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-position-x: 100%;
 `;
 
-const Curtain = styled.div`
+const Curtain = styled.div.attrs({
+  "data-aos": "fade",
+  "data-aos-duration": duration
+})`
   position: absolute;
   left: 0;
   width: 100%;
@@ -85,6 +104,7 @@ const Header = styled.h2`
 // TOOD video of berlin in background?
 const Contact = () => (
   <Container>
+    <Background />
     <Curtain>
       <FadeWithoutFont>
         <Content>

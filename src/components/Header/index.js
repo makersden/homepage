@@ -207,12 +207,12 @@ class Header extends PureComponent {
   };
 
   handlePin = () => {
-    const home = this.state.home || document.getElementById("home");
-    const isSticky = window.scrollY >= home.offsetHeight - 88;
+    const hero = this.state.hero || document.getElementById("hero");
+    const isSticky = window.scrollY >= hero.offsetHeight - 88;
     this.setState(() => ({
       isSticky,
       navVisible: false,
-      home
+      hero
     }));
   };
 

@@ -2,10 +2,28 @@ import { Flex, Box } from "grid-styled";
 import styled, { css } from "styled-components";
 
 import { transparentize } from "../../polished";
-import { color, size } from "../../theme";
+import { color, font, size } from "../../theme";
 import { media } from "../../styles/mediaQueries";
+import GracefulImage from "../../GracefulImage";
+import GracefulSvg from "../../GracefulSvg";
 
-export const Background = styled.div`
+const duration = 1000;
+
+// order
+const background = 1;
+const image = 2;
+const title = 3;
+const description = 4;
+
+const delay = 50;
+
+const getDelay = order => (order - 1) * delay;
+
+export const Background = styled.div.attrs({
+  "data-aos": "fade",
+  "data-aos-delay": getDelay(background),
+  "data-aos-duration": duration
+})`
   position: absolute;
   top: 0;
   left: 0;
@@ -14,7 +32,10 @@ export const Background = styled.div`
   z-index: 0;
 `;
 
-export const Quote = styled.blockquote`
+export const Quote = styled.blockquote.attrs({
+  "data-aos": "fade",
+  "data-aos-duration": duration
+})`
   margin-left: 0;
   margin-right: 0;
   font-weight: 300;
@@ -45,7 +66,10 @@ export const authorStyle = css`
   }
 `;
 
-export const Author = styled.span`
+export const Author = styled.span.attrs({
+  "data-aos": "fade",
+  "data-aos-duration": duration
+})`
   ${authorStyle};
   img {
     border-radius: 50%;
@@ -55,7 +79,9 @@ export const Author = styled.span`
 `;
 
 export const AuthorLink = styled.a.attrs({
-  target: "blank"
+  target: "blank",
+  "data-aos": "fade",
+  "data-aos-duration": duration
 })`
   &,
   &:active,
@@ -70,7 +96,10 @@ export const AuthorLink = styled.a.attrs({
   }
 `;
 
-export const Paragraph = styled.p`
+export const Paragraph = styled.p.attrs({
+  "data-aos": "fade",
+  "data-aos-duration": duration
+})`
   font-weight: 500;
   color: ${color("textDark")};
   text-align: ${props => props.align || "left"};
@@ -106,7 +135,11 @@ export const Section = styled(Box)`
   }
 `;
 
-export const Description = styled(Box)`
+export const Description = styled(Box).attrs({
+  "data-aos": "fade-left",
+  "data-aos-delay": getDelay(description),
+  "data-aos-duration": duration
+})`
   background: ${color("white")};
   display: flex;
   flex-direction: column;
@@ -123,3 +156,27 @@ export const Description = styled(Box)`
     background: ${transparentize(0.05, "superWhite")};
   `};
 `;
+
+export const Title = styled.h2.attrs({
+  "data-aos": "fade-up",
+  "data-aos-delay": getDelay(title),
+  "data-aos-duration": duration
+})`
+  font-family: ${font("display")};
+  font-weight: normal;
+  letter-spacing: 1px;
+  color: ${color("white")};
+  margin: 0;
+  font-size: ${size(3)};
+  ${media.aboveTablet`
+      font-size: ${size(4)};
+`};
+`;
+
+export const Image = styled(GracefulImage).attrs({
+  "data-aos": "fade",
+  "data-aos-delay": getDelay(image),
+  "data-aos-duration": duration
+})``;
+
+export const Svg = GracefulSvg;

@@ -3,12 +3,16 @@ import PropTypes from "prop-types";
 import Helmet from "react-helmet";
 import styled, { injectGlobal, ThemeProvider } from "styled-components";
 import { StickyContainer } from "react-sticky";
+import { compose, lifecycle } from "recompose";
 
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 import theme, { color, font } from "../theme";
 import { breakpoints } from "../styles/mediaQueries";
+
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Layout = styled.div`
   background: ${color("backgroundDark")};
@@ -54,7 +58,7 @@ const TemplateWrapper = props => (
           { name: "keywords", content: "sample, something" }
         ]}
       />
-      <StickyContainer>
+      <StickyContainer id="home">
         <Header {...props} />
         {props.children()}
         <Footer />
@@ -67,4 +71,10 @@ TemplateWrapper.propTypes = {
   children: PropTypes.func
 };
 
-export default TemplateWrapper;
+export default compose(
+  lifecycle({
+    componentDidMount() {
+      AOS.init();
+    }
+  })
+)(TemplateWrapper);

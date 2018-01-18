@@ -1,15 +1,11 @@
 import React, { PureComponent } from "react";
 import styled, { css } from "styled-components";
 
-import OnScreenDetect from "./OnScreenDetect";
+import Observer from "react-intersection-observer";
 
-const Img = styled.img`
-  opacity: ${props => (props.loaded ? "1" : "0")};
-  ${props =>
-    !props.static &&
-    css`
-      transform: translateY(${props => (props.loaded ? "0px" : "-20px")});
-    `} transition: opacity 800ms, transform 1000ms;
+const Img = styled.img.attrs({
+  "data-aos": "fade"
+})`
   ${props =>
     !props.loaded &&
     css`
@@ -43,14 +39,14 @@ class GracefulImage extends PureComponent {
       this.props.preloader || (() => <div className={className} />);
 
     return (
-      <OnScreenDetect once>
-        {({ isOnScreen }) =>
-          isOnScreen ? (
+      <Observer triggerOnce>
+        {inView =>
+          inView ? (
             <Img {...this.props} innerRef={this.listenToLoad} loaded={loaded} />
           ) : (
             <Preloader />
           )}
-      </OnScreenDetect>
+      </Observer>
     );
   }
 }

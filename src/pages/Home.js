@@ -32,15 +32,12 @@ const HeroSegment = styled(Box)`
 `;
 
 const LightSegment = styled(TransparentSegment)`
-  background: ${color("white")};
   color: ${color("textDark")};
   position: relative;
-  :nth-child(2n) {
-    background: ${color("whiteAlt")};
-  }
 `;
 
 const ContactSegment = styled(LightSegment)`
+  min-height: calc(100vh - 10.5rem);
   padding: 0;
   align-items: center;
   justify-content: center;
@@ -91,7 +88,7 @@ const Home = () => {
   return (
     <Container>
       <FadeWithoutFont>
-        <HeroSegment p={[0, 4]} m={[3, 4]} id="home">
+        <HeroSegment p={[0, 4]} m={[3, 4]} id="hero">
           <Title>We are a software workshop.</Title>
           {/* <StyledCogs /> */}
           <Subtitle w={[1, 6 / 12]} mx={[0, 4]} px={[0, 4]}>
