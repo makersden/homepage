@@ -153,11 +153,6 @@ const Nav = styled.nav`
           }
         `
       )}
-
-      &:last-child {
-        border-bottom-left-radius: 5px;
-        border-bottom-right-radius: 5px;
-      }
     }
 
     ${props =>
@@ -169,7 +164,7 @@ const Nav = styled.nav`
   `};
 `;
 
-const StyledHeader = styled.header`
+const StyledHeader = styled.div`
   transition: background ${duration("slow")};
   height: calc(9rem - 2px);
   display: flex;
@@ -178,8 +173,6 @@ const StyledHeader = styled.header`
   padding: 0 2.4rem;
   width: 100%;
   z-index: 2;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
 
   background-color: ${color("white")};
   border-bottom: 2px solid #f5f5f5;
@@ -208,7 +201,7 @@ class Header extends PureComponent {
 
   handlePin = () => {
     const hero = this.state.hero || document.getElementById("hero");
-    const isSticky = window.scrollY >= hero.offsetHeight - 88;
+    const isSticky = window.scrollY >= (hero ? hero.offsetHeight - 88 : 0);
     this.setState(() => ({
       isSticky,
       navVisible: false,
@@ -222,9 +215,12 @@ class Header extends PureComponent {
   render() {
     const { location: { hash, pathname } } = this.props;
     const hashName = hash.slice(1);
-    const isHome = pathname === "/" && (!hashName || hashName === "home");
+    const isLanding = pathname === "/";
+    const isHome = isLanding && (!hashName || hashName === "home");
     const isActive = target => hashName === target;
     const { isSticky, navVisible } = this.state;
+
+    const useAltHeader = isLanding && !isSticky;
 
     return (
       <Headroom
@@ -237,9 +233,9 @@ class Header extends PureComponent {
           zIndex: 10
         }}
       >
-        <StyledHeader dark={!isSticky} sticky={isSticky}>
+        <StyledHeader dark={useAltHeader} sticky={isSticky}>
           <BrandNav>
-            <BrandLink active={isHome} to="#home" light={!isSticky}>
+            <BrandLink active={isHome} to="#home" light={useAltHeader}>
               <BelowBigPhone component="span">
                 <GracefulSvg src={LogoShort} />
               </BelowBigPhone>
@@ -256,20 +252,28 @@ class Header extends PureComponent {
               onClick={this.toggleNav}
             />
             <Nav show={this.state.navVisible}>
-              <HashLink active={isActive("team")} to="#team" light={!isSticky}>
+              <HashLink
+                active={isActive("team")}
+                to="#team"
+                light={useAltHeader}
+              >
                 Team
               </HashLink>
-              <HashLink active={isActive("work")} to="#work" light={!isSticky}>
+              <HashLink
+                active={isActive("work")}
+                to="#work"
+                light={useAltHeader}
+              >
                 Work
               </HashLink>
               <HashLink
                 active={isActive("contact")}
                 to="#contact"
-                light={!isSticky}
+                light={useAltHeader}
               >
                 Contact
               </HashLink>
-              <NavLink to="blog" light={!isSticky}>
+              <NavLink to="blog" light={useAltHeader}>
                 Blog
               </NavLink>
             </Nav>

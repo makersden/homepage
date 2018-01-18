@@ -69,6 +69,10 @@ const Author = styled.figure`
   }
 `;
 
+const StyledLink = styled(Link)`
+  color: black;
+`;
+
 const AuthorImage = styled(Image).attrs({
   static: true
 })`
@@ -422,6 +426,10 @@ const DataSection = styled(Section)`
     );
   }
 
+  ${StyledLink} {
+    color: black;
+  }
+
   ${Title} {
     position: absolute;
     bottom: ${size(5)};
@@ -769,10 +777,12 @@ const Home = () => {
                 </Paragraph>
                 <Paragraph>
                   To explain the importance of contextualizing facts, we
-                  visualized flight departures and arrivals in Berlin.&nbsp;
-                  <Link to="berlin-flights">
+                  visualized flight departures and arrivals in Berlin.
+                </Paragraph>
+                <Paragraph>
+                  <StyledLink to="berlin-flights">
                     Click here for the full story.
-                  </Link>
+                  </StyledLink>
                 </Paragraph>
                 <Quote>
                   Without big data analytics, companies are blind and deaf,

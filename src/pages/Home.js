@@ -73,6 +73,7 @@ const Subtitle = styled(Box)`
 `;
 
 const Container = styled(Flex).attrs({ column: true })`
+  background: ${color("black")};
   color: ${get("theme.colors.text")};
 `;
 

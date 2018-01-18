@@ -43,12 +43,16 @@ const SmallStyledLogo = styled(StyledLogo).attrs({
 `;
 
 const StyledFooter = styled.footer`
-  display: flex;
-  flex-direction: row;
-  color: ${color("whiteAlt")};
-  align-items: flex-end;
-  justify-content: space-between;
-  padding: ${size(3)};
+  background: ${color("black")};
+
+  > * {
+    display: flex;
+    flex-direction: row;
+    color: ${color("whiteAlt")};
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: ${size(3)};
+  }
 `;
 
 const Socials = styled.div`
@@ -90,8 +94,8 @@ const Address = styled.p`
 `;
 
 const Footer = () => (
-  <FadeWithoutFont>
-    <StyledFooter id="footer" p={3}>
+  <StyledFooter id="footer" p={3}>
+    <FadeWithoutFont>
       <div>
         <StyledLogo src={LogoFull} />
         <Box mt={3}>
@@ -112,8 +116,8 @@ const Footer = () => (
           <SmallStyledLogo />
         </TaglineSection>
       </AboveTablet>
-    </StyledFooter>
-  </FadeWithoutFont>
+    </FadeWithoutFont>
+  </StyledFooter>
 );
 
 export default Footer;

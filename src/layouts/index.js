@@ -13,9 +13,10 @@ import { breakpoints } from "../styles/mediaQueries";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
+import "prismjs/themes/prism.css";
 
 const Layout = styled.div`
-  background: ${color("backgroundDark")};
+  background: ${color("white")};
   font-family: ${font("primary")};
   min-width: 32rem;
   overflow-x: hidden;
@@ -29,6 +30,8 @@ injectGlobal`
 
   html {
     font-size: 62.5%;
+    margin: 0;
+    padding: 0;
   }
 
   body {

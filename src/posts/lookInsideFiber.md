@@ -1,12 +1,11 @@
 ---
-title: A look inside React Fiber - how work will get done.
+title: A look inside React Fiber
 layout: Post
 date: 2017-07-07 15:00:00
 author: Korneliusz Caputa
-description: "Describing how React Fiber operates, step by step, starting from calling the `render`
-function in client JS and changing state of a component, down to
-describing the steps taken by Fiber to do all the work. Best served with Fiber
-source code on the side."
+slug: "look-inside-fiber"
+path: "/blog/look-inside-fiber"
+image: "first.png"
 tags:
   - react.js
   - javacsript
