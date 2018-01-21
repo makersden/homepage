@@ -8,7 +8,8 @@
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
-    "deploy": "gatsby build --prefix-paths && gh-pages -d public",
+    "release": "gatsby build && yarn deploy",
+    "deploy": "gh-pages -d public",
     "format":
       "prettier --trailing-comma es5 --no-semi --single-quote --write 'src/**/*.js'",
     "precommit": "lint-staged"
@@ -94,6 +95,7 @@
     "gatsby-image": "^1.0.33",
     "gatsby-link": "^1.6.22",
     "gatsby-plugin-catch-links": "^1.0.14",
+    "gatsby-plugin-google-analytics": "^1.0.15",
     "gatsby-plugin-react-helmet": "^1.0.8",
     "gatsby-plugin-sharp": "^1.6.25",
     "gatsby-plugin-styled-components": "^1.0.5",

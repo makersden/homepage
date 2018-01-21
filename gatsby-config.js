@@ -1,3 +1,5 @@
+console.log(process.env);
+
 module.exports = {
   siteMetadata: {
     title: `Makers' Den`
@@ -27,6 +29,13 @@ module.exports = {
     },
     `gatsby-plugin-catch-links`,
     `gatsby-plugin-react-helmet`,
-    `gatsby-plugin-styled-components`
+    `gatsby-plugin-styled-components`,
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: "UA-86953911-1",
+        anonymize: true
+      }
+    }
   ]
 };
