@@ -245,6 +245,13 @@ const KorneliuszSection = styled(Section)`
       min-width: 49.5rem;
     }
   `};
+
+  ${media.aboveDesktop`
+    ${Description} {
+      top: ${size(5)};
+      right: -${column(6)};
+    }
+  `};
 `;
 
 const PartnersImage = styled(GracefulImage).attrs({
@@ -296,11 +303,13 @@ const PartnersSection = styled(Section)`
   ${media.aboveBigLaptop`
     width: ${column(9)};
     margin-left: ${column(3)};
-  `} ${media.aboveDesktop`
+  `};
+
+  ${media.aboveDesktop`
     width: ${column(9)};
     margin-left: ${column(3)};
     padding: ${size(5)};
-    padding-bottom: ${sumSize(5, 3)};
+    padding-bottom: 0;
 
     ${PartnersImage} {
       margin: 0;
@@ -310,9 +319,9 @@ const PartnersSection = styled(Section)`
     }
 
     ${Description} {
-      position: static;
+      position: relative;
       margin: 0;
-      margin-right: ${size(4)};
+      margin-right: ${sumSize(5, 4)};
       margin-top: -${size(5)};
       align-self: flex-end;
       width: ${column(8)};

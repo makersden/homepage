@@ -438,8 +438,12 @@ const MissionreadySection = styled(Section)`
     ${Title} {
       margin-left: calc(${column(7)});
     }
-  `} ${media.aboveDesktop`
-      margin-left: calc(${column(6)} + ${sumSize(5)});
+  `};
+
+  ${media.aboveDesktop`
+    ${Description} {
+      top: ${sumSize(6, 4, 3)};
+    }
   `};
 `;
 
@@ -533,7 +537,8 @@ const DataSection = styled(Section)`
       margin: 0;
       width: ${column(6)};
     }
-  `} ${media.aboveBigLaptop`
+  `};
+  ${media.aboveBigLaptop`
     margin-top: ${sumSize(6, 5, 4)};
     width: ${column(7)};
 
@@ -545,7 +550,12 @@ const DataSection = styled(Section)`
     ${Title} {
       font-size: ${size(4)};
     }
-  `} ${media.aboveDesktop`
+  `};
+
+  ${media.aboveDesktop`
+    width: ${column(9)};
+    margin-left: auto;
+    margin-right: auto;
     ${DataImageContainer} {
       position: relative;
       margin-left: ${column(4)};
@@ -555,6 +565,7 @@ const DataSection = styled(Section)`
     ${Description} {
       bottom: ${sumSize(6, 1)};
       left: -${column(1)};
+      top: auto;
       width: ${column(6)};
     }
 
@@ -766,6 +777,14 @@ const YourProjectSection = styled(Section)`
 
     ${CallToAction} {
       margin-top: ${size(3)};
+    }
+
+    ${YourProjectImageContainer} {
+      padding-top: ${sumSize(4)};
+    }
+
+    ${Title} {
+      margin: -${size(3)} 0 ${size(3)};
     }
   `};
 `;
