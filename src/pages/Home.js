@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Flex, Box } from "grid-styled";
+/* import { Isvg } from "react-inlinesvg";*/
 
 import get from "lodash/fp/get";
 
@@ -12,7 +13,10 @@ import FadeWithoutFont from "../FadeWithoutFont";
 import Work from "../components/Work";
 import Team from "../components/Team";
 import Contact from "../components/Contact";
-import Cogs from "../components/Cogs";
+/* import Cogs from "../components/Cogs";*/
+import cogs from "../images/cogwheels_above_the_fold.svg";
+
+import { Image } from "../components/Section";
 
 const TransparentSegment = styled.div`
   min-height: 100vh;
@@ -79,9 +83,25 @@ const segments = ["home", "work", "team", "contact"];
 
 const shouldScroll = url => segments.indexOf(url) !== -1;
 
-const StyledCogs = styled(Cogs)`
-  align-self: center;
+const CogsContainer = styled.div`
+  max-height: 100%;
+  max-width: 100%;
+  margin: 0;
+
+  ${media.aboveTablet`
+    margin: 0 ${size(6)};
+  `};
 `;
+
+const CogsImage = styled(Image).attrs({
+  src: cogs,
+  "data-aos-once": true
+})`
+`;
+
+/* const StyledCogs = styled(Cogs)`
+ *   align-self: center;
+ * `;*/
 
 const Home = ({ data: images }) => {
   return (
@@ -89,7 +109,9 @@ const Home = ({ data: images }) => {
       <FadeWithoutFont>
         <HeroSegment p={[0, 4]} m={[3, 4]} id="hero">
           <Title>We are a software workshop.</Title>
-          {/* <StyledCogs /> */}
+          <CogsContainer>
+            <CogsImage />
+          </CogsContainer>
           <Subtitle w={[1, 6 / 12]} mx={[0, 4]} px={[0, 4]}>
             <div>
               <span>We solve gnarly problems</span>
