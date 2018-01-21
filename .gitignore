@@ -37,4 +37,8 @@ jspm_packages
 .node_repl_history
 .temp
 .cache
+
+# Build output
+public
+
 TODOs.org
