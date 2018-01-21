@@ -104,6 +104,9 @@ const Content = styled(Flex)`
   padding: ${sumSize(6, 4)} 0 ${size(5)} 0;
   width: 100%;
   overflow: hidden;
+  ${media.aboveTablet`
+    padding-bottom: ${sumSize(6, 5)};
+  `};
 `;
 
 const ArchitectureSvg = styled(Isvg).attrs({
@@ -197,7 +200,7 @@ const ArchitectureSection = styled(Section)`
       margin-top: -${sumSize(6)};
       margin-left: 0;
       padding: ${size(4)};
-      padding-top: ${sumSize(5, 4)};
+      padding-top: ${sumSize(5, 4, 3)};
       max-width: 98rem;
       width: calc(${column(12)} + ${size(5)});
       height: auto;
@@ -205,6 +208,7 @@ const ArchitectureSection = styled(Section)`
 
     ${Description} {
       position: absolute;
+      top: ${sumSize(5, 3)};
       right: -${size(5)};
       width: ${column(6)};
     }
@@ -219,7 +223,7 @@ const ArchitectureSection = styled(Section)`
 
     ${Title} {
       position: relative;
-      top: -${size(4)};
+      top: ${size(1)};
       left: ${size(4)};
       margin: 0;
       margin-top: -${sumSize(5)};
@@ -298,13 +302,13 @@ const EpimapSection = styled(Section)`
 
     ${Title} {
       margin-bottom: ${size(4)};
-      margin-left: ${size(4)};
-      margin-top: ${size(3)};
+      margin-left: 0;
+      margin-top: 0;
     }
 
     ${Description} {
-      left: ${size(5)};
-      width: ${column(7)};
+      left: ${size(4)};
+      width: ${column(8)};
     }
   `};
 
@@ -373,21 +377,25 @@ const MissionreadySection = styled(Section)`
 
     ${MissionreadyImage} {
       position: absolute;
-      left: ${size(4)};
+      left: ${size(3)};
       top: -${size(5, 4)};
     }
 
     ${Title} {
       position: static;
       margin-top: -${size(5)};
-      margin-left: calc(${column(6)} + ${sumSize(5)});
+      margin-left: ${column(1)};
     }
 
     ${Description} {
-      left: ${column(3)};
+      left: ${column(2)};
       top: ${sumSize(6, 4, 3)};
-      width: ${column(6)};
+      width: ${column(8)};
     }
+  `};
+
+  ${media.aboveLaptop`
+      margin-left: calc(${column(6)} + ${sumSize(5)});
   `};
 `;
 
@@ -440,30 +448,30 @@ const DataSection = styled(Section)`
   }
 
   ${media.aboveTablet`
-    margin-top: ${sumSize(7, 4)};
+    margin-top: ${sumSize(7, 5)};
     margin-left: ${column(3)};
     padding: ${size(4)};
-    padding-top: ${sumSize(4, 3)};
     width: ${column(9)};
 
     ${DataImageContainer} {
       position: relative;
       margin-left: 0;
-      margin-top: ${size(4)};
+      margin-top: ${size(0)};
     }
 
     ${Description} {
       position: absolute;
-      bottom: ${sumSize(5, 3, 2)};
+      bottom: ${sumSize(4, 3, 1)};
       left: -${column(5)};
       margin-left: ${size(4)};
       width: ${column(7)};
     }
 
     ${Title} {
+      font-size: ${sumSize(3, 2)};
       position: absolute;
       bottom: ${size(3)};
-      left: ${sumSize(5)};
+      left: ${sumSize(4, 3, 2, 1)};
     }
   `};
 
@@ -474,18 +482,27 @@ const DataSection = styled(Section)`
       margin-top: ${size(4)};
     }
 
-      ${Description} {
-        bottom: ${sumSize(6, 1)};
-        left: -${column(1)};
-        width: ${column(6)};
-      }
+    ${Description} {
+      bottom: ${sumSize(6, 1)};
+      left: -${column(1)};
+      width: ${column(6)};
+    }
+
+    ${Title} {
+      font-size: ${size(4)};
+      position: absolute;
+      bottom: ${size(3)};
+      left: ${size(5)};
+    }
   `};
 `;
 
 const YourProjectImage = styled(Svg).attrs({
   src: revenue
 })`
+  border-radius: 0 !important;
   svg {
+    border-radius: 0 !important;
     max-height: 100%;
     max-width: 100%;
     width: 100%;
@@ -495,7 +512,7 @@ const YourProjectImage = styled(Svg).attrs({
   min-width: 30rem;
   width: 100%;
 
-  ${media.aboveTablet`
+  ${media.aboveLaptop`
     svg {
       width: 80rem;
       height: 50rem;
@@ -600,17 +617,24 @@ const YourProjectSection = styled(Section)`
     align-items: center;
     margin: 0 auto;
     margin-top: ${size(6)};
-    padding: 0 ${size(4)};
+    padding: 0 ${size(3)};
     width: ${column(10)};
 
     ${YourProjectImageContainer} {
       margin: ${size(4)};
       margin-top: -${size(4)};
-      padding: ${size(4)};
+      padding: ${sumSize(2, 1)} ${size(2)};
+    }
+
+    ${YourProjectImage} {
+      svg {
+        min-width: 40rem;
+        min-height: 30rem;
+      }
     }
 
     ${CallToAction} {
-      padding: ${sumSize(3, 2)} 0;
+      padding: ${sumSize(3, 1)} 0;
       span {
         font-size: ${sumSize(2, 1)};
       }
@@ -618,8 +642,9 @@ const YourProjectSection = styled(Section)`
 
     ${Description} {
       position: absolute;
-      bottom: -${sumSize(5, 4, 3, 2, 1)};
+      bottom: -${sumSize(5, 4, 1)};
       width: ${column(5)};
+      padding: ${sumSize(2, 1)};
     }
 
     ${Paragraph} {
@@ -627,7 +652,10 @@ const YourProjectSection = styled(Section)`
     }
 
     ${Title} {
-      margin-left: ${size(2)};
+      font-size: ${sumSize(3, 1)};
+      margin: 0;
+      margin-top: -${size(1)};
+      text-align: center;
       width: ${column(12)};
     }
   `};
@@ -818,7 +846,7 @@ const Home = () => {
             <Description data-aos="fade-down">
               <FWF>
                 <Paragraph>
-                  Interested in assistance from a team of veterans?
+                  Interested in tactical support from a veteran team?
                 </Paragraph>
               </FWF>
               <CallToAction href="mailto:hello@makersden.io">
