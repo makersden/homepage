@@ -87,16 +87,15 @@ const CogsContainer = styled.div`
   max-height: 100%;
   max-width: 100%;
   margin: 0;
-
-  ${media.aboveTablet`
-    margin: 0 ${size(6)};
-  `};
 `;
 
 const CogsImage = styled(Image).attrs({
   src: cogs,
   "data-aos-once": true
 })`
+  max-width: 700px;
+  display: block;
+  margin: 0 auto;
 `;
 
 /* const StyledCogs = styled(Cogs)`
