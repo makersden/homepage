@@ -13,3 +13,44 @@ import Homepage from "./Home";
  * )
  * */
 export default Homepage;
+
+export const pageQuery = graphql`
+  query IndexImages {
+    allImageSharp {
+      edges {
+        node {
+          ... on ImageSharp {
+            responsiveSizes(maxWidth: 1440) {
+              src
+              srcSet
+              sizes
+              aspectRatio
+              base64
+              originalImg
+            }
+          }
+        }
+      }
+    }
+    kalle: imageSharp(id: { regex: "/kalle.png/" }) {
+      sizes: responsiveSizes(maxWidth: 1440, cropFocus: NORTH) {
+        src
+        srcSet
+        sizes
+        aspectRatio
+        base64
+        originalImg
+      }
+    }
+    korneliusz: imageSharp(id: { regex: "/korneliusz2.jpg/" }) {
+      sizes: responsiveSizes(maxWidth: 1440, cropFocus: NORTH) {
+        src
+        srcSet
+        sizes
+        aspectRatio
+        base64
+        originalImg
+      }
+    }
+  }
+`;

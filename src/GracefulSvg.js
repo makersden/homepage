@@ -5,7 +5,10 @@ import Observer from "react-intersection-observer";
 
 import { fade } from "./mixins";
 
-const StyledGracefulSvg = styled(Isvg)`
+const StyledGracefulSvg = styled(Isvg).attrs({
+  "data-aos": "fade",
+  "data-aos-duration": 1000
+})`
   ${fade} svg {
     ${fade};
   }

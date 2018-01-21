@@ -69,7 +69,7 @@ const Author = styled.figure`
   }
 `;
 
-const StyledLink = styled(Link)`
+const StyledLink = styled.a`
   color: black;
 `;
 
@@ -578,7 +578,7 @@ const DataSection = styled(Section)`
   `};
 `;
 
-const YourProjectImage = styled(Svg).attrs({
+const YourProjectImage = styled(Image).attrs({
   src: revenue
 })`
   border-radius: 0 !important;
@@ -589,8 +589,8 @@ const YourProjectImage = styled(Svg).attrs({
     width: 100%;
   }
 
-  min-height: 17.5rem;
-  min-width: 30rem;
+  max-height: 100%;
+  max-width: 100%;
   width: 100%;
 
   ${media.aboveLaptop`
@@ -653,6 +653,7 @@ const YourProjectSection = styled(Section)`
     margin: ${size(3)};
     margin-top: -${size(4)};
     padding: ${size(3)};
+    padding-top: ${size(2)};
     margin-left: ${size(2)};
     width: calc(${column(11)} + ${size(3)});
   }
@@ -708,10 +709,8 @@ const YourProjectSection = styled(Section)`
     }
 
     ${YourProjectImage} {
-      svg {
-        min-width: 40rem;
-        min-height: 30rem;
-      }
+      min-width: 40rem;
+      min-height: 30rem;
     }
 
     ${CallToAction} {
@@ -805,7 +804,8 @@ const SectionContainer = styled.div`
   align-items: center;
 `;
 
-const Home = () => {
+const Work = ({ images }) => {
+  console.log(images.epimap3d);
   return (
     <Container>
       <Curtain>
@@ -865,7 +865,7 @@ const Home = () => {
                   </Author>
                 </FWF>
               </Description>
-              <EpimapImage data-aos="fade-left" />
+              <EpimapImage {...images.epimap3d} data-aos="fade-left" />
             </SectionContent>
           </EpimapSection>
           <MissionreadySection>
@@ -934,7 +934,7 @@ const Home = () => {
                   visualized flight departures and arrivals in Berlin.
                 </Paragraph>
                 <Paragraph>
-                  <StyledLink to="berlin-flights">
+                  <StyledLink href="https://berlinairtraffic.s3.eu-central-1.amazonaws.com/index.html">
                     Click here for the full story.
                   </StyledLink>
                 </Paragraph>
@@ -975,4 +975,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Work;

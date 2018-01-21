@@ -71,9 +71,7 @@ const SocialLink = styled.a.attrs({
   }
 `;
 
-const SocialIcon = styled(Image).attrs({
-  "data-aos": "zoom-in"
-})`
+const SocialIcon = styled.img`
   max-width: 100%;
   max-height: 100%;
   width: 4.1rem;
@@ -97,7 +95,7 @@ const Footer = () => (
   <StyledFooter id="footer" p={3}>
     <FadeWithoutFont>
       <div>
-        <StyledLogo src={LogoFull} />
+        <StyledLogo src={LogoFull} data-aos="fade" data-aos-duration={1000} />
         <Box mt={3}>
           <Socials>
             <SocialLink href="https://www.facebook.com/wearemakersden/">

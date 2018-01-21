@@ -22,15 +22,10 @@ const Posts = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
+  min-height: calc(100vh - 21rem - 8.8rem);
 `;
 
-const PostImage = styled(Img)`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-`;
+const PostImage = styled(Img)``;
 
 const Post = styled.li`
   margin: 0 auto;
@@ -40,11 +35,6 @@ const Post = styled.li`
 
   max-width: 144rem;
   width: 100%;
-  max-height: 100%;
-
-  &:not(:first-child) {
-    height: 35rem;
-  }
 `;
 
 const PostLink = styled(Link)`
@@ -57,25 +47,41 @@ const PostLink = styled(Link)`
   transition: background-color 1s;
   display: flex;
   align-items: flex-end;
-  padding: ${size(4)};
+  justify-content: space-between;
+  padding: ${size(3)};
   text-decoration: none;
   &:hover {
     background-color: ${transparentize(0.5, "white")};
   }
+
+  ${media.aboveTablet`
+    padding: ${size(4)};
+  `};
 `;
 
 const Title = styled.h2`
   font-family: ${font("display")};
   color: ${color("white")};
-  font-size: ${size(4)};
+  font-size: ${size(3)};
   margin: 0;
+  line-height: 1;
+  ${media.aboveTablet`
+    font-size: ${size(4)};
+  `};
 `;
 
 const Container = styled(Flex).attrs({ column: true })`
   color: ${get("theme.colors.text")};
 `;
 
-const Home = ({ data: { allMarkdownRemark: { edges } } }) => {
+const Date = styled.span`
+  font-family: ${font("primary")};
+  color: ${color("white")};
+  font-size: ${size(2)};
+  padding-bottom: 0.3rem;
+`;
+
+const Blog = ({ data: { allMarkdownRemark: { edges } } }) => {
   return (
     <Posts>
       {edges
@@ -92,7 +98,7 @@ const Home = ({ data: { allMarkdownRemark: { edges } } }) => {
   );
 };
 
-export default Home;
+export default Blog;
 
 export const pageQuery = graphql`
   query IndexQuery {
@@ -107,8 +113,13 @@ export const pageQuery = graphql`
             path
             image {
               childImageSharp {
-                sizes(maxWidth: 1440) {
-                  ...GatsbyImageSharpSizes
+                responsiveSizes(maxWidth: 1440) {
+                  src
+                  srcSet
+                  sizes
+                  aspectRatio
+                  base64
+                  originalImg
                 }
               }
             }

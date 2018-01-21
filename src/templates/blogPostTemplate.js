@@ -5,12 +5,14 @@ import Helmet from "react-helmet";
 
 import { transparentize } from "../polished";
 import { color, font, size } from "../theme";
+import { media } from "../styles/mediaQueries";
 
 const Post = styled.article`
   background: ${color("white")};
   margin: 0;
   font-size: 1.8rem;
   color: ${color("textDark")};
+  min-height: 100vh;
 `;
 
 const TitleImage = styled(Img)`
@@ -22,9 +24,13 @@ const TitleImage = styled(Img)`
 
 const Title = styled.h1`
   font-family: ${font("display")};
-  font-size: ${size(4)};
   text-align: center;
   color: ${color("black")};
+  font-size: ${size(3)};
+
+  ${media.aboveTablet`
+    font-size: ${size(4)};
+  `};
 `;
 
 const Meta = styled.section`
@@ -43,7 +49,7 @@ const Container = styled.section`
 
 const Content = styled.section`
   width: 50em;
-  max-width: calc(100vw - 10em);
+  max-width: calc(100vw - 2em);
   margin: 0 auto;
   h2,
   h3,
@@ -73,11 +79,17 @@ const Content = styled.section`
   }
 
   blockquote {
-    float: left;
-    max-width: 31.5rem;
     margin: 2em;
-    margin-left: -5em;
-    p {
+    ${media.aboveTablet`
+      float: left;
+      max-width: 31.5rem;
+      margin-left: 0;
+      margin-top: 1em;
+    `};
+
+    ${media.aboveBigLaptop`
+      margin-left: -5em;
+    `} p {
       font-family: ${font("display")};
       font-size: ${size(3)};
       margin: 0;

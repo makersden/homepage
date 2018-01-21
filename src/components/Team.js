@@ -2,6 +2,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { Flex } from "grid-styled";
 import Isvg from "react-inlinesvg";
+import GatsbyImage from "gatsby-image";
 
 import { color, font, size, sumSize, column } from "../theme";
 import GracefulImage from "../GracefulImage";
@@ -14,10 +15,13 @@ import partners from "../../assets/images/partners.png";
 import giantCog from "../../assets/images/GiantCog.svg";
 
 const sectionSpacing = css`
-  margin-top: ${size(4)};
-  ${media.aboveLaptop`
-    margin-top: ${size(5)};
-  `};
+  margin-top: ${size(5)};
+
+  &:not(:first-child) {
+    ${media.aboveLaptop`
+      margin-top: ${size(6)};
+    `};
+  }
 `;
 
 const Title = styled.h2`
@@ -128,12 +132,7 @@ const authorStyle = css`
   margin-left: 2.4rem;
 `;
 
-const KalleImage = styled(GracefulImage).attrs({
-  src: kalle
-})`
-  max-height: 100%;
-  max-width: 100%;
-`;
+const KalleImage = "kalle";
 
 const AuthorSpan = styled.span`
   ${authorStyle};
@@ -175,13 +174,13 @@ const KalleSection = styled(Section)`
     width: ${column(9)};
     padding: ${size(4)};
 
-    ${KalleImage} {
-      margin-left: ${size(5)};
+    .${KalleImage} {
+      margin-right: -${size(5)};
     }
 
     ${Description} {
       position: absolute;
-      left: calc(-${column(2)} + ${size(4)});
+      left: calc(-${column(3)} + ${size(4)});
       top: -${size(4)};
       margin: 0;
       width: ${column(7)};
@@ -189,22 +188,18 @@ const KalleSection = styled(Section)`
   `};
 `;
 
-const KorneliuszImage = styled(GracefulImage).attrs({
-  src: korneliusz
-})`
-  max-height: 100%;
-  max-width: 100%;
-`;
+const KorneliuszImage = "korneliusz";
 
 const KorneliuszSection = styled(Section)`
   margin: 0 ${size(3)};
   padding-bottom: ${size(3)};
-  ${sectionSpacing} ${Background} {
+  ${sectionSpacing};
+  ${Background} {
     border-radius: 20px;
   }
 
   ${Description} {
-    margin-top: -${sumSize(4, 3)};
+    margin-top: -${sumSize(5)};
     margin-left: -${size(3)};
     width: calc(${column(12)});
   }
@@ -224,7 +219,7 @@ const KorneliuszSection = styled(Section)`
     margin: ${size(3)};
     margin-top: ${size(5)};
     margin-left: ${size(3)};
-    width: ${column(6)};
+    width: ${column(7)};
     padding: ${size(4)} 0;
 
     ${Description} {
@@ -232,17 +227,14 @@ const KorneliuszSection = styled(Section)`
       position: absolute;
       right: -${column(7)};
       padding: ${size(3)};
-      top: ${size(6)};
+      top: ${size(5)};
       width: ${column(10)};
     }
 
-    ${KorneliuszImage} {
-      margin: 0;
+    .${KorneliuszImage} {
+      margin: 0 ${size(4)};
       width: auto;
-      margin-left: ${size(4)};
-      height: 63.5rem;
-      min-height: 63.5rem;
-      min-width: 49.5rem;
+      min-height: 65rem;
     }
   `};
 
@@ -265,6 +257,7 @@ const PartnersImage = styled(GracefulImage).attrs({
 const PartnersSection = styled(Section)`
   justify-content: center;
   margin: ${size(3)};
+  margin-top: ${size(5)};
   margin-bottom: 0;
   position: relative;
   ${sectionSpacing};
@@ -329,7 +322,7 @@ const PartnersSection = styled(Section)`
   `};
 `;
 
-const Home = () => {
+const Team = ({ images }) => {
   return (
     <Container id="team">
       <Title>The A-Team</Title>
@@ -339,7 +332,13 @@ const Home = () => {
             </CogContainer> */}
         <KalleSection>
           <Background />
-          <KalleImage data-aos="fade-right" />
+          <div
+            data-aos="fade-right"
+            data-aos-duration={1000}
+            className={KalleImage}
+          >
+            <GatsbyImage {...images.kalle} />
+          </div>
           <Description data-aos="fade-up">
             <Name>Carl-Petter (Kalle) Bertell</Name>
             <Paragraph>
@@ -369,7 +368,9 @@ const Home = () => {
         </KalleSection>
         <KorneliuszSection>
           <Background />
-          <KorneliuszImage data-aos="fade-left" />
+          <div data-aos="fade-left" data-aos-duration={1000}>
+            <GatsbyImage {...images.korneliusz} className={KorneliuszImage} />
+          </div>
           <Description data-aos="fade-down">
             <Name>Korneliusz Caputa</Name>
             <Paragraph>
@@ -410,4 +411,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Team;

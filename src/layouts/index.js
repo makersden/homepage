@@ -8,7 +8,7 @@ import { compose, lifecycle } from "recompose";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
-import theme, { color, font } from "../theme";
+import theme, { color, duration, font } from "../theme";
 import { breakpoints } from "../styles/mediaQueries";
 
 import AOS from "aos";
@@ -16,6 +16,7 @@ import "aos/dist/aos.css";
 import "prismjs/themes/prism.css";
 
 const Layout = styled.div`
+  transition: background ${duration("slow")};
   background: ${props => color(props.dark ? "backgroundDark" : "white")(props)};
   font-family: ${font("primary")};
   min-width: 32rem;
@@ -58,7 +59,7 @@ const TemplateWrapper = props => (
       breakpoints
     }}
   >
-    <Layout dark={props.location.pathname.indexOf("/blog") === -1}>
+    <Layout dark={props.location.pathname.indexOf("/blog/") === -1}>
       <Helmet
         title="Makers' Den"
         meta={[

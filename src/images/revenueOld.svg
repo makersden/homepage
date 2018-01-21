@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="31.830172mm"
+   height="21.951738mm"
+   viewBox="0 0 31.830172 21.951738"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.2 5c3e80d, 2017-08-06"
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-0.67147161,-0.53303881)">
+    <path
+       class="guide"
+       d="M 1.3229166,5.9583253 H 31.749999 v 0 0 0 0 0"
+       id="path4519-3-7-5"
+       inkscape:connector-curvature="0" />
+    <path
+       class="guide"
+       d="M 1.3229166,16.541667 H 31.75 v 0 0 0 0 0"
+       id="path4519-3"
+       inkscape:connector-curvature="0" />
+    <path
+       class="guide"
+       d="M 1.3229166,11.249992 H 31.749999 v 0 0 0 0 0"
+       id="path4519-3-7"
+       inkscape:connector-curvature="0" />
+    <path
+       class="chartline"
+       d="m 1.3229165,21.833333 1.3229167,-1.322917 v 0 l 1.3229167,-1.322916 1.3229164,1.322916 1.322917,-2.645833 1.322917,-1.322917 1.322916,1.322917 1.3229167,-2.645833 1.322916,-2.645834 2.645834,1.322917 2.645833,-2.645833 1.322917,-2.6458335 1.322916,1.3229167 2.645834,-2.6458333 1.322916,-2.6458333 1.322917,2.6458333 2.645833,-2.6458333 1.322917,-2.6458333 1.322917,-1.32291665 v 0 0 0 0"
+       id="path4517"
+       inkscape:connector-curvature="0" />
+    <path
+       class="axes"
+       d="m 1.3229165,3.3124999 c 0,18.5208331 0,18.5208331 0,18.5208331 H 31.749999 v 0 0"
+       id="path4506"
+       inkscape:connector-curvature="0" />
+  </g>
+</svg>

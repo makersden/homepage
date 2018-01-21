@@ -3,6 +3,7 @@ import Link from "gatsby-link";
 import styled, { css } from "styled-components";
 import Headroom from "react-headroom";
 import Hamburger from "./Hamburger";
+import Isvg from "react-inlinesvg";
 
 import LogoFull from "../../../assets/logoFull.svg";
 import LogoShort from "../../../assets/logoShort.svg";
@@ -19,7 +20,6 @@ import {
   sumSize
 } from "../../theme";
 import FadeWithoutFont from "../../FadeWithoutFont";
-import GracefulSvg from "../../GracefulSvg";
 
 const {
   BelowPhone,
@@ -75,10 +75,12 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   padding: 0 0.8rem;
 
-  ${linkHighlight};
   color: ${props => color(props.light ? "white" : "textDark")(props)};
   background: ${props =>
     props.light ? color("backgroundDark") : color("white")};
+  ${media.aboveTablet`
+    background: transparent;
+  `};
 `;
 
 const NavLink = styled(StyledLink).attrs({
@@ -236,11 +238,19 @@ class Header extends PureComponent {
         <StyledHeader dark={useAltHeader} sticky={isSticky}>
           <BrandNav>
             <BrandLink active={isHome} to="#home" light={useAltHeader}>
-              <BelowBigPhone component="span">
-                <GracefulSvg src={LogoShort} />
+              <BelowBigPhone
+                component="span"
+                data-aos="fade"
+                data-aos-duration={1000}
+              >
+                <Isvg src={LogoShort} />
               </BelowBigPhone>
-              <AboveBigPhone component="span">
-                <GracefulSvg src={LogoFull} />
+              <AboveBigPhone
+                component="span"
+                data-aos="fade"
+                data-aos-duration={1000}
+              >
+                <Isvg src={LogoFull} />
               </AboveBigPhone>
             </BrandLink>
           </BrandNav>
@@ -248,7 +258,7 @@ class Header extends PureComponent {
             <BelowTablet
               active={navVisible}
               component={Hamburger}
-              light={!isSticky}
+              light={useAltHeader}
               onClick={this.toggleNav}
             />
             <Nav show={this.state.navVisible}>

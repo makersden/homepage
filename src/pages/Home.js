@@ -83,7 +83,7 @@ const StyledCogs = styled(Cogs)`
   align-self: center;
 `;
 
-const Home = () => {
+const Home = ({ data: images }) => {
   return (
     <Container>
       <FadeWithoutFont>
@@ -99,10 +99,10 @@ const Home = () => {
         </HeroSegment>
       </FadeWithoutFont>
       <LightSegment>
-        <Work />
+        <Work images={images} />
       </LightSegment>
       <LightSegment>
-        <Team />
+        <Team images={images} />
       </LightSegment>
       <ContactSegment id="contact">
         <Contact />
