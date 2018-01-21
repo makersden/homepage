@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import Img from "gatsby-image";
-import ReactDisqusComments from "react-disqus-comments";
 import Helmet from "react-helmet";
 
 import { transparentize } from "../polished";
@@ -98,7 +97,7 @@ const Author = styled.p`
 
 const Comments = styled.div`
   margin-top: 1em;
-  margin-bottom: 2em;
+  margin-bottom: 3em;
 `;
 
 export default function Template({
@@ -118,13 +117,7 @@ export default function Template({
             <Date>{frontmatter.date}</Date>
           </Meta>
           <section dangerouslySetInnerHTML={{ __html: html }} />
-          <Comments>
-            <ReactDisqusComments
-              shortname="makersden-io"
-              title={frontmatter.title}
-              identifier={frontmatter.slug}
-            />
-          </Comments>
+          <Comments />
         </Content>
       </Container>
     </Post>

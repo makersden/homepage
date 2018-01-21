@@ -16,7 +16,7 @@ import "aos/dist/aos.css";
 import "prismjs/themes/prism.css";
 
 const Layout = styled.div`
-  background: ${color("backgroundDark")};
+  background: ${props => color(props.dark ? "backgroundDark" : "white")(props)};
   font-family: ${font("primary")};
   min-width: 32rem;
   overflow-x: hidden;
@@ -58,7 +58,7 @@ const TemplateWrapper = props => (
       breakpoints
     }}
   >
-    <Layout>
+    <Layout dark={props.location.pathname.indexOf("/blog") === -1}>
       <Helmet
         title="Makers' Den"
         meta={[
