@@ -8,6 +8,7 @@ const reduce = cappedReduce.convert({ cap: false });
 
 const breakpoints = {
   desktop: 1440,
+  bigLaptop: 1366,
   laptop: 1024,
   tablet: 768,
   bigPhone: 412, // e.g. iPhone 6+

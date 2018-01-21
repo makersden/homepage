@@ -231,6 +231,18 @@ const ArchitectureSection = styled(Section)`
     }
   `};
 
+  ${media.aboveLaptop`
+    ${Title} {
+      top: -${size(4)};
+    }
+  `};
+
+  ${media.aboveBigLaptop`
+    ${ArchitectureSvg} {
+      max-width: 100%;
+    }
+  `};
+
   ${media.aboveDesktop`
     ${ArchitectureSvg} {
       margin-left: ${size(4)};
@@ -327,7 +339,8 @@ const MissionreadyImage = styled(Image).attrs({
 })`
   max-width: 100%;
   max-height: 100%;
-  ${media.aboveTablet`
+
+  ${media.aboveDesktop`
     height: 70.6rem;
     min-width: 49rem;
     min-height: 70.6rem;
@@ -340,7 +353,9 @@ const MissionreadySection = styled(Section)`
   width: ${column(12)};
   padding: ${size(2)};
 
-  ${sectionSpacing} ${MissionreadyImage} {
+  ${sectionSpacing};
+
+  ${MissionreadyImage} {
     position: relative;
     top: -${size(5)};
   }
@@ -395,6 +410,35 @@ const MissionreadySection = styled(Section)`
   `};
 
   ${media.aboveLaptop`
+    margin-left: auto;
+    margin-right: auto;
+    width: ${column(11)};
+
+    ${MissionreadyImage} {
+      min-height: ${sumSize(7, 4, 1)};
+      top: -${size(3)};
+    }
+
+    ${Title} {
+      font-size: ${sumSize(3, 2, 1)};
+      margin-left: calc(${column(7)} + ${size(3)});
+    }
+
+    ${Description} {
+      left: ${column(3)};
+      top: ${sumSize(6, 4)};
+      width: ${column(7)};
+    }
+  `} ${media.aboveBigLaptop`
+    margin-top: ${size(7)};
+    ${MissionreadyImage} {
+      min-height: ${sumSize(7, 6)};
+      top: -${size(5)};
+    }
+    ${Title} {
+      margin-left: calc(${column(7)});
+    }
+  `} ${media.aboveDesktop`
       margin-left: calc(${column(6)} + ${sumSize(5)});
   `};
 `;
@@ -408,7 +452,7 @@ const DataImage = styled(Image).attrs({
   ${media.aboveTablet`
     min-height: 55rem;
   `}
-  ${media.aboveLaptop`
+  ${media.aboveDesktop`
     min-height: 60rem;
   `}
 `;
@@ -476,6 +520,32 @@ const DataSection = styled(Section)`
   `};
 
   ${media.aboveLaptop`
+    margin: ${sumSize(7, 5)} ${sumSize(4, 2)} 0 auto;
+    width: ${column(8)};
+    ${Title} {
+      font-size: ${sumSize(3, 2, 1)};
+    }
+
+    ${Description} {
+      top: -${sumSize(4, 2, 1)};
+      bottom: auto;
+      left: calc(-${column(6)} + ${sumSize(4, 2)} + ${size(4)});
+      margin: 0;
+      width: ${column(6)};
+    }
+  `} ${media.aboveBigLaptop`
+    margin-top: ${sumSize(6, 5, 4)};
+    width: ${column(7)};
+
+    ${Description} {
+      left: calc(-${column(5)} + ${sumSize(4, 2)} + ${size(4)});
+      top: ${sumSize(2, 1)};
+      width: ${column(5)};
+    }
+    ${Title} {
+      font-size: ${size(4)};
+    }
+  `} ${media.aboveDesktop`
     ${DataImageContainer} {
       position: relative;
       margin-left: ${column(4)};
@@ -643,7 +713,7 @@ const YourProjectSection = styled(Section)`
     ${Description} {
       position: absolute;
       bottom: -${sumSize(5, 4, 1)};
-      width: ${column(5)};
+      width: ${column(6)};
       padding: ${sumSize(2, 1)};
     }
 
@@ -661,13 +731,37 @@ const YourProjectSection = styled(Section)`
   `};
 
   ${media.aboveLaptop`
+    ${YourProjectImageContainer} {
+      padding: ${sumSize(3, 2, 1)} ${sumSize(4, 2)};
+    }
+
+    ${Title} {
+      font-size: ${size(4)};
+    }
+
     ${Paragraph} {
-      margin-bottom: ${size(3)};
+      margin-bottom: ${size(2)};
     }
 
     ${Description} {
-      width: ${column(5)};
+      bottom: -${sumSize(4, 3, 2, 1)};
+      width: ${column(6)};
+      padding: ${size(3)};
+    }
+
+    ${CallToAction} {
+      margin-top: ${size(2)};
+    }
+  `};
+
+  ${media.aboveBigLaptop`
+    ${Description} {
+      bottom: -${sumSize(5, 4, 3, 1)};
       padding: ${size(4)};
+    }
+
+    ${Paragraph} {
+      margin-bottom: ${size(3)};
     }
 
     ${CallToAction} {

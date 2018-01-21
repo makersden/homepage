@@ -101,7 +101,7 @@ const Home = () => {
       <LightSegment>
         <Work />
       </LightSegment>
-      <LightSegment id="team">
+      <LightSegment>
         <Team />
       </LightSegment>
       <ContactSegment id="contact">

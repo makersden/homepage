@@ -33,8 +33,8 @@ export const Background = styled.div.attrs({
 `;
 
 export const Quote = styled.blockquote.attrs({
-  "data-aos": "fade",
-  "data-aos-duration": duration
+  // "data-aos": "fade",
+  // "data-aos-duration": duration
 })`
   margin-left: 0;
   margin-right: 0;
@@ -67,8 +67,8 @@ export const authorStyle = css`
 `;
 
 export const Author = styled.span.attrs({
-  "data-aos": "fade",
-  "data-aos-duration": duration
+  // "data-aos": "fade",
+  // "data-aos-duration": duration
 })`
   ${authorStyle};
   img {
@@ -79,9 +79,9 @@ export const Author = styled.span.attrs({
 `;
 
 export const AuthorLink = styled.a.attrs({
-  target: "blank",
-  "data-aos": "fade",
-  "data-aos-duration": duration
+  target: "blank"
+  // "data-aos": "fade",
+  // "data-aos-duration": duration
 })`
   &,
   &:active,
@@ -97,8 +97,8 @@ export const AuthorLink = styled.a.attrs({
 `;
 
 export const Paragraph = styled.p.attrs({
-  "data-aos": "fade",
-  "data-aos-duration": duration
+  // "data-aos": "fade",
+  // "data-aos-duration": duration
 })`
   font-weight: 500;
   color: ${color("textDark")};

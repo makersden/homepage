@@ -155,7 +155,8 @@ const Author = ({ children, href }) =>
 const KalleSection = styled(Section)`
   margin: 0 ${size(3)};
   padding-bottom: ${size(3)};
-  ${sectionSpacing} ${KalleImage} {
+  ${sectionSpacing};
+  ${KalleImage} {
     border-radius: 10px;
   }
 
@@ -175,16 +176,15 @@ const KalleSection = styled(Section)`
     padding: ${size(4)};
 
     ${KalleImage} {
-      min-height: 68.8rem;
       margin-left: ${size(5)};
     }
 
     ${Description} {
       position: absolute;
-      left: ${size(4)};
-      top: ${size(5)};
+      left: calc(-${column(2)} + ${size(4)});
+      top: -${size(4)};
       margin: 0;
-      width: ${column(5)};
+      width: ${column(7)};
     }
   `};
 `;
@@ -230,9 +230,10 @@ const KorneliuszSection = styled(Section)`
     ${Description} {
       margin: 0;
       position: absolute;
-      right: -${size(6)};
+      right: -${column(7)};
       padding: ${size(3)};
-      width: ${column(8)};
+      top: ${size(6)};
+      width: ${column(10)};
     }
 
     ${KorneliuszImage} {
@@ -247,7 +248,8 @@ const KorneliuszSection = styled(Section)`
 `;
 
 const PartnersImage = styled(GracefulImage).attrs({
-  src: partners
+  src: partners,
+  "data-aos-duration": 1000
 })`
   max-height: 100%;
   max-width: 100%;
@@ -278,16 +280,27 @@ const PartnersSection = styled(Section)`
 
     ${Description} {
       position: relative;
-      left: ${size(5)};
-      margin: ${size(3)};
-      margin-left: ${size(3)};
-      margin-top: -${size(4)};
+      margin: 0;
+      left: ${column(2)};
+      margin-top: -${size(5)};
+      top: ${size(4)};
+      width: ${column(9)};
     }
-  `} ${media.aboveLaptop`
+  `};
+
+  ${media.aboveLaptop`
+    width: ${column(10)};
+    margin-left: ${column(1)};
+  `};
+
+  ${media.aboveBigLaptop`
+    width: ${column(9)};
+    margin-left: ${column(3)};
+  `} ${media.aboveDesktop`
     width: ${column(9)};
     margin-left: ${column(3)};
     padding: ${size(5)};
-    padding-bottom: ${size(5, 0) + size(3, 0)}px;
+    padding-bottom: ${sumSize(5, 3)};
 
     ${PartnersImage} {
       margin: 0;
@@ -309,7 +322,7 @@ const PartnersSection = styled(Section)`
 
 const Home = () => {
   return (
-    <Container>
+    <Container id="team">
       <Title>The A-Team</Title>
       <Content column>
         {/* <CogContainer>
