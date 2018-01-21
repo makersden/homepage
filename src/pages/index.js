@@ -32,7 +32,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    kalle: imageSharp(id: { regex: "/kalle.png/" }) {
+    kalle: imageSharp(id: { regex: "/kalle/" }) {
       sizes: responsiveSizes(maxWidth: 1440, cropFocus: NORTH) {
         src
         srcSet
@@ -42,7 +42,7 @@ export const pageQuery = graphql`
         originalImg
       }
     }
-    korneliusz: imageSharp(id: { regex: "/korneliusz2.jpg/" }) {
+    korneliusz: imageSharp(id: { regex: "/korneliusz2/" }) {
       sizes: responsiveSizes(maxWidth: 1440, cropFocus: NORTH) {
         src
         srcSet

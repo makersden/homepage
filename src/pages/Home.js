@@ -99,7 +99,7 @@ const Home = ({ data: images }) => {
         </HeroSegment>
       </FadeWithoutFont>
       <LightSegment>
-        <Work images={images} />
+        <Work />
       </LightSegment>
       <LightSegment>
         <Team images={images} />

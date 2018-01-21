@@ -155,8 +155,12 @@ const KalleSection = styled(Section)`
   margin: 0 ${size(3)};
   padding-bottom: ${size(3)};
   ${sectionSpacing};
-  ${KalleImage} {
+
+  .${KalleImage} {
     border-radius: 10px;
+    min-height: 30rem;
+    max-width: 100%;
+    max-height: 100%;
   }
 
   ${Background} {
@@ -169,12 +173,17 @@ const KalleSection = styled(Section)`
     width: ${column(12)};
   }
 
-  ${media.aboveLaptop`
+  ${media.aboveTablet`
+    .${KalleImage} {
+      min-height: 50rem;
+    }
+  `} ${media.aboveLaptop`
     margin-left: ${column(2)};
     width: ${column(9)};
     padding: ${size(4)};
 
     .${KalleImage} {
+      min-height: 60rem;
       margin-right: -${size(5)};
     }
 
@@ -183,7 +192,7 @@ const KalleSection = styled(Section)`
       left: calc(-${column(3)} + ${size(4)});
       top: -${size(4)};
       margin: 0;
-      width: ${column(7)};
+      width: ${column(6)};
     }
   `};
 `;
@@ -196,6 +205,10 @@ const KorneliuszSection = styled(Section)`
   ${sectionSpacing};
   ${Background} {
     border-radius: 20px;
+  }
+
+  .${KorneliuszImage} {
+    min-height: 30rem;
   }
 
   ${Description} {
@@ -214,7 +227,11 @@ const KorneliuszSection = styled(Section)`
       margin-bottom: ${size(3)};
     }
 
+    .${KorneliuszImage} {
+      min-height: 60rem;
+    }
   `};
+
   ${media.aboveLaptop`
     margin: ${size(3)};
     margin-top: ${size(5)};
@@ -322,7 +339,9 @@ const PartnersSection = styled(Section)`
   `};
 `;
 
-const Team = ({ images }) => {
+const Team = () => {
+  const fakeKalleFromGraphQL = { sizes: { src: kalle } };
+  const fakeKorneliuszFromGraphQL = { sizes: { src: korneliusz } };
   return (
     <Container id="team">
       <Title>The A-Team</Title>
@@ -337,7 +356,7 @@ const Team = ({ images }) => {
             data-aos-duration={1000}
             className={KalleImage}
           >
-            <GatsbyImage {...images.kalle} />
+            <GatsbyImage {...fakeKalleFromGraphQL} className={KalleImage} />
           </div>
           <Description data-aos="fade-up">
             <Name>Carl-Petter (Kalle) Bertell</Name>
@@ -369,7 +388,10 @@ const Team = ({ images }) => {
         <KorneliuszSection>
           <Background />
           <div data-aos="fade-left" data-aos-duration={1000}>
-            <GatsbyImage {...images.korneliusz} className={KorneliuszImage} />
+            <GatsbyImage
+              {...fakeKorneliuszFromGraphQL}
+              className={KorneliuszImage}
+            />
           </div>
           <Description data-aos="fade-down">
             <Name>Korneliusz Caputa</Name>

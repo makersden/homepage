@@ -804,8 +804,7 @@ const SectionContainer = styled.div`
   align-items: center;
 `;
 
-const Work = ({ images }) => {
-  console.log(images.epimap3d);
+const Work = () => {
   return (
     <Container>
       <Curtain>
@@ -865,7 +864,7 @@ const Work = ({ images }) => {
                   </Author>
                 </FWF>
               </Description>
-              <EpimapImage {...images.epimap3d} data-aos="fade-left" />
+              <EpimapImage data-aos="fade-left" />
             </SectionContent>
           </EpimapSection>
           <MissionreadySection>
