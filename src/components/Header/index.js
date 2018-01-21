@@ -78,7 +78,7 @@ const StyledLink = styled(Link)`
   ${linkHighlight};
   color: ${props => color(props.light ? "white" : "textDark")(props)};
   background: ${props =>
-    props.light ? transparentize(0.01, "backgroundDark") : color("white")};
+    props.light ? color("backgroundDark") : color("white")};
 `;
 
 const NavLink = styled(StyledLink).attrs({

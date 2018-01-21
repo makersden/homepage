@@ -37,7 +37,6 @@ const LightSegment = styled(TransparentSegment)`
 `;
 
 const ContactSegment = styled(LightSegment)`
-  min-height: calc(100vh - 10.5rem);
   padding: 0;
   align-items: center;
   justify-content: center;
@@ -73,7 +72,6 @@ const Subtitle = styled(Box)`
 `;
 
 const Container = styled(Flex).attrs({ column: true })`
-  background: ${color("black")};
   color: ${get("theme.colors.text")};
 `;
 
@@ -100,7 +98,7 @@ const Home = () => {
           </Subtitle>
         </HeroSegment>
       </FadeWithoutFont>
-      <LightSegment id="work">
+      <LightSegment>
         <Work />
       </LightSegment>
       <LightSegment id="team">

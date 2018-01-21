@@ -16,7 +16,7 @@ import "aos/dist/aos.css";
 import "prismjs/themes/prism.css";
 
 const Layout = styled.div`
-  background: ${color("white")};
+  background: ${color("backgroundDark")};
   font-family: ${font("primary")};
   min-width: 32rem;
   overflow-x: hidden;
@@ -47,7 +47,7 @@ injectGlobal`
 `;
 
 const Content = styled.div`
-  background: ${color("black")};
+  background: ${color("backgroundDark")};
   min-height: calc(100vh - 21rem - 8.8rem);
 `;
 

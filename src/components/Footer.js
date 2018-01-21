@@ -43,7 +43,7 @@ const SmallStyledLogo = styled(StyledLogo).attrs({
 `;
 
 const StyledFooter = styled.footer`
-  background: ${color("black")};
+  background: ${color("backgroundDark")};
 
   > * {
     display: flex;

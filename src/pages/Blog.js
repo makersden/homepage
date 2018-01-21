@@ -20,8 +20,8 @@ import Cogs from "../components/Cogs";
 
 const Posts = styled.ul`
   list-style: none;
-  margin: 0 auto;
   padding: 0;
+  margin: 0;
 `;
 
 const PostImage = styled(Img)`
@@ -33,7 +33,7 @@ const PostImage = styled(Img)`
 `;
 
 const Post = styled.li`
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
   position: relative;
   overflow: hidden;
@@ -41,10 +41,9 @@ const Post = styled.li`
   max-width: 144rem;
   width: 100%;
   max-height: 100%;
-  height: 35rem;
 
-  &:first-child {
-    height: 60rem;
+  &:not(:first-child) {
+    height: 35rem;
   }
 `;
 

@@ -95,7 +95,8 @@ const Link = styled.a`
   }
 `;
 
-const Header = styled.h2`
+const Title = styled.h2`
+  letter-spacing: 0.5px;
   color: ${color("accent")};
   font-weight: 500;
   font-family: ${font("display")};
@@ -108,7 +109,7 @@ const Contact = () => (
     <Curtain>
       <FadeWithoutFont>
         <Content>
-          <Header>Let's get started.</Header>
+          <Title>Let's get started.</Title>
           <p>
             <Link href="mailto:hello@makersden.io">hello@makersden.io</Link>
           </p>

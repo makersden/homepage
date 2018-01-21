@@ -101,7 +101,7 @@ const Curtain = styled.div`
 const Content = styled(Flex)`
   max-width: 144rem;
   margin: 0 auto;
-  padding: ${size(7)} 0;
+  padding: ${sumSize(6, 4)} 0 ${size(5)} 0;
   width: 100%;
   overflow: hidden;
 `;
@@ -153,7 +153,7 @@ const ArchitectureSection = styled(Section)`
     margin-left: -${size(3)};
     margin-top: -${sumSize(5, 4, 2, 1)};
     padding-top: ${size(3)};
-    padding-bottom: ${sumSize(5, 2)};
+    padding-bottom: ${sumSize(5, 4)};
   }
 
   ${Description} {
@@ -171,18 +171,18 @@ const ArchitectureSection = styled(Section)`
 
   ${Title} {
     position: relative;
-    top: ${size(5)};
-    margin: 0;
-    margin-bottom: ${sumSize(3, 1)};
+    top: ${sumSize(5, 4, 2)};
+    margin-top: -${size(4)};
+    margin-bottom: ${sumSize(4, 3)};
     width: ${column(12)};
     z-index: 3;
   }
 
-  ${media.belowBigPhone`
+  ${media.aboveBigPhone`
     ${Title} {
-      top: ${sumSize(5, 3, 2)};
-      margin-top: -${size(4)};
-      margin-bottom: ${sumSize(4, 3)};
+      top: ${sumSize(5)};
+      margin: 0;
+      margin-bottom: ${sumSize(3, 1)};
     }
   `};
 
@@ -513,11 +513,6 @@ const YourProjectImageContainer = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  margin: ${size(3)};
-
-  ${media.aboveTablet`
-    padding: ${size(4)} ${size(5)};
-  `};
 `;
 
 const CallToAction = styled.a`
@@ -557,6 +552,7 @@ const YourProjectSection = styled(Section)`
   ${sectionSpacing};
 
   ${YourProjectImageContainer} {
+    margin: ${size(3)};
     margin-top: -${size(4)};
     padding: ${size(3)};
     margin-left: ${size(2)};
@@ -652,11 +648,28 @@ const YourProjectSection = styled(Section)`
   `};
 `;
 
+const ScrollAnchor = styled.span`
+  position: relative;
+  top: -${sumSize(4)};
+  ${media.aboveLaptop`
+    top: -${sumSize(5, 3)};
+  `};
+`;
+
+const SectionContainer = styled.div`
+  background: rgba(255, 0, 0, 0.3);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const Home = () => {
   return (
     <Container>
       <Curtain>
         <Content column>
+          <ScrollAnchor id="work" />
           <ArchitectureSection>
             <Title data-aos="fade-down">
               <FWF>Outstanding services and apps</FWF>
@@ -805,7 +818,7 @@ const Home = () => {
             <Description data-aos="fade-down">
               <FWF>
                 <Paragraph>
-                  Interested in getting support from a team of veterans?
+                  Interested in assistance from a team of veterans?
                 </Paragraph>
               </FWF>
               <CallToAction href="mailto:hello@makersden.io">

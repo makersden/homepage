@@ -198,29 +198,29 @@ const KorneliuszImage = styled(GracefulImage).attrs({
 
 const KorneliuszSection = styled(Section)`
   margin: 0 ${size(3)};
-  padding: ${size(3)} 0 0 ${size(3)};
+  padding-bottom: ${size(3)};
   ${sectionSpacing} ${Background} {
     border-radius: 20px;
   }
 
   ${Description} {
-    margin-left: -${size(4)};
-    width: calc(${column(12)} + ${size(3)});
-  }
-
-  ${KorneliuszImage} {
-    border-radius: 10px;
-    width: calc(100% - ${size(3)});
+    margin-top: -${sumSize(4, 3)};
+    margin-left: -${size(3)};
+    width: calc(${column(12)});
   }
 
   ${media.aboveTablet`
+    margin-left: calc(${column(3)} - ${size(3)});
+    width: ${column(9)};
     ${Description} {
       position: relative;
       top: ${size(3)};
-      margin-top: -${size(6)};
+      margin-top: -${sumSize(6, 3)};
+      margin-bottom: ${size(3)};
     }
 
-  `} ${media.aboveLaptop`
+  `};
+  ${media.aboveLaptop`
     margin: ${size(3)};
     margin-top: ${size(5)};
     margin-left: ${size(3)};
@@ -265,7 +265,7 @@ const PartnersSection = styled(Section)`
 
   ${Description} {
     margin: ${size(3)};
-    margin-left: -${size(3)};
+    margin-right: -${size(3)};
     margin-top: -${size(4)};
   }
 
@@ -317,8 +317,8 @@ const Home = () => {
             </CogContainer> */}
         <KalleSection>
           <Background />
-          <KalleImage />
-          <Description>
+          <KalleImage data-aos="fade-right" />
+          <Description data-aos="fade-up">
             <Name>Carl-Petter (Kalle) Bertell</Name>
             <Paragraph>
               <span>
@@ -347,8 +347,8 @@ const Home = () => {
         </KalleSection>
         <KorneliuszSection>
           <Background />
-          <KorneliuszImage />
-          <Description>
+          <KorneliuszImage data-aos="fade-left" />
+          <Description data-aos="fade-down">
             <Name>Korneliusz Caputa</Name>
             <Paragraph>
               Managing Director and a seasoned software engineer. Passionate
