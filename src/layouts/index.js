@@ -10,6 +10,7 @@ import Footer from "../components/Footer";
 
 import theme, { color, duration, font } from "../theme";
 import { breakpoints } from "../styles/mediaQueries";
+import ogImage from "../images/ogImage.png";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -63,8 +64,28 @@ const TemplateWrapper = props => (
       <Helmet
         title="Makers' Den"
         meta={[
-          { name: "description", content: "Sample" },
-          { name: "keywords", content: "sample, something" }
+          {
+            name: "description",
+            content:
+              "We are a software workshop. We solve gnarly problems to realise amazing ideas."
+          },
+          {
+            name: "keywords",
+            content:
+              "software, consulting, full-stack, fullstack, development, berlin, deutschland, react, node.js, amazon web services, aws, scala, software house, agency"
+          },
+          {
+            name: "viewport",
+            content: "width=device-width, initial-scale=1"
+          },
+          {
+            name: "google-site-verification",
+            content: "VEd-YN0XIV4G-934e_RkML776hewBuI9UC0O-9IFOrQ"
+          },
+          {
+            property: "og:image",
+            content: ogImage
+          }
         ]}
       />
       <StickyContainer id="home">
