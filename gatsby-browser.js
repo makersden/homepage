@@ -27,3 +27,7 @@ exports.onRouteUpdate = props => {
 
 //   return isHomeRoute(history.location.pathname) && isHomeRoute(location.pathname)
 // }
+
+exports.onClientEntry = () => {
+  require("intersection-observer");
+};
