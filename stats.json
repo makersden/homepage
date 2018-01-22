@@ -21,8 +21,8 @@
       "component---src-layouts-index-js-72693272ac3463d696bd.js.map"
     ],
     "path---index": [
-      "path---index-3f499c0a8366d9fef0a9.js",
-      "path---index-3f499c0a8366d9fef0a9.js.map"
+      "path---index-6da981ed03954991bced.js",
+      "path---index-6da981ed03954991bced.js.map"
     ],
     "component---src-pages-home-js": [
       "component---src-pages-home-js-37b8ae0e57b9c28cabde.js",
@@ -47,9 +47,9 @@
       "component---src-pages-blog-js-070a1a21b4198a409f58.js.map"
     ],
     "app": [
-      "app-bd6e94149aaa0981ee50.js",
+      "app-c5fded5048f627e252a2.js",
       "build-js-styles.css",
-      "app-bd6e94149aaa0981ee50.js.map",
+      "app-c5fded5048f627e252a2.js.map",
       "build-js-styles.css.map"
     ]
   }
