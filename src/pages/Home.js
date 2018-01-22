@@ -91,7 +91,7 @@ const CogsContainer = styled.div`
 
 const CogsImage = styled(Image).attrs({
   src: cogs,
-  "data-aos-once": true
+  "data-aos": ""
 })`
   max-width: 700px;
   display: block;

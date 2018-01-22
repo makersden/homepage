@@ -354,11 +354,12 @@ const Team = () => {
           <div
             data-aos="fade-right"
             data-aos-duration={1000}
+            data-aos-once
             className={KalleImage}
           >
             <GatsbyImage {...fakeKalleFromGraphQL} className={KalleImage} />
           </div>
-          <Description data-aos="fade-up">
+          <Description data-aos="fade-up" data-aos-once>
             <Name>Carl-Petter (Kalle) Bertell</Name>
             <Paragraph>
               <span>
@@ -387,13 +388,13 @@ const Team = () => {
         </KalleSection>
         <KorneliuszSection>
           <Background />
-          <div data-aos="fade-left" data-aos-duration={1000}>
+          <div data-aos="fade-left" data-aos-duration={1000} data-aos-once>
             <GatsbyImage
               {...fakeKorneliuszFromGraphQL}
               className={KorneliuszImage}
             />
           </div>
-          <Description data-aos="fade-down">
+          <Description data-aos="fade-down" data-aos-once>
             <Name>Korneliusz Caputa</Name>
             <Paragraph>
               Managing Director and a seasoned software engineer. Passionate

@@ -22,7 +22,8 @@ const getDelay = order => (order - 1) * delay;
 export const Background = styled.div.attrs({
   "data-aos": "fade",
   "data-aos-delay": getDelay(background),
-  "data-aos-duration": duration
+  "data-aos-duration": duration,
+  "data-aos-once": true
 })`
   position: absolute;
   top: 0;
@@ -138,7 +139,8 @@ export const Section = styled(Box)`
 export const Description = styled(Box).attrs({
   "data-aos": "fade-left",
   "data-aos-delay": getDelay(description),
-  "data-aos-duration": duration
+  "data-aos-duration": duration,
+  "data-aos-once": true
 })`
   background: ${color("white")};
   display: flex;
@@ -160,7 +162,8 @@ export const Description = styled(Box).attrs({
 export const Title = styled.h2.attrs({
   "data-aos": "fade-up",
   "data-aos-delay": getDelay(title),
-  "data-aos-duration": duration
+  "data-aos-duration": duration,
+  "data-aos-once": true
 })`
   font-family: ${font("display")};
   font-weight: normal;
@@ -176,7 +179,8 @@ export const Title = styled.h2.attrs({
 export const Image = styled(GracefulImage).attrs({
   "data-aos": "fade",
   "data-aos-delay": getDelay(image),
-  "data-aos-duration": duration
+  "data-aos-duration": duration,
+  "data-aos-once": true
 })``;
 
 export const Svg = GracefulSvg;

@@ -5,7 +5,8 @@ import Observer from "react-intersection-observer";
 
 const Img = styled.img.attrs({
   "data-aos": "fade",
-  "data-aos-duration": 1000
+  "data-aos-duration": 1000,
+  "data-aos-once": true
 })`
   ${props =>
     !props.loaded &&
