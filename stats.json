@@ -1,8 +1,8 @@
 {
   "assetsByChunkName": {
     "component---src-pages-index-js": [
-      "component---src-pages-index-js-36cca006bfe24986cb0c.js",
-      "component---src-pages-index-js-36cca006bfe24986cb0c.js.map"
+      "component---src-pages-index-js-35b6c4b5c0585c503823.js",
+      "component---src-pages-index-js-35b6c4b5c0585c503823.js.map"
     ],
     "path---blog": [
       "path---blog-cd6ea77eaa52ed283019.js",
@@ -17,16 +17,16 @@
       "path---home-a0e39f21c11f6a62c5ab.js.map"
     ],
     "component---src-layouts-index-js": [
-      "component---src-layouts-index-js-7234b70f4b26c0964afc.js",
-      "component---src-layouts-index-js-7234b70f4b26c0964afc.js.map"
+      "component---src-layouts-index-js-9e05252b3f989f35cb72.js",
+      "component---src-layouts-index-js-9e05252b3f989f35cb72.js.map"
     ],
     "path---index": [
       "path---index-9fa6d86a549377592aa3.js",
       "path---index-9fa6d86a549377592aa3.js.map"
     ],
     "component---src-pages-home-js": [
-      "component---src-pages-home-js-37b8ae0e57b9c28cabde.js",
-      "component---src-pages-home-js-37b8ae0e57b9c28cabde.js.map"
+      "component---src-pages-home-js-89936369e70d28740b3e.js",
+      "component---src-pages-home-js-89936369e70d28740b3e.js.map"
     ],
     "commons": [
       "commons-3c3cd762ea3395014f69.js",
@@ -43,8 +43,8 @@
       "component---src-templates-blog-post-template-js-4e35a48125553850106e.js.map"
     ],
     "component---src-pages-blog-js": [
-      "component---src-pages-blog-js-070a1a21b4198a409f58.js",
-      "component---src-pages-blog-js-070a1a21b4198a409f58.js.map"
+      "component---src-pages-blog-js-d6389e277b3d60026664.js",
+      "component---src-pages-blog-js-d6389e277b3d60026664.js.map"
     ],
     "app": [
       "app-bd6e94149aaa0981ee50.js",
