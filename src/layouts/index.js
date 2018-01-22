@@ -87,7 +87,10 @@ const TemplateWrapper = props => (
             content: ogImage
           }
         ]}
-      />
+      >
+        <script src="https://cdn.polyfill.io/v2/polyfill.min.js" />
+      </Helmet>
+
       <StickyContainer id="home">
         <Header {...props} />
         <Content>{props.children()}</Content>
