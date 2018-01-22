@@ -142,6 +142,7 @@ export const Description = styled(Box).attrs({
   "data-aos-duration": duration,
   "data-aos-once": true
 })`
+  position: relative;
   background: ${color("white")};
   display: flex;
   flex-direction: column;
@@ -167,6 +168,7 @@ export const Title = styled.h2.attrs({
   "data-aos-duration": duration,
   "data-aos-once": true
 })`
+  position: relative;
   font-family: ${font("display")};
   font-weight: normal;
   letter-spacing: 1px;
