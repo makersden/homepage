@@ -157,6 +157,8 @@ export const Description = styled(Box).attrs({
     padding: ${size(3)};
     background: ${transparentize(0.05, "superWhite")};
   `};
+
+  z-index: 4999;
 `;
 
 export const Title = styled.h2.attrs({
@@ -174,6 +176,7 @@ export const Title = styled.h2.attrs({
   ${media.aboveTablet`
       font-size: ${size(4)};
 `};
+  z-index: 5000;
 `;
 
 export const Image = styled(GracefulImage).attrs({

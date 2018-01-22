@@ -89,6 +89,7 @@ const TemplateWrapper = props => (
         ]}
       >
         <script src="https://cdn.polyfill.io/v2/polyfill.min.js" />
+        <script src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver" />
       </Helmet>
 
       <StickyContainer id="home">
