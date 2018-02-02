@@ -1,21 +1,19 @@
-import React, { PropTypes } from 'react';
-import Helmet from 'react-helmet';
+import React, { PropTypes } from "react";
+import Helmet from "react-helmet";
 
 const DefaultHeadMeta = (props, { metadata: { pkg } }) => (
   <div hidden>
     <Helmet
       meta={[
         {
-          name: 'generator',
-          content: `${
-          process.env.PHENOMIC_NAME} ${process.env.PHENOMIC_VERSION}`,
+          name: "generator",
+          content: `${process.env.PHENOMIC_NAME} ${process.env
+            .PHENOMIC_VERSION}`
         },
-        { property: 'og:site_name', content: pkg.name },
-        { name: 'twitter:site', content: `@${pkg.twitter}` },
+        { property: "og:site_name", content: pkg.name },
+        { name: "twitter:site", content: `@${pkg.twitter}` }
       ]}
-      script={[
-        { src: 'https://cdn.polyfill.io/v2/polyfill.min.js' },
-      ]}
+      script={[{ src: "https://cdn.polyfill.io/v2/polyfill.min.js" }]}
     />
 
     <Helmet>
@@ -38,22 +36,25 @@ const DefaultHeadMeta = (props, { metadata: { pkg } }) => (
       <meta name="theme-color" content="#090a0f" />
     </Helmet>
 
-    { /* meta viewport safari/chrome/edge */ }
+    {/* meta viewport safari/chrome/edge */}
     <Helmet
-      meta={[{
-        name: 'viewport',
-        content: 'width=device-width, initial-scale=1',
-      }, {
-        name: 'google-site-verification',
-        content: 'VEd-YN0XIV4G-934e_RkML776hewBuI9UC0O-9IFOrQ',
-      }]}
+      meta={[
+        {
+          name: "viewport",
+          content: "width=device-width, initial-scale=1"
+        },
+        {
+          name: "google-site-verification",
+          content: "VEd-YN0XIV4G-934e_RkML776hewBuI9UC0O-9IFOrQ"
+        }
+      ]}
     />
-    <style>{ '@-ms-viewport { width: device-width; }' }</style>
+    <style>{"@-ms-viewport { width: device-width; }"}</style>
   </div>
 );
 
 DefaultHeadMeta.contextTypes = {
-  metadata: PropTypes.object.isRequired,
+  metadata: PropTypes.object.isRequired
 };
 
 export default DefaultHeadMeta;

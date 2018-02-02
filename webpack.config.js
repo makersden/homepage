@@ -1,381 +1,140 @@
-import path from 'path';
+import path from "path";
 
-import webpack from 'webpack';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
-import DashboardPlugin from 'webpack-dashboard/plugin';
-import { phenomicLoader } from 'phenomic';
-import PhenomicLoaderFeedWebpackPlugin
-  from 'phenomic/lib/loader-feed-webpack-plugin';
+import webpack from "webpack";
+import DashboardPlugin from "webpack-dashboard/plugin";
 
-import pkg from './package.json';
+import pkg from "./package.json";
 
-export default (config = {}) => {
-  const dev = config.dev;
+// note that this webpack file is exporting a "makeConfig" function
+// which is used for phenomic to build dynamic configuration based on your needs
+// see the end of the file if you want to export a default config
+// (eg: if you share your config for phenomic and other stuff)
+module.exports = (config = {}) => {
+  const isDev = process.env.PHENOMIC_ENV === "development";
+  const isProduction = process.env.PHENOMIC_ENV === "productionelopment";
+  const isStatic = process.env.PHENOMIC_ENV === "static";
   return {
-    // ...config.dev && {
-    //   devtool: 'eval',
-    // },
+    ...(isDev && {
+      devtool: "#cheap-module-eval-source-map"
+    }),
+    entry: {
+      [config.bundleName]: [
+        !isStatic && require.resolve("webpack-hot-middleware/client"),
+        !isStatic && require.resolve("react-hot-loader/patch"),
+        "./App.js"
+      ].filter(item => item)
+    },
+    output: {
+      publicPath: "/",
+      path: path.join(process.cwd(), "docs"),
+      ...(isStatic
+        ? {
+            filename: "phenomic/[name].[chunkhash:8].js",
+            chunkFilename: "phenomic/[name].[chunkhash:8].chunk.js"
+          }
+        : {
+            filename: "phenomic/[name].js",
+            chunkFilename: "phenomic/[name].chunk.js"
+          })
+    },
     module: {
       noParse: /\.min\.js/,
-      // webpack 1
-      loaders: [
-      // webpack 2
-      /*
       rules: [
-      */
-        // *.md => consumed via phenomic special webpack loader
-        // allow to generate collection and rss feed.
+        // "file" loader makes sure those assets get served by WebpackDevServer.
+        // When you `import` an asset, you get its (virtual) filename.
+        // In production, they would get copied to the `build` folder.
+        // This loader don't uses a "test" so it will catch all modules
+        // that fall through the other loaders.
         {
-          // phenomic requirement
-          test: /\.(md|markdown)$/,
-          loader: phenomicLoader,
-          query: {
-            context: path.join(__dirname, config.source),
-            // plugins: [
-            //   ...require("phenomic/lib/loader-preset-markdown").default
-            // ]
-            // see https://phenomic.io/docs/usage/plugins/
-          },
-        },
-
-        // *.json => like in node, return json
-        // (not handled by webpack by default)
-        {
-          test: /\.json$/,
-          loader: 'json-loader',
-        },
-
-        // *.js => babel + eslint
-        {
-          test: /\.jsx?$/,
-          include: [
-            path.resolve(__dirname, 'scripts'),
-            path.resolve(__dirname, 'src')
-          ],
-          loaders: (config.dev ? [
-            'babel-loader?cacheDirectory',
-            `eslint-loader${config.dev ? '?emitWarning' : ''}`,
-          ] :  [
-            'babel-loader?cacheDirectory',
-          ]),
-        },
-
-        // ! \\
-        // by default *.css files are considered as CSS Modules
-        // And *.global.css are considered as global (normal) CSS
-
-        // *.css => CSS Modules
-        {
-          test: /\.(scss|sass|css)$/,
-          exclude: /\.global\.(scss|sass|css)$/,
-          include: path.resolve(__dirname, 'src'),
-          // webpack 1
-          loader: ExtractTextPlugin.extract(
-            'style-loader',
-            [`css-loader?modules&localIdentName=${
-              config.production
-              ? '[hash:base64:5]'
-              : '[path][name]--[local]--[hash:base64:5]'
-              }`,
-              'sass-loader',
-            ].join('!'),
-          ),
-          // webpack 2
-          /*
-          loader: ExtractTextPlugin.extract({
-            fallbackLoader: "style-loader",
-            loader: [
-              {
-                loader: "css-loader",
-                query: {
-                  modules: true,
-                  localIdentName: (
-                    config.production
-                    ? "[hash:base64:5]"
-                    : "[path][name]--[local]--[hash:base64:5]"
-                  ),
-                },
-              },
-              {
-                loader: "postcss-loader",
-                // query for postcss can't be used right now
-                // https://github.com/postcss/postcss-loader/issues/99
-                // meanwhile, see webpack.LoaderOptionsPlugin in plugins list
-                // query: { plugins: postcssPlugins },
-              },
-            ],
-          }),
-          */
-        },
-        // *.global.css => global (normal) css
-        {
-          test: /\.global\.(scss|sass|css)$/,
-          include: [
-            path.resolve('src'),
-          ],
-          // webpack 1
-          loader: ExtractTextPlugin.extract(
-            'style-loader',
-            ['css-loader', 'sass-loader'].join('!'),
-          ),
-          // webpack 2
-          /*
-            loader: ExtractTextPlugin.extract({
-            fallbackLoader: "style-loader",
-            loader: [
-            "css-loader",
-            {
-            loader: "postcss-loader",
-            // query for postcss can't be used right now
-            // https://github.com/postcss/postcss-loader/issues/99
-            // meanwhile, see webpack.LoaderOptionsPlugin in plugins list
-            // query: { plugins: postcssPlugins },
-            },
-            ],
-            }),
-          */
+          // Exclude `js` files to keep "css" loader working as it injects
+          // it's runtime that would otherwise processed through "file" loader.
+          // Also exclude `html` and `json` extensions so they get processed
+          // by webpacks internal loaders.
+          exclude: [/\.js$/, /\.html$/, /\.json$/, /.svg$/],
+          loader: require.resolve("file-loader"),
+          options: {
+            name: "static/media/[name].[hash:8].[ext]"
+          }
         },
         {
-          // External css
-          test: /\.(scss|sass|css)$/,
-          include: [
-            path.resolve('node_modules', 'devicon'),
-            path.resolve('node_modules', 'slick-carousel'),
-          ],
-          // webpack 1
-          loader: ExtractTextPlugin.extract(
-            'style-loader',
-            ['css-loader', 'sass-loader'].join('!'),
-          ),
-          // webpack 2
-          /*
-          loader: ExtractTextPlugin.extract({
-            fallbackLoader: "style-loader",
-            loader: [
-              "css-loader",
-              {
-                loader: "postcss-loader",
-                // query for postcss can't be used right now
-                // https://github.com/postcss/postcss-loader/issues/99
-                // meanwhile, see webpack.LoaderOptionsPlugin in plugins list
-                // query: { plugins: postcssPlugins },
-              },
-            ],
-          }),
-          */
-        },
-        // ! \\
-        // If you want global CSS only, just remove the 2 sections above
-        // and use the following one
-        // ! \\ If you want global CSS for node_modules only, just uncomment
-        // this section and the `include` part
-        // // webpack 1
-        /*
-        {
-          test: /\.css$/,
-          // depending on your need, you might need to scope node_modules
-          // for global CSS if you want to keep CSS Modules by default
-          // for your own CSS. If so, uncomment the line below
-          // include: path.resolve(__dirname, "node_modules"),
-          loader: ExtractTextPlugin.extract(
-            "style-loader",
-            loader: [
-              "css-loader",
-              "postcss-loader",
-            ].join("!")
-          ),
-        },
-        */
-        // // webpack 2
-        /*
-        {
-          test: /\.css$/,
-          // depending on your need, you might need to scope node_modules
-          // for global CSS if you want to keep CSS Modules by default
-          // for your own CSS. If so, uncomment the line below
-          // include: path.resolve(__dirname, "node_modules"),
-          loader: ExtractTextPlugin.extract({
-            fallbackLoader: "style-loader",
-            loader: [
-              "css-loader",
-              {
-                loader: "postcss-loader",
-                query: { "plugins": postcssPlugins },
-              },
+          test: /\.js$/,
+          exclude: /node_modules/,
+          loader: require.resolve("babel-loader"),
+          options: {
+            babelrc: false,
+            cacheDirectory: true,
+            presets: [require.resolve("@phenomic/babel-preset")],
+            plugins: [
+              require.resolve("react-hot-loader/babel"),
+              [
+                require.resolve("babel-plugin-styled-components"),
+                {
+                  displayName: true,
+                  minify: false
+                }
+              ]
             ]
-          }),
+          }
         },
-        */
-        // ! \\ if you want to use Sass or LESS, you can add sass-loader or
-        // less-loader after postcss-loader (or replacing it).
-        // ! \\ You will also need to adjust the file extension
-        // and to run the following command
-        //
-        // Sass: `npm install --save-dev node-sass sass-loader`
-        // https://github.com/jtangelder/sass-loader
-        //
-        // LESS: npm install --save-dev less less-loader
-        // https://github.com/webpack/less-loader
-
-        // copy assets and return generated path in js
-        {
-          test: /\.(html|ico|jpe?g|png|gif)$/,
-          loader: 'file-loader',
-          query: {
-            name: '[path][name].[hash].[ext]',
-            context: path.join(__dirname, config.source),
-          },
-          include: [
-            path.resolve('assets', 'images'),
-            path.resolve('node_modules', 'slick-carousel')
-          ]
-        },
-          // svg as raw string to be inlined
-        // {
-        //   test: /\.svg$/,
-        //   loader: 'raw-loader',
-        //   exclude: path.resolve('assets', 'fonts'),
-        // },
         {
           test: /\.svg$/,
-          loader: 'url-loader?limit=10000',
-          include: [
-            path.resolve('assets'),
-            path.resolve('node_modules', 'devicon', 'fonts'),
-            path.resolve('node_modules', 'slick-carousel', 'slick', 'fonts'),
-          ],
-        },
-        {
-          test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-          loader: 'url?limit=10000&mimetype=application/font-woff',
-          include: [
-            path.resolve('assets', 'fonts'),
-            path.resolve('node_modules', 'devicon', 'fonts'),
-            path.resolve('node_modules', 'slick-carousel', 'slick', 'fonts'),
-          ],
-        },
-        {
-          test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-          loader: 'url?limit=10000&mimetype=application/font-woff',
-          include: [
-            path.resolve('assets', 'fonts'),
-            path.resolve('node_modules', 'devicon', 'fonts'),
-            path.resolve('node_modules', 'slick-carousel', 'slick', 'fonts'),
-          ],
-        },
-        {
-          test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-          loader: 'url?limit=10000&mimetype=application/octet-stream',
-          include: [
-            path.resolve('assets', 'fonts'),
-            path.resolve('node_modules', 'devicon', 'fonts'),
-            path.resolve('node_modules', 'slick-carousel', 'slick', 'fonts'),
-          ],
-        },
-        {
-          test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-          loader: 'file',
-          include: [
-            path.resolve('assets', 'fonts'),
-            path.resolve('node_modules', 'devicon', 'fonts'),
-            path.resolve('node_modules', 'slick-carousel'),
-          ],
-        },
-      ],
+          include: /assets/,
+          use: [
+            {
+              loader: "file-loader",
+              options: {
+                name: "static/media/[name].[hash:8].[ext]"
+              }
+            },
+            {
+              loader: require.resolve("svgo-loader"),
+              options: {
+                plugins: [
+                  { convertPathData: true },
+                  { removeViewBox: true },
+                  { removeTitle: true },
+                  { removeEmptyAttrs: true }
+                ]
+              }
+            }
+          ]
+        }
+      ]
     },
-
-    // webpack 1
-    // postcss: postcssPlugins,
 
     plugins: [
-      // webpack 2
-      /*
-      // You should be able to remove the block below when the following
-      // issue has been correctly handled (and postcss-loader supports
-      // "plugins" option directly in query, see postcss-loader usage above)
-      // https://github.com/postcss/postcss-loader/issues/99
-      new webpack.LoaderOptionsPlugin({
-        test: /\.css$/,
-        options: {
-          postcss: postcssPlugins,
-          // required to avoid issue css-loader?modules
-          // this is normally the default value, but when we use
-          // LoaderOptionsPlugin, we must specify it again, otherwise,
-          // context is missing (and css modules names can be broken)!
-          context: __dirname,
-        },
-      }),
-      */
-
-      new PhenomicLoaderFeedWebpackPlugin({
-        // here you define generic metadata for your feed
-        feedsOptions: {
-          title: pkg.name,
-          site_url: pkg.homepage,
-        },
-        feeds: {
-          // here we define one feed, but you can generate multiple, based
-          // on different filters
-          'feed.xml': {
-            collectionOptions: {
-              filter: { layout: 'Post' },
-              sort: 'date',
-              reverse: true,
-              limit: 20,
-            },
-          },
-        },
-      }),
-
-      // webpack 1
-      new ExtractTextPlugin('[name].[hash].css', { disable: config.dev }),
-      // webpack 2
-      /*
-      new ExtractTextPlugin({
-        filename: "[name].[hash].css",
-        disable: config.dev,
-      }),
-      */
-
-      new webpack.DefinePlugin({
-        __PRODUCTION__: config.production,
-      }),
-
-      ...config.production && [
-        // webpack 2
-        // DedupePlugin does not work correctly with Webpack 2, yet ;)
-        // https://github.com/webpack/webpack/issues/2644
+      ...(isProduction && [
         new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.UglifyJsPlugin(
-          { compress: { warnings: false } },
-        ),
-      ],
+        new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false } })
+      ]),
+      isDev && new webpack.NoEmitOnErrorsPlugin(),
+      !isStatic && new webpack.HotModuleReplacementPlugin()
+    ].filter(item => item),
 
-      ...config.dev && [
-        new DashboardPlugin(),
-        new webpack.NoErrorsPlugin()
-
-      ],
-    ],
-
-    output: {
-      path: path.join(__dirname, config.destination),
-      publicPath: config.baseUrl.pathname,
-      filename: '[name].[hash].js',
-    },
-
-    // webpack 1
     resolve: {
-      extensions: ['.js', '.jsx', '.json', ''],
-      root: [
-        path.join(__dirname, 'node_modules'),
-        path.resolve('.'),
-      ],
+      // react-native(-web) | react-primitives
+      extensions: [".web.js", ".js", ".json"],
+      alias: {
+        "react-native": "react-native-web",
+        "styled-components": "styled-components/lib",
+
+        // to ensure a single module is used
+        react: path.resolve(path.join(process.cwd(), "node_modules", "react")),
+        "react-dom": path.resolve(
+          path.join(process.cwd(), "node_modules", "react-dom")
+        ),
+        "react-router": path.resolve(
+          path.join(process.cwd(), "node_modules", "react-router")
+        )
+      }
     },
-    resolveLoader: { root: [path.join(__dirname, 'node_modules')] },
-    // webpack 2
-    /*
-    resolve: { extensions: [ ".js", ".json" ] },
-    */
+
+    // eslint-disable-next-line max-len
+    // https://github.com/facebookincubator/create-react-app/blob/fbdff9d722d6ce669a090138022c4d3536ae95bb/packages/react-scripts/config/webpack.config.prod.js#L279-L285
+    node: {
+      fs: "empty",
+      net: "empty",
+      tls: "empty"
+    }
   };
 };
