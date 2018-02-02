@@ -3,15 +3,6 @@ import Link from "gatsby-link";
 
 import Homepage from "./Home";
 
-/* const IndexPage = () => (
- *   <div>
- *     <h1>Hi people</h1>
- *     <p>Welcome to your new Gatsby site.</p>
- *     <p>Now go build something great.</p>
- *     <Link to="/page-2/">Go to page 2</Link>
- *   </div>
- * )
- * */
 export default Homepage;
 
 export const pageQuery = graphql`
@@ -20,13 +11,16 @@ export const pageQuery = graphql`
       edges {
         node {
           ... on ImageSharp {
-            responsiveSizes(maxWidth: 1440) {
-              src
-              srcSet
-              sizes
-              aspectRatio
-              base64
-              originalImg
+            sizes(
+              maxWidth: 1920
+              height: 1080
+              traceSVG: {
+                color: "#f00e2e"
+                turnPolicy: TURNPOLICY_MINORITY
+                blackOnWhite: false
+              }
+            ) {
+              ...GatsbyImageSharpSizes_tracedSVG
             }
           }
         }

@@ -9,9 +9,6 @@ import GracefulImage from "../GracefulImage";
 import * as SectionModule from "./Section";
 import { media } from "../styles/mediaQueries";
 
-import kalle from "../../assets/images/kalle.png";
-import korneliusz from "../../assets/images/korneliusz2.jpg";
-import partners from "../../assets/images/partners.png";
 import giantCog from "../../assets/images/GiantCog.svg";
 
 const sectionSpacing = css`
@@ -263,13 +260,7 @@ const KorneliuszSection = styled(Section)`
   `};
 `;
 
-const PartnersImage = styled(GracefulImage).attrs({
-  src: partners,
-  "data-aos-duration": 1000
-})`
-  max-height: 100%;
-  max-width: 100%;
-`;
+const PartnersImage = "partners";
 
 const PartnersSection = styled(Section)`
   justify-content: center;
@@ -289,7 +280,7 @@ const PartnersSection = styled(Section)`
   }
 
   ${media.aboveTablet`
-    ${PartnersImage} {
+    .${PartnersImage} {
       width: calc(${column(12)} - ${size(4)});
       margin-left: ${size(3)};
       margin-top: ${size(3)};
@@ -321,7 +312,7 @@ const PartnersSection = styled(Section)`
     padding: ${size(5)};
     padding-bottom: 0;
 
-    ${PartnersImage} {
+    .${PartnersImage} {
       margin: 0;
       width: ${column(12)};
       min-width: 75.1rem;
@@ -334,14 +325,15 @@ const PartnersSection = styled(Section)`
       margin-right: ${sumSize(5, 4)};
       margin-top: -${size(5)};
       align-self: flex-end;
-      width: ${column(8)};
+      width: ${column(8)}:;
     }
   `};
 `;
 
-const Team = () => {
-  const fakeKalleFromGraphQL = { sizes: { src: kalle } };
-  const fakeKorneliuszFromGraphQL = { sizes: { src: korneliusz } };
+const Team = ({ findImage }) => {
+  const kalle = findImage("kalle");
+  const korneliusz = findImage("korneliusz");
+  const partners = findImage("partners");
   return (
     <Container id="team">
       <Title>The A-Team</Title>
@@ -357,7 +349,7 @@ const Team = () => {
             data-aos-once
             className={KalleImage}
           >
-            <GatsbyImage {...fakeKalleFromGraphQL} className={KalleImage} />
+            <GatsbyImage {...kalle} className={KalleImage} />
           </div>
           <Description data-aos="fade-up" data-aos-once>
             <Name>Carl-Petter (Kalle) Bertell</Name>
@@ -389,10 +381,7 @@ const Team = () => {
         <KorneliuszSection>
           <Background />
           <div data-aos="fade-left" data-aos-duration={1000} data-aos-once>
-            <GatsbyImage
-              {...fakeKorneliuszFromGraphQL}
-              className={KorneliuszImage}
-            />
+            <GatsbyImage {...korneliusz} className={KorneliuszImage} />
           </div>
           <Description data-aos="fade-down" data-aos-once>
             <Name>Korneliusz Caputa</Name>
@@ -418,7 +407,14 @@ const Team = () => {
         </KorneliuszSection>
         <PartnersSection>
           <Background />
-          <PartnersImage />
+          <div
+            data-aos="fade-right"
+            data-aos-duration={1000}
+            data-aos-once
+            className={PartnersImage}
+          >
+            <GatsbyImage {...partners} className={PartnersImage} />
+          </div>
           <Description>
             <Name>Our network of Trusted Partners</Name>
             <Paragraph>

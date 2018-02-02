@@ -4,6 +4,8 @@ import { Flex, Box } from "grid-styled";
 /* import { Isvg } from "react-inlinesvg";*/
 
 import get from "lodash/fp/get";
+import map from "lodash/fp/map";
+import find from "lodash/fp/find";
 
 import { color, font, size, sumSize } from "../theme";
 import { media } from "../styles/mediaQueries";
@@ -102,7 +104,11 @@ const CogsImage = styled(Image).attrs({
  *   align-self: center;
  * `;*/
 
-const Home = ({ data: images }) => {
+const Home = ({ data: { allImageSharp: { edges } } }) => {
+  const images = map("node", edges);
+  const findImage = name =>
+    find(img => img.responsiveSizes.originalImg.indexOf(name) !== -1, images);
+
   return (
     <Container>
       <FadeWithoutFont>
@@ -120,10 +126,10 @@ const Home = ({ data: images }) => {
         </HeroSegment>
       </FadeWithoutFont>
       <LightSegment>
-        <Work />
+        <Work findImage={findImage} />
       </LightSegment>
       <LightSegment>
-        <Team images={images} />
+        <Team findImage={findImage} />
       </LightSegment>
       <ContactSegment id="contact">
         <Contact />
