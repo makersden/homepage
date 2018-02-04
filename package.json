@@ -4,13 +4,12 @@
   "twitter": "makers_den",
   "repository": "https://github.com/makersden/homepage",
   "private": true,
-  "version": "0.3.0",
+  "version": "0.3.1",
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
     "release:minor":
       "yarn version --new-version minor && gatsby build && yarn deploy",
-
     "release:patch":
       "yarn version --new-version patch && gatsby build && yarn deploy",
     "release:major":
