@@ -9,7 +9,7 @@
     "build": "gatsby build",
     "develop": "gatsby develop",
     "release": "gatsby build && yarn deploy",
-    "deploy": "echo makersden.io > public/CNAME && gh-pages -d public",
+    "deploy": "gh-pages -d public",
     "format":
       "prettier --trailing-comma es5 --no-semi --single-quote --write 'src/**/*.js'",
     "precommit": "lint-staged"

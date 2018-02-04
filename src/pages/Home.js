@@ -106,8 +106,9 @@ const CogsImage = styled(Image).attrs({
 
 const Home = ({ data: { allImageSharp: { edges } } }) => {
   const images = map("node", edges);
+  console.log({ images });
   const findImage = name =>
-    find(img => img.responsiveSizes.originalImg.indexOf(name) !== -1, images);
+    find(img => img.sizes.src.indexOf(name) !== -1, images);
 
   return (
     <Container>

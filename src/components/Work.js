@@ -22,6 +22,10 @@ import aki from "../../assets/images/aki.png";
 
 const { AboveTablet, BelowTablet } = MQs;
 
+const StyledObserver = styled(Observer)`
+  z-index: 1;
+`;
+
 import {
   authorStyle,
   AuthorLink,
@@ -801,9 +805,9 @@ const Work = () => {
               <FWF>Outstanding services and apps</FWF>
             </Title>
             <Background />
-            <Observer triggerOnce>
+            <StyledObserver triggerOnce>
               {inView => <ArchitectureSvg show={inView} />}
-            </Observer>
+            </StyledObserver>
             <Description data-aos="fade-left">
               <FWF>
                 <Paragraph>

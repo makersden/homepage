@@ -115,14 +115,10 @@ export const Section = styled(Box)`
   justify-content: center;
   position: relative;
   * {
-      border-radius: 10px;
-      ${media.aboveTablet`
+    border-radius: 10px;
+    ${media.aboveTablet`
         border-radius: 20px;
-      `}
-
-      &:not(${Background}) {
-        z-index: 1;
-      }
+      `};
   }
 `;
 

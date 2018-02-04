@@ -247,7 +247,6 @@ const KorneliuszSection = styled(Section)`
 
     .${KorneliuszImage} {
       margin: 0 ${size(4)};
-      width: auto;
       min-height: 65rem;
     }
   `};
