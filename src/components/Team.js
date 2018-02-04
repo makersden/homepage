@@ -346,12 +346,11 @@ const Team = ({ findImage }) => {
           <div
             data-aos="fade-right"
             data-aos-duration={1000}
-            data-aos-once
             className={KalleImage}
           >
             <GatsbyImage {...kalle} className={KalleImage} />
           </div>
-          <Description data-aos="fade-up" data-aos-once>
+          <Description data-aos="fade-up">
             <Name>Carl-Petter (Kalle) Bertell</Name>
             <Paragraph>
               <span>
@@ -380,10 +379,10 @@ const Team = ({ findImage }) => {
         </KalleSection>
         <KorneliuszSection>
           <Background />
-          <div data-aos="fade-left" data-aos-duration={1000} data-aos-once>
+          <div data-aos="fade-left" data-aos-duration={1000}>
             <GatsbyImage {...korneliusz} className={KorneliuszImage} />
           </div>
-          <Description data-aos="fade-down" data-aos-once>
+          <Description data-aos="fade-down">
             <Name>Korneliusz Caputa</Name>
             <Paragraph>
               Managing Director and a seasoned software engineer. Passionate
@@ -410,7 +409,6 @@ const Team = ({ findImage }) => {
           <div
             data-aos="fade-right"
             data-aos-duration={1000}
-            data-aos-once
             className={PartnersImage}
           >
             <GatsbyImage {...partners} className={PartnersImage} />

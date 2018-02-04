@@ -22,8 +22,7 @@ const getDelay = order => (order - 1) * delay;
 export const Background = styled.div.attrs({
   "data-aos": "fade",
   "data-aos-delay": getDelay(background),
-  "data-aos-duration": duration,
-  "data-aos-once": true
+  "data-aos-duration": duration
 })`
   position: absolute;
   top: 0;
@@ -33,10 +32,7 @@ export const Background = styled.div.attrs({
   z-index: 0;
 `;
 
-export const Quote = styled.blockquote.attrs({
-  // "data-aos": "fade",
-  // "data-aos-duration": duration
-})`
+export const Quote = styled.blockquote.attrs({})`
   margin-left: 0;
   margin-right: 0;
   font-weight: 300;
@@ -67,10 +63,7 @@ export const authorStyle = css`
   }
 `;
 
-export const Author = styled.span.attrs({
-  // "data-aos": "fade",
-  // "data-aos-duration": duration
-})`
+export const Author = styled.span.attrs({})`
   ${authorStyle};
   img {
     border-radius: 50%;
@@ -97,10 +90,7 @@ export const AuthorLink = styled.a.attrs({
   }
 `;
 
-export const Paragraph = styled.p.attrs({
-  // "data-aos": "fade",
-  // "data-aos-duration": duration
-})`
+export const Paragraph = styled.p.attrs({})`
   font-weight: 500;
   color: ${color("textDark")};
   text-align: ${props => props.align || "left"};
@@ -139,8 +129,7 @@ export const Section = styled(Box)`
 export const Description = styled(Box).attrs({
   "data-aos": "fade-left",
   "data-aos-delay": getDelay(description),
-  "data-aos-duration": duration,
-  "data-aos-once": true
+  "data-aos-duration": duration
 })`
   position: relative;
   background: ${color("white")};
@@ -159,14 +148,13 @@ export const Description = styled(Box).attrs({
     background: ${transparentize(0.05, "superWhite")};
   `};
 
-  z-index: 4999;
+  z-index: 3;
 `;
 
 export const Title = styled.h2.attrs({
   "data-aos": "fade-up",
   "data-aos-delay": getDelay(title),
-  "data-aos-duration": duration,
-  "data-aos-once": true
+  "data-aos-duration": duration
 })`
   position: relative;
   font-family: ${font("display")};
@@ -178,14 +166,15 @@ export const Title = styled.h2.attrs({
   ${media.aboveTablet`
       font-size: ${size(4)};
 `};
-  z-index: 5000;
+  z-index: 2;
 `;
 
 export const Image = styled(GracefulImage).attrs({
   "data-aos": "fade",
   "data-aos-delay": getDelay(image),
-  "data-aos-duration": duration,
-  "data-aos-once": true
-})``;
+  "data-aos-duration": duration
+})`
+  z-index: 1;
+`;
 
 export const Svg = GracefulSvg;

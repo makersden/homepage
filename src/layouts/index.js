@@ -108,7 +108,10 @@ TemplateWrapper.propTypes = {
 export default compose(
   lifecycle({
     componentDidMount() {
-      AOS.init();
+      AOS.init({
+        offset: 300,
+        once: true
+      });
     }
   })
 )(TemplateWrapper);

@@ -43,17 +43,6 @@ const sectionSpacing = css`
 `;
 
 const DataImageContainer = styled.div``;
-/* const Crop = styled.div`
- *   ${props =>
- *     "width" in props &&
- *     `
- *     width: ${props.width};
- *   `} ${props =>
- *       "height" in props &&
- *       `
- *     height: ${props.height};
- *   `} overflow: hidden;
- * `;*/
 
 const Author = styled.figure`
   display: flex;
@@ -74,7 +63,8 @@ const StyledLink = styled.a`
 `;
 
 const AuthorImage = styled(Image).attrs({
-  static: true
+  static: true,
+  "data-aos": undefined
 })`
   ${circle("7.5rem")};
 `;
@@ -178,7 +168,6 @@ const ArchitectureSection = styled(Section)`
     margin-top: -${size(4)};
     margin-bottom: ${sumSize(4, 3)};
     width: ${column(12)};
-    z-index: 3;
   }
 
   ${media.aboveBigPhone`
@@ -285,7 +274,6 @@ const EpimapSection = styled(Section)`
   ${Description} {
     position: relative;
     left: 0;
-    z-index: 2;
     width: ${column(12)};
   }
 
@@ -299,7 +287,6 @@ const EpimapSection = styled(Section)`
 
   ${Title} {
     margin-bottom: ${size(3)};
-    z-index: 3;
   }
 
   ${media.aboveTablet`
@@ -366,7 +353,6 @@ const MissionreadySection = styled(Section)`
     top: ${sumSize(5, 3)};
     margin-top: ${size(2)};
     width: ${column(10)};
-    z-index: 2;
   }
 
   ${Background} {
@@ -471,7 +457,6 @@ const DataSection = styled(Section)`
     margin-top: -${sumSize(4, 3, 2)};
     margin-left: ${size(3)};
     width: ${column(12)};
-    z-index: 2;
   }
 
   ${Background} {
@@ -656,6 +641,7 @@ const YourProjectSection = styled(Section)`
     padding-top: ${size(2)};
     margin-left: ${size(2)};
     width: calc(${column(11)} + ${size(3)});
+    z-index: 1;
   }
 
   ${Background} {
