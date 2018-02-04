@@ -940,7 +940,7 @@ const Work = ({ images }) => {
                   visualized flight departures and arrivals in Berlin.
                 </Paragraph>
                 <Paragraph>
-                  <StyledLink href="https://makersden.io/berlin-air-traffic">
+                  <StyledLink href="/berlin-air-traffic">
                     Click here for the full story.
                   </StyledLink>
                 </Paragraph>
