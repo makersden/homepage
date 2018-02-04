@@ -129,7 +129,10 @@ export const transition = (...props) => css`
 `;
 
 export const circle = size => css`
-  border-radius: 50%;
-  height: ${size};
-  width: ${size};
+  &,
+  * {
+    border-radius: 50%;
+    height: ${size};
+    width: ${size};
+  }
 `;

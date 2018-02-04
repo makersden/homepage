@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { media } from "../styles/mediaQueries";
 import { color, font, size, sumSize } from "../theme";
 import { transparentize } from "../polished";
-import berlin from "../../assets/images/berlin-sharp.jpg";
 import FadeWithoutFont from "../FadeWithoutFont";
 
 const duration = 3000;
@@ -29,7 +28,7 @@ const Background = styled.div.attrs({
   width: 100%;
   height: 100%;
   position: absolute;
-  background-image: url(${berlin});
+  background-image: url(${props => props.background});
   background-size: cover;
   background-attachment: fixed;
   background-repeat: no-repeat;
@@ -103,9 +102,9 @@ const Title = styled.h2`
 `;
 
 // TOOD video of berlin in background?
-const Contact = () => (
+const Contact = ({ images }) => (
   <Container>
-    <Background />
+    <Background background={images.berlin.sizes.src} />
     <Curtain>
       <FadeWithoutFont>
         <Content>

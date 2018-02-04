@@ -53,7 +53,7 @@ const Content = styled.div`
   min-height: calc(100vh - 21rem - 8.8rem);
 `;
 
-const TemplateWrapper = props => (
+const TemplateWrapper = ({ ...props }) => (
   <ThemeProvider
     theme={{
       ...theme,
@@ -111,7 +111,6 @@ export default compose(
       AOS.init({
         delay: 200,
         duration: 1000,
-        offset: 300,
         once: true
       });
     }

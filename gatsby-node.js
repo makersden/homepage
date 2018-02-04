@@ -1,4 +1,7 @@
 const path = require("path");
+const package = require("./package.json");
+
+const version = package.version;
 
 exports.createPages = ({ boundActionCreators: { createPage }, graphql }) => {
   const blogPostTemplate = path.resolve(`src/templates/blogPostTemplate.js`);
@@ -28,7 +31,9 @@ exports.createPages = ({ boundActionCreators: { createPage }, graphql }) => {
         path: `/blog/${node.frontmatter.slug}`,
         slug: node.frontmatter.slug,
         component: blogPostTemplate,
-        context: {} // additional data can be passed via context
+        context: {
+          version
+        } // additional data can be passed via context
       });
     });
   });

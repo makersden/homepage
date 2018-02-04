@@ -17,7 +17,6 @@ import FadeWithoutFont from "../FadeWithoutFont";
 import Work from "../components/Work";
 import Team from "../components/Team";
 import Contact from "../components/Contact";
-/* import Cogs from "../components/Cogs";*/
 import cogs from "../images/cogwheels_above_the_fold.svg";
 
 import { Image } from "../components/Section";
@@ -93,25 +92,22 @@ const CogsContainer = styled.div`
   margin: 0;
 `;
 
-const CogsImage = styled(Image).attrs({
-  src: cogs,
-  "data-aos": ""
-})`
+const CogsImage = styled(Image)`
   max-width: 700px;
   display: block;
   margin: 0 auto;
 `;
 
-const Home = ({ data }) => {
-  const { korneliusz, kalle, partners } = mapValues("childImageSharp", data);
-
+const Home = ({ data }, context) => {
+  const images = mapValues("childImageSharp", data);
+  const cogsImg = { sizes: { src: { cogs } } };
   return (
     <Container>
       <FadeWithoutFont>
         <HeroSegment p={[0, 4]} m={[3, 4]} id="hero">
           <Title>We are a software workshop.</Title>
           <CogsContainer>
-            <CogsImage />
+            <CogsImage {...cogsImg} />
           </CogsContainer>
           <Subtitle w={[1, 6 / 12]} mx={[0, 4]} px={[0, 4]}>
             <div>
@@ -122,13 +118,13 @@ const Home = ({ data }) => {
         </HeroSegment>
       </FadeWithoutFont>
       <LightSegment>
-        <Work />
+        <Work images={images} />
       </LightSegment>
       <LightSegment>
-        <Team images={{ kalle, korneliusz, partners }} />
+        <Team images={images} />
       </LightSegment>
       <ContactSegment id="contact">
-        <Contact />
+        <Contact images={images} />
       </ContactSegment>
     </Container>
   );
@@ -138,6 +134,90 @@ export default Home;
 
 export const pageQuery = graphql`
   query IndexImages {
+    berlin: file(relativePath: { eq: "berlin-sharp.jpg" }) {
+      childImageSharp {
+        sizes(maxWidth: 2560, toFormat: JPG) {
+          ...GatsbyImageSharpSizes
+        }
+      }
+    }
+    epimap3d: file(relativePath: { eq: "epimap_3d.jpg" }) {
+      childImageSharp {
+        sizes(
+          maxWidth: 1400
+          toFormat: JPG
+          traceSVG: { color: "rgba(250, 250, 250, 0.3)", blackOnWhite: false }
+        ) {
+          ...GatsbyImageSharpSizes_tracedSVG
+        }
+      }
+    }
+    revenue: file(relativePath: { eq: "revenue.png" }) {
+      childImageSharp {
+        sizes(
+          maxWidth: 978
+          maxHeight: 658
+          toFormat: PNG
+          traceSVG: { color: "transparent", blackOnWhite: true }
+        ) {
+          ...GatsbyImageSharpSizes_tracedSVG
+        }
+      }
+    }
+    missionready: file(relativePath: { eq: "missionready.jpg" }) {
+      childImageSharp {
+        sizes(
+          maxWidth: 700
+          toFormat: JPG
+          traceSVG: { color: "rgba(250, 250, 250, 0.3)", blackOnWhite: false }
+        ) {
+          ...GatsbyImageSharpSizes_tracedSVG
+        }
+      }
+    }
+    waves: file(relativePath: { eq: "waves.png" }) {
+      childImageSharp {
+        sizes(
+          maxWidth: 1400
+          traceSVG: { color: "#fafafa", blackOnWhite: false }
+        ) {
+          ...GatsbyImageSharpSizes
+        }
+      }
+    }
+    data: file(relativePath: { eq: "data.png" }) {
+      childImageSharp {
+        sizes(
+          maxWidth: 1400
+          toFormat: JPG
+          traceSVG: { color: "rgba(250, 250, 250, 0.3)", blackOnWhite: false }
+        ) {
+          ...GatsbyImageSharpSizes_tracedSVG
+        }
+      }
+    }
+    otto: file(relativePath: { eq: "otto.png" }) {
+      childImageSharp {
+        sizes(
+          maxWidth: 75
+          toFormat: JPG
+          traceSVG: { color: "#fafafa", blackOnWhite: false }
+        ) {
+          ...GatsbyImageSharpSizes_tracedSVG
+        }
+      }
+    }
+    aki: file(relativePath: { eq: "aki.png" }) {
+      childImageSharp {
+        sizes(
+          maxWidth: 75
+          toFormat: JPG
+          traceSVG: { color: "#fafafa", blackOnWhite: false }
+        ) {
+          ...GatsbyImageSharpSizes_tracedSVG
+        }
+      }
+    }
     kalle: file(relativePath: { eq: "kalle.png" }) {
       childImageSharp {
         sizes(

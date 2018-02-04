@@ -1,12 +1,13 @@
 import React, { PureComponent } from "react";
 import styled, { css } from "styled-components";
+import GatsbyImage from "gatsby-image";
+import pick from "lodash/fp/pick";
+import omit from "lodash/fp/omit";
 
 import Observer from "react-intersection-observer";
 
-const Img = styled.img.attrs({
-  "data-aos": "fade",
-  "data-aos-duration": 1000,
-  "data-aos-once": true
+const Img = styled.div.attrs({
+  "data-aos": "fade"
 })`
   ${props =>
     !props.loaded &&
@@ -16,41 +17,12 @@ const Img = styled.img.attrs({
     `};
 `;
 
-class GracefulImage extends PureComponent {
-  state = {
-    loaded: false
-  };
+const imgProps = ["data-aos", "className"];
 
-  componentDidMount() {
-    const { element } = this;
-  }
-
-  onLoaded = () =>
-    this.setState(() => ({
-      loaded: true
-    }));
-
-  listenToLoad = element =>
-    element && element.addEventListener("load", this.onLoaded);
-
-  render() {
-    const { className } = this.props;
-    const { loaded } = this.state;
-
-    const Preloader =
-      this.props.preloader || (() => <div className={className} />);
-
-    return (
-      <Observer triggerOnce>
-        {inView =>
-          inView ? (
-            <Img {...this.props} innerRef={this.listenToLoad} loaded={loaded} />
-          ) : (
-            <Preloader />
-          )}
-      </Observer>
-    );
-  }
-}
+const GracefulImage = props => (
+  <Img {...pick(imgProps, props)}>
+    <GatsbyImage {...omit(imgProps, props)} className={props.className} />
+  </Img>
+);
 
 export default GracefulImage;

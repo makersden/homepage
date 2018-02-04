@@ -11,14 +11,7 @@ import { color, column, font, size, sumSize } from "../theme";
 import MQs, { media } from "../styles/mediaQueries";
 import FWF from "../FadeWithoutFont";
 
-import architecture from "../../assets/images/Web App Reference Architecture.svg";
-import epimap3d from "../../assets/images/epimap_3d.jpg";
-import missionready from "../../assets/images/missionready.jpg";
-import revenue from "../../assets/images/revenue.svg";
-import waves from "../../assets/images/waves.png";
-import data from "../../assets/images/data.png";
-import otto from "../../assets/images/otto.png";
-import aki from "../../assets/images/aki.png";
+import architecture from "../images/Web App Reference Architecture.svg";
 
 const { AboveTablet, BelowTablet } = MQs;
 
@@ -77,7 +70,7 @@ const Container = styled.div`
   width: 100%;
   overflow-x: hidden;
   position: relative;
-  background: url(${waves});
+  background: url(${props => props.background});
   background-repeat: repeat;
   background-size: 25%;
 `;
@@ -195,6 +188,7 @@ const ArchitectureSection = styled(Section)`
       padding: ${size(4)};
       padding-top: ${sumSize(5, 4, 3)};
       max-width: 98rem;
+      min-height: 66rem;
       width: calc(${column(12)} + ${size(5)});
       height: auto;
     }
@@ -237,13 +231,19 @@ const ArchitectureSection = styled(Section)`
   `};
 
   ${media.aboveDesktop`
+    margin-right: 0;
+
     ${ArchitectureSvg} {
-      margin-left: ${size(4)};
+      margin-left: 0;
     }
 
+    ${Description} {
+        top: auto;
+        right: -${sumSize(5, 4)};
+    }
 
     ${Title} {
-      left: ${size(5)};
+      left: ${size(4)};
       top: -${sumSize(4, 2)};
       width: ${column(7)};
     }
@@ -256,10 +256,12 @@ const SectionContent = styled.div`
   `};
 `;
 
-const EpimapImage = styled(Image).attrs({
-  src: epimap3d
-})`
-  max-width: 100%;
+const EpimapImage = styled(Image)`
+  &,
+  img {
+    max-width: 100%;
+    max-height: 100%;
+  }
 `;
 
 const EpimapSection = styled(Section)`
@@ -269,10 +271,13 @@ const EpimapSection = styled(Section)`
 
   ${sectionSpacing};
   ${EpimapImage} {
+    margin-right: 0;
+    right: 0;
     position: absolute;
     top: -${size(4)};
     right: 0;
-    width: ${column(9)};
+    left: ${column(2)};
+    width: ${column(12)};
   }
 
   ${Description} {
@@ -315,27 +320,29 @@ const EpimapSection = styled(Section)`
     }
   `};
 
-  ${media.aboveDesktop`
+  ${media.aboveLaptop`
     ${EpimapImage} {
-      position: static;
-      margin-top: -${sumSize(7, 6, 4)};
-      margin-left: ${sumSize(7)};
-      width: calc(100% - ${sumSize(6, 4)});
+      left: ${column(2)};
+      width: ${column(11)};
+    }
+  `} ${media.aboveDesktop`
+    ${EpimapImage} {
+      left: ${column(3)};
+      width: ${column(10)};
     }
   `};
 `;
 
-const MissionreadyImage = styled(Image).attrs({
-  src: missionready
-})`
-  max-width: 100%;
-  max-height: 100%;
+const MissionreadyImage = styled(Image)`
+  &,
+  img {
+    max-width: 100%;
+    max-height: 100%;
 
-  ${media.aboveDesktop`
-    height: 70.6rem;
-    min-width: 49rem;
-    min-height: 70.6rem;
-  `}
+    ${media.aboveDesktop`
+      min-height: 70.6rem;
+    `};
+  }
 `;
 
 const MissionreadySection = styled(Section)`
@@ -348,7 +355,7 @@ const MissionreadySection = styled(Section)`
 
   ${MissionreadyImage} {
     position: relative;
-    top: -${size(5)};
+    top: -${sumSize(4, 3)};
   }
 
   ${Description} {
@@ -374,6 +381,12 @@ const MissionreadySection = styled(Section)`
     left: ${column(1)};
   }
 
+  ${media.aboveBigPhone`
+    ${Title} {
+      width: ${column(5)};
+    }
+  `};
+
   ${media.aboveTablet`
     width: ${column(10)};
     margin-left: ${column(1)};
@@ -381,9 +394,9 @@ const MissionreadySection = styled(Section)`
     margin-top: ${size(6)};
 
     ${MissionreadyImage} {
+      width: ${column(11)};
       position: absolute;
-      left: ${size(3)};
-      top: -${size(5, 4)};
+      left: ${sumSize(2, 1)};
     }
 
     ${Title} {
@@ -405,25 +418,32 @@ const MissionreadySection = styled(Section)`
     width: ${column(11)};
 
     ${MissionreadyImage} {
-      min-height: ${sumSize(7, 4, 1)};
+      width: calc(${column(8)} + ${size(2)});
+      img {
+        width: 100%;
+      }
+      left: ${size(2)};
       top: -${size(3)};
     }
 
     ${Title} {
       font-size: ${sumSize(3, 2, 1)};
-      margin-left: calc(${column(7)} + ${size(3)});
+      margin-left: calc(${column(6)} + ${size(4)});
     }
 
     ${Description} {
       left: ${column(3)};
-      top: ${sumSize(6, 4)};
+      top: ${sumSize(6, 4, 2)};
       width: ${column(7)};
     }
-  `} ${media.aboveBigLaptop`
-    margin-top: ${size(7)};
+  `};
+
+  ${media.aboveBigLaptop`
+    margin-top: ${sumSize(6, 5)};
     ${MissionreadyImage} {
+      left: calc(${column(1)} - ${sumSize(3, 2, 1)});
       min-height: ${sumSize(7, 6)};
-      top: -${size(5)};
+      top: -${size(4)};
     }
     ${Title} {
       margin-left: calc(${column(7)});
@@ -437,18 +457,15 @@ const MissionreadySection = styled(Section)`
   `};
 `;
 
-const DataImage = styled(Image).attrs({
-  src: data
-})`
+const DataImage = styled(Image)`
   max-width: 100%;
   max-height: 100%;
   min-height: 50rem;
   ${media.aboveTablet`
     min-height: 55rem;
-  `}
-  ${media.aboveDesktop`
+  `} ${media.aboveDesktop`
     min-height: 60rem;
-  `}
+  `};
 `;
 
 const DataSection = styled(Section)`
@@ -567,31 +584,11 @@ const DataSection = styled(Section)`
   `};
 `;
 
-const YourProjectImage = styled(Image).attrs({
-  src: revenue
-})`
-  border-radius: 0 !important;
-  svg {
+const YourProjectImage = styled(Image)`
+  &,
+  * {
     border-radius: 0 !important;
-    max-height: 100%;
-    max-width: 100%;
-    width: 100%;
   }
-
-  max-height: 100%;
-  max-width: 100%;
-  width: 100%;
-
-  ${media.aboveLaptop`
-    svg {
-      width: 80rem;
-      height: 50rem;
-    }
-
-    width: 80rem;
-    min-width: 80rem;
-    min-height: 50rem;
-  `}
 `;
 
 const YourProjectImageContainer = styled.div`
@@ -641,11 +638,16 @@ const YourProjectSection = styled(Section)`
   ${YourProjectImageContainer} {
     margin: ${size(3)};
     margin-top: -${size(4)};
-    padding: ${size(3)};
+    padding: ${size(3)} ${size(4)};
     padding-top: ${size(2)};
     margin-left: ${size(2)};
     width: calc(${column(11)} + ${size(3)});
     z-index: 1;
+  }
+
+  ${YourProjectImage} {
+    min-height: 20rem;
+    width: 100%;
   }
 
   ${Background} {
@@ -681,7 +683,7 @@ const YourProjectSection = styled(Section)`
 
   ${Title} {
     margin-bottom: ${size(2)};
-    width: ${column(7)};
+    width: ${column(8)};
     margin-left: calc(${column(5)} - ${size(3)});
   }
 
@@ -695,12 +697,12 @@ const YourProjectSection = styled(Section)`
     ${YourProjectImageContainer} {
       margin: ${size(4)};
       margin-top: -${size(4)};
-      padding: ${sumSize(2, 1)} ${size(2)};
+      box-sizing: border-box;
+      padding: ${size(4)};
     }
 
     ${YourProjectImage} {
-      min-width: 40rem;
-      min-height: 30rem;
+      width: 100%;
     }
 
     ${CallToAction} {
@@ -712,7 +714,7 @@ const YourProjectSection = styled(Section)`
 
     ${Description} {
       position: absolute;
-      bottom: -${sumSize(5, 4, 1)};
+      bottom: -${sumSize(5, 2, 1)};
       width: ${column(6)};
       padding: ${sumSize(2, 1)};
     }
@@ -724,7 +726,8 @@ const YourProjectSection = styled(Section)`
     ${Title} {
       font-size: ${sumSize(3, 1)};
       margin: 0;
-      margin-top: -${size(1)};
+      margin-top: -${size(3)};
+      margin-bottom: ${size(2)};
       text-align: center;
       width: ${column(12)};
     }
@@ -794,9 +797,10 @@ const SectionContainer = styled.div`
   align-items: center;
 `;
 
-const Work = () => {
+const Work = ({ images }) => {
+  const { aki, data, epimap3d, missionready, otto, revenue, waves } = images;
   return (
-    <Container>
+    <Container background={waves.sizes.src}>
       <Curtain>
         <Content column>
           <ScrollAnchor id="work" />
@@ -844,7 +848,7 @@ const Work = () => {
                     Impeccable work - I can recommend them without hesitation.
                   </Quote>
                   <Author>
-                    <AuthorImage src={otto} />
+                    <AuthorImage {...otto} />
                     <figcaption>
                       <AuthorLink href="https://www.linkedin.com/in/otto-helve-665a6b4b/">
                         Dr. Otto Helve
@@ -854,12 +858,12 @@ const Work = () => {
                   </Author>
                 </FWF>
               </Description>
-              <EpimapImage data-aos="fade-left" />
+              <EpimapImage data-aos="fade-left" {...epimap3d} />
             </SectionContent>
           </EpimapSection>
           <MissionreadySection>
             <Background />
-            <MissionreadyImage data-aos="fade-right" />
+            <MissionreadyImage data-aos="fade-right" {...missionready} />
             <Title data-aos="fade-up">
               <FWF>Rock-solid technical expertise</FWF>
             </Title>
@@ -876,7 +880,7 @@ const Work = () => {
                   platform and our ability to grow without limits.
                 </Quote>
                 <Author>
-                  <AuthorImage src={aki} />
+                  <AuthorImage {...aki} />
                   <figcaption>
                     <AuthorLink href="https://www.linkedin.com/in/otto-helve-665a6b4b/">
                       Aki Ranin
@@ -891,7 +895,7 @@ const Work = () => {
             <Background />
             <AboveTablet>
               <DataImageContainer>
-                <DataImage data-aos="fade-right" />
+                <DataImage data-aos="fade-right" {...data} />
                 <Title>
                   <FWF>
                     <span>Data +</span>
@@ -902,7 +906,7 @@ const Work = () => {
               </DataImageContainer>
             </AboveTablet>
             <BelowTablet style={{ position: "relative" }}>
-              <DataImage />
+              <DataImage {...data} />
               <Title>
                 <FWF>
                   <span>Data +</span>
@@ -943,7 +947,7 @@ const Work = () => {
               <Title data-aos="fade-right">
                 <FWF>At your service?</FWF>
               </Title>
-              <YourProjectImage />
+              <YourProjectImage {...revenue} />
             </YourProjectImageContainer>
             <Description data-aos="fade-down">
               <FWF>
