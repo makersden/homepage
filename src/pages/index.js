@@ -146,6 +146,7 @@ export const pageQuery = graphql`
         sizes(
           maxWidth: 1400
           toFormat: JPG
+          quality: 99
           traceSVG: { color: "rgba(250, 250, 250, 0.3)", blackOnWhite: false }
         ) {
           ...GatsbyImageSharpSizes_tracedSVG
@@ -158,6 +159,7 @@ export const pageQuery = graphql`
           maxWidth: 978
           maxHeight: 658
           toFormat: PNG
+          quality: 99
           traceSVG: { color: "transparent", blackOnWhite: true }
         ) {
           ...GatsbyImageSharpSizes_tracedSVG
@@ -169,6 +171,7 @@ export const pageQuery = graphql`
         sizes(
           maxWidth: 700
           toFormat: JPG
+          quality: 99
           traceSVG: { color: "rgba(250, 250, 250, 0.3)", blackOnWhite: false }
         ) {
           ...GatsbyImageSharpSizes_tracedSVG
@@ -179,6 +182,7 @@ export const pageQuery = graphql`
       childImageSharp {
         sizes(
           maxWidth: 1400
+          quality: 99
           traceSVG: { color: "#fafafa", blackOnWhite: false }
         ) {
           ...GatsbyImageSharpSizes
@@ -190,6 +194,7 @@ export const pageQuery = graphql`
         sizes(
           maxWidth: 1400
           toFormat: JPG
+          quality: 99
           traceSVG: { color: "rgba(250, 250, 250, 0.3)", blackOnWhite: false }
         ) {
           ...GatsbyImageSharpSizes_tracedSVG
@@ -201,6 +206,7 @@ export const pageQuery = graphql`
         sizes(
           maxWidth: 75
           toFormat: JPG
+          quality: 99
           traceSVG: { color: "#fafafa", blackOnWhite: false }
         ) {
           ...GatsbyImageSharpSizes_tracedSVG
@@ -212,6 +218,7 @@ export const pageQuery = graphql`
         sizes(
           maxWidth: 75
           toFormat: JPG
+          quality: 99
           traceSVG: { color: "#fafafa", blackOnWhite: false }
         ) {
           ...GatsbyImageSharpSizes_tracedSVG
@@ -223,6 +230,7 @@ export const pageQuery = graphql`
         sizes(
           maxWidth: 1400
           toFormat: JPG
+          quality: 99
           traceSVG: { color: "#fafafa", blackOnWhite: false }
         ) {
           ...GatsbyImageSharpSizes_tracedSVG
@@ -234,6 +242,7 @@ export const pageQuery = graphql`
         sizes(
           maxWidth: 1400
           toFormat: JPG
+          quality: 99
           traceSVG: { color: "#fafafa", blackOnWhite: false }
         ) {
           ...GatsbyImageSharpSizes_tracedSVG
@@ -245,6 +254,7 @@ export const pageQuery = graphql`
         sizes(
           maxWidth: 1400
           toFormat: JPG
+          quality: 99
           traceSVG: { color: "#fafafa", blackOnWhite: false }
         ) {
           ...GatsbyImageSharpSizes_tracedSVG
