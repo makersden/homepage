@@ -11,8 +11,8 @@
     "release:minor":
       "yarn version --new-version minor && gatsby build && yarn deploy",
 
-    "release:bugfix":
-      "yarn version --new-version bugfix && gatsby build && yarn deploy",
+    "release:patch":
+      "yarn version --new-version patch && gatsby build && yarn deploy",
     "release:major":
       "yarn version --new-version major && gatsby build && yarn deploy",
     "deploy": "gh-pages -d public",
