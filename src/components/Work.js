@@ -12,6 +12,7 @@ import MQs, { media } from "../styles/mediaQueries";
 import FWF from "../FadeWithoutFont";
 
 import architecture from "../images/Web App Reference Architecture.svg";
+import revenue from "../images/revenue.svg";
 
 const { AboveTablet, BelowTablet } = MQs;
 
@@ -702,7 +703,7 @@ const YourProjectSection = styled(Section)`
     }
 
     ${YourProjectImage} {
-      width: 100%;
+      min-height: 40rem;
     }
 
     ${CallToAction} {
@@ -775,8 +776,20 @@ const YourProjectSection = styled(Section)`
       padding-top: ${sumSize(4)};
     }
 
+    ${YourProjectImage} {
+      margin: 0 auto;
+      width: 100%;
+      min-height: 60rem;
+    }
+
     ${Title} {
       margin: -${size(3)} 0 ${size(3)};
+    }
+  `};
+
+  ${media.aboveDesktop`
+    ${YourProjectImage} {
+      min-height: 63rem;
     }
   `};
 `;
@@ -798,7 +811,7 @@ const SectionContainer = styled.div`
 `;
 
 const Work = ({ images }) => {
-  const { aki, data, epimap3d, missionready, otto, revenue, waves } = images;
+  const { aki, data, epimap3d, missionready, otto, waves } = images;
   return (
     <Container background={waves.sizes.src}>
       <Curtain>
@@ -927,7 +940,7 @@ const Work = ({ images }) => {
                   visualized flight departures and arrivals in Berlin.
                 </Paragraph>
                 <Paragraph>
-                  <StyledLink href="https://berlinairtraffic.s3.eu-central-1.amazonaws.com/index.html">
+                  <StyledLink href="https://makersden.io/berlin-air-traffic/index.html">
                     Click here for the full story.
                   </StyledLink>
                 </Paragraph>
@@ -947,7 +960,7 @@ const Work = ({ images }) => {
               <Title data-aos="fade-right">
                 <FWF>At your service?</FWF>
               </Title>
-              <YourProjectImage {...revenue} />
+              <YourProjectImage sizes={{ src: revenue }} />
             </YourProjectImageContainer>
             <Description data-aos="fade-down">
               <FWF>
