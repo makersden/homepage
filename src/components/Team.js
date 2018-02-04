@@ -3,13 +3,15 @@ import styled, { css } from "styled-components";
 import { Flex } from "grid-styled";
 import Isvg from "react-inlinesvg";
 import GatsbyImage from "gatsby-image";
+import Observer from "react-intersection-observer";
 
 import { color, font, size, sumSize, column } from "../theme";
-import GracefulImage from "../GracefulImage";
 import * as SectionModule from "./Section";
 import { media } from "../styles/mediaQueries";
 
 import giantCog from "../../assets/images/GiantCog.svg";
+
+const StyledObserver = styled(Observer);
 
 const sectionSpacing = css`
   margin-top: ${size(5)};
@@ -329,10 +331,8 @@ const PartnersSection = styled(Section)`
   `};
 `;
 
-const Team = ({ findImage }) => {
-  const kalle = findImage("kalle");
-  const korneliusz = findImage("korneliusz");
-  const partners = findImage("partners");
+const Team = ({ images: { kalle, korneliusz, partners } }) => {
+  console.log({ kalle, korneliusz, partners });
   return (
     <Container id="team">
       <Title>The A-Team</Title>
@@ -342,11 +342,7 @@ const Team = ({ findImage }) => {
             </CogContainer> */}
         <KalleSection>
           <Background />
-          <div
-            data-aos="fade-right"
-            data-aos-duration={1000}
-            className={KalleImage}
-          >
+          <div data-aos="fade-right">
             <GatsbyImage {...kalle} className={KalleImage} />
           </div>
           <Description data-aos="fade-up">
@@ -378,7 +374,7 @@ const Team = ({ findImage }) => {
         </KalleSection>
         <KorneliuszSection>
           <Background />
-          <div data-aos="fade-left" data-aos-duration={1000}>
+          <div data-aos="fade-left">
             <GatsbyImage {...korneliusz} className={KorneliuszImage} />
           </div>
           <Description data-aos="fade-down">
@@ -405,11 +401,7 @@ const Team = ({ findImage }) => {
         </KorneliuszSection>
         <PartnersSection>
           <Background />
-          <div
-            data-aos="fade-right"
-            data-aos-duration={1000}
-            className={PartnersImage}
-          >
+          <div data-aos="fade-up">
             <GatsbyImage {...partners} className={PartnersImage} />
           </div>
           <Description>

@@ -1,13 +1,5 @@
 const path = require("path");
 
-const homeSubpage = (subRoute, page) => {
-  return Object.assign({}, page, {
-    path: `/${subRoute}`
-  });
-};
-
-const subRoutes = ["home", "team", "work", "contact"];
-
 exports.createPages = ({ boundActionCreators: { createPage }, graphql }) => {
   const blogPostTemplate = path.resolve(`src/templates/blogPostTemplate.js`);
 
@@ -41,15 +33,6 @@ exports.createPages = ({ boundActionCreators: { createPage }, graphql }) => {
     });
   });
 };
-
-// exports.onCreatePage = ({ page, boundActionCreators: { createPage } }) =>
-//   new Promise(resolve => {
-//     if (page.path === "/") {
-//       subRoutes.forEach(subRoute => createPage(homeSubpage(subRoute, page)));
-//     }
-
-//     resolve();
-//   });
 
 exports.modifyWebpackConfig = ({ config, stage }) => {
   if (stage === "build-html") {

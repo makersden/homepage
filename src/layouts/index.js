@@ -109,6 +109,8 @@ export default compose(
   lifecycle({
     componentDidMount() {
       AOS.init({
+        delay: 200,
+        duration: 1000,
         offset: 300,
         once: true
       });
