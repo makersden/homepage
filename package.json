@@ -8,7 +8,8 @@
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
-    "release": "gatsby build && yarn deploy",
+    "release":
+      "yarn version --new-version minor && gatsby build && yarn deploy",
     "deploy": "gh-pages -d public",
     "format":
       "prettier --trailing-comma es5 --no-semi --single-quote --write 'src/**/*.js'",
