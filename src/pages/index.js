@@ -178,10 +178,10 @@ export const pageQuery = graphql`
         }
       }
     }
-    waves: file(relativePath: { eq: "waves.png" }) {
+    waves: file(relativePath: { eq: "waves.jpg" }) {
       childImageSharp {
         sizes(
-          maxWidth: 1400
+          maxWidth: 1000
           quality: 99
           traceSVG: { color: "#fafafa", blackOnWhite: false }
         ) {
