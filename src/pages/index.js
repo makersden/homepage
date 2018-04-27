@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { Flex, Box } from "grid-styled";
 /* import { Isvg } from "react-inlinesvg";*/
 
@@ -8,6 +8,7 @@ import getOr from "lodash/fp/getOr";
 import mapValues from "lodash/fp/mapValues";
 import find from "lodash/fp/find";
 import flow from "lodash/fp/flow";
+import GatsbyImage from "gatsby-image";
 
 import { color, font, size, sumSize } from "../theme";
 import { media } from "../styles/mediaQueries";
@@ -17,9 +18,9 @@ import FadeWithoutFont from "../FadeWithoutFont";
 import Work from "../components/Work";
 import Team from "../components/Team";
 import Contact from "../components/Contact";
-import cogs from "../images/cogwheels_above_the_fold.svg";
+import gears from "../images/gears.svg";
 
-import { Image } from "../components/Section";
+import { Svg } from "../components/Section";
 
 const TransparentSegment = styled.div`
   min-height: 100vh;
@@ -29,12 +30,13 @@ const TransparentSegment = styled.div`
 `;
 
 const HeroSegment = styled(Box)`
-  height: calc(100vh - 152px);
+  height: calc(100vh - 88px - ${size(4)});
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
   ${media.aboveTablet`
-    height: calc(100vh - 192px);
+    height: calc(100vh - 88px - ${size(4)});
   `};
 `;
 
@@ -92,22 +94,90 @@ const CogsContainer = styled.div`
   margin: 0;
 `;
 
-const CogsImage = styled(Image)`
-  max-width: 700px;
-  display: block;
-  margin: 0 auto;
+const rotateGear = keyframes`
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 `;
+
+const gearRatios = [1, 2.67, 2.67, 8, 2.89, 2, 3.78, 3.78];
+
+const spinDirection = [1, -1, -1, 1, -1, 1, -1, 1];
+
+const rpm = 10;
+
+const rps = rpm / 60;
+
+const GearsImage = styled(Svg)`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+
+  transform: rotateY(180deg);
+
+  .geartext,
+  .guides {
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .firstmarker {
+    display: none;
+  }
+
+  .gear {
+    stroke: rgba(255, 255, 255, 0.01);
+    fill: rgba(255, 255, 255, 0.01);
+
+    &:hover {
+      stroke: rgba(255, 255, 255, 0.08);
+      fill: rgba(255, 255, 255, 0.05);
+
+      ~ .geartext {
+        opacity: 1;
+      }
+
+      ~ .guides {
+        opacity: 0.2;
+      }
+    }
+
+    transition: opacity 0.2s, stroke 0.2s, fill 0.2s;
+    opacity: 0;
+
+    ${gearRatios.map(
+      (ratio, i) => `
+       &[data-id="${i}"] {
+          opacity: 1;
+          animation: ${rotateGear} ${1 / rps * ratio}s ${spinDirection[i] === 1
+        ? "normal"
+        : "reverse"} linear infinite;
+        }
+    `
+    )};
+  }
+`;
+
+/*
+   .geartext
+   .guides
+   .gearguides
+*/
 
 const Home = ({ data }, context) => {
   const images = mapValues("childImageSharp", data);
-  const cogsImg = { sizes: { src: { cogs } } };
+
   return (
     <Container>
       <FadeWithoutFont>
         <HeroSegment p={[0, 4]} m={[3, 4]} id="hero">
           <Title>We are a software workshop.</Title>
           <CogsContainer>
-            <CogsImage {...cogsImg} />
+            <GearsImage src={gears} />
           </CogsContainer>
           <Subtitle w={[1, 6 / 12]} mx={[0, 4]} px={[0, 4]}>
             <div>
