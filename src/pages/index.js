@@ -131,11 +131,11 @@ const GearsImage = styled(Svg)`
 
   .gear {
     stroke: rgba(255, 255, 255, 0.01);
-    fill: rgba(255, 255, 255, 0.01);
+    fill: rgba(255, 255, 255, 0.05);
 
     &:hover {
-      stroke: rgba(255, 255, 255, 0.08);
-      fill: rgba(255, 255, 255, 0.05);
+      stroke: rgba(255, 255, 255, 0.12);
+      fill: rgba(255, 255, 255, 0.09);
 
       ~ .geartext {
         opacity: 1;
