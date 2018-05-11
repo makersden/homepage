@@ -1,16 +1,13 @@
 import React from "react";
 import styled, { css, keyframes } from "styled-components";
-import { Flex, Box } from "grid-styled";
+import { withStateHandlers } from "recompose";
+import { Flex } from "grid-styled";
 import Helmet from "react-helmet";
-import Img from "gatsby-image";
-import Link from "gatsby-link";
 import Observer from "react-intersection-observer";
 
 import get from "lodash/fp/get";
 
 import { color, column, font, size, sumSize } from "../theme";
-import { transparentize } from "../polished";
-import { media } from "../styles/mediaQueries";
 
 import { Image } from "../components/Section";
 
@@ -114,8 +111,10 @@ const flash = props => keyframes`
 `;
 
 const StyledFeatures = styled.div`
+  position: relative;
   margin-top: ${size(4)};
   width: ${column(10)};
+  min-width: 600px;
   display: flex;
   flex-direction: row;
   font-family: ${font("display")};
@@ -125,24 +124,27 @@ const StyledFeatures = styled.div`
 
   h3 {
     margin-top: 0;
-    flex: 1;
     text-align: right;
+    flex: 1;
   }
 
   ul {
     flex: 1;
     margin: 0;
-    margin-left: ${size(4)};
     padding: 0;
     list-style: none;
     line-height: 1.17;
-    li {
-    }
+    margin-left: ${size(4)};
   }
 `;
 
 const Feature = styled.li`
   cursor: pointer;
+  background: ${color("backgroundDark")};
+  position: relative;
+  z-index: 1;
+  margin-left: calc(-${size(4)} + 1px);
+  padding-left: calc(${size(4)} - 1px);
 `;
 
 const FlashingSpan = styled.span`
@@ -152,58 +154,156 @@ const FlashingSpan = styled.span`
   transition: color 0.3s;
 
   ${props =>
-    props.flash &&
-    css`
-      animation: 300ms ${flash};
-    `} &:hover {
+    props.selected
+      ? css`
+          color: ${color("superWhite")};
+        `
+      : props.flash &&
+        css`
+          animation: 300ms ${flash};
+        `} &:hover {
     color: ${color("superWhite")};
   }
 `;
 
-const Features = ({ title, features }) => (
+const Description = styled.li`
+  text-align: margin;
+  font-family: monospace;
+  position: absolute;
+  font-size: ${size(2)};
+  margin-top: calc(1.17 * ${sumSize(3, 2)});
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  opacity: 0;
+  letter-spacing: 0.5px;
+  line-height: 1.5;
+  width: calc(50% - ${size(3)});
+  transition: opacity 100ms, transform 100ms;
+  transform: translateX(50%);
+
+  ${props =>
+    props.show &&
+    css`
+      opacity: 0.7;
+      transform: translateX(0);
+      transition: opacity 300ms, transform 300ms;
+    `} 1;
+`;
+
+const Features = ({ title, features, selectedFeature, onSelectFeature }) => (
   <StyledFeatures>
     <h3>{title}</h3>
     <ul>
       {features.map(feature => [
-        <Feature>
+        <Feature onClick={() => onSelectFeature(feature)}>
           <Observer>
             {inView => (
-              <FlashingSpan flash={inView}>
+              <FlashingSpan
+                flash={inView}
+                selected={selectedFeature === feature}
+              >
                 {feature.name || feature}
               </FlashingSpan>
             )}
           </Observer>
         </Feature>,
-        feature.description && <li>{feature.description}</li>
+        feature.description && (
+          <Description show={selectedFeature === feature}>
+            {feature.description}
+          </Description>
+        )
       ])}
     </ul>
   </StyledFeatures>
 );
 
 const workFeatures = [
-  { name: "React" },
-  { name: "Nodejs" },
-  { name: "Scala" },
-  { name: "Kotlin" },
+  {
+    name: "React",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+  },
+  {
+    name: "Nodejs",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+  },
+  {
+    name: "Scala",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+  },
+  {
+    name: "Kotlin",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+  },
   { name: "Design & UX" }
 ];
 
 const funFeatures = [
-  { name: "Videos" },
-  { name: "Podcasts" },
+  {
+    name: "Videos",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+  },
+  {
+    name: "Podcasts",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+  },
   { name: "Apps & Demos" },
-  { name: "Drawing" },
-  { name: "Woodworking" },
-  { name: "..." }
+  {
+    name: "Drawing",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+  },
+  {
+    name: "Woodworking",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+  },
+  {
+    name: "...",
+    description:
+      "You are passionate about various topics. We are eager to hear about your interests. Perhaps we can partake in them together?"
+  }
 ];
 
 const values = [
-  { name: "Freedom" },
-  { name: "Challenge" },
-  { name: "Improvement" },
-  { name: "Responsibility" },
-  { name: "Respect" },
-  { name: "Balance" }
+  {
+    name: "Freedom",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+  },
+  {
+    name: "Challenge",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+  },
+  {
+    name: "Improvement",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+  },
+  {
+    name: "Responsibility",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+  },
+  {
+    name: "Respect",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+  },
+  {
+    name: "Balance",
+    description:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+  }
 ];
 
 const workplaces = [
@@ -212,7 +312,7 @@ const workplaces = [
   { name: "At customers'" }
 ];
 
-const Join = ({ data }) => {
+const Join = ({ data, selectedFeature, selectFeature }) => {
   return (
     <Container>
       <FadeWithoutFont>
@@ -229,13 +329,33 @@ const Join = ({ data }) => {
           <LunchHeadline>Let's have lunch.</LunchHeadline>
           <LunchMenu {...data} />
 
-          <Features title="Mostly we do" features={workFeatures} />
+          <Features
+            title="Mostly we do"
+            features={workFeatures}
+            selectedFeature={selectedFeature}
+            onSelectFeature={selectFeature}
+          />
 
-          <Features title="For fun, we also do" features={funFeatures} />
+          <Features
+            title="For fun, we do"
+            features={funFeatures}
+            selectedFeature={selectedFeature}
+            onSelectFeature={selectFeature}
+          />
 
-          <Features title="We value" features={values} />
+          <Features
+            title="We value"
+            features={values}
+            selectedFeature={selectedFeature}
+            onSelectFeature={selectFeature}
+          />
 
-          <Features title="We work" features={workplaces} />
+          <Features
+            title="We work"
+            features={workplaces}
+            selectedFeature={selectedFeature}
+            onSelectFeature={selectFeature}
+          />
 
           <LunchHeadline>We eat food too.</LunchHeadline>
           <LunchMenu {...data} />
@@ -245,7 +365,14 @@ const Join = ({ data }) => {
   );
 };
 
-export default Join;
+export default withStateHandlers(() => ({ selectedFeature: "" }), {
+  selectFeature: () => selectedFeature => {
+    console.log("lalalala");
+    return {
+      selectedFeature
+    };
+  }
+})(Join);
 
 export const pageQuery = graphql`
   query Images {
