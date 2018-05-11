@@ -11,8 +11,6 @@ import { media } from "../styles/mediaQueries";
 
 import giantCog from "../../assets/images/GiantCog.svg";
 
-const StyledObserver = styled(Observer);
-
 const sectionSpacing = css`
   margin-top: ${size(5)};
 

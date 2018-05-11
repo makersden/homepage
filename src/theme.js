@@ -10,6 +10,8 @@ const theme = {
     black: "#111",
     darkGrey: "#333",
     accent: `#56CCF2`,
+    green: "#27AE60",
+    lightGreen: "#6FCF97",
     backgroundDark: `#090a0f`,
     backgroundLight: `#1A1F1F`,
     text: "#ecf0f1",

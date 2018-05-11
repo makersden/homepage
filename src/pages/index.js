@@ -4,11 +4,7 @@ import { Flex, Box } from "grid-styled";
 /* import { Isvg } from "react-inlinesvg";*/
 
 import get from "lodash/fp/get";
-import getOr from "lodash/fp/getOr";
 import mapValues from "lodash/fp/mapValues";
-import find from "lodash/fp/find";
-import flow from "lodash/fp/flow";
-import GatsbyImage from "gatsby-image";
 
 import { color, font, size, sumSize } from "../theme";
 import { media } from "../styles/mediaQueries";
