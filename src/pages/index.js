@@ -166,8 +166,8 @@ const Home = ({ data }, context) => {
           </CogsContainer>
           <Subtitle w={[1, 6 / 12]} mx={[0, 4]} px={[0, 4]}>
             <div>
-              <span>You can realize amazing ideas</span>
-              <span>with our Javascript veterans</span>
+              <span>Solving gnarly problems</span>
+              <span>to realise amazing ideas</span>
             </div>
           </Subtitle>
         </HeroSegment>
