@@ -832,9 +832,7 @@ const Work = ({ images }) => {
                   weaponizing data, managing the cloud.
                 </Paragraph>
                 <Paragraph>It's what we do best.</Paragraph>
-                <Paragraph>
-                  We excel at React, Node.js, Scala and AWS.
-                </Paragraph>
+                <Paragraph>We excel at React, Node.js and AWS.</Paragraph>
               </FWF>
             </Description>
           </ArchitectureSection>

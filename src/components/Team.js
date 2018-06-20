@@ -358,14 +358,14 @@ const Team = ({ images: { kalle, korneliusz, partners } }) => {
               all trades: seasoned with competence and enough humour to survive
               the toughest of situations.
             </Quote>
-            <Author href="https://www.linkedin.com/in/silvan-saxer-6b9268130/">
+            <Author href="https://www.linkedin.com/in/ossi-tiltti-3120071/">
               Ossi Tiltti, Technical Director at Rovio
             </Author>
             <Quote>
               I can honestly recommend him to anyone needing help with their
               frontend needs.
             </Quote>
-            <Author href="https://www.linkedin.com/in/otto-helve-665a6b4b/">
+            <Author href="https://www.linkedin.com/in/mathias-nestler-a8436044/">
               Mathias Nestler, CTO at FRI:DAY
             </Author>
           </Description>
@@ -390,10 +390,12 @@ const Team = ({ images: { kalle, korneliusz, partners } }) => {
               Silvan Saxer, COO at FRI:DAY Versicherung
             </Author>
             <Quote>
-              Absolute craftmanship. It’s easy to recommend Korneliusz.
+              He is the most insightful and talented person which I have ever
+              met. His passion, attitude, open mind, strong pursuit for gaining
+              knowledge and pragmatism should be a model for others.
             </Quote>
-            <Author href="https://www.linkedin.com/in/otto-helve-665a6b4b/">
-              Dr. Otto Helve, CEO at iHealth Finland
+            <Author href="https://www.linkedin.com/in/afronski/">
+              Wojciech Gawroński, Founder at White Rook
             </Author>
           </Description>
         </KorneliuszSection>

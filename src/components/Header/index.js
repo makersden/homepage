@@ -5,7 +5,7 @@ import Headroom from "react-headroom";
 import Hamburger from "./Hamburger";
 import Isvg from "react-inlinesvg";
 
-import LogoFull from "../../../assets/logoFull.svg";
+import LogoFull from "../../images/makers_den_logo.svg";
 import LogoShort from "../../../assets/logoShort.svg";
 
 import MediaQueries, { media } from "../../styles/mediaQueries";

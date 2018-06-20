@@ -16,7 +16,6 @@ import FadeWithoutFont from "../FadeWithoutFont";
 import Work from "../components/Work";
 import Team from "../components/Team";
 import Contact from "../components/Contact";
-import Cogs from "../components/Cogs";
 
 const Posts = styled.ul`
   list-style: none;

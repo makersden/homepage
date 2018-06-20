@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Box } from "grid-styled";
 
-import LogoFull from "../../assets/logoFull.svg";
+import LogoFull from "../images/makers_den_logo.svg";
 import LogoShort from "../../assets/logoShort.svg";
 import FadeWithoutFont from "../FadeWithoutFont";
 

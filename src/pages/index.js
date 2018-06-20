@@ -1,7 +1,6 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 import { Flex, Box } from "grid-styled";
-/* import { Isvg } from "react-inlinesvg";*/
 
 import get from "lodash/fp/get";
 import mapValues from "lodash/fp/mapValues";
@@ -80,10 +79,6 @@ const Container = styled(Flex).attrs({ column: true })`
   color: ${get("theme.colors.text")};
 `;
 
-const segments = ["home", "work", "team", "contact"];
-
-const shouldScroll = url => segments.indexOf(url) !== -1;
-
 const CogsContainer = styled.div`
   max-height: 100%;
   max-width: 100%;
@@ -158,12 +153,6 @@ const GearsImage = styled(Svg)`
   }
 `;
 
-/*
-   .geartext
-   .guides
-   .gearguides
-*/
-
 const Home = ({ data }, context) => {
   const images = mapValues("childImageSharp", data);
 
@@ -171,14 +160,14 @@ const Home = ({ data }, context) => {
     <Container>
       <FadeWithoutFont>
         <HeroSegment p={[0, 4]} m={[3, 4]} id="hero">
-          <Title>We are a software workshop.</Title>
+          <Title>We are a Javascript workshop.</Title>
           <CogsContainer>
             <GearsImage src={gears} />
           </CogsContainer>
           <Subtitle w={[1, 6 / 12]} mx={[0, 4]} px={[0, 4]}>
             <div>
-              <span>We solve gnarly problems</span>
-              <span>to realize amazing ideas.</span>
+              <span>You can realize amazing ideas</span>
+              <span>with our Javascript veterans</span>
             </div>
           </Subtitle>
         </HeroSegment>
