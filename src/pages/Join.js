@@ -264,23 +264,23 @@ const funFeatures = [
   {
     name: "Podcasts",
     description:
-      "Some discussions are just too good to keep only within the inner circle. Some ideas "
+      "Some discussions are just too good to keep only within the inner circle. Some ideas are too fascinating not to share."
   },
   { name: "Apps & Demos" },
   {
     name: "Drawing",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+      "Words are sometimes not enough. Also, jokes are usually funnier when drawn."
   },
   {
     name: "Woodworking",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+      "Some people meditate, some people build wardrobes. Seriously though, software engineering and carpentry have a lot in common as it turns out."
   },
   {
-    name: "...",
+    name: "…",
     description:
-      "You are passionate about various topics. We are eager to hear about your interests. Perhaps we can partake in them together?"
+      "You are passionate about various topics. We are keen to hear about your interests. Perhaps we can partake in them together?"
   }
 ];
 
