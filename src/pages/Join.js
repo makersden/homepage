@@ -1,8 +1,7 @@
 import React from "react";
 import styled, { css, keyframes } from "styled-components";
-import { withStateHandlers } from "recompose";
+import { withStateHandlers, withHandlers } from "recompose";
 import { Flex } from "grid-styled";
-import Helmet from "react-helmet";
 import Observer from "react-intersection-observer";
 
 import get from "lodash/fp/get";
@@ -10,6 +9,7 @@ import get from "lodash/fp/get";
 import { color, column, font, size, sumSize } from "../theme";
 
 import { Image } from "../components/Section";
+import CvModal from "../components/CvModal";
 
 import FadeWithoutFont from "../FadeWithoutFont";
 
@@ -68,7 +68,7 @@ const StyledLunchOption = styled.li`
   display: flex;
   align-items: center;
   width: calc(300px - ${size(4)} / 2);
-  transition: color 300ms, background 300ms;
+  transition: color 300ms, background-color 300ms;
 
   &:hover {
     background: ${color("lightGreen")};
@@ -82,17 +82,17 @@ const StyledLunchOption = styled.li`
   }
 `;
 
-const LunchOption = ({ children, image }) => (
-  <StyledLunchOption>
+const LunchOption = ({ children, image, onClick }) => (
+  <StyledLunchOption onClick={onClick}>
     <Image {...image.childImageSharp} width={size(4)} />
     <span>{children}</span>
   </StyledLunchOption>
 );
 
-const LunchMenu = ({ meat, veg }) => (
+const LunchMenu = ({ meat, veg, onClick }) => (
   <StyledLunchMenu>
-    <LunchOption image={meat}>Meat</LunchOption>
-    <LunchOption image={veg}>Veg</LunchOption>
+    <LunchOption image={meat} onClick={onClick}>Meat</LunchOption>
+    <LunchOption image={veg} onClick={onClick}>Veg</LunchOption>
   </StyledLunchMenu>
 );
 
@@ -109,6 +109,7 @@ const flash = props => keyframes`
     color: ${color("green")(props)};
   }
 `;
+
 
 const StyledFeatures = styled.div`
   position: relative;
@@ -139,7 +140,9 @@ const StyledFeatures = styled.div`
 `;
 
 const Feature = styled.li`
-  cursor: pointer;
+  ${props => props.clickable && `
+    cursor: pointer;
+  `}
   background: ${color("backgroundDark")};
   position: relative;
   z-index: 1;
@@ -151,6 +154,7 @@ const FlashingSpan = styled.span`
   color: ${color("green")};
   height: 1.17em;
   line-height: 1.17em;
+  height: 1.17em;
   transition: color 0.3s;
 
   ${props =>
@@ -161,13 +165,16 @@ const FlashingSpan = styled.span`
       : props.flash &&
         css`
           animation: 300ms ${flash};
-        `} &:hover {
-    color: ${color("superWhite")};
-  }
+        `}
+  ${props=> props.clickable && css`
+    &:hover {
+      color: ${color("superWhite")};
+    }
+  `}
 `;
 
 const Description = styled.li`
-  text-align: margin;
+  text-align: right;
   font-family: monospace;
   position: absolute;
   font-size: ${size(2)};
@@ -198,12 +205,13 @@ const Features = ({ title, features, selectedFeature, onSelectFeature }) => (
     <h3>{title}</h3>
     <ul>
       {features.map(feature => [
-        <Feature onClick={() => onSelectFeature(feature)}>
+        <Feature clickable={!!feature.description} onClick={() => onSelectFeature(feature)}>
           <Observer>
             {inView => (
               <FlashingSpan
                 flash={inView}
                 selected={selectedFeature === feature}
+                clickable={!!feature.description}
               >
                 {feature.name || feature}
               </FlashingSpan>
@@ -211,9 +219,10 @@ const Features = ({ title, features, selectedFeature, onSelectFeature }) => (
           </Observer>
         </Feature>,
         feature.description && (
-          <Description show={selectedFeature === feature}>
-            {feature.description}
-          </Description>
+          <Description
+            show={selectedFeature === feature}
+            dangerouslySetInnerHTML={{ __html: feature.description }}
+          />
         )
       ])}
     </ul>
@@ -222,38 +231,40 @@ const Features = ({ title, features, selectedFeature, onSelectFeature }) => (
 
 const workFeatures = [
   {
-    name: "React",
+    name: "Code React",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+      "Let's face it - it's the bees knees. They got a lot of things right in there and it makes us real happy. We don't mind other frameworks, but React (or Preact) is usually our first choice."
   },
   {
-    name: "Nodejs",
+    name: "With Nodejs",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+      "It's matured a lot and - all hype aside - it's the right tool for 80% of the jobs. As long as we don't try to implement computer vision algorithms in it."
   },
   {
-    name: "Scala",
+    name: "On AWS",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+      "There's a lot less backend to maintain when you can write lambdas instead."
   },
   {
-    name: "Kotlin",
+    name: "for Services",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+      "We're all on this earth for a reason. Ours is to crank out amazing services. We knock 'em out of the park."
   },
-  { name: "Design & UX" }
+  {
+    name: "    ",
+  },
 ];
 
 const funFeatures = [
   {
     name: "Videos",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+      "Don't knock it till you try it - we've had tons of joy shooting different videos!"
   },
   {
     name: "Podcasts",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+      "Some discussions are just too good to keep only within the inner circle. Some ideas "
   },
   { name: "Apps & Demos" },
   {
@@ -282,7 +293,7 @@ const values = [
   {
     name: "Challenge",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+      "There's no reason to be afraid, no time to be light-weight. If you don't feel stupid - you're not challenging yourself or learning enough. We like to <strong>feel</strong> stupid so we don't have to <strong>be</strong> stupid."
   },
   {
     name: "Improvement",
@@ -312,7 +323,7 @@ const workplaces = [
   { name: "At customers'" }
 ];
 
-const Join = ({ data, selectedFeature, selectFeature }) => {
+const Join = ({ closeModal, data, isModalOpen, openModal, selectedFeature, selectFeature }) => {
   return (
     <Container>
       <FadeWithoutFont>
@@ -327,17 +338,17 @@ const Join = ({ data, selectedFeature, selectFeature }) => {
       <FadeWithoutFont>
         <Container>
           <LunchHeadline>Let's have lunch.</LunchHeadline>
-          <LunchMenu {...data} />
+          <LunchMenu {...data} onClick={openModal} />
 
           <Features
-            title="Mostly we do"
+            title="By day, we"
             features={workFeatures}
             selectedFeature={selectedFeature}
             onSelectFeature={selectFeature}
           />
 
           <Features
-            title="For fun, we do"
+            title="For fun, we"
             features={funFeatures}
             selectedFeature={selectedFeature}
             onSelectFeature={selectFeature}
@@ -358,19 +369,29 @@ const Join = ({ data, selectedFeature, selectFeature }) => {
           />
 
           <LunchHeadline>We eat food too.</LunchHeadline>
-          <LunchMenu {...data} />
+          <LunchMenu {...data} onClick={openModal} />
         </Container>
       </FadeWithoutFont>
+      <CvModal isOpen={isModalOpen} onClose={closeModal} />
     </Container>
   );
 };
 
-export default withStateHandlers(() => ({ selectedFeature: "" }), {
+export default withStateHandlers(() => ({ selectedFeature: "", isModalOpen: false, }), {
   selectFeature: () => selectedFeature => {
-    console.log("lalalala");
     return {
       selectedFeature
     };
+  },
+  openModal: () => () => ({
+    isModalOpen: true
+  }),
+  closeModal: () => () => {
+    console.log("closeModal")
+    return ({
+      isModalOpen: false
+    })
+
   }
 })(Join);
 

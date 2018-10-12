@@ -1,5 +1,4 @@
 import get from "lodash/fp/get";
-import memoize from "lodash/fp/memoize";
 import "../assets/fonts/index.css";
 
 const theme = {

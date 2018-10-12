@@ -88,6 +88,9 @@ const TemplateWrapper = ({ ...props }) => (
           }
         ]}
       >
+        {props.location.pathname.indexOf("/join") !== -1 && (
+          <script charstet="utf-8" src="https://ucarecdn.com/libs/widget/3.6.1/uploadcare.full.min.js"></script>
+        )}
         <script src="https://cdn.polyfill.io/v2/polyfill.min.js" />
         <script src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver" />
       </Helmet>
