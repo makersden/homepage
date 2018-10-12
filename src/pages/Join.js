@@ -386,13 +386,9 @@ export default withStateHandlers(() => ({ selectedFeature: "", isModalOpen: fals
   openModal: () => () => ({
     isModalOpen: true
   }),
-  closeModal: () => () => {
-    console.log("closeModal")
-    return ({
-      isModalOpen: false
-    })
-
-  }
+  closeModal: () => () => ({
+    isModalOpen: false
+  })
 })(Join);
 
 export const pageQuery = graphql`

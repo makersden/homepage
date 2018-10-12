@@ -7,6 +7,7 @@ import { compose, withHandlers, withState } from 'recompose';
 
 import { color, font, size } from "../theme";
 import Hamburger from './Header/Hamburger';
+import doUploadCv from "../utils/uploadCv"
 
 injectGlobal`
     .ReactModal__Overlay {
@@ -27,6 +28,7 @@ const StyledModal = styled(Modal)`
     width: 100%;
     height: 100%;
     font-family: ${font("primary")};
+    color: ${color("black")};
 `
 const Headline = styled.h1`
   font-family: ${font("display")};
@@ -40,34 +42,35 @@ const Hint = styled.p`
 const StyledDropzone = styled(Dropzone)`
     width: 100%;
     height: 100%;
-    cursor: pointer;
+    ${props => !props.disabled && `
+        cursor: pointer;
+    `}
 `
 
 const DropzoneBody = styled.div`
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-background-color: ${color("white")};
-text-align: center;
-padding: ${size(3)};
-transition: background-color 500ms, color 500ms;
-    a {
-        color: ${color("green")};
-    }
+  background-color: ${color("white")};
+  text-align: center;
+  padding: ${size(3)};
+  transition: background-color 500ms, color 500ms;
+  a {
+    color: ${color("green")};
+  }
 
+    ${({ isDragActive }) => isDragActive && css`
+        background-color: ${color("black")};
+        color: ${color("white")};
+    `};
 
-${({ isDragActive }) => isDragActive && css`
-    background-color: ${color("black")};
-    color: ${color("white")};
-`};
-
-${({ isDragReject }) => isDragReject && css`
-    background-color: ${color("black")};
-    color: ${color("white")};
-`};
+    ${({ isDragReject }) => isDragReject && css`
+        background-color: ${color("black")};
+        color: ${color("white")};
+    `};
 `
 
 const Error = styled.p`
@@ -77,7 +80,7 @@ const Error = styled.p`
   transition: opacity 500ms;
 `
 
-const FormBrokenLink = () => (
+const FormBrokenEmailLink = () => (
     <a href="mailto:hello@makersden.io?subject=Your%20CV%20form%20is%20broken.%20%3A(&body=There%20was%20en%20error%20uploading%20my%20CV%2C%20please%20check%20your%20form!">
         hello@makersden.io
     </a>
@@ -92,24 +95,32 @@ const CloseButtonContainer = styled.div`
 
 const CloseButton = styled(Hamburger).attrs({
     active: true,
-})``
+})`
+    &::before,
+    &::after {
+        background-color: ${color("black")};
+    }
+`
 
-const DropzoneContents = ({ isDragActive, isDragReject, uploadStatus }) => {
-    if (uploadStatus === UPLOAD_STATUS.UPLOADING) {
-        return (
-            <Headline>Just a sec...</Headline>
-        )
+    const DropzoneContents = ({ isDragActive, isDragReject, uploadStatus }) => {
+        if (uploadStatus === UPLOAD_STATUS.UPLOADING) {
+            return (
+                <Headline>Just a sec...</Headline>
+            )
     }
 
     if (uploadStatus === UPLOAD_STATUS.SUCCESS) {
         return (
-            <Headline>Thanks. We'll get in touch, please be hungry!</Headline>
+            <div>
+                <Headline>Thanks. We'll get in touch, please be hungry!</Headline>
+                <Hint>(Click anywhere to go back)</Hint>
+            </div>
         )
     }
 
     if (uploadStatus === UPLOAD_STATUS.FAILED) {
         return (
-            <Headline>Oops, something went wrong. <br /> Mind letting us know via <FormBrokenLink />?</Headline>
+            <Headline>Oops, something went wrong. <br /> Mind letting us know via <FormBrokenEmailLink />?</Headline>
         )
     }
 
@@ -136,16 +147,22 @@ const DropzoneContents = ({ isDragActive, isDragReject, uploadStatus }) => {
     )
 }
 
-const CvModal = ({ isOpen, onClose, uploadCv, uploadStatus }) => (
+const CvModal = ({ isOpen, handleClick, handleClose, uploadCv, uploadStatus }) => (
     <StyledModal 
-        onClose={onClose}
+        onClose={handleClose}
         closeTimeoutMS={200}
         isOpen={isOpen}
     >
         <CloseButtonContainer>
-            <CloseButton onClick={onClose} />
+            <CloseButton onClick={handleClose} />
         </CloseButtonContainer>
-        <StyledDropzone accept="application/pdf" onDrop={uploadCv} disabled={uploadStatus === UPLOAD_STATUS.FAILED}>
+        <StyledDropzone 
+            onMouseDown={handleClick}
+            onTouchStart={handleClick}
+            accept="application/pdf" 
+            onDrop={uploadCv} 
+            disabled={uploadStatus === UPLOAD_STATUS.FAILED || uploadStatus === UPLOAD_STATUS.SUCCESS}
+            >
         {({ isDragActive, isDragReject }) => ( 
             <DropzoneBody isDragActive={isDragActive} isDragReject={isDragReject}>
                 <DropzoneContents isDragActive={isDragActive} isDragReject={isDragReject} uploadStatus={uploadStatus} />
@@ -181,9 +198,21 @@ export default compose(
 
             setUploadStatus(UPLOAD_STATUS.UPLOADING);
 
-            return Promise.resolve()
+            return doUploadCv(file)
                 .then(() => setUploadStatus(UPLOAD_STATUS.SUCCESS))
                 .catch(() => setUploadStatus(UPLOAD_STATUS.FAILED));
+        },
+        handleClose: ({ onClose, setUploadStatus, uploadStatus }) => () => {
+            onClose();
+
+            if (uploadStatus !== UPLOAD_STATUS.SUCCESS) {
+                setUploadStatus(UPLOAD_STATUS.WAITING);
+            }
+        },
+        handleClick: ({ onClose, uploadStatus }) => () => {
+            if (uploadStatus === UPLOAD_STATUS.SUCCESS) {
+                onClose();
+            }
         }
     })
 )(CvModal);
