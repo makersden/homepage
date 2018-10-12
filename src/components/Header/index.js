@@ -237,7 +237,7 @@ class Header extends PureComponent {
       >
         <StyledHeader dark={useAltHeader} sticky={isSticky}>
           <BrandNav>
-            <BrandLink active={isHome} to="#home" light={useAltHeader}>
+            <BrandLink active={isHome} to="/#home" light={useAltHeader}>
               <BelowBigPhone
                 component="span"
                 data-aos="fade"
@@ -264,21 +264,21 @@ class Header extends PureComponent {
             <Nav show={this.state.navVisible}>
               <HashLink
                 active={isActive("team")}
-                to="#team"
+                to="/#team"
                 light={useAltHeader}
               >
                 Team
               </HashLink>
               <HashLink
                 active={isActive("work")}
-                to="#work"
+                to="/#work"
                 light={useAltHeader}
               >
                 Work
               </HashLink>
               <HashLink
                 active={isActive("contact")}
-                to="#contact"
+                to="/#contact"
                 light={useAltHeader}
               >
                 Contact
