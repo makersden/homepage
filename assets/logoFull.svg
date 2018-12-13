@@ -14,7 +14,7 @@
    viewBox="0 0 68.73822 10.532533"
    version="1.1"
    id="svg8"
-   inkscape:version="0.92.1 r"
+   inkscape:version="0.92.2 2405546, 2018-03-11"
    sodipodi:docname="logoFull.svg">
   <defs
      id="defs2" />
@@ -25,16 +25,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.35"
-     inkscape:cx="-371.36456"
-     inkscape:cy="108.89143"
+     inkscape:zoom="3.959798"
+     inkscape:cx="123.49706"
+     inkscape:cy="49.319297"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1600"
-     inkscape:window-height="900"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
+     inkscape:window-width="1256"
+     inkscape:window-height="1380"
+     inkscape:window-x="1288"
+     inkscape:window-y="16"
      inkscape:window-maximized="0" />
   <metadata
      id="metadata5">
@@ -44,7 +44,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -56,8 +56,7 @@
     <g
        aria-label="Makers' Den"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.93333244px;line-height:6.61458302px;font-family:Airstream;-inkscape-font-specification:'Airstream, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       id="text4487"
-       transform="translate(0,0.52916667)">
+       id="text4487">
       <path
          d="m 60.195578,49.572551 q -0.06773,0.135467 -0.135467,0.287867 -0.0508,0.135467 -0.135466,0.287867 0,0.01693 -0.01693,0.03387 0,0 0,0.01693 -0.1524,0.321733 -0.287866,0.626533 -0.135467,0.287867 -0.237067,0.474133 -0.118533,0.254 -0.254,0.541867 -0.135467,0.270933 -0.254,0.575733 -0.1524,0.287867 -0.287867,0.6096 -0.118533,0.3048 -0.254,0.6096 -0.3556,0.8636 -0.6096,1.710267 -0.254,0.829733 -0.254,1.4732 0,0.474133 0.254,0.778933 0.270934,0.3048 0.948267,0.321733 h 0.829733 l -0.541866,1.659467 h -0.287867 q -1.591733,0 -2.252133,-0.762 -0.643467,-0.762 -0.626534,-1.998133 0,-0.287867 0.03387,-0.575734 0.03387,-0.3048 0.1016,-0.6096 -0.677333,0.931334 -1.3716,1.913467 -0.694266,0.982133 -1.4732,2.032 h -1.794933 l 1.27,-5.1308 q -0.829733,1.303867 -1.7272,2.5908 -0.880533,1.286933 -1.862667,2.54 h -2.116666 q 0.389467,-0.508 0.795867,-1.032933 0.4064,-0.541867 0.8128,-1.1176 0.406399,-0.575734 0.812799,-1.1684 0.423334,-0.592667 0.829734,-1.185333 0.745066,-1.100667 1.439333,-2.1844 0.7112,-1.100667 1.3208,-2.065867 0.186267,-0.287867 0.372533,-0.575733 0.186267,-0.3048 0.423334,-0.677334 h 1.845733 l -1.439333,5.774267 q 0.118533,-0.169334 0.237066,-0.338667 0.135467,-0.186266 0.254,-0.3556 0.135467,-0.169333 0.254,-0.338666 0.135467,-0.186267 0.254,-0.3556 0.745067,-1.049867 1.507067,-2.1336 0.778933,-1.083734 1.6256,-2.252134 h 1.998133 z"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.93333244px;font-family:Airstream;-inkscape-font-specification:'Airstream, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.26458332px"

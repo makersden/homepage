@@ -160,7 +160,7 @@ const Home = ({ data }, context) => {
     <Container>
       <FadeWithoutFont>
         <HeroSegment p={[0, 4]} m={[3, 4]} id="hero">
-          <Title>We are a Javascript workshop.</Title>
+          <Title>Your Javascript workshop.</Title>
           <CogsContainer>
             <GearsImage src={gears} />
           </CogsContainer>

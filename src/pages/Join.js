@@ -34,10 +34,18 @@ const Headline = styled.h1`
   text-align: center;
 `;
 
-const Video = styled.div`
-  border: 1px solid white;
+
+const Video = styled.iframe.attrs({
+  width: 640,
+  height: 360,
+  src: 'https://www.youtube.com/embed/MIJLhvI-0pg',
+  frameborder: 0,
+  allow: "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture",
+  allowfullscreen: true,
+})`
+  border: none;
   width: 640px;
-  height: 480px;
+  height: 360px;
 `;
 
 const LunchHeadline = styled.h3`
@@ -233,12 +241,12 @@ const workFeatures = [
   {
     name: "Code React",
     description:
-      "Let's face it - it's the bees knees. They got a lot of things right in there and it makes us real happy. We don't mind other frameworks, but React (or Preact) is usually our first choice."
+      "Let's face it - it's the bees knees. They got a lot of things right in there and it makes us real happy. It's usually our first choice."
   },
   {
     name: "With Nodejs",
     description:
-      "It's matured a lot and - all hype aside - it's the right tool for 80% of the jobs. As long as we don't try to implement computer vision algorithms in it."
+      "It's matured a lot and - all hype aside - it's the right tool for 80% of the jobs. As long as we don't use it to implement computer vision."
   },
   {
     name: "On AWS",
@@ -266,7 +274,10 @@ const funFeatures = [
     description:
       "Some discussions are just too good to keep only within the inner circle. Some ideas are too fascinating not to share."
   },
-  { name: "Apps & Demos" },
+  {
+     name: "Apps & Demos",
+     description: "Feels good to make crazy ideas come to life. For ourselves and customers alike."
+ },
   {
     name: "Drawing",
     description:
@@ -288,39 +299,52 @@ const values = [
   {
     name: "Freedom",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+      "The apprentice fears it, the master savours it."
   },
   {
     name: "Challenge",
     description:
-      "There's no reason to be afraid, no time to be light-weight. If you don't feel stupid - you're not challenging yourself or learning enough. We like to <strong>feel</strong> stupid so we don't have to <strong>be</strong> stupid."
+      "There's no reason to be afraid, no time to be light-weight. If you don't feel stupid - you're not challenging yourself enough. We like to <strong>feel</strong> stupid so we don't have to <strong>be</strong> stupid."
   },
   {
     name: "Improvement",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+      "Kaizen is what we're all about. If you're planning on standing still, let's not waste each other's time."
   },
   {
     name: "Responsibility",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+      "This ain't gonna be a bigco, and for good reasons. The consequence is that each one of us matters. Each makes a difference. Each deals with it."
   },
   {
     name: "Respect",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+      "None of us are here by chance. Though paths leading each here were different, all of them were long and demanding. That deserves acknowledgment."
   },
   {
     name: "Balance",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+      "We don't like the smell of oil burnt at midnight. Rockstarianism ain't our thing - we prefer good health and healthy passion."
   }
 ];
 
 const workplaces = [
-  { name: "At co-works" },
-  { name: "From home" },
-  { name: "At customers'" }
+  {
+    name: "In our Den",
+    description: "You should really come & check it out. It's pretty cool."
+  },
+  {
+    name: "At co-works",
+    description: "Sometimes a change of environment is just what the doctor ordered."
+  },
+  {
+    name: "From home",
+    description: "Because some days you just shouldn't be wearing pants."
+  },
+  {
+    name: "At customers'",
+    description: "We help them work, they help us socialize!"
+  }
 ];
 
 const Join = ({ closeModal, data, isModalOpen, openModal, selectedFeature, selectFeature }) => {
