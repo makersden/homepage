@@ -283,10 +283,10 @@ class Header extends PureComponent {
               >
                 Contact
               </HashLink>
-              <NavLink to="join" light={useAltHeader}>
+              <NavLink to="/join" light={useAltHeader}>
                 Join
               </NavLink>
-              <NavLink to="blog" light={useAltHeader}>
+              <NavLink to="/blog" light={useAltHeader}>
                 Blog
               </NavLink>
             </Nav>
