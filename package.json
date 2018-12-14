@@ -4,7 +4,7 @@
   "twitter": "makers_den",
   "repository": "https://github.com/makersden/homepage",
   "private": true,
-  "version": "0.7.0",
+  "version": "0.8.0",
   "scripts": {
     "build": "gatsby build",
     "start": "yarn develop",
