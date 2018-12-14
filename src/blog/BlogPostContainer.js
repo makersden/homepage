@@ -8,8 +8,6 @@ import {
 import BlogPost from "./BlogPost";
 
 const BlogPostContainer = createContainer(BlogPost, props => {
-  console.log(props);
-
   return {
     page: query({
       collection: "posts",

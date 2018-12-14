@@ -330,7 +330,6 @@ const PartnersSection = styled(Section)`
 `;
 
 const Team = ({ images: { kalle, korneliusz, partners } }) => {
-  console.log({ kalle, korneliusz, partners });
   return (
     <Container id="team">
       <Title>The A-Team</Title>

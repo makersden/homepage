@@ -38,6 +38,10 @@ const Headline = styled.h1`
 const Hint = styled.p`
     font-size: ${size(2)};
 `
+const TopHint = styled(Hint)`
+  position: relative;
+  z-index: 20;
+`
 
 const StyledDropzone = styled(Dropzone)`
     width: 100%;
@@ -102,7 +106,15 @@ const CloseButton = styled(Hamburger).attrs({
     }
 `
 
-    const DropzoneContents = ({ isDragActive, isDragReject, uploadStatus }) => {
+const disableClick = setEnableClick => () => {
+  setEnableClick(false);
+}
+
+const enableClick = setEnableClick => () => {
+  setEnableClick(true);
+}
+
+    const DropzoneContents = ({ isDragActive, isDragReject, setEnableClick, uploadStatus }) => {
         if (uploadStatus === UPLOAD_STATUS.UPLOADING) {
             return (
                 <Headline>Just a sec...</Headline>
@@ -136,6 +148,8 @@ const CloseButton = styled(Hamburger).attrs({
         )
     }
 
+    const doDisableClick = disableClick(setEnableClick)
+    const doEnableClick = enableClick(setEnableClick)
     return (
         <div>
             <Headline>Mind sending us your CV before we buy you lunch?</Headline>
@@ -143,12 +157,13 @@ const CloseButton = styled(Hamburger).attrs({
             <Error show={isDragReject || uploadStatus === UPLOAD_STATUS.REJECTED}>
                 A single PDF please.
             </Error>
+            <TopHint>Or zip it along to <a id="email_cv" href="mailto:join@makersden.io" onMouseOver={doDisableClick} onMouseOut={doEnableClick} onTouchStart={doDisableClick} onTouchEnd={doEnableClick}>join@makersden.io</a>.</TopHint>
         </div>
     )
 }
 
-const CvModal = ({ isOpen, handleClick, handleClose, uploadCv, uploadStatus }) => (
-    <StyledModal 
+const CvModal = ({ enableClick, isOpen, handleClick, handleClose, setEnableClick, uploadCv, uploadStatus }) => (
+    <StyledModal
         onClose={handleClose}
         closeTimeoutMS={200}
         isOpen={isOpen}
@@ -156,16 +171,17 @@ const CvModal = ({ isOpen, handleClick, handleClose, uploadCv, uploadStatus }) =
         <CloseButtonContainer>
             <CloseButton onClick={handleClose} />
         </CloseButtonContainer>
-        <StyledDropzone 
-            onMouseDown={handleClick}
+        <StyledDropzone
+            disableClick={!enableClick}
+            onMouseDown={e =>  false}
             onTouchStart={handleClick}
-            accept="application/pdf" 
-            onDrop={uploadCv} 
+            accept="application/pdf"
+            onDrop={uploadCv}
             disabled={uploadStatus === UPLOAD_STATUS.FAILED || uploadStatus === UPLOAD_STATUS.SUCCESS}
             >
-        {({ isDragActive, isDragReject }) => ( 
+        {({ isDragActive, isDragReject }) => (
             <DropzoneBody isDragActive={isDragActive} isDragReject={isDragReject}>
-                <DropzoneContents isDragActive={isDragActive} isDragReject={isDragReject} uploadStatus={uploadStatus} />
+                <DropzoneContents isDragActive={isDragActive} isDragReject={isDragReject} uploadStatus={uploadStatus} setEnableClick={setEnableClick} />
             </DropzoneBody>
         )}
         </StyledDropzone>
@@ -182,6 +198,7 @@ const UPLOAD_STATUS = {
 
 export default compose(
     withState("uploadStatus", "setUploadStatus", UPLOAD_STATUS.WAITING),
+    withState("enableClick", "setEnableClick", true),
     withHandlers({
         uploadCv: ({ setUploadStatus }) => (acceptedFiles, rejectedFiles) => {
             if (!isEmpty(rejectedFiles)) {
@@ -209,7 +226,13 @@ export default compose(
                 setUploadStatus(UPLOAD_STATUS.WAITING);
             }
         },
-        handleClick: ({ onClose, uploadStatus }) => () => {
+        handleClick: ({ onClose, uploadStatus }) => (e) => {
+            if(e.target.id === "email_cv") {
+              e.preventDefault();
+              e.stopPropagation();
+              return;
+            }
+
             if (uploadStatus === UPLOAD_STATUS.SUCCESS) {
                 onClose();
             }

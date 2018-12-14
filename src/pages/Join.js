@@ -239,6 +239,11 @@ const Features = ({ title, features, selectedFeature, onSelectFeature }) => (
 
 const workFeatures = [
   {
+    name: "Make Products",
+    description:
+      "We're all on this earth for a reason. Ours is to crank out amazing <b>services & products</b>. We knock 'em out of the park."
+  },
+  {
     name: "Code React",
     description:
       "Let's face it - it's the bees knees. They got a lot of things right in there and it makes us real happy. It's usually our first choice."
@@ -252,11 +257,6 @@ const workFeatures = [
     name: "On AWS",
     description:
       "There's a lot less backend to maintain when you can write lambdas instead."
-  },
-  {
-    name: "for Services",
-    description:
-      "We're all on this earth for a reason. Ours is to crank out amazing services. We knock 'em out of the park."
   },
   {
     name: "    ",
@@ -319,7 +319,7 @@ const values = [
   {
     name: "Respect",
     description:
-      "None of us are here by chance. Though paths leading each here were different, all of them were long and demanding. That deserves acknowledgment."
+      "None of us are here by chance. Each path leading here was different, all of them were long and demanding. That deserves acknowledgment."
   },
   {
     name: "Balance",

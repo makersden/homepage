@@ -18,7 +18,6 @@ const uploadCv = (file) => new Promise((resolve, reject) =>
         Key: file.name,
         Body: file,
     }, function (err, data) {
-        console.log({ err, data });
         if (err) {
             reject(err);
         } else {

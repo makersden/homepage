@@ -14,7 +14,6 @@ function scrollToAnchor() {
   const [, hash] = window.decodeURIComponent(window.location.hash).split("#");
   if (hash) {
     const element = document.getElementById(hash);
-    console.log(element.offsetTop);
     if (element) {
       window.scrollTo(0, element.offsetTop - 68);
     }
