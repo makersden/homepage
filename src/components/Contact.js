@@ -33,6 +33,7 @@ const Background = styled.div.attrs({
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-position-x: 100%;
+  background-position-y: 20%;
 `;
 
 const Curtain = styled.div.attrs({
@@ -104,7 +105,7 @@ const Title = styled.h2`
 // TOOD video of berlin in background?
 const Contact = ({ images }) => (
   <Container>
-    <Background background={images.berlin.sizes.src} />
+    <Background background={images.office.sizes.src} />
     <Curtain>
       <FadeWithoutFont>
         <Content>

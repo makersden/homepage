@@ -881,7 +881,7 @@ const Work = ({ images }) => {
             <Description data-aos="fade-left">
               <FWF>
                 <Paragraph>
-                  Missionready trusts us to make sure their platform is
+                  Healthzilla trusts us to make sure their platform is
                   production-ready in terms of performance and scalability.
                 </Paragraph>
                 <Quote>
@@ -896,7 +896,7 @@ const Work = ({ images }) => {
                     <AuthorLink href="https://www.linkedin.com/in/otto-helve-665a6b4b/">
                       Aki Ranin
                     </AuthorLink>
-                    <span>CEO of Missionready</span>
+                    <span>CEO of Healthzilla</span>
                   </figcaption>
                 </Author>
               </FWF>

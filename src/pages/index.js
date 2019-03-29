@@ -188,7 +188,7 @@ export default Home;
 
 export const pageQuery = graphql`
   query IndexImages {
-    berlin: file(relativePath: { eq: "berlin-sharp.jpg" }) {
+    office: file(relativePath: { eq: "office.jpg" }) {
       childImageSharp {
         sizes(maxWidth: 2560, toFormat: JPG) {
           ...GatsbyImageSharpSizes
@@ -282,7 +282,31 @@ export const pageQuery = graphql`
     kalle: file(relativePath: { eq: "kalle3.jpg" }) {
       childImageSharp {
         sizes(
-          maxWidth: 1400
+          maxWidth: 1440
+          toFormat: JPG
+          quality: 99
+          traceSVG: { color: "#fafafa", blackOnWhite: false }
+        ) {
+          ...GatsbyImageSharpSizes_tracedSVG
+        }
+      }
+    }
+    harrison: file(relativePath: { eq: "harrison3.jpg" }) {
+      childImageSharp {
+        sizes(
+          maxWidth: 1440
+          toFormat: JPG
+          quality: 99
+          traceSVG: { color: "#fafafa", blackOnWhite: false }
+        ) {
+          ...GatsbyImageSharpSizes_tracedSVG
+        }
+      }
+    }
+    rob: file(relativePath: { eq: "rob3.jpg" }) {
+      childImageSharp {
+        sizes(
+          maxWidth: 1440
           toFormat: JPG
           quality: 99
           traceSVG: { color: "#fafafa", blackOnWhite: false }
@@ -294,7 +318,7 @@ export const pageQuery = graphql`
     korneliusz: file(relativePath: { eq: "korneliusz3.jpg" }) {
       childImageSharp {
         sizes(
-          maxWidth: 1400
+          maxWidth: 1440
           toFormat: JPG
           quality: 99
           traceSVG: { color: "#fafafa", blackOnWhite: false }
@@ -306,7 +330,7 @@ export const pageQuery = graphql`
     partners: file(relativePath: { eq: "partners.png" }) {
       childImageSharp {
         sizes(
-          maxWidth: 1400
+          maxWidth: 1440
           toFormat: JPG
           quality: 99
           traceSVG: { color: "#fafafa", blackOnWhite: false }

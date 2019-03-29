@@ -7,16 +7,22 @@ import * as SectionModule from "./Section";
 import range from 'lodash/range';
 import theme from "../theme";
 import { color, size, } from "../theme";
+import {media} from '../styles/mediaQueries';
+
+const offsets = {
+  Korneliusz: '-30%',
+  Harrison: '8%'
+}
 
 const Member = ({ image, name, description, quotes }) => (
-  <MemberContainer>
+  <MemberContainer offset={offsets[name]}>
     <MemberImage {...image} />
     <Background />
     <MemberContent>
       <Description data-aos="fade-up">
         <Name>{name}</Name>
-        {flatMap(paragraph => (
-          <Paragraph>
+        {flatMap((paragraph, i) => (
+          <Paragraph key={i}>
             <span>{paragraph}</span>
           </Paragraph>
         ), description)}
@@ -41,9 +47,11 @@ const MemberContent = styled.div`
   align-items: center;
   height: 100%;
 
-  > * {
-    width: 55%;
-  }
+  ${media.aboveTablet`
+    > * {
+      width: 55%;
+    }
+  `}
 `;
 
 const Background = styled.div`
@@ -56,15 +64,7 @@ const Background = styled.div`
 
 const MemberContainer = styled.div`
   position: relative;
-  height: ${height};
   overflow: hidden;
-  &:first-child {
-    border-top-right-radius: 10px;
-  }
-
-  &:last-child {
-    border-bottom-right-radius: 10px;
-  }
 
   .gatsby-image-outer-wrapper,
   .gatsby-image-wrapper {
@@ -75,8 +75,6 @@ const MemberContainer = styled.div`
 
   .gatsby-image-outer-wrapper {
     width: 100%;
-    position: absolute !important;
-    top: 0;
     height: ${height};
     min-height: ${height};
     max-width: 100%;
@@ -87,32 +85,68 @@ const MemberContainer = styled.div`
   }
 
   &:nth-child(2n) {
-    .gatsby-image-outer-wrapper {
-      transform: translateX(-30%);
-    }
-
-    ${MemberContent} {
-      left: 45%;
-    }
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+    ${media.belowDesktop`
+      border-top-left-radius: 0px;
+      border-bottom-left-radius: 0px;
+    `}
   }
 
   &:nth-child(2n+1) {
-    .gatsby-image-outer-wrapper {
-      transform: translateX(30%);
-    }
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+    ${media.belowDesktop`
+      border-top-right-radius: 0px;
+      border-bottom-right-radius: 0px;
+    `}
   }
 
-  ${range(10).flatMap(i => css`
-    &:nth-child(${i}) {
-      ${Background} {
-        ${i % 2 === 0 ? css`
-          background: linear-gradient(70deg, ${theme.colors.team[i]} 20%, ${color('backgroundDark')} 50.69%);
-        ` : css`
-          background: linear-gradient(100deg, ${color('backgroundDark')} 50%, ${theme.colors.team[i]} 85.69%);
+  ${media.aboveTablet`
+    height: ${height};
+
+    .gatsby-image-outer-wrapper {
+      position: absolute !important;
+      top: 0;
+      left: 0;
+    }
+    &:nth-child(2n) {
+      .gatsby-image-outer-wrapper {
+        ${props => props.offset && `
+          transform: translateX(${props.offset});
+        `}
+      }
+
+      ${MemberContent} {
+        left: 45%;
+      }
+    }
+
+    &:nth-child(2n+1) {
+      .gatsby-image-outer-wrapper {
+        transform: translateX(30%);
+        ${props => props.offset && `
+          transform: translateX(${props.offset});
         `}
       }
     }
-  `)}
+  `}
+
+    ${range(10).map(i => css`
+      &:nth-child(${i+1}) {
+        ${Background} {
+          ${i % 2 === 0 ? css`
+            background: linear-gradient(100deg, ${color('backgroundDark')} 50%, ${theme.colors.team[i]} 80.69%);
+          ` : css`
+            background: linear-gradient(70deg, ${theme.colors.team[i]} 20%, ${color('backgroundDark')} 50.69%);
+          `}
+
+          ${media.belowTablet`
+            background: linear-gradient(180deg, ${theme.colors.team[i]} 47%, ${color('backgroundDark')} 57%);
+          `}
+        }
+      }
+    `)}
 `
 
 const MemberImage = styled(GatsbyImage)`

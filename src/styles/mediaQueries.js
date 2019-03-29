@@ -20,7 +20,7 @@ const capitalize = str => str[0].toUpperCase() + str.slice(1);
 const maxSizes = reduce(
   (result, breakpoint, label) => ({
     ...result,
-    ["below" + capitalize(label)]: breakpoint - 1
+    ["below" + capitalize(label)]: breakpoint
   }),
   {}
 )(breakpoints);
@@ -28,7 +28,7 @@ const maxSizes = reduce(
 const minSizes = reduce(
   (result, breakpoint, label) => ({
     ...result,
-    ["above" + capitalize(label)]: breakpoint
+    ["above" + capitalize(label)]: breakpoint + 1
   }),
   {}
 )(breakpoints);

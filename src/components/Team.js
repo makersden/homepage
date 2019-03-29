@@ -24,7 +24,7 @@ const Title = styled.h2`
   font-weight: 300;
   color: ${color("accent")};
   font-size: ${size(3)};
-  margin: ${size(3)} 0 ${size(2)} 0;
+  margin: ${size(3)} 0 ${size(4)} 0;
 
   ${media.aboveLaptop`
     font-size: ${size(4)};
@@ -153,9 +153,9 @@ const KalleSection = styled(Section)`
 `;
 
 
-const makeMembers = ({ kalle, korneliusz, partners }) => [
+const makeMembers = ({ kalle, korneliusz, harrison, rob, partners }) => [
   {
-    name: 'Carl-Petter Bertell',
+    name: 'Carl-Petter',
     image: kalle,
     description: [
       `
@@ -179,8 +179,50 @@ const makeMembers = ({ kalle, korneliusz, partners }) => [
     }]
   },
   {
-    name: 'Korneliusz Caputa',
+    name: 'Korneliusz',
     image: korneliusz,
+    description: [
+      `
+        Managing Director and a seasoned software engineer. Passionate
+        about cloud architecture and frontend development, especially the
+        React ecosystem.
+      `
+    ],
+    quotes: [{
+      content: `
+              He understands a startup’s need for speed and made effort towards
+              improving the team’s velocity without sacrificing quality.
+                `,
+      author: {
+        link: 'https://www.linkedin.com/in/silvan-saxer-6b9268130/',
+        name: 'Silvan Saxer, COO at FRI:DAY Versicherung'
+      }
+    }]
+  },
+  {
+    name: 'Harrison',
+    image: harrison,
+    description: [
+      `
+        Managing Director and a seasoned software engineer. Passionate
+        about cloud architecture and frontend development, especially the
+        React ecosystem.
+      `
+    ],
+    quotes: [{
+      content: `
+              He understands a startup’s need for speed and made effort towards
+              improving the team’s velocity without sacrificing quality.
+                `,
+      author: {
+        link: 'https://www.linkedin.com/in/silvan-saxer-6b9268130/',
+        name: 'Silvan Saxer, COO at FRI:DAY Versicherung'
+      }
+    }]
+  },
+  {
+    name: 'Rob',
+    image: rob,
     description: [
       `
         Managing Director and a seasoned software engineer. Passionate
@@ -210,26 +252,16 @@ const makeMembers = ({ kalle, korneliusz, partners }) => [
     `,
     `We work with the best.`
     ],
-    quotes: [{
-      content: `
-              He understands a startup’s need for speed and made effort towards
-              improving the team’s velocity without sacrificing quality.
-                `,
-      author: {
-        link: 'https://www.linkedin.com/in/silvan-saxer-6b9268130/',
-        name: 'Silvan Saxer, COO at FRI:DAY Versicherung'
-      }
-    }]
   },
 ]
 
 
-const Team = ({ images: { kalle, korneliusz, partners } }) => {
+const Team = ({ images: { kalle, korneliusz, harrison, rob, partners } }) => {
   return (
     <Container id="team">
       <Title>Meet your makers</Title>
       <Content column>
-        {makeMembers({ kalle, korneliusz, partners }).map(member => <Member {...member} />)}
+        {makeMembers({ kalle, korneliusz, harrison, rob, partners }).map(member => <Member key={member.name} {...member} />)}
       </Content>
     </Container>
   );
