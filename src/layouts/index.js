@@ -67,7 +67,7 @@ const TemplateWrapper = ({ ...props }) => (
           {
             name: "description",
             content:
-              "We are a software workshop. We solve gnarly problems to realise amazing ideas."
+              "Your javascript studio. Solving gnarly problems to realise amazing ideas."
           },
           {
             name: "keywords",

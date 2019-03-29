@@ -14,7 +14,15 @@ const theme = {
     backgroundDark: `#090a0f`,
     backgroundLight: `#1A1F1F`,
     text: "#ecf0f1",
-    textDark: "#2c3e50"
+    textDark: "#2c3e50",
+    team: [
+      'rgba(222, 147, 201, 0)',
+      'rgba(4, 66, 3, 0.2)',
+      'rgba(53, 110, 255, 0)',
+      'rgba(4, 66, 3, 0.2)',
+      'rgba(146, 0, 0, 0)',
+      'rgba(4, 66, 3, 0.2)',
+    ]
   },
   font: {
     primary: "Work Sans, sans-serif",

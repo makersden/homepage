@@ -114,6 +114,8 @@ const BrandNav = styled.nav`
   z-index: 10;
 `;
 
+const MENU_ITEM_COUNT = 5;
+
 const Nav = styled.nav`
   display: flex;
   ${media.belowTablet`
@@ -138,15 +140,15 @@ const Nav = styled.nav`
       transform: translateY(0);
       ${transition("transform")};
 
-      ${Array.from({ length: 4 }).map(
+      ${Array.from({ length: MENU_ITEM_COUNT }).map(
         (_, i) => css`
           &:nth-child(${i + 1}) {
-            z-index: ${4 - i + 1};
+            z-index: ${MENU_ITEM_COUNT - i + 1};
             ${props =>
               !props.show &&
               css`
                 transform: translateY(-${(i + 0.5) * sizeWithoutUnit(4)}px);
-                transition-delay: ${(4 - i) * 25}ms;
+                transition-delay: ${(MENU_ITEM_COUNT - i) * 25}ms;
               `} ${props =>
                 props.show &&
                 css`

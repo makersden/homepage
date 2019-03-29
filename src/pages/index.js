@@ -21,7 +21,6 @@ const TransparentSegment = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow-x: hidden;
 `;
 
 const HeroSegment = styled(Box)`
@@ -160,7 +159,7 @@ const Home = ({ data }, context) => {
     <Container>
       <FadeWithoutFont>
         <HeroSegment p={[0, 4]} m={[3, 4]} id="hero">
-          <Title>Your Javascript workshop.</Title>
+          <Title>Your Javascript studio.</Title>
           <CogsContainer>
             <GearsImage src={gears} />
           </CogsContainer>
@@ -280,7 +279,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    kalle: file(relativePath: { eq: "kalle.png" }) {
+    kalle: file(relativePath: { eq: "kalle3.jpg" }) {
       childImageSharp {
         sizes(
           maxWidth: 1400
@@ -292,7 +291,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    korneliusz: file(relativePath: { eq: "korneliusz2.jpg" }) {
+    korneliusz: file(relativePath: { eq: "korneliusz3.jpg" }) {
       childImageSharp {
         sizes(
           maxWidth: 1400

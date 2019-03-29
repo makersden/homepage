@@ -82,7 +82,7 @@ const Curtain = styled.div`
     ${color("backgroundDark")} 0%,
     rgba(0, 0, 0, 0) 18.23%,
     rgba(0, 0, 0, 0) 81.77%,
-    ${color("darkGrey")} 99%
+    ${color("backgroundDark")} 99%
   );
 `;
 
