@@ -24,7 +24,9 @@ const Posts = styled.ul`
   min-height: calc(100vh - 21rem - 8.8rem);
 `;
 
-const PostImage = styled(Img)``;
+const PostImage = styled(Img)`
+  max-height: calc((100vh - 21rem - 8.8rem) / 1.5);
+`;
 
 const Post = styled.li`
   margin: 0 auto;
@@ -42,7 +44,7 @@ const PostLink = styled(Link)`
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: calc((100vh - 21rem - 8.8rem) / 1.5);
   transition: background-color 1s;
   display: flex;
   align-items: flex-end;

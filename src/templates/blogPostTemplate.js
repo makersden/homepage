@@ -11,7 +11,7 @@ const Post = styled.article`
   background: ${color("white")};
   margin: 0;
   font-size: 1.8rem;
-  color: ${color("textDark")};
+  color: ${color("black")};
   min-height: 100vh;
 `;
 
@@ -54,15 +54,24 @@ const Content = styled.section`
   h2,
   h3,
   h4 {
-    color: ${color("black")};
+    color: ${transparentize(0.2, "black")};
   }
   p {
     margin: 1em 0;
     font-weight: 300;
   }
 
+  ul {
+    font-weight: 300;
+  }
+
   a {
-    color: ${color("black")};
+    color: ${transparentize(0.3, "black")};
+    transition: color 0.1s;
+
+    &:hover {
+      color: ${color("black")};
+    }
   }
 
   em,
