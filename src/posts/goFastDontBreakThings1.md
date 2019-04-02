@@ -1,3 +1,21 @@
+---
+title: Go fast and don't break things
+layout: Post
+date: 2019-04-01 15:00:00
+author: Korneliusz Caputa
+slug: "go-fast-dont-break-things-1"
+path: "/blog/go-fast-dont-break-things-1"
+image: "gofastdontbreakthings1.jpg"
+tags:
+  - software development
+  - architecture
+  - management
+  - agile
+  - consulting
+  - lean delivery
+  - design thinking
+---
+
 No matter how you look at it, software development is a delicate process. Success has never been easier to achieve, yet still obstacles  lay on the path to victory. The worst thing about them is that they are small mistakes. They're easy to miss and without obvious immediate consequences. If leave them unchecked, they have the potential to spell disaster in the long run. This post describes how we recognize and manage those obstacles, emphasizing ones that impede the progress and speed of delivery. Time can be wasted on each stage of the project, so part of our job is to mitigate slowdowns starting right at the sales phase, all the way to release and maintenance.
 
 The draft of this has grown a lot, so we’ll split it in two. Today, we will focus on the work ethic and team management practices we use to keep things moving fast. Next time, we’ll set our sights more on concrete coding decisions. 

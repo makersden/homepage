@@ -36,6 +36,7 @@ const Post = styled.li`
 
   max-width: 144rem;
   width: 100%;
+  max-height: calc((100vh - 21rem - 8.8rem) / 1.5);
 `;
 
 const PostLink = styled(Link)`
@@ -44,7 +45,7 @@ const PostLink = styled(Link)`
   top: 0;
   left: 0;
   width: 100%;
-  height: calc((100vh - 21rem - 8.8rem) / 1.5);
+  height: 100%;
   transition: background-color 1s;
   display: flex;
   align-items: flex-end;
@@ -91,7 +92,9 @@ const Blog = ({ data: { allMarkdownRemark: { edges } } }) => {
           <Post>
             <PostImage {...node.frontmatter.image.childImageSharp} />
             <PostLink to={node.frontmatter.path}>
-              <Title>{node.frontmatter.title}</Title>
+              <FadeWithoutFont>
+                <Title>{node.frontmatter.title}</Title>
+              </FadeWithoutFont>
             </PostLink>
           </Post>
         ))}
