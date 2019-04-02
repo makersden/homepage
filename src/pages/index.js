@@ -159,14 +159,14 @@ const Home = ({ data }, context) => {
     <Container>
       <FadeWithoutFont>
         <HeroSegment p={[0, 4]} m={[3, 4]} id="hero">
-          <Title>Your Javascript studio.</Title>
+          <Title>Your Javascript Crew.</Title>
           <CogsContainer>
             <GearsImage src={gears} />
           </CogsContainer>
           <Subtitle w={[1, 6 / 12]} mx={[0, 4]} px={[0, 4]}>
             <div>
-              <span>Solving gnarly problems</span>
-              <span>to realise amazing ideas</span>
+              <span>Currently making a difference in</span>
+              <span>Finance, Payments, Maps & Health</span>
             </div>
           </Subtitle>
         </HeroSegment>

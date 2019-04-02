@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css } from "styled-components";
+import styled, { css, injectGlobal } from "styled-components";
 import flatMap from 'lodash/fp/flatMap'
 import GatsbyImage from "gatsby-image";
 
@@ -10,14 +10,14 @@ import { color, size, } from "../theme";
 import {media} from '../styles/mediaQueries';
 
 const offsets = {
-  Korneliusz: '-30%',
+  Korneliusz: '-35%',
   Harrison: '8%'
 }
 
 const Member = ({ image, name, description, quotes }) => (
   <MemberContainer offset={offsets[name]}>
-    <MemberImage {...image} />
-    <Background />
+    <MemberImage {...image}  />
+    <Background data-aos="gradient" />
     <MemberContent>
       <Description data-aos="fade-up">
         <Name>{name}</Name>
@@ -58,7 +58,7 @@ const Background = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 200%;
   height: 100%;
 `
 
@@ -135,15 +135,36 @@ const MemberContainer = styled.div`
     ${range(10).map(i => css`
       &:nth-child(${i+1}) {
         ${Background} {
-          ${i % 2 === 0 ? css`
-            background: linear-gradient(100deg, ${color('backgroundDark')} 50%, ${theme.colors.team[i]} 80.69%);
-          ` : css`
-            background: linear-gradient(70deg, ${theme.colors.team[i]} 20%, ${color('backgroundDark')} 50.69%);
+          ${i % 2 === 0 && css`
+            background: linear-gradient(110deg, ${color('backgroundDark')} 77%, ${theme.colors.team[i]} 77%);
+
+            &[data-aos="gradient"] {
+                transition-property: transform;
+                transform: translateX(0%);
+
+                &.aos-animate {
+                  transform: translateX(-50%);
+                }
+            }
+          `};
+
+          ${i % 2 !== 0 && css`
+            background: linear-gradient(70deg, ${theme.colors.team[i]} 23%, ${color('backgroundDark')} 20%);
+
+            &[data-aos="gradient"] {
+                transition-property: transform;
+                transform: translateX(-50%);
+
+                &.aos-animate {
+                  transform: translateX(0%);
+                }
+            }
           `}
 
           ${media.belowTablet`
             background: linear-gradient(180deg, ${theme.colors.team[i]} 47%, ${color('backgroundDark')} 57%);
           `}
+
         }
       }
     `)}
