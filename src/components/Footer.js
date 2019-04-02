@@ -105,7 +105,7 @@ const Footer = () => (
               <SocialIcon src={twitter} />
             </SocialLink>
           </Socials>
-          <Address>Germaniastr. 1, 12099 Berlin</Address>
+          <Address>Germaniastr. 1A | Kirchhofstr. 45, Berlin</Address>
         </Box>
       </div>
       <AboveTablet>
