@@ -32,7 +32,6 @@ const Background = styled.div.attrs({
   background-size: cover;
   background-attachment: fixed;
   background-repeat: no-repeat;
-  background-position-x: 100%;
   background-position-y: 20%;
 `;
 

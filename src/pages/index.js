@@ -165,8 +165,8 @@ const Home = ({ data }, context) => {
           </CogsContainer>
           <Subtitle w={[1, 6 / 12]} mx={[0, 4]} px={[0, 4]}>
             <div>
-              <span>Currently making a difference in</span>
-              <span>Finance, Payments, Maps & Health</span>
+              <span>Currently helping to revolutionize</span>
+              <span>Finance, Payments, Maps and Health</span>
             </div>
           </Subtitle>
         </HeroSegment>
@@ -303,6 +303,18 @@ export const pageQuery = graphql`
         }
       }
     }
+    kimi: file(relativePath: { eq: "kimi3.jpg" }) {
+      childImageSharp {
+        sizes(
+          maxWidth: 1440
+          toFormat: JPG
+          quality: 99
+          traceSVG: { color: "#fafafa", blackOnWhite: false }
+        ) {
+          ...GatsbyImageSharpSizes_tracedSVG
+        }
+      }
+    }
     rob: file(relativePath: { eq: "rob3.jpg" }) {
       childImageSharp {
         sizes(
@@ -327,7 +339,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    partners: file(relativePath: { eq: "partners.png" }) {
+    partners: file(relativePath: { eq: "partners.jpg" }) {
       childImageSharp {
         sizes(
           maxWidth: 1440

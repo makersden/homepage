@@ -50,10 +50,6 @@ const Background = styled(SectionModule.Background)`
   background: #1a1a1a;
 `;
 
-const Paragraph = styled(SectionModule.Paragraph)`
-  color: ${color("whiteAlt")};
-`;
-
 const Description = styled(SectionModule.Description)`
   background: #2f80ed;
   border-radius: 10px;
@@ -153,7 +149,7 @@ const KalleSection = styled(Section)`
 `;
 
 
-const makeMembers = ({ kalle, korneliusz, harrison, rob, partners }) => [
+const makeMembers = ({ kalle, korneliusz, harrison, rob, kimi, partners }) => [
   {
     name: 'Carl-Petter',
     image: kalle,
@@ -204,42 +200,48 @@ const makeMembers = ({ kalle, korneliusz, harrison, rob, partners }) => [
     image: harrison,
     description: [
       `
-        Managing Director and a seasoned software engineer. Passionate
-        about cloud architecture and frontend development, especially the
-        React ecosystem.
+        Math & petroengineering genius in a love affair with code since the age of 15.
+        Full-stack web is the name of the game, speed and discipline are the key tenents.
+      `,
+      `
+        His ability to dismantle problems and catch details never ceases to amaze.
       `
     ],
-    quotes: [{
-      content: `
-              He understands a startup’s need for speed and made effort towards
-              improving the team’s velocity without sacrificing quality.
-                `,
-      author: {
-        link: 'https://www.linkedin.com/in/silvan-saxer-6b9268130/',
-        name: 'Silvan Saxer, COO at FRI:DAY Versicherung'
-      }
-    }]
+    quotes: []
   },
   {
     name: 'Rob',
     image: rob,
     description: [
       `
-        Managing Director and a seasoned software engineer. Passionate
-        about cloud architecture and frontend development, especially the
-        React ecosystem.
+        His path goes on from enterprise
+        consultant, through successful startup
+        CTO, to indie hacker with 2 prospering
+        products.
+      `,
+      `
+        True fullstack, from mobile to cloud infrastructure,
+        never losing sight of the big picture. Keen sailor and
+        crypto analyst.
       `
     ],
-    quotes: [{
-      content: `
-              He understands a startup’s need for speed and made effort towards
-              improving the team’s velocity without sacrificing quality.
-                `,
-      author: {
-        link: 'https://www.linkedin.com/in/silvan-saxer-6b9268130/',
-        name: 'Silvan Saxer, COO at FRI:DAY Versicherung'
-      }
-    }]
+    quotes: []
+  },
+  {
+    name: 'Kimi',
+    image: kimi,
+    description: [
+      `
+        AI, machine learning & data science powerhouse
+        with coding skills and a pragmatic approach to boot.
+      `,
+      `
+        When not busy managing PhD offers, he stays on top of all
+        things blockchain. Breaching security is his favorite
+        evening pastime.
+      `
+    ],
+    quotes: []
   },
   {
     name: 'Our Partners',
@@ -256,12 +258,12 @@ const makeMembers = ({ kalle, korneliusz, harrison, rob, partners }) => [
 ]
 
 
-const Team = ({ images: { kalle, korneliusz, harrison, rob, partners } }) => {
+const Team = ({ images }) => {
   return (
     <Container id="team">
       <Title>Meet your makers</Title>
       <Content column>
-        {makeMembers({ kalle, korneliusz, harrison, rob, partners }).map(member => <Member key={member.name} {...member} />)}
+        {makeMembers(images).map(member => <Member key={member.name} {...member} />)}
       </Content>
     </Container>
   );
