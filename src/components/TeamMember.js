@@ -1,45 +1,49 @@
-import React from 'react';
+import React from "react";
 import styled, { css, injectGlobal } from "styled-components";
-import flatMap from 'lodash/fp/flatMap'
+import flatMap from "lodash/fp/flatMap";
 import GatsbyImage from "gatsby-image";
 
 import * as SectionModule from "./Section";
-import range from 'lodash/range';
+import range from "lodash/range";
 import theme from "../theme";
-import { color, size, } from "../theme";
-import {media} from '../styles/mediaQueries';
+import { color, size } from "../theme";
+import { media } from "../styles/mediaQueries";
 
 const offsets = {
-  Korneliusz: '-35%',
-  Harrison: '8%'
-}
+  Korneliusz: "-35%",
+  Harrison: "-0%"
+};
 
 const Member = ({ image, name, description, quotes }) => (
   <MemberContainer offset={offsets[name]}>
-    <MemberImage {...image}  />
+    <MemberImage {...image} />
     <Background data-aos="gradient" />
     <MemberContent>
       <Description data-aos="fade-up">
         <Name>{name}</Name>
-        {flatMap((paragraph, i) => (
-          <Paragraph key={i}>
-            <span>{paragraph}</span>
-          </Paragraph>
-        ), description)}
-        {flatMap(quote => [
-          <Quote>{quote.content}</Quote>,
-          <Author href={quote.author.link}>
-            {quote.author.name}
-          </Author>
-        ], quotes)}
+        {flatMap(
+          (paragraph, i) => (
+            <Paragraph key={i}>
+              <span>{paragraph}</span>
+            </Paragraph>
+          ),
+          description
+        )}
+        {flatMap(
+          quote => [
+            <Quote>{quote.content}</Quote>,
+            <Author href={quote.author.link}>{quote.author.name}</Author>
+          ],
+          quotes
+        )}
       </Description>
     </MemberContent>
   </MemberContainer>
-)
+);
 
 export default Member;
 
-const height = '500px';
+const height = "500px";
 
 const MemberContent = styled.div`
   position: relative;
@@ -51,7 +55,7 @@ const MemberContent = styled.div`
     > * {
       width: 55%;
     }
-  `}
+  `};
 `;
 
 const Background = styled.div`
@@ -60,7 +64,7 @@ const Background = styled.div`
   left: 0;
   width: 200%;
   height: 100%;
-`
+`;
 
 const MemberContainer = styled.div`
   position: relative;
@@ -85,21 +89,21 @@ const MemberContainer = styled.div`
   }
 
   &:nth-child(2n) {
-      border-top-left-radius: 10px;
-      border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
     ${media.belowDesktop`
       border-top-left-radius: 0px;
       border-bottom-left-radius: 0px;
-    `}
+    `};
   }
 
-  &:nth-child(2n+1) {
-      border-top-right-radius: 10px;
-      border-bottom-right-radius: 10px;
+  &:nth-child(2n + 1) {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
     ${media.belowDesktop`
       border-top-right-radius: 0px;
       border-bottom-right-radius: 0px;
-    `}
+    `};
   }
 
   ${media.aboveTablet`
@@ -112,7 +116,9 @@ const MemberContainer = styled.div`
     }
     &:nth-child(2n) {
       .gatsby-image-outer-wrapper {
-        ${props => props.offset && `
+        ${props =>
+          props.offset &&
+          `
           transform: translateX(${props.offset});
         `}
       }
@@ -125,53 +131,63 @@ const MemberContainer = styled.div`
     &:nth-child(2n+1) {
       .gatsby-image-outer-wrapper {
         transform: translateX(30%);
-        ${props => props.offset && `
+        ${props =>
+          props.offset &&
+          `
           transform: translateX(${props.offset});
         `}
       }
     }
-  `}
+  `} ${range(10).map(
+      i => css`
+        &:nth-child(${i + 1}) {
+          ${Background} {
+            ${i % 2 === 0 &&
+              css`
+                background: linear-gradient(
+                  110deg,
+                  ${color("backgroundDark")} 77%,
+                  ${theme.colors.team[i]} 77%
+                );
 
-    ${range(10).map(i => css`
-      &:nth-child(${i+1}) {
-        ${Background} {
-          ${i % 2 === 0 && css`
-            background: linear-gradient(110deg, ${color('backgroundDark')} 77%, ${theme.colors.team[i]} 77%);
-
-            &[data-aos="gradient"] {
-                transition-property: transform;
-                transform: translateX(0%);
-
-                &.aos-animate {
-                  transform: translateX(-50%);
-                }
-            }
-          `};
-
-          ${i % 2 !== 0 && css`
-            background: linear-gradient(70deg, ${theme.colors.team[i]} 23%, ${color('backgroundDark')} 20%);
-
-            &[data-aos="gradient"] {
-                transition-property: transform;
-                transform: translateX(-50%);
-
-                &.aos-animate {
+                &[data-aos="gradient"] {
+                  transition-property: transform;
                   transform: translateX(0%);
+
+                  &.aos-animate {
+                    transform: translateX(-50%);
+                  }
                 }
-            }
-          `}
+              `};
 
-          ${media.belowTablet`
-            background: linear-gradient(180deg, ${theme.colors.team[i]} 47%, ${color('backgroundDark')} 57%);
-          `}
+            ${i % 2 !== 0 &&
+              css`
+                background: linear-gradient(
+                  70deg,
+                  ${theme.colors.team[i]} 23%,
+                  ${color("backgroundDark")} 20%
+                );
 
+                &[data-aos="gradient"] {
+                  transition-property: transform;
+                  transform: translateX(-50%);
+
+                  &.aos-animate {
+                    transform: translateX(0%);
+                  }
+                }
+              `} ${media.belowTablet`
+            background: linear-gradient(180deg, ${theme.colors.team[
+              i
+            ]} 47%, ${color("backgroundDark")} 57%);
+          `};
+          }
         }
-      }
-    `)}
-`
+      `
+    )};
+`;
 
-const MemberImage = styled(GatsbyImage)`
-`
+const MemberImage = styled(GatsbyImage)``;
 
 const Quote = styled(SectionModule.Quote)`
   margin-bottom: ${size(2)};
@@ -206,8 +222,8 @@ const Author = ({ children, href }) =>
   href ? (
     <AuthorLink href={href}>{children}</AuthorLink>
   ) : (
-      <AuthorSpan>{children}</AuthorSpan>
-    );
+    <AuthorSpan>{children}</AuthorSpan>
+  );
 
 const Paragraph = styled(SectionModule.Paragraph)`
   color: ${color("whiteAlt")};
