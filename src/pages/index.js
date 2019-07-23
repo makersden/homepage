@@ -291,7 +291,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    harrison: file(relativePath: { eq: "harrison3.jpg" }) {
+    harrison: file(relativePath: { eq: "harrison3_framed.jpg" }) {
       childImageSharp {
         sizes(
           maxWidth: 1440

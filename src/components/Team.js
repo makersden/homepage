@@ -243,18 +243,6 @@ const makeMembers = ({ kalle, korneliusz, harrison, rob, kimi, partners }) => [
     ],
     quotes: []
   },
-  {
-    name: 'Our Partners',
-    image: partners,
-    description: [
-      `
-        We are connected to a wide range of industry experts within
-        Design, UX, Machine Learning as well as stellar developers within
-        web, mobile and backends.
-    `,
-    `We work with the best.`
-    ],
-  },
 ]
 
 
