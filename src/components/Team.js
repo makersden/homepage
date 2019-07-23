@@ -156,7 +156,7 @@ const makeMembers = ({ kalle, korneliusz, harrison, rob, kimi, partners }) => [
     description: [
       `
         Packs more than a decade of development experience, from
-        architecture to UX. A Scala/Java hevyweight whose current love
+        architecture to UX. A Scala/Java heavyweight whose current love
         is React and NodeJS.
       `,
     ],
@@ -201,7 +201,7 @@ const makeMembers = ({ kalle, korneliusz, harrison, rob, kimi, partners }) => [
     description: [
       `
         Math & petroengineering genius in a love affair with code since the age of 15.
-        Full-stack web is the name of the game, speed and discipline are the key tenents.
+        Full-stack web is the name of the game, speed and discipline are the key tenets.
       `,
       `
         His ability to dismantle problems and catch details never ceases to amaze.
