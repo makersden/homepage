@@ -16,13 +16,13 @@ tags:
   - design thinking
 ---
 
-No matter how you look at it, software development is a delicate process. Success has never been easier to achieve, yet still obstacles  lay on the path to victory. The worst thing about them is that they are small mistakes. They're easy to miss and without obvious immediate consequences. If leave them unchecked, they have the potential to spell disaster in the long run. This post describes how we recognize and manage those obstacles, emphasizing ones that impede the progress and speed of delivery. Time can be wasted on each stage of the project, so part of our job is to mitigate slowdowns starting right at the sales phase, all the way to release and maintenance.
+No matter how you look at it, software development is a delicate process. Success has never been easier to achieve, yet still obstacles  lay on the path to victory. The worst thing about them is that they are small mistakes - easy to miss and without obvious immediate consequences. Leave them unchecked however, and they can spell disaster in the long run. This post describes how we recognize and manage those obstacles, emphasizing ones that impede the progress and speed of delivery. Time can be wasted on each stage of the project. Part of our job is to mitigate slowdowns starting right at the sales phase, all the way to release and maintenance.
 
 The draft of this has grown a lot, so we’ll split it in two. Today, we will focus on the work ethic and team management practices we use to keep things moving fast. Next time, we’ll set our sights more on concrete coding decisions. 
 
 ## Sales & initial discussions
 
-A lot of time can go to waste here. It’s usually a result of good willed dishonesty - overstepping yourself trying to help or to close a deal without a good enough fit. We’ve suffered from it ourselves, overwhelmed by a will to help above our means. If your business strategy is sound, no case should stretch it sideways. Of course the best projects put us through our paces. They demand more effort, knowledge or resources within our domain. Yet we pay close attention that they do not derail our mission.
+A lot of time can go to waste here. It’s mostly a result of good willed dishonesty - overstepping yourself trying to help or to close a deal without a good enough fit. We’ve suffered from it ourselves, overwhelmed by a will to help above our means. If your business strategy is sound, no case should stretch it sideways. Of course the best projects put us through our paces. They demand more effort, knowledge or resources within our domain. Yet we pay close attention that they do not derail our mission.
 
 Over the years we gravitated towards two simple techniques to treat our Customers with due respect by saving their and our own time.
 
@@ -60,15 +60,15 @@ These questions are our travel guide. We use them throughout the whole project, 
 
 ## Vitamins & Painkillers
 
-**Vitamins** are nice-to-haves, solutions to problems that don’t yet exist or that are not urgent. **Painkillers** are remedies for most urgent issues, which can threaten the  project. People use those terms in business and product context, but they apply as well to execution. 
+**Vitamins** are nice-to-haves, solutions to problems that don’t yet exist or that are not urgent. **Painkillers** are remedies for most urgent issues, one that can threaten the  project. People use those terms in business and product context, but they apply as well to execution. 
 
-The product is our brainchild and it’s human nature to feel a parental bond with it. This comes at us from all angles when we develop out-of-house and join a Customer team. Most everyone usually has a “favorite feature” and a “better idea”, within or sometimes outside the project scope. That’s all very good of course - creative and passionate people are the cornerstone of success! Yet all those contributions often stay in the vacuum of kitchen talk instead of being appreciated and evaluated. What ensues is a steady drop in productivity - people tend to keep thinking about their concepts, being afraid to forget. Because they’re passionate, their minds wander towards what value can those ideas bring and how they could implement them. This derails their thoughts from the main track of making the priority stuff happen. We watch out for such situations and, having noticed them, propose to put in place a 2-step solution, rooted in the practice of [Getting Things Done](https://gettingthingsdone.com/five-steps/).
+The product is our brainchild and it’s human nature to feel a parental bond with it. This comes at us from all angles when we develop out-of-house and join a Customer team. Most everyone has a “favorite feature” and a “better idea”, within or sometimes outside the project scope. That’s all very good of course - creative and passionate people are the cornerstone of success! Yet all those contributions often stay in the vacuum of kitchen talk instead of being appreciated and evaluated. What ensues is a steady drop in productivity - people tend to keep thinking about their concepts, being afraid to forget. Because they’re passionate, their minds wander towards what value can those ideas bring and how they could implement them. This derails their thoughts from the main track of making the priority stuff happen. We watch out for such situations and, having noticed them, propose to put in place a two-step solution, rooted in the practice of [Getting Things Done](https://gettingthingsdone.com/five-steps/).
 
 The first step is to have an *idea inbox* - a safe place to store all input from the Team. 
 
 The second step involves establishing a *recurring idea review event*. There the Team gathers the ideas from the inbox, reviews, discusses and triages them. It’s key to have people from different domains involved - product, design, development - to have a complete assessment. They can pick out the best ones and prioritize them in the product backlog if suitable. 
 
-We've been on both the idea contributor and manager side of the fence of this. Those back-of-your-mind sparks of inspiration often concern vitamins. Being to keen to act on them often leads to an unnecessary investment of time with the value added being questionable at best. However, the fact that they are vitamins now does not mean they will never become painkillers. The Team may put some ideas back in the inbox to iterate on them through multiple reviews.
+We've been on both the idea contributor and manager side of the fence here. Those back-of-your-mind sparks of inspiration often concern vitamins. Being too keen to act on them often leads to an unnecessary investment of time with the value added being questionable at best. However, the fact that they are vitamins now does not mean they will never become painkillers. The Team may put some ideas back in the inbox to iterate on them through multiple reviews.
 
 So why is this important? 
 
@@ -81,7 +81,8 @@ As with any emotional subject, we recommend utmost care and caution. Maintain a 
 
 ## Development
 
-Decisions, decisions, decisions. Part of why software development is so exciting! Yet decisions can also incur one the highest costs. It can happen directly within decision-making - through a long process of reaching agreements, and over time - by suffering the consequences of wrong choices. 
+Decisions, decisions, decisions. Part of why software development is so exciting! Yet misplaced decisions can also cost the most.
+It can happen directly within decision-making - through a long process of reaching agreements, and over time - by suffering the consequences of wrong choices. 
 
 ### Greenfield projects
 

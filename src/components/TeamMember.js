@@ -11,7 +11,7 @@ import { media } from "../styles/mediaQueries";
 
 const offsets = {
   Korneliusz: "-35%",
-  Harrison: "-0%"
+  Harrison: "8%"
 };
 
 const Member = ({ image, name, description, quotes }) => (
@@ -50,6 +50,7 @@ const MemberContent = styled.div`
   display: flex;
   align-items: center;
   height: 100%;
+  padding-bottom: ${size(2)};
 
   ${media.aboveTablet`
     > * {
@@ -72,20 +73,34 @@ const MemberContainer = styled.div`
 
   .gatsby-image-outer-wrapper,
   .gatsby-image-wrapper {
-    height: ${height};
-    min-height: ${height};
     max-width: 100%;
+    height: calc(${height} / 1.5);
+    min-height: calc(${height} / 1.5);
+
+    ${media.aboveTablet`
+      height: ${height};
+      min-height: ${height};
+    `};
   }
 
   .gatsby-image-outer-wrapper {
     width: 100%;
-    height: ${height};
-    min-height: ${height};
     max-width: 100%;
+    height: calc(${height} / 1.5);
+    min-height: calc(${height} / 1.5);
     img {
+      height: ${height} / 1.5;
+      min-height: ${height} / 1.5;
+    }
+
+    ${media.aboveTablet`
       height: ${height};
       min-height: ${height};
-    }
+      img {
+        height: ${height};
+        min-height: ${height};
+      }
+    `};
   }
 
   &:nth-child(2n) {
@@ -190,7 +205,9 @@ const MemberContainer = styled.div`
 const MemberImage = styled(GatsbyImage)``;
 
 const Quote = styled(SectionModule.Quote)`
-  margin-bottom: ${size(2)};
+  &:not(:last-child) {
+    margin-bottom: ${size(2)};
+  }
 `;
 
 const authorStyle = css`
@@ -227,6 +244,10 @@ const Author = ({ children, href }) =>
 
 const Paragraph = styled(SectionModule.Paragraph)`
   color: ${color("whiteAlt")};
+
+  &:not(:nth-child(2)) {
+    font-weight: 300;
+  }
 `;
 
 const Description = styled(SectionModule.Description)`

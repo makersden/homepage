@@ -50,10 +50,6 @@ const Background = styled(SectionModule.Background)`
   background: #1a1a1a;
 `;
 
-const Paragraph = styled(SectionModule.Paragraph)`
-  color: ${color("whiteAlt")};
-`;
-
 const Description = styled(SectionModule.Description)`
   background: #2f80ed;
   border-radius: 10px;
@@ -103,8 +99,8 @@ const Author = ({ children, href }) =>
   href ? (
     <AuthorLink href={href}>{children}</AuthorLink>
   ) : (
-      <AuthorSpan>{children}</AuthorSpan>
-    );
+    <AuthorSpan>{children}</AuthorSpan>
+  );
 
 const KalleSection = styled(Section)`
   margin: 0 ${size(3)};
@@ -152,34 +148,34 @@ const KalleSection = styled(Section)`
   `};
 `;
 
-
-const makeMembers = ({ kalle, korneliusz, harrison, rob, partners }) => [
+const makeMembers = ({ kalle, korneliusz, harrison, rob, kimi, partners }) => [
   {
-    name: 'Carl-Petter',
+    name: "Carl-Petter",
     image: kalle,
     description: [
       `
         Packs more than a decade of development experience, from
-        architecture to UX. A Scala/Java hevyweight whose current love
+        architecture to UX. A Scala/Java heavyweight whose current love
         is React and NodeJS.
-      `,
+      `
     ],
-    quotes: [{
-      content:
-        `
+    quotes: [
+      {
+        content: `
         I had the pleasure of working with Kalle in total more than one
         and a half years during my time in Rovio. Kalle is truly a jack of
         all trades: seasoned with competence and enough humour to survive
         the toughest of situations.
       `,
-      author: {
-        link: 'https://www.linkedin.com/in/ossi-tiltti-3120071/',
-        name: 'Ossi Tiltti, Technical Director at Rovio'
+        author: {
+          link: "https://www.linkedin.com/in/ossi-tiltti-3120071/",
+          name: "Ossi Tiltti, Technical Director at Rovio"
+        }
       }
-    }]
+    ]
   },
   {
-    name: 'Korneliusz',
+    name: "Korneliusz",
     image: korneliusz,
     description: [
       `
@@ -188,80 +184,77 @@ const makeMembers = ({ kalle, korneliusz, harrison, rob, partners }) => [
         React ecosystem.
       `
     ],
-    quotes: [{
-      content: `
+    quotes: [
+      {
+        content: `
               He understands a startup’s need for speed and made effort towards
               improving the team’s velocity without sacrificing quality.
                 `,
-      author: {
-        link: 'https://www.linkedin.com/in/silvan-saxer-6b9268130/',
-        name: 'Silvan Saxer, COO at FRI:DAY Versicherung'
+        author: {
+          link: "https://www.linkedin.com/in/silvan-saxer-6b9268130/",
+          name: "Silvan Saxer, COO at FRI:DAY Versicherung"
+        }
       }
-    }]
+    ]
   },
   {
-    name: 'Harrison',
+    name: "Harrison",
     image: harrison,
     description: [
       `
-        Managing Director and a seasoned software engineer. Passionate
-        about cloud architecture and frontend development, especially the
-        React ecosystem.
+        Math & petroengineering genius in a love affair with code since the age of 15.
+        Full-stack web is the name of the game, speed and discipline are the key tenets.
+      `,
+      `
+        His ability to dismantle problems and catch details never ceases to amaze.
       `
     ],
-    quotes: [{
-      content: `
-              He understands a startup’s need for speed and made effort towards
-              improving the team’s velocity without sacrificing quality.
-                `,
-      author: {
-        link: 'https://www.linkedin.com/in/silvan-saxer-6b9268130/',
-        name: 'Silvan Saxer, COO at FRI:DAY Versicherung'
-      }
-    }]
+    quotes: []
   },
   {
-    name: 'Rob',
+    name: "Rob",
     image: rob,
     description: [
       `
-        Managing Director and a seasoned software engineer. Passionate
-        about cloud architecture and frontend development, especially the
-        React ecosystem.
+        His path goes on from enterprise
+        consultant, through successful startup
+        CTO, to indie hacker with 2 prospering
+        products.
+      `,
+      `
+        True fullstack, from mobile to cloud infrastructure,
+        never losing sight of the big picture. Keen sailor and
+        crypto analyst.
       `
     ],
-    quotes: [{
-      content: `
-              He understands a startup’s need for speed and made effort towards
-              improving the team’s velocity without sacrificing quality.
-                `,
-      author: {
-        link: 'https://www.linkedin.com/in/silvan-saxer-6b9268130/',
-        name: 'Silvan Saxer, COO at FRI:DAY Versicherung'
-      }
-    }]
+    quotes: []
   },
   {
-    name: 'Our Partners',
-    image: partners,
+    name: "Kimi",
+    image: kimi,
     description: [
       `
-        We are connected to a wide range of industry experts within
-        Design, UX, Machine Learning as well as stellar developers within
-        web, mobile and backends.
-    `,
-    `We work with the best.`
+        AI, machine learning & data science powerhouse
+        with coding skills and a pragmatic approach to boot.
+      `,
+      `
+        When not busy managing PhD offers, he stays on top of all
+        things blockchain. Breaching security is his favorite
+        evening pastime.
+      `
     ],
-  },
-]
+    quotes: []
+  }
+];
 
-
-const Team = ({ images: { kalle, korneliusz, harrison, rob, partners } }) => {
+const Team = ({ images }) => {
   return (
     <Container id="team">
       <Title>Meet your makers</Title>
       <Content column>
-        {makeMembers({ kalle, korneliusz, harrison, rob, partners }).map(member => <Member key={member.name} {...member} />)}
+        {makeMembers(images).map(member => (
+          <Member key={member.name} {...member} />
+        ))}
       </Content>
     </Container>
   );
