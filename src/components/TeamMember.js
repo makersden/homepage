@@ -11,7 +11,10 @@ import { media } from "../styles/mediaQueries";
 
 const offsets = {
   Korneliusz: "-35%",
-  Harrison: "8%"
+  Harrison: "8%",
+  Shreyans: "-30%",
+  Rob: "50%",
+  Kimi: "-25%"
 };
 
 const Member = ({ image, name, description, quotes }) => (
