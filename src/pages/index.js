@@ -303,6 +303,18 @@ export const pageQuery = graphql`
         }
       }
     }
+    shreyans: file(relativePath: { eq: "shreyans.jpg" }) {
+      childImageSharp {
+        sizes(
+          maxWidth: 1440
+          toFormat: JPG
+          quality: 99
+          traceSVG: { color: "#fafafa", blackOnWhite: false }
+        ) {
+          ...GatsbyImageSharpSizes_tracedSVG
+        }
+      }
+    }
     kimi: file(relativePath: { eq: "kimi3.jpg" }) {
       childImageSharp {
         sizes(

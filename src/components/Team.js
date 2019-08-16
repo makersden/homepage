@@ -148,7 +148,15 @@ const KalleSection = styled(Section)`
   `};
 `;
 
-const makeMembers = ({ kalle, korneliusz, harrison, rob, kimi, partners }) => [
+const makeMembers = ({
+  kalle,
+  korneliusz,
+  harrison,
+  shreyans,
+  rob,
+  kimi,
+  partners
+}) => [
   {
     name: "Carl-Petter",
     image: kalle,
@@ -210,6 +218,14 @@ const makeMembers = ({ kalle, korneliusz, harrison, rob, kimi, partners }) => [
       `
     ],
     quotes: []
+  },
+  {
+    name: "Shreyans",
+    image: shreyans,
+    description: [
+      `Former UX designer who found a passion for frontend development with ReactJS and hasn’t looked back since his first commit. Driven full-stack developer with a keen attention to detail.`,
+      `Home automation hobbyist whose apartment has more CPUs per lightbulb than your average Amazon micro instance.`
+    ]
   },
   {
     name: "Rob",
