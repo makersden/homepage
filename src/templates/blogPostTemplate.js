@@ -108,6 +108,27 @@ const Content = styled.section`
       }
     }
   }
+
+  .quote2 {
+    margin: 2em;
+    font-family: ${font("display")};
+    font-size: ${size(2.5)};
+
+    ${media.aboveTablet`
+      float: left;
+      max-width: 31.5rem;
+      margin-left: 0;
+      margin-top: 1em;
+    `};
+
+    ${media.aboveBigLaptop`
+      margin-left: -5em;
+    `} p {
+      font-family: ${font("display")};
+      font-size: ${size(3)};
+      margin: 0;
+    }
+  }
 `;
 
 const Paragraph = styled.p``;
