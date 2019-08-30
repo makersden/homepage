@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Img from "gatsby-image";
 import Helmet from "react-helmet";
+import { ReactTypeformEmbed } from "react-typeform-embed";
 
 import { transparentize } from "../polished";
 import { color, font, size } from "../theme";
@@ -159,6 +160,10 @@ export default function Template({
             <Date>{frontmatter.date}</Date>
           </Meta>
           <section dangerouslySetInnerHTML={{ __html: html }} />
+          <ReactTypeformEmbed
+            url="https://makersden.typeform.com/to/lvLOpJ"
+            style={{ position: "relative", height: 500, marginTop: 50 }}
+          />
           <Comments />
         </Content>
       </Container>
