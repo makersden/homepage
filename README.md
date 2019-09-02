@@ -1,21 +1,17 @@
-# [Phenomic](https://github.com/MoOx/phenomic) phenomic-theme-base
+# Makers' Den Homepage & Blog
 
-## Install dependencies
+This used to be a Phenomic site which was migrated to Gatsby.
 
-```sh
-npm install
-```
-
-## Run development server
+## Dev
 
 ```sh
-npm start
+yarn
+yarn develop
 ```
 
-## Build for production
+## Build for production & deploy (requires creds)
 
 ```sh
-npm run build
+./deploy.sh
 ```
-
 
