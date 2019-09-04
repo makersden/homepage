@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Img from "gatsby-image";
 import Helmet from "react-helmet";
 import { ReactTypeformEmbed } from "react-typeform-embed";
+import LinkedInTag from "react-linkedin-insight";
+import FacebookPixel from "react-facebook-pixel";
 
 import { transparentize } from "../polished";
 import { color, font, size } from "../theme";
@@ -143,32 +145,42 @@ const Comments = styled.div`
   margin-bottom: 3em;
 `;
 
-export default function Template({
-  data // this prop will be injected by the GraphQL query below.
-}) {
-  const { markdownRemark } = data; // data.markdownRemark holds our post data
-  const { frontmatter, html } = markdownRemark;
-  return (
-    <Post>
-      <Helmet title={`${frontmatter.title} - Makers' Den blog`} />
-      <TitleImage {...frontmatter.image.childImageSharp} />
-      <Container>
-        <Title>{frontmatter.title}</Title>
-        <Content>
-          <Meta>
-            <span>{frontmatter.author}</span>,&nbsp;
-            <Date>{frontmatter.date}</Date>
-          </Meta>
-          <section dangerouslySetInnerHTML={{ __html: html }} />
-          <ReactTypeformEmbed
-            url="https://makersden.typeform.com/to/lvLOpJ"
-            style={{ position: "relative", height: 500, marginTop: 50 }}
-          />
-          <Comments />
-        </Content>
-      </Container>
-    </Post>
-  );
+export default class Template extends React.Component {
+  componentDidMount() {
+    const { data } = this.props;
+    const { markdownRemark } = data;
+    const { frontmatter } = markdownRemark;
+    FacebookPixel.track(frontmatter.title);
+  }
+
+  render() {
+    // this prop will be injected by the GraphQL query below.
+    const { data } = this.props;
+
+    const { markdownRemark } = data; // data.markdownRemark holds our post data
+    const { frontmatter, html } = markdownRemark;
+    return (
+      <Post>
+        <Helmet title={`${frontmatter.title} - Makers' Den blog`} />
+        <TitleImage {...frontmatter.image.childImageSharp} />
+        <Container>
+          <Title>{frontmatter.title}</Title>
+          <Content>
+            <Meta>
+              <span>{frontmatter.author}</span>,&nbsp;
+              <Date>{frontmatter.date}</Date>
+            </Meta>
+            <section dangerouslySetInnerHTML={{ __html: html }} />
+            <ReactTypeformEmbed
+              url="https://makersden.typeform.com/to/lvLOpJ"
+              style={{ position: "relative", height: 500, marginTop: 50 }}
+            />
+            <Comments />
+          </Content>
+        </Container>
+      </Post>
+    );
+  }
 }
 
 export const pageQuery = graphql`
@@ -180,6 +192,7 @@ export const pageQuery = graphql`
         path
         title
         author
+        tags
         image {
           childImageSharp {
             sizes(maxWidth: 1440) {

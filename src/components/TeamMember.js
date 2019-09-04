@@ -25,18 +25,20 @@ const Member = ({ image, name, description, quotes }) => (
       <Description data-aos="fade-up">
         <Name>{name}</Name>
         {flatMap(
-          (paragraph, i) => (
-            <Paragraph key={i}>
+          paragraph => (
+            <Paragraph key={paragraph}>
               <span>{paragraph}</span>
             </Paragraph>
           ),
           description
         )}
         {flatMap(
-          quote => [
-            <Quote>{quote.content}</Quote>,
-            <Author href={quote.author.link}>{quote.author.name}</Author>
-          ],
+          quote => (
+            <div key={quote.author.name}>
+              <Quote>{quote.content}</Quote>
+              <Author href={quote.author.link}>{quote.author.name}</Author>
+            </div>
+          ),
           quotes
         )}
       </Description>

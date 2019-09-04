@@ -8,8 +8,8 @@ path: "/blog/svelte-3"
 image: "minato_japan.jpg"
 tags:
   - svelte
+  - frontend
   - javacsript
-  - architecture
 ---
 
 ## A new contender for the frontend crown
