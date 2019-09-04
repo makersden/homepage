@@ -4,6 +4,7 @@ import Helmet from "react-helmet";
 import styled, { injectGlobal, ThemeProvider } from "styled-components";
 import { StickyContainer } from "react-sticky";
 import { compose, lifecycle } from "recompose";
+import LinkedInTag from "react-linkedin-insight";
 
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -11,6 +12,8 @@ import Footer from "../components/Footer";
 import theme, { color, duration, font } from "../theme";
 import { breakpoints } from "../styles/mediaQueries";
 import ogImage from "../images/ogImage.png";
+
+LinkedInTag.init("691641");
 
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -89,7 +92,10 @@ const TemplateWrapper = ({ ...props }) => (
         ]}
       >
         {props.location.pathname.indexOf("/join") !== -1 && (
-          <script charstet="utf-8" src="https://ucarecdn.com/libs/widget/3.6.1/uploadcare.full.min.js"></script>
+          <script
+            charstet="utf-8"
+            src="https://ucarecdn.com/libs/widget/3.6.1/uploadcare.full.min.js"
+          />
         )}
         <script src="https://cdn.polyfill.io/v2/polyfill.min.js" />
         <script src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver" />
