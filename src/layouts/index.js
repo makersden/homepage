@@ -6,6 +6,7 @@ import { StickyContainer } from "react-sticky";
 import { compose, lifecycle } from "recompose";
 import LinkedInTag from "react-linkedin-insight";
 import FacebookPixel from "react-facebook-pixel";
+import TagManager from "react-gtm-module";
 
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -125,6 +126,9 @@ export default compose(
       LinkedInTag.init("691641");
       FacebookPixel.init("2565393533492435");
       FacebookPixel.pageView();
+      TagManager.initialize({
+        gtmId: "GTM-PTS69CM"
+      });
     }
   })
 )(TemplateWrapper);

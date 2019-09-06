@@ -5,6 +5,7 @@ import Helmet from "react-helmet";
 import { ReactTypeformEmbed } from "react-typeform-embed";
 import LinkedInTag from "react-linkedin-insight";
 import FacebookPixel from "react-facebook-pixel";
+import TagManager from "react-gtm-module";
 
 import { transparentize } from "../polished";
 import { color, font, size } from "../theme";
@@ -150,7 +151,13 @@ export default class Template extends React.Component {
     const { data } = this.props;
     const { markdownRemark } = data;
     const { frontmatter } = markdownRemark;
-    FacebookPixel.track(frontmatter.title);
+    FacebookPixel.trackCustom(frontmatter.title);
+    TagManager.dataLayer({
+      dataLayerName: "BlogDataLayer",
+      dataLayer: {
+        title: frontmatter.title
+      }
+    });
   }
 
   render() {
