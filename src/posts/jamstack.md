@@ -27,7 +27,9 @@ JAMstack refers to an architectural approach leveraging Javascript, Apis and Mar
 
 ### LOFTY CLAIMS! How is this achieved?
 
-Well, a static site is just a bunch of html files. You can just copy them up on to a Content Delivery Network and you have your new version deployed. No servers needed also means no scaling needed, and zero security concerns. Static files means a deployment is a simple upload and that your content is visible as fast as possible to users and friendly to all crawler bots.
+A static site is mostly just a bunch of html files and images. You can just copy them up on any Content Delivery Network and have a new version deployed
+
+Since no servers are involved, it also means no scaling needed, and zero security concerns. Just static files with pre-generated html means a deployment is a simple upload and that your content is visible as fast as possible to users and friendly to all crawler bots.
 
 ### That’ll take us back to the 90s in terms of Dev Experience and functionality. Can’t I have my modern React?
 
@@ -47,7 +49,7 @@ For example:
 - Comments (Disqus)
 - Forms (Typeform)
 
-Many of these can be integrated with pure frontend integrations. If you do need something custom, consider a “serverless” lambda (“cloud function”) and outsource the tedious and costly ops and scaling part of backends.
+Many of these can be integrated with pure frontend integrations. If you do need something custom, consider a serverless lambda/cloud function and outsource the tedious and costly ops and scaling part of backends.
 
 ![JAMStack Gatsby and Netlify pipeline](./jamstack_gatsby_netlify.png)
 
