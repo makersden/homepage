@@ -11,14 +11,19 @@
     "start": "yarn develop",
     "dev": "yarn develop",
     "develop": "gatsby develop",
-    "release:minor": "yarn version --new-version minor && gatsby build && yarn deploy",
-    "release:patch": "yarn version --new-version patch && gatsby build && yarn deploy",
-    "release:major": "yarn version --new-version major && gatsby build && yarn deploy",
+    "release:minor":
+      "yarn version --new-version minor && gatsby build && yarn deploy",
+    "release:patch":
+      "yarn version --new-version patch && gatsby build && yarn deploy",
+    "release:major":
+      "yarn version --new-version major && gatsby build && yarn deploy",
     "deploy": "gh-pages -d public",
-    "format": "prettier --trailing-comma es5 --no-semi --single-quote --write 'src/**/*.js'",
+    "format":
+      "prettier --trailing-comma es5 --no-semi --single-quote --write 'src/**/*.js'",
     "precommit": "lint-staged"
   },
-  "#babel": "webpack-(development|production) are useful for webpack 2, otherwise use development|production",
+  "#babel":
+    "webpack-(development|production) are useful for webpack 2, otherwise use development|production",
   "babel": {
     "env": {
       "webpack-development": {
@@ -65,10 +70,7 @@
     "extends": "stylelint-config-standard"
   },
   "lint-staged": {
-    "*.{js,json,css}": [
-      "prettier --write",
-      "git add"
-    ]
+    "*.{js,json,css}": ["prettier --write", "git add"]
   },
   "devDependencies": {
     "eslint": "^3.14.1",
@@ -110,7 +112,7 @@
     "gatsby-plugin-styled-components": "^1.0.5",
     "gatsby-plugin-typography": "^1.7.10",
     "gatsby-remark-copy-linked-files": "^1.5.25",
-    "gatsby-remark-images": "^1.5.37",
+    "gatsby-remark-images": "^1.5.66",
     "gatsby-remark-prismjs": "^1.2.12",
     "gatsby-source-filesystem": "^1.5.11",
     "gatsby-transformer-remark": "^1.7.28",
