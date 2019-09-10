@@ -18,26 +18,35 @@ tags:
 JAMstack refers to an architectural approach leveraging <span style="font-size: 1.2em">**J**avascript, **A**pis and **M**arkup</span>, that lets you create rich websites and apps without servers. Build markup with a Static Site Generator, deliver with a CDN, and use JS + APIs for dynamic parts.
 
 ### So what’s so good with JAMStack?
-- Best possible page load
-- Best possible SEO
-- Best possible security
-- No servers needed
-- No scaling needed
-- Zero cost deployments
+- **Best possible page load**
+- **Best possible SEO**
+- **Best possible security**
+- **No servers needed**
+- **No scaling needed**
+- **Zero cost deployments**
 
 ### LOFTY CLAIMS! How is this achieved?
 
-A static site is mostly just a bunch of html files and images. You can just copy them up on any Content Delivery Network and have a new version deployed
+A static site is mostly just a bunch of html files and images. You can just copy them up on any CDN and have a new version live.
 
-Since no servers are involved, it also means no scaling needed, and zero security concerns. Just static files with pre-generated html means a deployment is a simple upload and that your content is visible as fast as possible to users and friendly to all crawler bots.
 
-### That’ll take us back to the 90s in terms of Dev Experience and functionality. Can’t I have my modern React?
+<div class="quote2">
+Build markup with a Static Site Generator, deliver with a CDN, and use JS + APIs for dynamic parts.
+</div>
 
-Enter **GatsbyJS**. You can have your cake and eat it too. It’ll pre-generate html files based on your React components, and re-hydrate your app as a fully fledged React app once the page has loaded.
+Since no servers are involved, it means no scaling is needed; and with no servers we reduce our attack surface close to zero. The pre-generated html is friendly to all crawler bots and guarantees your content is visible to end users as fast as possible.
+
+### Our content managers don't do html.
+
+There are numerous ways you can let content managers create new content. You can use a headless CMS like Contentful or Prismic, or even Wordpress. In your build process you pull content from your CMS and pre-generate html pages. Most headless Content Management Systems support webhooks, so you can trigger a re-build of your site and have it re-deployed to the CDN when someone publishes new content. For your developer-types you can have a git based workflow with markdown.
+
+### This is so 90s and we need modern UX. Can’t I have my React?
+
+Enter [**GatsbyJS**](https://www.gatsbyjs.org/). You can have your cake and eat it too. It’ll pre-generate html files based on your React components, and re-hydrate your app as a fully fledged React app once the page has loaded.
 
 ![JAMStack Gatsby end user experience](./jamstack_gatsby_end_user_experience.png)
 
-### Ok. But we also have APPS and not just SITES. We need data, backends and our own very custom apis.
+### Fine for sites, but what about APPS? We need data and custom apis.
 
 A lot of the backend functionality implemented in every project is re-inventing the wheel over and over again. Consider consuming some pre-existing services instead of adding more backend maintenance and ops work to your plate ad infinitum.
 
@@ -53,7 +62,6 @@ Many of these can be integrated with pure frontend integrations. If you do need 
 
 ![JAMStack Gatsby and Netlify pipeline](./jamstack_gatsby_netlify.png)
 
-
 ### That just leaves us a bunch of frontend work.
 
 Yep. If you ask me, Frontend is the new king (with some help from serverless offerings).
@@ -64,6 +72,6 @@ If you really want, you can still use your own hosted backends too. Just because
 If you ask me, Frontend is the new king.
 </div>
 
-Minimizing your backend footprint with serverless options will go a long way of making your product iteration faster by letting you deliver new features by deploying a new static frontend. Have a new staging version deployed, ready for clicking, for every commit. It’s basically free, and fast.
+Minimizing your backend footprint with serverless options will go a long way of making your product iteration faster by letting you deliver new features by deploying static frontends. Have a new staging version deployed, ready for clicking, for every commit. It’s basically free, and fast.
 
 Scale to infinity and pay as you go.
