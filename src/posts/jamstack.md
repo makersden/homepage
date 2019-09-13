@@ -1,5 +1,5 @@
 ---
-title: JAMStack
+title: Why JAMStack
 layout: Post
 date: 2019-09-09 22:00:00
 author: Carl-Petter Bertell
@@ -15,9 +15,10 @@ tags:
 
 ## JAMStack?
 
-JAMstack refers to an architectural approach leveraging <span style="font-size: 1.2em">**J**avascript, **A**pis and **M**arkup</span>, that lets you create rich websites and apps without servers. Build markup with a Static Site Generator, deliver with a CDN, and use JS + APIs for dynamic parts.
+JAMstack refers to an architectural approach leveraging <span style="font-size: 1.2em">**J**avascript, **A**pis and **M**arkup</span>, that lets you create rich websites and apps without backends. Build markup with a Static Site Generator, deliver with a CDN, and use JS + APIs for dynamic parts.
 
 ### So what’s so good with JAMStack?
+
 - **Best possible page load**
 - **Best possible SEO**
 - **Best possible security**
@@ -28,7 +29,6 @@ JAMstack refers to an architectural approach leveraging <span style="font-size: 
 ### LOFTY CLAIMS! How is this achieved?
 
 A static site is mostly just a bunch of html files and images. You can just copy them up on any CDN and have a new version live.
-
 
 <div class="quote2">
 Build markup with a Static Site Generator, deliver with a CDN, and use JS + APIs for dynamic parts.
@@ -51,6 +51,7 @@ Enter [**GatsbyJS**](https://www.gatsbyjs.org/). You can have your cake and eat 
 A lot of the backend functionality implemented in every project is re-inventing the wheel over and over again. Consider consuming some pre-existing services instead of adding more backend maintenance and ops work to your plate ad infinitum.
 
 For example:
+
 - Authentication (Auth0, Cognito)
 - E-commerce (Snipcart)
 - Payments (Stripe, Braintree)
@@ -66,7 +67,7 @@ Many of these can be integrated with pure frontend integrations. If you do need 
 
 Yep. If you ask me, Frontend is the new king (with some help from serverless offerings).
 
-If you really want, you can still use your own hosted backends too. Just because part of your app ecosystem is JAMStacked and serverless doesn't exclude custom backends if that's the path of least resistance for you. If static files doesn’t fit for a portion of your frontend app, you can opt not to have that specific part of your app/site pre-generated as static files (Gatsby has you covered).
+If you really want, you can still use your own hosted backends too. Just because part of your app ecosystem is JAMStacked and serverless doesn't exclude custom backends if that's the path of least resistance for you. If static files don't fit for a portion of your frontend app, you can opt not to have that specific part of your app/site pre-generated as static files (Gatsby has you covered).
 
 <div class="quote2">
 If you ask me, Frontend is the new king.
