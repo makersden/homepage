@@ -52,12 +52,12 @@ A lot of the backend functionality implemented in every project is re-inventing 
 
 For example:
 
-- Authentication (Auth0, Cognito)
-- E-commerce (Snipcart)
-- Payments (Stripe, Braintree)
-- Search (Algolia)
-- Comments (Disqus)
-- Forms (Typeform)
+- Authentication ([Auth0](https://auth0.com/), [Cognito](https://aws.amazon.com/cognito/))
+- E-commerce ([Snipcart](https://snipcart.com/))
+- Payments ([Stripe](https://stripe.com), [Braintree](https://www.braintreepayments.com/), [Klarna](https://www.klarna.com))
+- Search ([Algolia](https://www.algolia.com/))
+- Comments ([Disqus](https://disqus.com/))
+- Forms ([Typeform](https://www.typeform.com/))
 
 Many of these can be integrated with pure frontend integrations. If you do need something custom, consider a serverless lambda/cloud function and outsource the tedious and costly ops and scaling part of backends.
 
