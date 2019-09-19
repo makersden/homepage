@@ -44,7 +44,11 @@ There are numerous ways you can let content managers create new content. You can
 
 Enter [**GatsbyJS**](https://www.gatsbyjs.org/). You can have your cake and eat it too. It’ll pre-generate html files based on your React components, and re-hydrate your app as a fully fledged React app once the page has loaded.
 
+<div style="max-width: 500px; margin: 0 auto;">
+
 ![JAMStack Gatsby end user experience](./jamstack_gatsby_end_user_experience.png)
+
+</div>
 
 ### Fine for sites, but what about APPS? We need data and custom apis.
 
@@ -61,8 +65,11 @@ For example:
 
 Many of these can be integrated with pure frontend integrations. If you do need something custom, consider a serverless lambda/cloud function and outsource the tedious and costly ops and scaling part of backends.
 
+<div style="max-width: 700px; margin: 0 auto;">
+
 ![JAMStack Gatsby and Netlify pipeline](./jamstack_gatsby_netlify.png)
 
+</div>
 ### That just leaves us a bunch of frontend work.
 
 Yep. If you ask me, Frontend is the new king (with some help from serverless offerings).

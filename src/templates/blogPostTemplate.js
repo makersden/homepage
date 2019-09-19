@@ -129,10 +129,20 @@ const Content = styled.section`
       max-width: 31.5rem;
       margin-left: 0;
       margin-top: 1em;
+
+      &.right {
+        float: right;
+        margin-right: 0;
+        margin-left: 2em;
+      }
     `};
 
     ${media.aboveBigLaptop`
       margin-left: -5em;
+      &.right {
+        margin-left: 2em;
+        margin-right: -5em;
+      }
     `} p {
       font-family: ${font("display")};
       font-size: ${size(3)};
