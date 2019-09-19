@@ -113,6 +113,12 @@ const Content = styled.section`
     }
   }
 
+  .shaded-images {
+    .gatsby-resp-image-wrapper {
+      box-shadow: rgba(0, 0, 0, 0.25) 0 1px 4px;
+    }
+  }
+
   .quote2 {
     margin: 2em;
     font-family: ${font("display")};

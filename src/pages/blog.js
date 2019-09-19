@@ -13,10 +13,6 @@ import { media } from "../styles/mediaQueries";
 
 import FadeWithoutFont from "../FadeWithoutFont";
 
-import Work from "../components/Work";
-import Team from "../components/Team";
-import Contact from "../components/Contact";
-
 const Posts = styled.ul`
   list-style: none;
   padding: 0;
