@@ -6,6 +6,7 @@ author: Carl-Petter Bertell
 slug: "klarna-instore"
 path: "/blog/klarna-instore"
 image: "klarna_getsmooth.jpg"
+titlecolor: black
 tags:
   - klarna
   - payments

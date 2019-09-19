@@ -59,7 +59,7 @@ const PostLink = styled(Link)`
 
 const Title = styled.h2`
   font-family: ${font("display")};
-  color: ${color("white")};
+  color: ${props => props.color || color("white")};
   font-size: ${size(3)};
   margin: 0;
   line-height: 1;
@@ -89,7 +89,9 @@ const Blog = ({ data: { allMarkdownRemark: { edges } } }) => {
             <PostImage {...node.frontmatter.image.childImageSharp} />
             <PostLink to={node.frontmatter.path}>
               <FadeWithoutFont>
-                <Title>{node.frontmatter.title}</Title>
+                <Title color={node.frontmatter.titlecolor}>
+                  {node.frontmatter.title}
+                </Title>
               </FadeWithoutFont>
             </PostLink>
           </Post>
@@ -109,6 +111,7 @@ export const pageQuery = graphql`
           id
           frontmatter {
             title
+            titlecolor
             date(formatString: "MMMM DD, YYYY")
             path
             image {
